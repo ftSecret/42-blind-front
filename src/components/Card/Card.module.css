@@ -1,0 +1,22 @@
+.container {
+  background-color: #242526;
+  flex-direction: column;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  border-radius: 0.3rem;
+  transition: 0.5s;
+  padding: 1.3rem;
+  gap: 1.3rem;
+  width: 100%;
+}
+
+.detail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.hidden {
+  opacity: 0;
+}

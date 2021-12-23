@@ -1,56 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Card from "./components/Card/Card";
+import Header from "./components/Header/Header";
+import LoadData from "./components/LoadData/LoadData";
+import { getDummies } from "./utils/getDummies";
 
 function App() {
+  const [data, setData] = useState(getDummies());
+
+  const load = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setData((data) => [...data, ...getDummies()]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Header />
+      <div className="Cards">
+        <div />
+        {data.map((elem, idx) => (
+          <Card
+            title={`${idx} - ${elem.title}`}
+            detail={elem.detail}
+            key={idx}
+          />
+        ))}
+      </div>
+      <LoadData load={load} />
     </div>
   );
 }
