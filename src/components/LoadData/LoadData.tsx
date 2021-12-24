@@ -26,7 +26,7 @@ const LoadData = ({ load }: PropTypes) => {
     let observer: IntersectionObserver;
     if (targetRef?.current) {
       observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.4,
+        threshold: 0,
       });
       observer.observe(targetRef?.current);
     }

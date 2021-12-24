@@ -6,29 +6,35 @@
   font-weight: bold;
   line-height: 1.2;
   text-align: center;
-  z-index: 5000;
   text-shadow: 1px 1px 2px white;
 }
 
 .list {
   background-color: #242526;
-  position: -webkit-sticky;
-  position: sticky;
+  box-sizing: border-box;
   width: 100%;
   font-size: 1.5rem;
-  top: 0rem;
   text-align: center;
   display: flex;
   justify-content: center;
   line-height: 1.6;
   gap: 5rem;
   color: grey;
-  z-index: 5000;
-  box-sizing: border-box;
   border-color: #3b3c3e;
   border-width: 0px 0px 1px 0px;
   border-style: solid;
 }
+
+.container {
+  height: 10vh;
+}
+
+/* @media (min-height: 600px) {
+  .list {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+} */
 
 .list > div:nth-child(1) {
   color: white;

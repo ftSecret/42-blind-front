@@ -6,18 +6,18 @@ import LoadData from "./components/LoadData/LoadData";
 import { getDummies } from "./utils/getDummies";
 
 function App() {
-  const [data, setData] = useState(getDummies());
+  const [data, setData] = useState<ReturnType<typeof getDummies>>([]);
 
   const load = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setData((data) => [...data, ...getDummies()]);
   };
 
   return (
     <div className="App">
       <Header />
+      <div />
       <div className="Cards">
-        <div />
         {data.map((elem, idx) => (
           <Card
             title={`${idx} - ${elem.title}`}
@@ -25,8 +25,8 @@ function App() {
             key={idx}
           />
         ))}
+        <LoadData load={load} />
       </div>
-      <LoadData load={load} />
     </div>
   );
 }

@@ -1,3 +1,5 @@
 .container {
-  height: 30px;
+  height: 300px;
+  opacity: 0;
+  flex: none;
 }
