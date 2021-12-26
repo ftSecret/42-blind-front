@@ -16,8 +16,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div />
       <div className="Cards">
+        <div />
+        <div />
         {data.map((elem, idx) => (
           <Card
             title={`${idx} - ${elem.title}`}
