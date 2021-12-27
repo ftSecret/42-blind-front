@@ -45,3 +45,8 @@ body {
 *::-webkit-scrollbar-track {
   width: 0.3rem;
 }
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+}

@@ -1,0 +1,41 @@
+.container {
+  background-color: var(--black-color);
+  display: flex;
+  align-items: center;
+  padding: 0 1em;
+}
+
+.container > h2 {
+  min-width: 70px;
+  font-weight: bold;
+}
+
+.title {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.list {
+  background-color: var(--black-color);
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  line-height: 1.6;
+  gap: 5rem;
+  color: grey;
+  border-color: #3b3c3e;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+}
+
+.list > div:nth-child(1) {
+  color: white;
+  font-weight: bold;
+}

@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.container:hover {
+  cursor: pointer;
+}
+
 .hidden {
   opacity: 0;
 }
@@ -22,16 +26,22 @@
 }
 
 .Content {
+  width: 100%;
+  line-height: 1.2;
+  color: var(--grey-color);
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
-  color: var(--grey-color);
+  white-space: nowrap;
 }
 
 .Title {
   color: var(--white-color);
   font-weight: bold;
   font-size: 1.2em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .status {

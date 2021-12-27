@@ -1,11 +1,11 @@
 import React from "react";
 import Cards from "../../Cards/Cards";
-import Header from "../../Header/Header";
+import MainHeader from "../../MainHeader/MainHeader";
 
 const MainPage = () => {
   return (
     <div>
-      <Header />
+      <MainHeader />
       <Cards />
     </div>
   );
