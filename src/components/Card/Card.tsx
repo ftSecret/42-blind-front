@@ -1,12 +1,28 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { formatDate } from "../../utils/formatDate";
+import ChatIcon from "../icons/ChatIcon";
+import CheckCircleIcon from "../icons/CheckCircleIcon";
+import ThumbUpIcon from "../icons/ThumbUpIcon";
 import classes from "./Card.module.css";
 
 type PropTypes = {
   title: string;
-  detail: string;
+  content: string;
+  created_at: Date;
+  views: number;
+  likes: number;
+  comments: number;
 };
 
-const Card = ({ title, detail, ...rest }: PropTypes) => {
+const Card = ({
+  title,
+  content,
+  created_at,
+  views,
+  likes,
+  comments,
+  ...rest
+}: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -36,8 +52,26 @@ const Card = ({ title, detail, ...rest }: PropTypes) => {
 
   return (
     <section className={classes.hidden} ref={targetRef}>
-      <h1>{title}</h1>
-      <pre className={classes.detail}>{detail}</pre>
+      <div className={classes.Title}>{title}</div>
+      <div className={classes.Content}>{content}</div>
+
+      <div className={classes.info}>
+        <div>{formatDate(created_at)}</div>
+        <ul className={classes.status}>
+          <li>
+            <ChatIcon className={classes.icon} />
+            <div>{comments}</div>
+          </li>
+          <li>
+            <CheckCircleIcon className={classes.icon} />
+            <div>{views}</div>
+          </li>
+          <li>
+            <ThumbUpIcon className={classes.icon} />
+            <div>{likes}</div>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 };

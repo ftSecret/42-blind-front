@@ -1,22 +1,50 @@
 .container {
-  background-color: #242526;
+  background-color: var(--black-color);
   flex-direction: column;
   box-sizing: border-box;
-  color: white;
+  color: var(--white-color);
   display: flex;
   border-radius: 0.3rem;
   transition: 0.5s;
-  padding: 1.3rem;
-  gap: 1.3rem;
-  width: 100%;
-}
-
-.detail {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 0.5rem;
+  gap: 1rem;
   width: 100%;
 }
 
 .hidden {
   opacity: 0;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--grey-color);
+}
+
+.Content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  color: var(--grey-color);
+}
+
+.Title {
+  color: var(--white-color);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.status {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status > li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.icon {
+  font-size: 1em;
 }

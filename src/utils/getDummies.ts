@@ -1,52 +1,97 @@
 export const getDummies = () => [
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetail\ndetaildetaildetaildetaildetaildetaildetail",
+    id: 1,
+    title: "테스트 제목 입니다 1",
+    content: "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildet\naildetaildetaildetaildetaildetail",
+    id: 2,
+    title: "테스트 제목 입니다 2",
+    content:
+      "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n 테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetail\ndetaildetaildetaildetaildetaildetaildetail",
+    id: 3,
+    title: "테스트 제목 입니다 3",
+    content: "?",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 4,
+    title: "테스트 제목 입니다 테스트 제목 입니다. ",
+    content: "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 5,
+    title: "테스트 제목 입니다",
+    content:
+      "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 6,
+    title: "테스트 제목 입니다 1",
+    content: "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 7,
+    title: "테스트 제목 입니다 2",
+    content:
+      "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n 테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 8,
+    title: "테스트 제목 입니다 3",
+    content: "?",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 9,
+    title:
+      "테스트 제목 입니다 테스트 제목 입니다 테스트 제목 입니다 테스트 제목 입니다 테스트 제목 입니다 테스트 제목 입니다.. ",
+    content: "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
   {
-    title: "test",
-    detail:
-      "detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail",
+    id: 10,
+    title: "테스트 제목 입니다",
+    content:
+      "테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요\n",
+    created_at: new Date(),
+    views: 10,
+    likes: 1,
+    comments: 10,
   },
 ];
