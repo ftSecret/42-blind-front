@@ -131,8 +131,13 @@ a {
   all: unset;
   width: 100%;
 }
-a:hover {
+a:hover,
+button:hover {
   cursor: pointer;
+}
+
+button {
+  border-style: none;
 }
 
 input:focus {

@@ -1,10 +1,9 @@
 import React from 'react';
+import classes from 'components/Status/Status.module.css';
 
-import classes from './Status.module.css';
-
-import ChatIcon from '../icons/ChatIcon';
-import CheckCircleIcon from '../icons/CheckCircleIcon';
-import ThumbUpIcon from '../icons/ThumbUpIcon';
+import ChatIcon from 'components/icons/ChatIcon';
+import CheckCircleIcon from 'components/icons/CheckCircleIcon';
+import ThumbUpIcon from 'components/icons/ThumbUpIcon';
 
 type StatusType = {
   comments: number;

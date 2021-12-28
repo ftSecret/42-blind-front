@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import classes from './TabBar.module.css';
-import { useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+import classes from 'components/TabBar/TabBar.module.css';
 
 const linkData = [
   {

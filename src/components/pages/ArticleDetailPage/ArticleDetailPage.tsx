@@ -1,11 +1,13 @@
-import ArticleDetail from '../../ArticleDetail/ArticleDetail';
-import Comments from '../../Comments/Comments';
-import DetailHeader from '../../DetailHeader/DetailHeader';
-import classes from './ArticleDetailPage.module.css';
+import Comments from 'components/Comments/Comments';
+import DetailHeader from 'components/DetailHeader/DetailHeader';
+import ArticleDetail from 'components/ArticleDetail/ArticleDetail';
+
+import classes from 'components/pages/ArticleDetailPage/ArticleDetailPage.module.css';
+
 const ArticleDetailPage = () => {
   return (
     <>
-      <DetailHeader />
+      <DetailHeader content="42 블라인드 익명 게시판" />
       <section className={classes.wrap}>
         <ArticleDetail />
         <Comments />

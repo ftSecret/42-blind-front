@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getCommentsDummies } from '../../utils/getDummies';
-import Comment from '../Comment/Comment';
-import classes from './Comments.module.css';
+import { getCommentsDummies } from 'utils/getDummies';
+import Comment from 'components/Comment/Comment';
+import classes from 'components/Comments/Comments.module.css';
+
 type CommentType = {
   id: number | null;
   user_id: string;

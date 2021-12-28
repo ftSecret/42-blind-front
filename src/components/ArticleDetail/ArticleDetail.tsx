@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { formatDate } from '../../utils/formatDate';
-import { getDummies } from '../../utils/getDummies';
-import userImage from '../../assets/images/alien (2).png';
-import Status from '../Status/Status';
-import classes from './ArticleDetail.module.css';
+import { formatDate } from 'utils/formatDate';
+import { getDummies } from 'utils/getDummies';
+
+import userImage from 'assets/images/alien (2).png';
+
+import Status from 'components/Status/Status';
+import classes from 'components/ArticleDetail/ArticleDetail.module.css';
 
 type ArticleTypes = {
   id: number | null;

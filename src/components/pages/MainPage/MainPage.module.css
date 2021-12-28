@@ -1,7 +1,13 @@
 .writeButton {
-  background-color: red;
+  background-color: var(--dark-grey-color);
+  color: var(--white-color);
   width: 100px;
-  height: 100px;
+  height: 50px;
   position: sticky;
-  bottom: 0;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  border-radius: 50px;
+  border: 1px solid var(--white-color);
+  font-weight: 500;
 }

@@ -1,6 +1,8 @@
-import userImage from '../../assets/images/alien (2).png';
-import { formatDate } from '../../utils/formatDate';
-import classes from './Comment.module.css';
+import { formatDate } from 'utils/formatDate';
+
+import userImage from 'assets/images/alien (2).png';
+
+import classes from 'components/Comment/Comment.module.css';
 
 type PropType = {
   id: number | null;

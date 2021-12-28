@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getDummies } from '../../utils/getDummies';
-import Card from '../Card/Card';
-import LoadData from '../LoadData/LoadData';
-import classes from './Cards.module.css';
+import { getDummies } from 'utils/getDummies';
+
+import Card from 'components/Card/Card';
+import classes from 'components/Cards/Cards.module.css';
+import LoadData from 'components/LoadData/LoadData';
 
 const Cards = () => {
   const [data, setData] = useState<ReturnType<typeof getDummies>>([]);

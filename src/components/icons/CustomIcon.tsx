@@ -1,19 +1,22 @@
 import classNames from 'classnames';
 import React from 'react';
 
-const CustomIcon = ({
-  iconName,
-  className,
-}: {
+export type CustomIconPropTypes = {
   iconName: string;
   className?: string;
-}) => {
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLSpanElement>,
+  HTMLSpanElement
+>;
+
+const CustomIcon = ({ iconName, className, ...rest }: CustomIconPropTypes) => {
   return (
     <span
       className={classNames({
         'material-icons': true,
         [className ?? '']: className,
       })}
+      {...rest}
     >
       {iconName}
     </span>

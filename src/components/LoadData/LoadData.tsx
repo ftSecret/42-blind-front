@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import classes from "./LoadData.module.css";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import classes from 'components/LoadData/LoadData.module.css';
 
 type PropTypes = {
   load: () => void;

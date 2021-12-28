@@ -1,8 +1,9 @@
 import React from 'react';
-import CustomIcon from './CustomIcon';
+import CustomIcon from 'components/icons/CustomIcon';
+import { CustomIconPropTypes } from 'components/icons/CustomIcon';
 
-const CheckCircleIcon = ({ className }: { className?: string }) => {
-  return <CustomIcon iconName="check_circle_outline" className={className} />;
+const CheckCircleIcon = (props: Omit<CustomIconPropTypes, 'iconName'>) => {
+  return <CustomIcon iconName="check_circle_outline" {...props} />;
 };
 
 export default CheckCircleIcon;

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from '../icons/ArrowBackIcon';
-import classes from './DetailHeader.module.css';
-const DetailHeader = () => {
+import ArrowBackIcon from 'components/icons/ArrowBackIcon';
+import classes from 'components/DetailHeader/DetailHeader.module.css';
+
+const DetailHeader = ({ content }: { content: string }) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -12,7 +13,7 @@ const DetailHeader = () => {
       <span onClick={goBack}>
         <ArrowBackIcon className={classes.icon} />
       </span>
-      <h1>42 블라인드 익명 게시판</h1>
+      <h1>{content}</h1>
     </section>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { formatDate } from '../../utils/formatDate';
+import { formatDate } from 'utils/formatDate';
 
-import Status from '../Status/Status';
-import classes from './Card.module.css';
+import Status from 'components/Status/Status';
+import classes from 'components/Card/Card.module.css';
 
 type PropTypes = {
   title: string;
