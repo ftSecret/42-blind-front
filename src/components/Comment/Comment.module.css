@@ -1,0 +1,26 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  border-bottom: 1px solid var(--grey-color);
+}
+.userImage {
+  width: 25px;
+  height: 25px;
+  background: var(--white-color);
+  border-radius: 5px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.profile > h1 {
+  font-weight: bold;
+}
+
+.date {
+  color: var(--grey-color);
+}

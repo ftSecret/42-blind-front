@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { formatDate } from "../../utils/formatDate";
-import ChatIcon from "../icons/ChatIcon";
-import CheckCircleIcon from "../icons/CheckCircleIcon";
-import ThumbUpIcon from "../icons/ThumbUpIcon";
-import classes from "./Card.module.css";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { formatDate } from '../../utils/formatDate';
+
+import Status from '../Status/Status';
+import classes from './Card.module.css';
 
 type PropTypes = {
   title: string;
@@ -57,20 +56,7 @@ const Card = ({
 
       <div className={classes.info}>
         <div>{formatDate(created_at)}</div>
-        <ul className={classes.status}>
-          <li>
-            <ChatIcon className={classes.icon} />
-            <div>{comments}</div>
-          </li>
-          <li>
-            <CheckCircleIcon className={classes.icon} />
-            <div>{views}</div>
-          </li>
-          <li>
-            <ThumbUpIcon className={classes.icon} />
-            <div>{likes}</div>
-          </li>
-        </ul>
+        <Status comments={comments} views={views} likes={likes} />
       </div>
     </section>
   );

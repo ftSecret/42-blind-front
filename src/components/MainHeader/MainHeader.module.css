@@ -39,3 +39,8 @@
   color: white;
   font-weight: bold;
 }
+
+.mypage {
+  position: absolute;
+  right: 0.5rem;
+}

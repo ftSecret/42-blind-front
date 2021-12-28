@@ -2,14 +2,11 @@
   background-color: var(--black-color);
   display: flex;
   align-items: center;
-  padding: 0 1em;
+  padding: 0.5em;
   justify-content: space-around;
-}
-
-.container > a {
   font-size: 1.3rem;
-  color: grey;
   text-align: center;
+  color: grey;
 }
 
 .selected {

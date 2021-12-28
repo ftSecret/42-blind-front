@@ -1,0 +1,6 @@
+.comments {
+  flex-direction: column;
+  display: flex;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
