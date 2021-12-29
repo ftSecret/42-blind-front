@@ -36,10 +36,9 @@ const ArticleDetail = () => {
       if (`${data.id}` === articleId) return true;
       return false;
     });
-    const { id, title, content, created_at, views, likes, comments } =
-      temp as ArticleTypes;
+    const { id, title, content, created_at, views, likes, comments } = temp as ArticleTypes;
     setDetail({ id, title, content, created_at, views, likes, comments });
-  }, []);
+  }, [articleId]);
   return (
     <div className={classes.detail}>
       <div className={classes.profile}>
@@ -53,11 +52,7 @@ const ArticleDetail = () => {
       </div>
       <h1>{detail.title}</h1>
       <h1>{detail.content}</h1>
-      <Status
-        comments={detail.comments}
-        views={detail.views}
-        likes={detail.likes}
-      />
+      <Status comments={detail.comments} views={detail.views} likes={detail.likes} />
     </div>
   );
 };

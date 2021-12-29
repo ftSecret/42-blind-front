@@ -2,7 +2,7 @@ import Comments from 'components/Comments/Comments';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
 import ArticleDetail from 'components/ArticleDetail/ArticleDetail';
 
-import classes from 'components/pages/ArticleDetailPage/ArticleDetailPage.module.css';
+import classes from './ArticleDetailPage.module.css';
 
 const ArticleDetailPage = () => {
   return (

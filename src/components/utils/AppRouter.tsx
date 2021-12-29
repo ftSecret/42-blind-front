@@ -2,10 +2,10 @@ import React from 'react';
 import { Routes, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
-import MyPage from 'components/pages/MyPage/MyPage';
-import MainPage from 'components/pages/MainPage/MainPage';
-import ArticleDetailPage from 'components/pages/ArticleDetailPage/ArticleDetailPage';
-import ArticleWritingPage from 'components/pages/ArticleWritingPage/ArticleWritingPage';
+import MyPage from 'pages/MyPage/MyPage';
+import MainPage from 'pages/MainPage/MainPage';
+import ArticleDetailPage from 'pages/ArticleDetailPage/ArticleDetailPage';
+import ArticleWritingPage from 'pages/ArticleWritingPage/ArticleWritingPage';
 
 const AppRouter = () => {
   return (
