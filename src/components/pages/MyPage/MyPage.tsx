@@ -10,7 +10,7 @@ const MyPage = () => {
       <MyHeader />
       <TabBar />
       <Routes>
-        <Route path="/ㄴarticle" element={<Cards key="1" />} />
+        <Route path="/article" element={<Cards key="1" />} />
         <Route path="/comment" element={<Cards key="2" />} />
       </Routes>
     </div>
