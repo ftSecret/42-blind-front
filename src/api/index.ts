@@ -1,0 +1,1 @@
+export { blindPostAPI } from './blindPost';
