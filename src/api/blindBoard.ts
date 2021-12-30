@@ -14,10 +14,18 @@ export const blindBoardAPI = createApi({
       //   ex) query: (name) => `post/${name}`,
       query: () => ({
         url: `board`,
+        // credentials: 'same-origin',
+      }),
+    }),
+    postBlindBoard: builder.query<_BoardResponse, string>({
+      //   ex) query: (name) => `post/${name}`,
+      query: () => ({
+        url: `board`,
+        method: 'post',
         headers: {
           withCredential: 'true',
         },
-        credentials: 'include',
+        credentials: 'same-origin',
       }),
     }),
   }),
@@ -25,4 +33,4 @@ export const blindBoardAPI = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetBlindBoardQuery } = blindBoardAPI;
+export const { useGetBlindBoardQuery, usePostBlindBoardQuery } = blindBoardAPI;
