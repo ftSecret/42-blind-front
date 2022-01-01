@@ -3,6 +3,8 @@ import { formatDate } from 'utils/formatDate';
 
 import Status from 'components/Status/Status';
 import classes from 'components/Card/Card.module.css';
+import styled from 'styled-components';
+import { flexColumn, flexRow } from 'assets/styles/mixin';
 
 type PropTypes = {
   title: string;
@@ -13,15 +15,7 @@ type PropTypes = {
   comments: number;
 };
 
-const Card = ({
-  title,
-  content,
-  created_at,
-  views,
-  likes,
-  comments,
-  ...rest
-}: PropTypes) => {
+const Card = ({ title, content, created_at, views, likes, comments, ...rest }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -31,11 +25,9 @@ const Card = ({
         observer.unobserve(entry.target);
         observer && observer.disconnect();
         setIsLoaded(true);
-        targetRef?.current?.classList.remove(classes.hidden);
-        targetRef?.current?.classList.add(classes.container);
       }
     },
-    [isLoaded]
+    [isLoaded],
   );
 
   useEffect(() => {
@@ -50,16 +42,61 @@ const Card = ({
   }, [onIntersect]);
 
   return (
-    <section className={classes.hidden} ref={targetRef}>
-      <div className={classes.Title}>{title}</div>
-      <div className={classes.Content}>{content}</div>
+    <StyledSection ref={targetRef} loaded={isLoaded}>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledContent>{content}</StyledContent>
 
-      <div className={classes.info}>
+      <StyledInfo>
         <div>{formatDate(created_at)}</div>
         <Status comments={comments} views={views} likes={likes} />
-      </div>
-    </section>
+      </StyledInfo>
+    </StyledSection>
   );
 };
 
 export default Card;
+
+type StyledSectionProps = {
+  loaded: boolean;
+};
+
+const StyledSection = styled.section<StyledSectionProps>`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.white};
+  opacity: ${(props) => (props.loaded ? 1 : 0)};
+  ${flexColumn}
+  border-radius: 0.3rem;
+  transition: 0.5s;
+  padding: 0.5rem;
+  width: 100%;
+  gap: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledInfo = styled.div`
+  ${flexRow}
+  justify-content: space-between;
+  color: ${({ theme }) => theme.colors.secondary};
+`;
+
+const StyledContent = styled.div`
+  width: 100%;
+  line-height: 1.2;
+  color: ${({ theme }) => theme.colors.secondary};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const StyledTitle = styled.div`
+  color: ${({ theme }) => theme.white};
+  font-weight: bold;
+  font-size: 1.2em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;

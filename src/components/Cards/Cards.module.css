@@ -1,8 +1,0 @@
-.Cards {
-  box-sizing: border-box;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-  padding: 0.5rem;
-  gap: 0.5rem;
-}

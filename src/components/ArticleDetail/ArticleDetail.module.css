@@ -5,6 +5,7 @@
   border-bottom: 1px solid var(--grey-color);
   margin-bottom: 0.5rem;
 }
+
 .profile {
   display: flex;
   gap: 1em;

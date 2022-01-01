@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { getDummies } from 'utils/getDummies';
 
 import Card from 'components/Card/Card';
-import classes from 'components/Cards/Cards.module.css';
 import LoadData from 'components/LoadData/LoadData';
+import styled from 'styled-components';
+import { flexColumn } from 'assets/styles/mixin';
 
 const Cards = () => {
   const [data, setData] = useState<ReturnType<typeof getDummies>>([]);
@@ -15,15 +16,22 @@ const Cards = () => {
   };
 
   return (
-    <div className={classes.Cards}>
+    <StyledCards>
       {data.map((elem, idx) => (
         <Link key={idx} to={`/detail/${elem.id}`}>
           <Card {...elem} />
         </Link>
       ))}
       <LoadData load={load} />
-    </div>
+    </StyledCards>
   );
 };
+
+const StyledCards = styled.div`
+  ${flexColumn}
+  align-items: center;
+  padding: 0.5rem;
+  gap: 0.5rem;
+`;
 
 export default Cards;
