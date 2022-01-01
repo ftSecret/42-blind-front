@@ -1,8 +1,7 @@
 import { formatDate } from 'utils/formatDate';
-
 import userImage from 'assets/images/alien (2).png';
-
-import classes from 'components/Comment/Comment.module.css';
+import styled from 'styled-components';
+import { flexColumn, flexRow } from 'assets/styles/mixin';
 
 type PropType = {
   id: number | null;
@@ -11,26 +10,48 @@ type PropType = {
   created_at: Date | null;
   likes: number | null;
 };
-const Comment = ({
-  id,
-  user_id,
-  content,
-  created_at,
-  likes,
-  ...rest
-}: PropType) => {
+
+// TODO: "!" 이게 뭐하는 연산자일까...?
+const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType) => {
   return (
-    <div className={classes.comment}>
-      <div className={classes.profile}>
-        <div className={classes.userImage}>
+    <StyledComment>
+      <StyledProfile>
+        <StyledUserImage>
           <img alt="user" width="25" height="25" src={userImage} />
-        </div>
+        </StyledUserImage>
         <h1>익명1</h1>
-      </div>
+      </StyledProfile>
       <p>{content}</p>
-      <h3 className={classes.date}> {formatDate(created_at!)}</h3>
-    </div>
+      <StyledDate>{formatDate(created_at!)}</StyledDate>
+    </StyledComment>
   );
 };
+
+const StyledComment = styled.div`
+  ${flexColumn}
+  gap: 0.5em;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
+`;
+
+const StyledUserImage = styled.div`
+  width: 25px;
+  height: 25px;
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
+`;
+
+const StyledProfile = styled.div`
+  ${flexRow}
+  align-items: center;
+  gap: 1em;
+
+  & > h1 {
+    font-weight: bold;
+  }
+`;
+
+const StyledDate = styled.h3`
+  color: ${({ theme }) => theme.colors.secondary};
+`;
 
 export default Comment;

@@ -6,7 +6,8 @@ import { getDummies } from 'utils/getDummies';
 import userImage from 'assets/images/alien (2).png';
 
 import Status from 'components/Status/Status';
-import classes from 'components/ArticleDetail/ArticleDetail.module.css';
+import styled from 'styled-components';
+import { flexColumn } from 'assets/styles/mixin';
 
 type ArticleTypes = {
   id: number | null;
@@ -29,6 +30,7 @@ const ArticleDetail = () => {
     comments: 0,
   });
   const { articleId } = useParams();
+
   useEffect(() => {
     //id로 데이터 가져오는 로직
     const datas = getDummies();
@@ -39,22 +41,54 @@ const ArticleDetail = () => {
     const { id, title, content, created_at, views, likes, comments } = temp as ArticleTypes;
     setDetail({ id, title, content, created_at, views, likes, comments });
   }, [articleId]);
+
   return (
-    <div className={classes.detail}>
-      <div className={classes.profile}>
-        <div className={classes.userImage}>
+    <StyledDetail>
+      <StyledProfile>
+        <StyledUserImage>
           <img alt="user" width="50" height="50" src={userImage} />
-        </div>
-        <div className={classes.profileInfo}>
+        </StyledUserImage>
+        <StyledProfileInfo>
           <h2>익명</h2>
           <h3>{formatDate(detail.created_at!)}</h3>
-        </div>
-      </div>
+        </StyledProfileInfo>
+      </StyledProfile>
       <h1>{detail.title}</h1>
       <h1>{detail.content}</h1>
       <Status comments={detail.comments} views={detail.views} likes={detail.likes} />
-    </div>
+    </StyledDetail>
   );
 };
 
 export default ArticleDetail;
+
+const StyledDetail = styled.div`
+  ${flexColumn}
+  gap: 0.5em;
+  border-bottom: 1px solid var(--grey-color);
+  margin-bottom: 0.5rem;
+`;
+
+const StyledProfile = styled.div`
+  ${flexColumn}
+  gap: 1em;
+`;
+
+const StyledProfileInfo = styled.div`
+  text-align: left;
+
+  & > h2 {
+    font-weight: bold;
+  }
+
+  & > h3 {
+    color: var(--grey-color);
+  }
+`;
+
+const StyledUserImage = styled.div`
+  width: 50px;
+  height: 50px;
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
+`;

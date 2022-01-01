@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getCommentsDummies } from 'utils/getDummies';
 import Comment from 'components/Comment/Comment';
-import classes from 'components/Comments/Comments.module.css';
+import styled from 'styled-components';
+import { flexColumn } from 'assets/styles/mixin';
 
 type CommentType = {
   id: number | null;
@@ -17,12 +18,18 @@ const Comments = () => {
     setComments(getCommentsDummies);
   }, []);
   return (
-    <div className={classes.comments}>
+    <StyledComments>
       {comments.map((comment) => (
         <Comment key={comment.id} {...comment} />
       ))}
-    </div>
+    </StyledComments>
   );
 };
+
+const StyledComments = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
+  overflow-y: auto;
+`;
 
 export default Comments;
