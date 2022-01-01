@@ -1,9 +1,10 @@
 import React from 'react';
-import classes from 'components/Status/Status.module.css';
 
 import ChatIcon from 'components/icons/ChatIcon';
 import CheckCircleIcon from 'components/icons/CheckCircleIcon';
 import ThumbUpIcon from 'components/icons/ThumbUpIcon';
+import styled from 'styled-components';
+import { flexRow } from 'assets/styles/mixin';
 
 type StatusType = {
   comments: number;
@@ -12,21 +13,36 @@ type StatusType = {
 };
 const Status = ({ comments, views, likes }: StatusType) => {
   return (
-    <ul className={classes.status}>
+    <StyledStatus>
       <li>
-        <ChatIcon className={classes.icon} />
+        <ChatIcon />
         <div>{comments}</div>
       </li>
       <li>
-        <CheckCircleIcon className={classes.icon} />
+        <CheckCircleIcon />
         <div>{views}</div>
       </li>
       <li>
-        <ThumbUpIcon className={classes.icon} />
+        <ThumbUpIcon />
         <div>{likes}</div>
       </li>
-    </ul>
+    </StyledStatus>
   );
 };
+
+const StyledStatus = styled.ul`
+  ${flexRow}
+  gap:0.5rem;
+
+  & > li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+  }
+
+  & span {
+    font-size: 1em;
+  }
+`;
 
 export default Status;

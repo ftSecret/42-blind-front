@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { formatDate } from 'utils/formatDate';
 
 import Status from 'components/Status/Status';
-import classes from 'components/Card/Card.module.css';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'assets/styles/mixin';
 

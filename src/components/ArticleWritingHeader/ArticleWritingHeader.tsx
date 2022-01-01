@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'components/Button/Button';
 import CloseIcon from 'components/icons/CloseIcon';
-import classes from 'components/ArticleWritingHeader/ArticleWritingHeader.module.css';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { flexRow } from 'assets/styles/mixin';
@@ -19,11 +18,11 @@ const ArticleWritingHeader = () => {
   };
 
   return (
-    <div className={classes.header}>
-      <CloseIcon className={classes.closeIcon} onClick={handleClose} />
-      <div className={classes.title}>글 작성</div>
-      <Button className={classes.submit} label="완료" onClick={handleSubmit} />
-    </div>
+    <StyledHeader>
+      <CloseIcon onClick={handleClose} />
+      <StyledTitle>글 작성</StyledTitle>
+      <StyledSubmitButton label="완료" onClick={handleSubmit} />
+    </StyledHeader>
   );
 };
 
@@ -39,31 +38,17 @@ const StyledHeader = styled.div`
   padding: 0 14px;
 `;
 
-/*
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  padding: 0 14px;
-  box-sizing: border-box;
-}
-
-.title {
+const StyledTitle = styled.div`
   font-size: 1.3rem;
-}
+`;
 
-.submit {
-  background-color: rgb(228, 55, 55);
-  border-color: white;
+const StyledSubmitButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.red};
+  border-color: ${({ theme }) => theme.colors.white};
   border-style: solid;
   border-width: 1px;
-  color: white;
-  width: 5rem;
-  height: 3rem;
+  color: ${({ theme }) => theme.colors.white};
+  width: 4rem;
+  height: 2.3rem;
   border-radius: 0.5rem;
-}
-
-*/
+`;

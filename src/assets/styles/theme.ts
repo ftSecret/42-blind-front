@@ -37,7 +37,7 @@ const fonts = {
 };
 
 const colors = {
-  red: '#ff4d4d',
+  red: '#e43737',
   yellow: '#ffff4d',
   blue: '#0099ff',
   white: '#ffffff',
