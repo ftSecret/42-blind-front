@@ -2,8 +2,7 @@ name: front-main-deploy
 
 on:
   push: # 적용될 액션
-    branches:
-      - main # 적용될 브랜치
+    branches: [main] # 적용될 브랜치
     paths:
       - './**' # workflow에서 적용될 path
 
@@ -32,6 +31,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
