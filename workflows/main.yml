@@ -22,7 +22,7 @@ jobs:
         run: yarn
 
       - name: Build
-        run: yarn build
+        run: export REACT_APP_BLIND_API_DOMAIN=https://api.42blind.com yarn build
 
       - name: S3 Deploy
         run: aws s3 sync ./dist s3://42-blind/ --acl bucket-owner-full-control
