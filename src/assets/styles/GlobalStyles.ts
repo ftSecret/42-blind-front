@@ -1,3 +1,8 @@
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
+
+const GlobalStyles = createGlobalStyle`
+${reset}
 :root {
   --black-color: #242526;
   --white-color: #ffffff;
@@ -6,25 +11,27 @@
 }
 
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-gutter: stable;
+  background-color: #18191a;
+  color: white;
+
 }
 
 html {
+  width: 100%;
+  height: 100%;
   scrollbar-gutter: stable;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-body {
-  background-color: #18191a;
-  color: white;
 }
 
 *::-webkit-scrollbar {
@@ -38,16 +45,25 @@ body {
 *::-webkit-scrollbar-track {
   width: 0.3rem;
 }
-
 * {
   scrollbar-gutter: unset;
 }
 
-/* 1rem = 10px; */
-html {
-  font-size: 62.5%;
+a {
+  all: unset;
+  width: 100%;
+}
+a:hover,
+button:hover {
+  cursor: pointer;
 }
 
-body {
-  font-size: 1.6rem;
+input:focus {
+  outline: none;
 }
+
+
+
+`;
+
+export default GlobalStyles;
