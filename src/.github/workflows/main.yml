@@ -1,4 +1,4 @@
-name: front-dev-deploy
+name: front-main-deploy
 
 on:
   push: # 적용될 액션
