@@ -1,21 +1,44 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from 'components/icons/ArrowBackIcon';
-import classes from 'components/DetailHeader/DetailHeader.module.css';
+import styled from 'styled-components';
 
 const DetailHeader = ({ content }: { content: string }) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
+
   return (
-    <section className={classes.header}>
+    <StyledSection>
       <span onClick={goBack}>
-        <ArrowBackIcon className={classes.icon} />
+        <StyledArrowBackIcon />
       </span>
       <h1>{content}</h1>
-    </section>
+    </StyledSection>
   );
 };
+
+const StyledSection = styled.section`
+  width: 100%;
+  padding: 0 14px;
+  height: 50px;
+  line-height: 3.5;
+  text-align: center;
+
+  & > span {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+  }
+`;
+
+const StyledArrowBackIcon = styled(ArrowBackIcon)`
+  width: 20px;
+  height: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export default DetailHeader;

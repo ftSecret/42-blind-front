@@ -4,6 +4,7 @@ import Cards from 'components/Cards/Cards';
 import MyHeader from 'components/MyHeader/MyHeader';
 import TabBar from 'components/TabBar/TabBar';
 
+// TODO: route의 key값은 추후에 삭제되어야함.
 const MyPage = () => {
   return (
     <div>

@@ -37,9 +37,10 @@ const fonts = {
 };
 
 const colors = {
-  red: '#ff4d4d',
+  red: '#e43737',
   yellow: '#ffff4d',
   blue: '#0099ff',
+  white: '#ffffff',
 };
 
 const size = {
@@ -64,7 +65,7 @@ const lightThemeColors = {
 const darkThemeColors = {
   ...colors,
   primary: '#242526',
-  secondary: '#282828',
+  secondary: '#c4c4c4',
   background: '#18191a',
 };
 
