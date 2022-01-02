@@ -1,30 +1,25 @@
 name: front-main-deploy
 
 on:
-  push: # 적용될 액션
-    branches: [main] # 적용될 브랜치
-#     paths:
-#       - './**' # workflow에서 적용될 path
-
-# defaults:
-#   run:
-#     working-directory: ./ # workflow에서 default working directory
+  push:
+    branches: [main]
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 인스턴스 OS
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2 # 워크플로에서 액세스할 수 있도록 에서 저장소를 체크아웃
+        uses: actions/checkout@v2
 
       - name: Install Dependencies
         run: yarn
 
       - name: Build
-        run: |
-          export REACT_APP_BLIND_API_DOMAIN=https://api.42blind.com
-          yarn build
+        run: yarn build
+        env:
+          REACT_APP_BLIND_API_DOMAIN: https://api.42blind.com
+          REACT_APP_ENV: prod
 
       - name: S3 Deploy
         run: aws s3 sync ./build s3://42-blind/ --acl bucket-owner-full-control
