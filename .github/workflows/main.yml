@@ -5,11 +5,11 @@ on:
     branches:
       - main # 적용될 브랜치
     paths:
-      - 'frontend/**' # workflow에서 적용될 path
+      - './**' # workflow에서 적용될 path
 
 defaults:
   run:
-    working-directory: ./frontend # workflow에서 default working directory
+    working-directory: ./ # workflow에서 default working directory
 
 jobs:
   deploy:
@@ -22,7 +22,9 @@ jobs:
         run: yarn
 
       - name: Build
-        run: export REACT_APP_BLIND_API_DOMAIN=https://api.42blind.com yarn build
+        run: |
+          export REACT_APP_BLIND_API_DOMAIN=https://api.42blind.com
+          yarn build
 
       - name: S3 Deploy
         run: aws s3 sync ./dist s3://42-blind/ --acl bucket-owner-full-control
