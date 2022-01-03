@@ -2,15 +2,27 @@ import React from 'react';
 import { store } from 'app/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { darkTheme } from 'assets/styles/theme';
+import theme from 'assets/styles/theme';
 import GlobalStyles from 'assets/styles/GlobalStyles';
+import { useAppSelector } from 'app/hooks';
+import { selectTheme } from 'features/theme/themeSlice';
+
+const ThemeProviders = ({ children }: { children: JSX.Element }) => {
+  const themeState = useAppSelector(selectTheme);
+
+  return (
+    <ThemeProvider theme={theme[themeState]}>
+      <GlobalStyles theme={theme[themeState]} />
+      {children}
+    </ThemeProvider>
+  );
+};
 
 const Providers = ({ children }: { children: JSX.Element }) => {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
-        <GlobalStyles />
+        <ThemeProviders children={children} />
       </Provider>
     </React.StrictMode>
   );

@@ -61,14 +61,13 @@ type StyledSectionProps = {
 
 const StyledSection = styled.section<StyledSectionProps>`
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.white};
   opacity: ${(props) => (props.loaded ? 1 : 0)};
   ${flexColumn}
   border-radius: 0.3rem;
   transition: 0.5s;
-  padding: 0.5rem;
+  padding: 0.5em;
   width: 100%;
-  gap: 1rem;
+  gap: 1em;
 
   &:hover {
     cursor: pointer;
@@ -78,20 +77,20 @@ const StyledSection = styled.section<StyledSectionProps>`
 const StyledInfo = styled.div`
   ${flexRow}
   justify-content: space-between;
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.font};
 `;
 
 const StyledContent = styled.div`
   width: 100%;
   line-height: 1.2;
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.font};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 const StyledTitle = styled.div`
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.colors.font};
   font-weight: bold;
   font-size: 1.2em;
 

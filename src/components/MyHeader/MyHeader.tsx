@@ -16,6 +16,7 @@ export default MyHeader;
 
 const StyledContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.font};
   display: flex;
   align-items: center;
   padding: 0 1em;
@@ -26,6 +27,6 @@ const StyledTitle = styled.h1`
   width: 100%;
   font-size: 2.5rem;
   font-weight: bold;
-  line-height: 1.2;
+  line-height: ${({ theme }) => theme.fonts.lineheight.base};
   text-align: center;
 `;

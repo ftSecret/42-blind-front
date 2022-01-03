@@ -15,36 +15,40 @@ const ArticleWritingDetail = () => {
 };
 
 const StyledContainer = styled.div`
-  padding: 1rem;
+  padding: 1em;
   height: 80vh;
+  background-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 10px;
 `;
 
 const StyledTitle = styled.div`
-  padding: 1rem 0rem;
+  padding: 1em 0em;
   border-style: solid;
   border-width: 0 0 1px 0;
   border-color: grey;
   box-sizing: border-box;
 
   & > input {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     background-color: rgba(0, 0, 0, 0);
     border-style: none;
-    color: white;
+    color: ${({ theme }) => theme.colors.font};
     width: 100%;
   }
 `;
 
 const StyledContent = styled.div`
-  padding: 1rem 0rem;
+  padding: 1em 0em;
   box-sizing: border-box;
   height: 100%;
 
   & > textarea {
-    font-size: 1.3rem;
+    font-size: 1rem;
     background-color: rgba(0, 0, 0, 0);
     border-style: none;
     color: white;
+    font-weight: bold;
     width: 100%;
     height: 100%;
     outline: none;
