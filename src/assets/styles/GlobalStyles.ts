@@ -1,14 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
 
-const GlobalStyles = createGlobalStyle`
+import reset from 'styled-reset';
+import { Theme } from './theme';
+
+const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
 ${reset}
-:root {
-  --black-color: #242526;
-  --white-color: #ffffff;
-  --grey-color: #c4c4c4;
-  --dark-grey-color: #282828;
-}
 
 body {
   width: 100%;
@@ -19,8 +15,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-gutter: stable;
-  background-color: #18191a;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.background};
+  color:  ${({ theme }) => theme.colors.font};
 
 }
 
