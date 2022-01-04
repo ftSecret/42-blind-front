@@ -1,21 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DARK_THEME, LIGHT_THEME, ThemeType } from 'constants/theme';
 import { RootState } from '../../app/store';
 
 const getInitialTheme = () => {
-  let theme = window.localStorage.getItem('theme') as 'darkTheme' | 'lightTheme';
-  const INVALID_THEME = theme !== 'darkTheme' && theme !== 'lightTheme';
-  if (INVALID_THEME) {
+  if (window.localStorage.getItem('theme')) {
     const { matches } = window.matchMedia('(prefers-color-scheme: dark)');
-    theme = matches ? 'darkTheme' : 'lightTheme';
+    return matches ? DARK_THEME : LIGHT_THEME;
   }
-  return theme;
+  return DARK_THEME;
 };
 
-export interface ThemeState {
-  value: 'darkTheme' | 'lightTheme';
-}
-
-const initialState: ThemeState = {
+const initialState: ThemeType = {
   value: getInitialTheme(),
 };
 
@@ -24,7 +19,7 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     toggle: (state) => {
-      state.value = state.value === 'darkTheme' ? 'lightTheme' : 'darkTheme';
+      state.value = state.value === DARK_THEME ? LIGHT_THEME : DARK_THEME;
     },
   },
 });
@@ -32,7 +27,7 @@ export const themeSlice = createSlice({
 export const themeMiddleware = (store: any) => (next: any) => (action: any) => {
   const prevTheme = store.getState().theme.value;
   if (toggle.match(action)) {
-    window.localStorage.setItem('theme', prevTheme === 'darkTheme' ? 'lightTheme' : 'darkTheme');
+    window.localStorage.setItem('theme', prevTheme === DARK_THEME ? LIGHT_THEME : DARK_THEME);
   }
   return next(action);
 };

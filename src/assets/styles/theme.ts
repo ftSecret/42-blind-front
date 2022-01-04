@@ -3,6 +3,8 @@ https://dkje.github.io/2020/10/13/StyledComponents/ 에서 가져온 코드입�
 아직 프로젝트에 반영이 제대로 되지 않았기 때문에 불필요하거나 맞지 않는 값이 있을 수 있습니다.
 */
 
+import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
+
 export type Theme = {
   colors: {
     primary: string;
@@ -21,9 +23,10 @@ export type Theme = {
   margins: { sm: string; base: string; lg: string; xl: string };
   paddings: { sm: string; base: string; lg: string; xl: string };
 };
+
 type ThemeGroup = {
-  lightTheme: Theme;
-  darkTheme: Theme;
+  [DARK_THEME]: Theme;
+  [LIGHT_THEME]: Theme;
 };
 
 const margins = {
@@ -109,19 +112,19 @@ const defalutTheme = {
   device,
 };
 
-export const darkTheme: Theme = {
+export const dark: Theme = {
   ...defalutTheme,
   colors: darkThemeColors,
 };
 
-export const lightTheme: Theme = {
+export const light: Theme = {
   ...defalutTheme,
   colors: lightThemeColors,
 };
 
 const theme: ThemeGroup = {
-  darkTheme,
-  lightTheme,
+  [DARK_THEME]: dark,
+  [LIGHT_THEME]: light,
 };
 
 export default theme;

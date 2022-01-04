@@ -10,7 +10,7 @@ const ThemeToggle = () => {
   const dispatch = useAppDispatch();
   return (
     <ToggleWrapper onClick={() => dispatch(toggle())} theme={theme[themeState]}>
-      {themeState === 'darkTheme' ? '🌚' : '🌝'}
+      {themeState === DARK_THEME ? '🌚' : '🌝'}
     </ToggleWrapper>
   );
 };

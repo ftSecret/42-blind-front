@@ -22,7 +22,7 @@ const Providers = ({ children }: { children: JSX.Element }) => {
   return (
     <React.StrictMode>
       <Provider store={store}>
-        <ThemeProviders children={children} />
+        <ThemeProviders>{children}</ThemeProviders>
       </Provider>
     </React.StrictMode>
   );
