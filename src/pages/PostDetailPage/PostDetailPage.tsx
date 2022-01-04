@@ -3,26 +3,32 @@ import DetailHeader from 'components/molecules/DetailHeader/DetailHeader';
 import PostDetail from 'components/templates/PostDetail/PostDetail';
 
 import styled from 'styled-components';
+import { containerStyle } from 'styles/mixin';
 
 const PostDetailPage = () => {
   return (
     <>
       <DetailHeader content="42 블라인드 익명 게시판" />
-      <StyledWrap>
-        <PostDetail />
-        <Comments />
-        <StyledInputWrap>
-          <StyledInput placeholder="댓글을 입력하세요" />
-        </StyledInputWrap>
-      </StyledWrap>
+      <StyledContainer>
+        <DetailWrap>
+          <PostDetail />
+          <Comments />
+          <StyledInputWrap>
+            <StyledInput placeholder="댓글을 입력하세요" />
+          </StyledInputWrap>
+        </DetailWrap>
+      </StyledContainer>
     </>
   );
 };
 
 export default PostDetailPage;
 
-const StyledWrap = styled.section`
-  padding: 10px 20px 0 20px;
+const StyledContainer = styled.div`
+  ${containerStyle}
+`;
+const DetailWrap = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 const StyledInputWrap = styled.div`
@@ -35,6 +41,6 @@ const StyledInput = styled.input`
   border-radius: 5px;
   border-style: none;
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.grey};
   padding: 0 10px;
 `;

@@ -1,14 +1,15 @@
 import React from 'react';
 
 type ButtonTypes = {
-  label?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
+  children?: JSX.Element | string;
 };
-const Button = ({ label, onClick, className }: ButtonTypes) => {
+
+const Button = ({ onClick, className, children }: ButtonTypes) => {
   return (
     <button onClick={onClick} className={className}>
-      {label}
+      {children}
     </button>
   );
 };

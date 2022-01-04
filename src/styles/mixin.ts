@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { size } from './theme';
 
 export const flexColumn = css`
   flex-direction: column;
@@ -18,4 +19,11 @@ export const headerStyle = css`
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+`;
+
+export const containerStyle = css`
+  max-width: ${size.tablet};
+  min-width: ${size.mobile};
+  margin: auto;
+  padding: 0.5em;
 `;

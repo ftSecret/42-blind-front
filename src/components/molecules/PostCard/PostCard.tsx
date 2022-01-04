@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { formatDate } from 'utils/formatDate';
 
 import Status from 'components/molecules/Status/Status';
@@ -15,34 +15,9 @@ type PropTypes = {
   comments: number;
 };
 
-const Card = ({ title, content, created_at, views, likes, comments, ...rest }: PropTypes) => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const onIntersect: IntersectionObserverCallback = useCallback(
-    async ([entry], observer) => {
-      if (entry.isIntersecting && !isLoaded) {
-        observer.unobserve(entry.target);
-        observer && observer.disconnect();
-        setIsLoaded(true);
-      }
-    },
-    [isLoaded],
-  );
-
-  useEffect(() => {
-    let observer: IntersectionObserver;
-    if (targetRef?.current) {
-      observer = new IntersectionObserver(onIntersect, {
-        threshold: 0,
-      });
-      observer.observe(targetRef?.current);
-    }
-    return () => observer && observer.disconnect();
-  }, [onIntersect]);
-
+const PostCard = ({ title, content, created_at, views, likes, comments, ...rest }: PropTypes) => {
   return (
-    <StyledSection ref={targetRef} loaded={isLoaded}>
+    <StyledDiv>
       <StyledTitle>{title}</StyledTitle>
       <StyledContent>{content}</StyledContent>
 
@@ -50,19 +25,14 @@ const Card = ({ title, content, created_at, views, likes, comments, ...rest }: P
         <div>{formatDate(created_at)}</div>
         <Status comments={comments} views={views} likes={likes} />
       </StyledInfo>
-    </StyledSection>
+    </StyledDiv>
   );
 };
 
-export default Card;
+export default PostCard;
 
-type StyledSectionProps = {
-  loaded: boolean;
-};
-
-const StyledSection = styled.section<StyledSectionProps>`
+const StyledDiv = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
-  opacity: ${(props) => (props.loaded ? 1 : 0)};
   ${flexColumn}
   border-radius: 0.3rem;
   transition: 0.5s;

@@ -2,19 +2,27 @@ import React from 'react';
 import PostWritingHeader from 'components/organisms/PostWritingHeader/PostWritingHeader';
 import PostWritingDetail from 'components/templates/PostWritingDetail/PostWritingDetail';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
+import { containerStyle, flexColumn } from 'styles/mixin';
 
 const PostWritingPage = () => {
   return (
-    <WritingWrap>
+    <>
       <PostWritingHeader />
-      <PostWritingDetail />
-    </WritingWrap>
+      <StyledContainer>
+        <WritingWrap>
+          <PostWritingDetail />
+        </WritingWrap>
+      </StyledContainer>
+    </>
   );
 };
 
+const StyledContainer = styled.div`
+  ${containerStyle}
+`;
 const WritingWrap = styled.div`
-  ${flexColumn}
+  ${flexColumn};
+  padding: 0.5em 0;
   gap: 1rem;
 `;
 

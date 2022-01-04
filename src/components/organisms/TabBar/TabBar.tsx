@@ -23,8 +23,8 @@ const TabBar = () => {
 
   return (
     <StyledContainer>
-      {linkData.map((data) => (
-        <Typography size={'sm'} lineHeight={'large'}>
+      {linkData.map((data, idx) => (
+        <Typography key={idx} size={'sm'} lineHeight={'large'}>
           <Link
             to={data.to}
             key={data.to}

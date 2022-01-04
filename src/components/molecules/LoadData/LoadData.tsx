@@ -1,5 +1,7 @@
+import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import classes from './LoadData.module.css';
+import styled from 'styled-components';
+import { flexColumn } from 'styles/mixin';
 
 type PropTypes = {
   load: () => void;
@@ -33,11 +35,19 @@ const LoadData = ({ load }: PropTypes) => {
     return () => observer && observer.disconnect();
   }, [onIntersect]);
 
-  return isLoading ? (
-    <div className={classes.loading}>로딩 중...</div>
-  ) : (
-    <div ref={targetRef} className={classes.container} />
+  // TODO: div를 감싸야하는 이유가 뭘까...?
+  return (
+    <LoadingDiv>
+      {isLoading && <LoadingSpinner />}
+      <div ref={targetRef} />
+    </LoadingDiv>
   );
 };
+
+const LoadingDiv = styled.div`
+  ${flexColumn}
+  align-items: center;
+  padding: 1rem;
+`;
 
 export default LoadData;

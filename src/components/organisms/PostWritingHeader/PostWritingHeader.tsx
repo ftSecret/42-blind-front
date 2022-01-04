@@ -24,7 +24,7 @@ const PostWritingHeader = () => {
       <Typography size="base" weight="bold">
         글 작성
       </Typography>
-      <StyledSubmitButton label="완료" onClick={handleSubmit} />
+      <StyledSubmitButton children="완료" onClick={handleSubmit} />
     </StyledHeader>
   );
 };

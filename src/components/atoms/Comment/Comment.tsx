@@ -29,8 +29,8 @@ const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType)
           <StyledDate>{formatDate(created_at!)}</StyledDate>
         </div>
         <div>
-          <Button label={'답글'} />
-          <Button label={'좋아요'} />
+          <Button children={'답글'} />
+          <Button children={'좋아요'} />
         </div>
       </StyledWrap>
     </StyledComment>

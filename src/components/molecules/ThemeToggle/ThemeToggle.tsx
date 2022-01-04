@@ -1,22 +1,22 @@
+import React from 'react';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toggle, selectTheme } from 'features/theme/themeSlice';
-import React from 'react';
+import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
+import Button from 'components/atoms/Button/Button';
 
-import theme from 'styles/theme';
-import styled from 'styled-components';
-import { DARK_THEME } from 'constants/theme';
+export const themeIcon = {
+  [DARK_THEME]: '🌚',
+  [LIGHT_THEME]: '🌝',
+};
 
 const ThemeToggle = () => {
   const themeState = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
-  return (
-    <ToggleWrapper onClick={() => dispatch(toggle())} theme={theme[themeState]}>
-      {themeState === DARK_THEME ? '🌚' : '🌝'}
-    </ToggleWrapper>
-  );
+  return <ToggleWrapper onClick={() => dispatch(toggle())}>{themeIcon[themeState]}</ToggleWrapper>;
 };
 
-const ToggleWrapper = styled.button`
+const ToggleWrapper = styled(Button)`
   background-color: ${(props) => props.theme.colors.background};
   border: ${(props) => props.theme.colors.background};
   font-size: 20px;

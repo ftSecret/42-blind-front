@@ -3,22 +3,21 @@ import styled from 'styled-components';
 
 const PostWritingDetail = () => {
   return (
-    <StyledContainer>
+    <WritingContainer>
       <StyledTitle>
         <input placeholder="제목" />
       </StyledTitle>
       <StyledContent>
         <textarea placeholder="내용을 입력하세요." />
       </StyledContent>
-    </StyledContainer>
+    </WritingContainer>
   );
 };
 
-const StyledContainer = styled.div`
-  padding: 1em;
-  height: 80vh;
+const WritingContainer = styled.div`
+  padding: 0.5rem;
+  height: 90vh;
   background-color: ${({ theme }) => theme.colors.primary};
-  border-radius: 10px;
 `;
 
 const StyledTitle = styled.div`
@@ -39,15 +38,16 @@ const StyledTitle = styled.div`
 `;
 
 const StyledContent = styled.div`
-  padding: 1em 0em;
+  padding: 1em 0;
   box-sizing: border-box;
   height: 100%;
+  color: ${({ theme }) => theme.colors.default};
 
   & > textarea {
     font-size: 1rem;
     background-color: rgba(0, 0, 0, 0);
     border-style: none;
-    color: white;
+    color: ${({ theme }) => theme.colors.default};
     font-weight: bold;
     width: 100%;
     height: 100%;

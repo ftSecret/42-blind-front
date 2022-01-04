@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
-import ThemeToggle from 'components/atoms/ThemeToggle/ThemeToggle';
+import ThemeToggle from 'components/molecules/ThemeToggle/ThemeToggle';
 import Typography from 'components/atoms/Typography/Typography';
 import { PATH_MY } from 'components/utils/AppRouter';
 

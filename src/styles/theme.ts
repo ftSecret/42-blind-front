@@ -58,8 +58,8 @@ export const colors = {
   blue: '#60deec',
 };
 
-const size = {
-  mobile: '425px',
+export const size = {
+  mobile: '280px',
   tablet: '768px',
   desktop: '1440px',
 };

@@ -57,7 +57,7 @@ const PostDetail = () => {
       <h1>{detail.content}</h1>
       <Status comments={detail.comments} views={detail.views} likes={detail.likes} />
       <StyledGoodWrap>
-        <Button label="좋아요" />
+        <Button children="좋아요" />
       </StyledGoodWrap>
     </StyledDetail>
   );
@@ -68,7 +68,7 @@ export default PostDetail;
 const StyledDetail = styled.div`
   ${flexColumn}
   gap: 0.5em;
-  padding: 0.5em 0;
+  padding: 0.5em;
   border-bottom: 1px solid var(--grey-color);
   color: ${({ theme }) => theme.colors.default};
 `;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cards from 'components/molecules/Cards/Cards';
 import Button from 'components/atoms/Button/Button';
 import MainHeader from 'components/organisms/MainHeader/MainHeader';
 import styled from 'styled-components';
 import { PATH_POST_WRITING } from 'components/utils/AppRouter';
+import Board from 'components/organisms/Board/Board';
+import { containerStyle } from 'styles/mixin';
 
 const MainPage = () => {
   const onClick = () => {
@@ -22,16 +23,23 @@ const MainPage = () => {
   return (
     <section>
       <MainHeader />
-      <Cards />
-      <Link to={PATH_POST_WRITING}>
-        <StyledWriteButton onClick={onClick} label={'글쓰기'} />
-      </Link>
+      <StyledContainer>
+        <Board />
+        <Link to={PATH_POST_WRITING}>
+          <StyledWriteButton onClick={onClick} children={'글쓰기'} />
+        </Link>
+      </StyledContainer>
     </section>
   );
 };
 
 // TODO: 여기서 white같은 값들이 테마에 맞는 색으로 변경되어야함. 논의 필요.
 // 버튼을 어디에 저장할 것인지...?
+
+const StyledContainer = styled.div`
+  ${containerStyle}
+`;
+
 const StyledWriteButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
