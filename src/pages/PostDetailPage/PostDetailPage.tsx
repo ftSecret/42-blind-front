@@ -1,15 +1,15 @@
 import Comments from 'components/Comments/Comments';
 import DetailHeader from 'components/DetailHeader/DetailHeader';
-import ArticleDetail from 'components/ArticleDetail/ArticleDetail';
+import PostDetail from 'components/PostDetail/PostDetail';
 
 import styled from 'styled-components';
 
-const ArticleDetailPage = () => {
+const PostDetailPage = () => {
   return (
     <>
       <DetailHeader content="42 블라인드 익명 게시판" />
       <StyledWrap>
-        <ArticleDetail />
+        <PostDetail />
         <Comments />
         <StyledInputWrap>
           <StyledInput placeholder="댓글을 입력하세요" />
@@ -19,7 +19,7 @@ const ArticleDetailPage = () => {
   );
 };
 
-export default ArticleDetailPage;
+export default PostDetailPage;
 
 const StyledWrap = styled.section`
   padding: 10px 20px 0 20px;

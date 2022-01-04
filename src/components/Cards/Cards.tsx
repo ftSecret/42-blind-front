@@ -6,6 +6,7 @@ import Card from 'components/Card/Card';
 import LoadData from 'components/LoadData/LoadData';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
+import { PATH_POST } from 'components/utils/AppRouter';
 
 const Cards = () => {
   const [data, setData] = useState<ReturnType<typeof getDummies>>([]);
@@ -18,7 +19,7 @@ const Cards = () => {
   return (
     <StyledCards>
       {data.map((elem, idx) => (
-        <Link key={idx} to={`/detail/${elem.id}`}>
+        <Link key={idx} to={`${PATH_POST}/${elem.id}`}>
           <Card {...elem} />
         </Link>
       ))}

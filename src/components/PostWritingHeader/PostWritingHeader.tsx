@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
 
-const ArticleWritingHeader = () => {
+const PostWritingHeader = () => {
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -26,7 +26,7 @@ const ArticleWritingHeader = () => {
   );
 };
 
-export default ArticleWritingHeader;
+export default PostWritingHeader;
 
 const StyledHeader = styled.div`
   ${flexRow}

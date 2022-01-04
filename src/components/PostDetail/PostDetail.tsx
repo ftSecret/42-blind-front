@@ -7,10 +7,9 @@ import Status from 'components/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import Button from 'components/Button/Button';
-import { darken } from 'polished';
-import { postDetailButton as postDetailButton } from 'components/Comment/Comment';
+import { postDetailButton } from 'components/Comment/Comment';
 
-type ArticleTypes = {
+type PostTypes = {
   id: number | null;
   title: string;
   content: string;
@@ -20,8 +19,8 @@ type ArticleTypes = {
   comments: number;
 };
 
-const ArticleDetail = () => {
-  const [detail, setDetail] = useState<ArticleTypes>({
+const PostDetail = () => {
+  const [detail, setDetail] = useState<PostTypes>({
     id: null,
     title: '',
     content: '',
@@ -30,18 +29,18 @@ const ArticleDetail = () => {
     likes: 0,
     comments: 0,
   });
-  const { articleId } = useParams();
+  const { postId } = useParams();
 
   useEffect(() => {
     //id로 데이터 가져오는 로직
     const datas = getDummies();
     const temp = datas.find((data) => {
-      if (`${data.id}` === articleId) return true;
+      if (`${data.id}` === postId) return true;
       return false;
     });
-    const { id, title, content, created_at, views, likes, comments } = temp as ArticleTypes;
+    const { id, title, content, created_at, views, likes, comments } = temp as PostTypes;
     setDetail({ id, title, content, created_at, views, likes, comments });
-  }, [articleId]);
+  }, [postId]);
 
   return (
     <StyledDetail>
@@ -64,7 +63,7 @@ const ArticleDetail = () => {
   );
 };
 
-export default ArticleDetail;
+export default PostDetail;
 
 const StyledDetail = styled.div`
   ${flexColumn}

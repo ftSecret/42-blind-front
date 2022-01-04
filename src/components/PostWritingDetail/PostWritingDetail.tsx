@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ArticleWritingDetail = () => {
+const PostWritingDetail = () => {
   return (
     <StyledContainer>
       <StyledTitle>
@@ -55,4 +55,4 @@ const StyledContent = styled.div`
   }
 `;
 
-export default ArticleWritingDetail;
+export default PostWritingDetail;
