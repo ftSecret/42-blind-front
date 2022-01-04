@@ -4,6 +4,7 @@ import React from 'react';
 
 import theme from 'assets/styles/theme';
 import styled from 'styled-components';
+import { DARK_THEME } from 'constants/theme';
 
 const ThemeToggle = () => {
   const themeState = useAppSelector(selectTheme);
