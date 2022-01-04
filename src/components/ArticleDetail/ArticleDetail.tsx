@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { formatDate } from 'utils/formatDate';
 import { getDummies } from 'utils/getDummies';
 
-import userImage from 'assets/images/alien (2).png';
+import userImage from 'assets/images/user.png';
 
 import Status from 'components/Status/Status';
 import styled from 'styled-components';
@@ -65,8 +65,9 @@ export default ArticleDetail;
 const StyledDetail = styled.div`
   ${flexColumn}
   gap: 0.5em;
+  padding: 0.5em 0;
   border-bottom: 1px solid var(--grey-color);
-  margin-bottom: 0.5rem;
+  color: ${({ theme }) => theme.colors.font};
 `;
 
 const StyledProfile = styled.div`
@@ -76,9 +77,9 @@ const StyledProfile = styled.div`
 
 const StyledProfileInfo = styled.div`
   text-align: left;
-
   & > h2 {
     font-weight: bold;
+    margin-bottom: 0.5em;
   }
 
   & > h3 {

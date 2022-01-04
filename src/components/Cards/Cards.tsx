@@ -30,7 +30,7 @@ const Cards = () => {
 const StyledCards = styled.div`
   ${flexColumn}
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5em;
   gap: 0.5rem;
 `;
 

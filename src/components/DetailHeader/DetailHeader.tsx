@@ -25,11 +25,16 @@ const StyledSection = styled.section`
   height: 50px;
   line-height: 3.5;
   text-align: center;
-
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.font};
   & > span {
     position: absolute;
     top: 5px;
     left: 10px;
+  }
+  h1 {
+    font-size: ${({ theme }) => theme.fonts.size.sm};
+    font-weight: bold;
   }
 `;
 

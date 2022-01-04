@@ -39,10 +39,14 @@ const StyledHeader = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  font-size: 1.3rem;
+  font-size: ${({ theme }) => theme.fonts.size.sm};
+
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.font};
 `;
 
 const StyledSubmitButton = styled(Button)`
+  font-weight: bold;
   background-color: ${({ theme }) => theme.colors.red};
   border-color: ${({ theme }) => theme.colors.white};
   border-style: solid;
@@ -50,5 +54,5 @@ const StyledSubmitButton = styled(Button)`
   color: ${({ theme }) => theme.colors.white};
   width: 4rem;
   height: 2.3rem;
-  border-radius: 0.5rem;
+  border-radius: 50px;
 `;

@@ -40,17 +40,22 @@ export default TabBar;
 
 const StyledContainer = styled.div`
   ${flexRow}
-  background-color: var(--black-color);
+  background-color:   ${({ theme }) => theme.colors.primary};
+  width: 100%;
   align-items: center;
-  padding: 0.5em;
-  justify-content: space-around;
-  font-size: 1.3rem;
+  justify-content: space-evenly;
+  font-size: ${({ theme }) => theme.fonts.size.sm};
   text-align: center;
+  line-height: 2;
   color: grey;
   position: sticky;
   top: 0px;
+  a {
+    width: 10%;
+  }
   & a.selected {
-    color: white;
+    color: ${({ theme }) => theme.colors.font};
     font-weight: bold;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.font};
   }
 `;

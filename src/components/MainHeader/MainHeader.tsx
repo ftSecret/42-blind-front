@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexRow } from 'assets/styles/mixin';
+import ThemeToggle from 'components/ThemeToggle/ThemeToggle';
 
 const MainHeader = () => {
   return (
     <StyledContainer>
+      <ThemeToggle />
       <StyledTitle>42 BLIND</StyledTitle>
       <StyledMyPage>
         <Link to="/my/article">마이페이지</Link>
@@ -28,16 +30,22 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledTitle = styled.div`
+const StyledTitle = styled.h1`
   box-sizing: border-box;
   width: 100%;
-  font-size: 2.5rem;
+  font-size: ${({ theme }) => theme.fonts.size.xl};
   font-weight: bold;
-  line-height: 1.2;
+  line-height: ${({ theme }) => theme.fonts.lineheight.base};
   text-align: center;
+  color: ${({ theme }) => theme.colors.font};
 `;
 
 const StyledMyPage = styled.div`
   position: absolute;
   right: 0.5rem;
+  color: ${({ theme }) => theme.colors.font};
+  font-weight: bold;
+  a {
+    font-size: ${({ theme }) => theme.fonts.size.sm};
+  }
 `;
