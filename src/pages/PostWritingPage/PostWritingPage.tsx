@@ -1,6 +1,6 @@
 import React from 'react';
-import PostWritingHeader from 'components/PostWritingHeader/PostWritingHeader';
-import PostWritingDetail from 'components/PostWritingDetail/PostWritingDetail';
+import PostWritingHeader from 'components/organisms/PostWritingHeader/PostWritingHeader';
+import PostWritingDetail from 'components/templates/PostWritingDetail/PostWritingDetail';
 import styled from 'styled-components';
 
 const PostWritingPage = () => {

@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { formatDate } from 'utils/formatDate';
 import { getDummies } from 'utils/getDummies';
 import userImage from 'assets/images/user.png';
-import Status from 'components/Status/Status';
+import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
-import Button from 'components/Button/Button';
-import { postDetailButton } from 'components/Comment/Comment';
+import Button from 'components/atoms/Button/Button';
+import { postDetailButton } from 'components/atoms/Comment/Comment';
 
 type PostTypes = {
   id: number | null;

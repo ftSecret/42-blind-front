@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { formatDate } from 'utils/formatDate';
 
-import Status from 'components/Status/Status';
+import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';

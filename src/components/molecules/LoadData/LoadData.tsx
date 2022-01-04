@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import classes from 'components/LoadData/LoadData.module.css';
+import classes from './LoadData.module.css';
 
 type PropTypes = {
   load: () => void;
@@ -19,7 +19,7 @@ const LoadData = ({ load }: PropTypes) => {
         observer.observe(entry.target);
       }
     },
-    [load]
+    [load],
   );
 
   useEffect(() => {

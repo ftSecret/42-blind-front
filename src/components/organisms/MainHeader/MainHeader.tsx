@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
-import ThemeToggle from 'components/ThemeToggle/ThemeToggle';
+import ThemeToggle from 'components/atoms/ThemeToggle/ThemeToggle';
 
 const MainHeader = () => {
   return (

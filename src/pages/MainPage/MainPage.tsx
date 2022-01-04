@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cards from 'components/Cards/Cards';
-import Button from 'components/Button/Button';
-import MainHeader from 'components/MainHeader/MainHeader';
+import Cards from 'components/molecules/Cards/Cards';
+import Button from 'components/atoms/Button/Button';
+import MainHeader from 'components/organisms/MainHeader/MainHeader';
 import styled from 'styled-components';
+import { PATH_POST_WRITING } from 'components/utils/AppRouter';
 
 const MainPage = () => {
   const onClick = () => {
@@ -22,7 +23,7 @@ const MainPage = () => {
     <section>
       <MainHeader />
       <Cards />
-      <Link to="/article-writing">
+      <Link to={PATH_POST_WRITING}>
         <StyledWriteButton onClick={onClick} label={'글쓰기'} />
       </Link>
     </section>

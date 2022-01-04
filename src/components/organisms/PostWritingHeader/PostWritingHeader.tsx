@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'components/Button/Button';
+import Button from 'components/atoms/Button/Button';
 import CloseIcon from 'components/icons/CloseIcon';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';

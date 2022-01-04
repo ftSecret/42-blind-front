@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Cards from 'components/Cards/Cards';
-import MyHeader from 'components/MyHeader/MyHeader';
-import TabBar from 'components/TabBar/TabBar';
+import Cards from 'components/molecules/Cards/Cards';
+import MyHeader from 'components/organisms/MyHeader/MyHeader';
+import TabBar from 'components/organisms/TabBar/TabBar';
 
 // TODO: route의 key값은 추후에 삭제되어야함.
 const MyPage = () => {

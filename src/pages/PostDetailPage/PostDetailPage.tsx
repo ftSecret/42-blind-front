@@ -1,6 +1,6 @@
-import Comments from 'components/Comments/Comments';
-import DetailHeader from 'components/DetailHeader/DetailHeader';
-import PostDetail from 'components/PostDetail/PostDetail';
+import Comments from 'components/molecules/Comments/Comments';
+import DetailHeader from 'components/molecules/DetailHeader/DetailHeader';
+import PostDetail from 'components/templates/PostDetail/PostDetail';
 
 import styled from 'styled-components';
 

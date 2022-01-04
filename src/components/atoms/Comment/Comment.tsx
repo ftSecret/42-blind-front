@@ -2,7 +2,7 @@ import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled, { css } from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
-import Button from 'components/Button/Button';
+import Button from 'components/atoms/Button/Button';
 import { lighten } from 'polished';
 
 type PropType = {
