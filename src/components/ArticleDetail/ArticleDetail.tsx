@@ -7,7 +7,7 @@ import userImage from 'assets/images/user.png';
 
 import Status from 'components/Status/Status';
 import styled from 'styled-components';
-import { flexColumn } from 'assets/styles/mixin';
+import { flexColumn } from 'styles/mixin';
 
 type ArticleTypes = {
   id: number | null;
@@ -67,7 +67,7 @@ const StyledDetail = styled.div`
   gap: 0.5em;
   padding: 0.5em 0;
   border-bottom: 1px solid var(--grey-color);
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
 `;
 
 const StyledProfile = styled.div`

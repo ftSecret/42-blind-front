@@ -3,7 +3,7 @@ import Button from 'components/Button/Button';
 import CloseIcon from 'components/icons/CloseIcon';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { flexRow } from 'assets/styles/mixin';
+import { flexRow } from 'styles/mixin';
 
 const ArticleWritingHeader = () => {
   const navigate = useNavigate();
@@ -42,15 +42,14 @@ const StyledTitle = styled.div`
   font-size: ${({ theme }) => theme.fonts.size.sm};
 
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
 `;
 
 const StyledSubmitButton = styled(Button)`
   font-weight: bold;
   background-color: ${({ theme }) => theme.colors.red};
   border-color: ${({ theme }) => theme.colors.white};
-  border-style: solid;
-  border-width: 1px;
+  border-style: none;
   color: ${({ theme }) => theme.colors.white};
   width: 4rem;
   height: 2.3rem;

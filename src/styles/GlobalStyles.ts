@@ -16,7 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   scrollbar-gutter: stable;
   background-color: ${({ theme }) => theme.colors.background};
-  color:  ${({ theme }) => theme.colors.font};
+  color:  ${({ theme }) => theme.colors.default};
 
 }
 

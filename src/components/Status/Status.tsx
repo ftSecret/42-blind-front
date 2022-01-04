@@ -4,8 +4,8 @@ import ChatIcon from 'components/icons/ChatIcon';
 import CheckCircleIcon from 'components/icons/CheckCircleIcon';
 import ThumbUpIcon from 'components/icons/ThumbUpIcon';
 import styled from 'styled-components';
-import { flexRow } from 'assets/styles/mixin';
-import { colors } from 'assets/styles/theme';
+import { flexRow } from 'styles/mixin';
+import { colors } from 'styles/theme';
 
 type StatusType = {
   comments: number;
@@ -16,11 +16,11 @@ const Status = ({ comments, views, likes }: StatusType) => {
   return (
     <StyledStatus>
       <li>
-        <ChatIcon color={colors.gray} />
+        <ChatIcon color={colors.grey} />
         <div>{comments}</div>
       </li>
       <li>
-        <CheckCircleIcon color={colors.yellow} />
+        <CheckCircleIcon color={colors.blue} />
         <div>{views}</div>
       </li>
       <li>

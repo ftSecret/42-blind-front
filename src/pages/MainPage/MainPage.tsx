@@ -41,7 +41,7 @@ const StyledWriteButton = styled(Button)`
   bottom: 10px;
   transform: translateX(-50%);
   border-radius: 50px;
-  border: 1px solid ${({ theme }) => theme.colors.white};
+  border: none;
   font-weight: bold;
 `;
 

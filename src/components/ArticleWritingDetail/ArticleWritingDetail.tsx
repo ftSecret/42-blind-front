@@ -33,7 +33,7 @@ const StyledTitle = styled.div`
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0);
     border-style: none;
-    color: ${({ theme }) => theme.colors.font};
+    color: ${({ theme }) => theme.colors.default};
     width: 100%;
   }
 `;

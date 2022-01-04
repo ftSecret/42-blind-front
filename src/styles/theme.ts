@@ -1,8 +1,3 @@
-/*
-https://dkje.github.io/2020/10/13/StyledComponents/ 에서 가져온 코드입니다.
-아직 프로젝트에 반영이 제대로 되지 않았기 때문에 불필요하거나 맞지 않는 값이 있을 수 있습니다.
-*/
-
 import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
 
 export type Theme = {
@@ -10,15 +5,13 @@ export type Theme = {
     primary: string;
     secondary: string;
     background: string;
+    default: string;
     red: string;
     yellow: string;
-    blue: string;
-    white: string;
-    orange: string;
     green: string;
-    purple: string;
-    gray: string;
-    font: string;
+    grey: string;
+    white: string;
+    blue: string;
   };
   margins: { sm: string; base: string; lg: string; xl: string };
   paddings: { sm: string; base: string; lg: string; xl: string };
@@ -69,12 +62,10 @@ const fonts = {
 export const colors = {
   red: '#ef7566',
   yellow: '#ffdc98',
-  blue: '#60deec',
-  white: '#fdfcfd',
-  orange: '#ed7631',
   green: '#90c37b',
-  purple: '#d1c4ff',
-  gray: '#7f808a',
+  grey: '#7f808a',
+  white: '#fdfcfd',
+  blue: '#60deec',
 };
 
 const size = {
@@ -89,12 +80,18 @@ const device = {
   desktopL: `@media only screen and (max-width: ${size.desktop})`,
 };
 
+/*
+primary : 카드색
+secondary : ???
+background : 배경색
+default : 글자색
+*/
 const lightThemeColors = {
   ...colors,
   primary: '#fdfcfd',
   secondary: '#7f808a',
-  background: '#f7f6f7',
-  font: '#111216',
+  background: '#F4F5F7',
+  default: '#111216',
 };
 
 const darkThemeColors = {
@@ -102,7 +99,7 @@ const darkThemeColors = {
   primary: '#1e1f22',
   secondary: '#7f808a',
   background: '#111216',
-  font: '#f8f8f8',
+  default: '#f8f8f8',
 };
 
 const defalutTheme = {

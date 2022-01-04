@@ -26,7 +26,7 @@ const StyledSection = styled.section`
   line-height: 3.5;
   text-align: center;
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
   & > span {
     position: absolute;
     top: 5px;

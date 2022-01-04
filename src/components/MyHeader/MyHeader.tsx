@@ -16,7 +16,7 @@ export default MyHeader;
 
 const StyledContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
   display: flex;
   align-items: center;
   padding: 0 1em;

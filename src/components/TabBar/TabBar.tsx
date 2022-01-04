@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexRow } from 'assets/styles/mixin';
+import { flexRow } from 'styles/mixin';
 
 const linkData = [
   {
@@ -54,8 +54,8 @@ const StyledContainer = styled.div`
     width: 10%;
   }
   & a.selected {
-    color: ${({ theme }) => theme.colors.font};
+    color: ${({ theme }) => theme.colors.default};
     font-weight: bold;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.font};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.default};
   }
 `;

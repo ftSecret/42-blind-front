@@ -1,7 +1,7 @@
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
-import { flexColumn, flexRow } from 'assets/styles/mixin';
+import { flexColumn, flexRow } from 'styles/mixin';
 
 type PropType = {
   id: number | null;
@@ -30,7 +30,7 @@ const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType)
 const StyledComment = styled.div`
   ${flexColumn}
   border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
   padding: ${({ theme }) => theme.paddings.sm};
   gap: 0.5rem;
 `;

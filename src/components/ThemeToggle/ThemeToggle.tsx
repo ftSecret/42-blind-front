@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toggle, selectTheme } from 'features/theme/themeSlice';
 import React from 'react';
 
-import theme from 'assets/styles/theme';
+import theme from 'styles/theme';
 import styled from 'styled-components';
 import { DARK_THEME } from 'constants/theme';
 

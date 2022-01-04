@@ -5,7 +5,7 @@ import { getDummies } from 'utils/getDummies';
 import Card from 'components/Card/Card';
 import LoadData from 'components/LoadData/LoadData';
 import styled from 'styled-components';
-import { flexColumn } from 'assets/styles/mixin';
+import { flexColumn } from 'styles/mixin';
 
 const Cards = () => {
   const [data, setData] = useState<ReturnType<typeof getDummies>>([]);

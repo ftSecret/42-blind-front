@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexRow } from 'assets/styles/mixin';
+import { flexRow } from 'styles/mixin';
 import ThemeToggle from 'components/ThemeToggle/ThemeToggle';
 
 const MainHeader = () => {
@@ -37,13 +37,13 @@ const StyledTitle = styled.h1`
   font-weight: bold;
   line-height: ${({ theme }) => theme.fonts.lineheight.base};
   text-align: center;
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
 `;
 
 const StyledMyPage = styled.div`
   position: absolute;
   right: 0.5rem;
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
   font-weight: bold;
   a {
     font-size: ${({ theme }) => theme.fonts.size.sm};

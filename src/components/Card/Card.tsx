@@ -3,7 +3,8 @@ import { formatDate } from 'utils/formatDate';
 
 import Status from 'components/Status/Status';
 import styled from 'styled-components';
-import { flexColumn, flexRow } from 'assets/styles/mixin';
+import { flexColumn, flexRow } from 'styles/mixin';
+import { darken } from 'polished';
 
 type PropTypes = {
   title: string;
@@ -77,20 +78,20 @@ const StyledSection = styled.section<StyledSectionProps>`
 const StyledInfo = styled.div`
   ${flexRow}
   justify-content: space-between;
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
 `;
 
 const StyledContent = styled.div`
   width: 100%;
   line-height: 1.2;
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => darken(0.3, theme.colors.default)};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 const StyledTitle = styled.div`
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.default};
   font-weight: bold;
   font-size: 1.2em;
 

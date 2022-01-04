@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getCommentsDummies } from 'utils/getDummies';
 import Comment from 'components/Comment/Comment';
 import styled from 'styled-components';
-import { flexColumn } from 'assets/styles/mixin';
+import { flexColumn } from 'styles/mixin';
 
 type CommentType = {
   id: number | null;
