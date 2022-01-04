@@ -32,17 +32,17 @@ const MainPage = () => {
 // TODO: 여기서 white같은 값들이 테마에 맞는 색으로 변경되어야함. 논의 필요.
 // 버튼을 어디에 저장할 것인지...?
 const StyledWriteButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
-  width: 100px;
-  height: 50px;
+  width: 80px;
+  height: 40px;
   position: sticky;
   left: 50%;
   bottom: 10px;
   transform: translateX(-50%);
   border-radius: 50px;
   border: 1px solid ${({ theme }) => theme.colors.white};
-  font-weight: 500;
+  font-weight: bold;
 `;
 
 export default MainPage;

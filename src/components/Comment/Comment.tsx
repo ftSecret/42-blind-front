@@ -1,5 +1,5 @@
 import { formatDate } from 'utils/formatDate';
-import userImage from 'assets/images/alien (2).png';
+import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'assets/styles/mixin';
 
@@ -29,8 +29,10 @@ const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType)
 
 const StyledComment = styled.div`
   ${flexColumn}
-  gap: 0.5em;
   border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.font};
+  padding: ${({ theme }) => theme.paddings.sm};
+  gap: 0.5rem;
 `;
 
 const StyledUserImage = styled.div`
