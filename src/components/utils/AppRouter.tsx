@@ -8,13 +8,13 @@ import PostDetailPage from 'pages/PostDetailPage/PostDetailPage';
 import PostWritingPage from 'pages/PostWritingPage/PostWritingPage';
 
 export const PATH_MAIN = '/';
-export const PATH_MY = '/my/*';
+export const PATH_MY = '/my';
 export const PATH_POST = '/post';
 export const PATH_POST_WRITING = '/post-writing';
 
 export const routes = [
   { path: PATH_MAIN, element: <MainPage /> },
-  { path: PATH_MY, element: <MyPage /> },
+  { path: `${PATH_MY}/*`, element: <MyPage /> },
   { path: `${PATH_POST}/:postId`, element: <PostDetailPage /> },
   { path: PATH_POST_WRITING, element: <PostWritingPage /> },
 ];

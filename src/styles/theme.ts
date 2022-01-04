@@ -1,20 +1,10 @@
 import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
 
 export type Theme = {
-  colors: {
-    primary: string;
-    secondary: string;
-    background: string;
-    default: string;
-    red: string;
-    yellow: string;
-    green: string;
-    grey: string;
-    white: string;
-    blue: string;
-  };
-  margins: { sm: string; base: string; lg: string; xl: string };
-  paddings: { sm: string; base: string; lg: string; xl: string };
+  colors: typeof lightThemeColors;
+  fonts: typeof fonts;
+  margins: typeof margins;
+  paddings: typeof paddings;
 };
 
 type ThemeGroup = {
@@ -36,7 +26,7 @@ const paddings = {
   xl: '3rem',
 };
 
-const fonts = {
+export const fonts = {
   family: {
     base: `'Noto Sans KR', sans-serif`,
     title: `'Merriweather', serif`,
@@ -53,9 +43,9 @@ const fonts = {
     normal: 400,
     bold: 700,
   },
-  lineheight: {
-    base: 1.5,
-    large: 3.5,
+  lineHeight: {
+    base: 1,
+    large: 1.5,
   },
 };
 

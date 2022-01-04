@@ -1,13 +1,15 @@
+import Typography from 'components/atoms/Typography/Typography';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { headerStyle } from 'styles/mixin';
 
 const MyHeader = () => {
   return (
     <StyledContainer>
-      <StyledTitle>
+      <Typography size="xl" weight="bold">
         <Link to="/">42 BLIND</Link>
-      </StyledTitle>
+      </Typography>
     </StyledContainer>
   );
 };
@@ -15,18 +17,5 @@ const MyHeader = () => {
 export default MyHeader;
 
 const StyledContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.default};
-  display: flex;
-  align-items: center;
-  padding: 0 1em;
-`;
-
-const StyledTitle = styled.h1`
-  box-sizing: border-box;
-  width: 100%;
-  font-size: 2.5rem;
-  font-weight: bold;
-  line-height: ${({ theme }) => theme.fonts.lineheight.base};
-  text-align: center;
+  ${headerStyle}
 `;

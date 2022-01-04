@@ -26,6 +26,7 @@ const ToggleWrapper = styled.button`
   align-items: center;
   width: 60px;
   height: 35px;
+  left: 1rem;
 
   border-radius: 30px;
 `;

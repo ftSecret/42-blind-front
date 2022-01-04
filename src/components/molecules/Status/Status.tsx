@@ -1,11 +1,11 @@
 import React from 'react';
 
-import ChatIcon from 'components/icons/ChatIcon';
-import ThumbUpIcon from 'components/icons/ThumbUpIcon';
+import ChatIcon from 'components/atoms/icons/ChatIcon';
+import ThumbUpIcon from 'components/atoms/icons/ThumbUpIcon';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
 import { colors } from 'styles/theme';
-import ViewIcon from 'components/icons/ViewIcon';
+import ViewIcon from 'components/atoms/icons/ViewIcon';
 
 type StatusType = {
   comments: number;

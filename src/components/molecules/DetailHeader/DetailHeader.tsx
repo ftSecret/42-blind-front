@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArrowBackIcon from 'components/icons/ArrowBackIcon';
+import ArrowBackIcon from 'components/atoms/icons/ArrowBackIcon';
 import styled from 'styled-components';
 
 const DetailHeader = ({ content }: { content: string }) => {

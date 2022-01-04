@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from 'components/atoms/Button/Button';
-import CloseIcon from 'components/icons/CloseIcon';
+import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { flexRow } from 'styles/mixin';
+import { headerStyle } from 'styles/mixin';
+import Typography from 'components/atoms/Typography/Typography';
 
 const PostWritingHeader = () => {
   const navigate = useNavigate();
@@ -20,7 +21,9 @@ const PostWritingHeader = () => {
   return (
     <StyledHeader>
       <CloseIcon onClick={handleClose} />
-      <StyledTitle>글 작성</StyledTitle>
+      <Typography size="base" weight="bold">
+        글 작성
+      </Typography>
       <StyledSubmitButton label="완료" onClick={handleSubmit} />
     </StyledHeader>
   );
@@ -29,20 +32,8 @@ const PostWritingHeader = () => {
 export default PostWritingHeader;
 
 const StyledHeader = styled.div`
-  ${flexRow}
-  width: 100%;
+  ${headerStyle}
   justify-content: space-between;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  padding: 0 14px;
-`;
-
-const StyledTitle = styled.div`
-  font-size: ${({ theme }) => theme.fonts.size.sm};
-
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.default};
 `;
 
 const StyledSubmitButton = styled(Button)`

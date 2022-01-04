@@ -2,6 +2,7 @@ import React from 'react';
 import PostWritingHeader from 'components/organisms/PostWritingHeader/PostWritingHeader';
 import PostWritingDetail from 'components/templates/PostWritingDetail/PostWritingDetail';
 import styled from 'styled-components';
+import { flexColumn } from 'styles/mixin';
 
 const PostWritingPage = () => {
   return (
@@ -13,7 +14,8 @@ const PostWritingPage = () => {
 };
 
 const WritingWrap = styled.div`
-  padding: 1rem;
+  ${flexColumn}
+  gap: 1rem;
 `;
 
 export default PostWritingPage;

@@ -3,15 +3,17 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexRow } from 'styles/mixin';
+import { headerStyle } from 'styles/mixin';
+import Typography from 'components/atoms/Typography/Typography';
 
+// TODO: ${PATH_MY}를 못 쓰는 이유 알아보기
 const linkData = [
   {
-    to: '/my/article',
+    to: `/my/post`,
     content: '내 글',
   },
   {
-    to: '/my/comment',
+    to: `/my/comment`,
     content: '내 댓글',
   },
 ] as const;
@@ -22,15 +24,17 @@ const TabBar = () => {
   return (
     <StyledContainer>
       {linkData.map((data) => (
-        <Link
-          to={data.to}
-          key={data.to}
-          className={classNames({
-            selected: data.to === location.pathname,
-          })}
-        >
-          {data.content}
-        </Link>
+        <Typography size={'sm'} lineHeight={'large'}>
+          <Link
+            to={data.to}
+            key={data.to}
+            className={classNames({
+              selected: data.to === location.pathname,
+            })}
+          >
+            {data.content}
+          </Link>
+        </Typography>
       ))}
     </StyledContainer>
   );
@@ -39,19 +43,14 @@ const TabBar = () => {
 export default TabBar;
 
 const StyledContainer = styled.div`
-  ${flexRow}
-  background-color:   ${({ theme }) => theme.colors.primary};
-  width: 100%;
-  align-items: center;
+  ${headerStyle}
   justify-content: space-evenly;
-  font-size: ${({ theme }) => theme.fonts.size.sm};
-  text-align: center;
-  line-height: 2;
-  color: grey;
   position: sticky;
   top: 0px;
+  padding: 0;
   a {
     width: 10%;
+    padding: 0.1rem 0;
   }
   & a.selected {
     color: ${({ theme }) => theme.colors.default};
