@@ -58,6 +58,9 @@ input:focus {
   outline: none;
 }
 
+* {
+  box-sizing: border-box;
+}
 
 
 `;

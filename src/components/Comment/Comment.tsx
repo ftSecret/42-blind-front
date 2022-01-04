@@ -1,7 +1,9 @@
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
+import Button from 'components/Button/Button';
+import { lighten } from 'polished';
 
 type PropType = {
   id: number | null;
@@ -22,7 +24,15 @@ const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType)
         <h1>익명1</h1>
       </StyledProfile>
       <p>{content}</p>
-      <StyledDate>{formatDate(created_at!)}</StyledDate>
+      <StyledWrap>
+        <div>
+          <StyledDate>{formatDate(created_at!)}</StyledDate>
+        </div>
+        <div>
+          <Button label={'답글'} />
+          <Button label={'좋아요'} />
+        </div>
+      </StyledWrap>
     </StyledComment>
   );
 };
@@ -52,8 +62,29 @@ const StyledProfile = styled.div`
   }
 `;
 
+export const postDetailButton = css`
+  all: unset;
+  background-color: ${({ theme }) => lighten(0.1, theme.colors.grey)};
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  padding: 0.3em;
+`;
+
 const StyledDate = styled.h3`
   color: ${({ theme }) => theme.colors.secondary};
+`;
+
+const StyledWrap = styled.div`
+  ${flexRow}
+  justify-content:space-between;
+  gap: 0.5rem;
+  & > div {
+    ${flexRow}
+    gap: 0.3rem
+  }
+  & > div > button {
+    ${postDetailButton}
+  }
 `;
 
 export default Comment;

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import ChatIcon from 'components/icons/ChatIcon';
-import CheckCircleIcon from 'components/icons/CheckCircleIcon';
 import ThumbUpIcon from 'components/icons/ThumbUpIcon';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
 import { colors } from 'styles/theme';
+import ViewIcon from 'components/icons/ViewIcon';
 
 type StatusType = {
   comments: number;
@@ -20,7 +20,7 @@ const Status = ({ comments, views, likes }: StatusType) => {
         <div>{comments}</div>
       </li>
       <li>
-        <CheckCircleIcon color={colors.blue} />
+        <ViewIcon color={colors.blue} />
         <div>{views}</div>
       </li>
       <li>

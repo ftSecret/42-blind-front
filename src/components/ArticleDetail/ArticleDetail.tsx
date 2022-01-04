@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { formatDate } from 'utils/formatDate';
 import { getDummies } from 'utils/getDummies';
-
 import userImage from 'assets/images/user.png';
-
 import Status from 'components/Status/Status';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
+import { flexColumn, flexRow } from 'styles/mixin';
+import Button from 'components/Button/Button';
+import { darken } from 'polished';
+import { postDetailButton as postDetailButton } from 'components/Comment/Comment';
 
 type ArticleTypes = {
   id: number | null;
@@ -56,6 +57,9 @@ const ArticleDetail = () => {
       <h1>{detail.title}</h1>
       <h1>{detail.content}</h1>
       <Status comments={detail.comments} views={detail.views} likes={detail.likes} />
+      <StyledGoodWrap>
+        <Button label="좋아요" />
+      </StyledGoodWrap>
     </StyledDetail>
   );
 };
@@ -92,4 +96,14 @@ const StyledUserImage = styled.div`
   height: 50px;
   background: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
+`;
+
+const StyledGoodWrap = styled.div`
+  ${flexRow}
+  justify-content: flex-end;
+  width: 100%;
+
+  & > button {
+    ${postDetailButton}
+  }
 `;
