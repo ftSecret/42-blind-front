@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Cards from 'components/molecules/Cards/Cards';
 import MyHeader from 'components/organisms/MyHeader/MyHeader';
 import TabBar from 'components/organisms/TabBar/TabBar';
-import { Navigate } from 'react-router-dom';
+
 // TODO: route의 key값은 추후에 삭제되어야함.
 const MyPage = () => {
   return (
@@ -13,7 +13,6 @@ const MyPage = () => {
       <Routes>
         <Route path="/post" element={<Cards key="1" />} />
         <Route path="/comment" element={<Cards key="2" />} />
-        {/* <Navigate to="/post" /> */}
       </Routes>
     </div>
   );
