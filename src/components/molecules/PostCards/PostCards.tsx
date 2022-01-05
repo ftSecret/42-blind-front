@@ -7,14 +7,14 @@ import { flexColumn } from 'styles/mixin';
 import { PATH_POST } from 'components/utils/AppRouter';
 
 type PropTypes = {
-  data: ReturnType<typeof getDummies>;
+  items: ReturnType<typeof getDummies>;
 };
 
-const PostCards = ({ data }: PropTypes) => {
+const PostCards = ({ items }: PropTypes) => {
   return (
     <StyledCards>
-      {data.map((elem, idx) => (
-        <Link key={idx} to={`${PATH_POST}/${elem.id}`}>
+      {items.map((elem, idx) => (
+        <Link key={idx} to={`${PATH_POST}/${elem.post_id}`}>
           <PostCard {...elem} />
         </Link>
       ))}
