@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { blindBoardAPI } from 'api/blindBoard';
-import themeReducer, { themeMiddleware } from '../features/theme/themeSlice';
+import userReducer from 'features/user/userSlice';
+import themeReducer, { themeMiddleware } from 'features/theme/themeSlice';
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
+    user: userReducer,
     [blindBoardAPI.reducerPath]: blindBoardAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>

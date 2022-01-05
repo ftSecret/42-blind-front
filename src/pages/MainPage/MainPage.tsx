@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
 import MainHeader from 'components/organisms/MainPage/MainHeader/MainHeader';
@@ -6,19 +6,15 @@ import styled from 'styled-components';
 import { PATH_POST_WRITING } from 'components/utils/AppRouter';
 import { containerStyle } from 'styles/mixin';
 import MainBoard from 'components/organisms/MainPage/MainBoard/MainBoard';
+import { useDispatch } from 'react-redux';
+import { setUser } from 'features/user/userSlice';
 
 const MainPage = () => {
-  const onClick = () => {
-    console.log('clicked');
-  };
+  const dispatch = useDispatch();
 
-  // TODO: 해당 주석은 추후에 삭제될 예정
-  // const { data, error, isLoading } = usePostBlindBoardQuery('blindBoardAPI');
-  // useEffect(() => {
-  //   if (isLoading === true) console.log('로딩 중...');
-  //   if (error) console.log(error);
-  //   if (data) console.log(data);
-  // }, [data, error, isLoading]);
+  useEffect(() => {
+    dispatch(setUser(2));
+  }, [dispatch]);
 
   return (
     <section>
@@ -26,7 +22,7 @@ const MainPage = () => {
       <StyledContainer>
         <MainBoard />
         <Link to={PATH_POST_WRITING}>
-          <StyledWriteButton onClick={onClick} children={'글쓰기'} />
+          <StyledWriteButton children={'글쓰기'} />
         </Link>
       </StyledContainer>
     </section>

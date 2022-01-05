@@ -2,17 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { DARK_THEME, LIGHT_THEME, ThemeType } from 'constants/theme';
 import { RootState } from 'app/store';
 
-// const getInitialTheme = () => {
-//   //저장된 값이 없다면 시스템 설정을 기준으로 함
-//   let theme = localStorage.getItem('theme')
-//     ? (localStorage.getItem('theme') as typeof DARK_THEME | typeof LIGHT_THEME)
-//     : ((window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK_THEME : LIGHT_THEME) as
-//         | typeof DARK_THEME
-//         | typeof LIGHT_THEME);
-
-//   return theme;
-// };
-
 const getInitialTheme = () => {
   //저장된 값이 없다면 시스템 설정을 기준으로 함
   const theme = localStorage.getItem('theme') as typeof DARK_THEME | typeof LIGHT_THEME;

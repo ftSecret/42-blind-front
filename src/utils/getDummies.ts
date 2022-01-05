@@ -1,6 +1,12 @@
+// command + d : 같은 이름찾기
+// option + 화살표 : 옮기기
+// option + shift + 화살표 : 복사하면서 옮기기
+// option + command + 화살표 : 다중 커서
+// option + command + s : 전체 저장
+
 export type PostCardType = {
-  user_id: number;
   post_id: number;
+  user_id: number;
   title: string;
   content: string;
   created_at: Date;
