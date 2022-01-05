@@ -1,46 +1,39 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { formatDate } from 'utils/formatDate';
-import { getDummies } from 'utils/getDummies';
 import userImage from 'assets/images/user.png';
 import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { postDetailButton } from 'components/molecules/Comment/Comment';
-
-type PostTypes = {
-  id: number | null;
-  title: string;
-  content: string;
-  created_at: Date | null;
-  views: number;
-  likes: number;
-  comments: number;
-};
+import { useState } from 'react';
+import { PostCardType } from 'utils/getDummies';
 
 const PostDetail = () => {
-  const [detail, setDetail] = useState<PostTypes>({
-    id: null,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [detail, setDetail] = useState<PostCardType>({
+    post_id: -1,
+    user_id: -1,
     title: '',
     content: '',
-    created_at: null,
-    views: 0,
-    likes: 0,
-    comments: 0,
+    created_at: new Date(),
+    count: {
+      views: 0,
+      likes: 0,
+      comments: 0,
+    },
   });
-  const { postId } = useParams();
+  // const { postId } = useParams();
 
-  useEffect(() => {
-    //id로 데이터 가져오는 로직
-    const datas = getDummies();
-    const temp = datas.find((data) => {
-      if (`${data.id}` === postId) return true;
-      return false;
-    });
-    const { id, title, content, created_at, views, likes, comments } = temp as PostTypes;
-    setDetail({ id, title, content, created_at, views, likes, comments });
-  }, [postId]);
+  // useEffect(() => {
+  //   //id로 데이터 가져오는 로직
+  //   const datas = getDummies();
+  //   const temp = datas.find((data) => {
+  //     if (`${data.post_id}` === postId) return true;
+  //     return false;
+  //   });
+  //   const { post_id, title, content, created_at, count } = temp as PostCardType;
+  //   setDetail({ post_id, title, content, created_at, count });
+  // }, [postId]);
 
   return (
     <StyledDetail>
@@ -55,7 +48,7 @@ const PostDetail = () => {
       </StyledProfile>
       <h1>{detail.title}</h1>
       <h1>{detail.content}</h1>
-      <Status comments={detail.comments} views={detail.views} likes={detail.likes} />
+      <Status count={detail.count} />
       <StyledGoodWrap>
         <Button children="좋아요" />
       </StyledGoodWrap>

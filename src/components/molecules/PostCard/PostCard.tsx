@@ -5,25 +5,19 @@ import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';
+import { PostCardType } from 'utils/getDummies';
+import Typography from 'components/atoms/Typography/Typography';
 
-type PropTypes = {
-  title: string;
-  content: string;
-  created_at: Date;
-  views: number;
-  likes: number;
-  comments: number;
-};
-
-const PostCard = ({ title, content, created_at, views, likes, comments, ...rest }: PropTypes) => {
+const PostCard = ({ title, content, created_at, count, ...rest }: PostCardType) => {
   return (
     <StyledDiv>
+      <Typography>{rest.post_id.toString()}</Typography>
       <StyledTitle>{title}</StyledTitle>
       <StyledContent>{content}</StyledContent>
 
       <StyledInfo>
         <div>{formatDate(created_at)}</div>
-        <Status comments={comments} views={views} likes={likes} />
+        <Status count={count} />
       </StyledInfo>
     </StyledDiv>
   );

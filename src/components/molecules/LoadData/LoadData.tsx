@@ -7,6 +7,7 @@ type PropTypes = {
   load: () => void;
 };
 
+// TODO: 감지가 왜 1, 2, 3, 4, ... 이런식으로 개수가 늘어나는지 원인 찾기.
 const LoadData = ({ load }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +15,7 @@ const LoadData = ({ load }: PropTypes) => {
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
       if (entry.isIntersecting) {
+        console.log('감지됨.');
         setIsLoading(true);
         observer.unobserve(entry.target);
         await load();
@@ -28,7 +30,7 @@ const LoadData = ({ load }: PropTypes) => {
     let observer: IntersectionObserver;
     if (targetRef?.current) {
       observer = new IntersectionObserver(onIntersect, {
-        threshold: 0,
+        threshold: 0.1,
       });
       observer.observe(targetRef?.current);
     }
@@ -39,7 +41,7 @@ const LoadData = ({ load }: PropTypes) => {
   return (
     <LoadingDiv>
       {isLoading && <LoadingSpinner />}
-      <div ref={targetRef} />
+      {<div ref={targetRef} style={{ display: isLoading === true ? 'none' : 'inherit' }} />}
     </LoadingDiv>
   );
 };

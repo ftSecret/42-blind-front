@@ -4,8 +4,8 @@ import Button from 'components/atoms/Button/Button';
 import MainHeader from 'components/organisms/MainPage/MainHeader/MainHeader';
 import styled from 'styled-components';
 import { PATH_POST_WRITING } from 'components/utils/AppRouter';
-import Board from 'components/organisms/Common/Board/Board';
 import { containerStyle } from 'styles/mixin';
+import MainBoard from 'components/organisms/MainPage/MainBoard/MainBoard';
 
 const MainPage = () => {
   const onClick = () => {
@@ -24,7 +24,7 @@ const MainPage = () => {
     <section>
       <MainHeader />
       <StyledContainer>
-        <Board />
+        <MainBoard />
         <Link to={PATH_POST_WRITING}>
           <StyledWriteButton onClick={onClick} children={'글쓰기'} />
         </Link>

@@ -8,24 +8,26 @@ import { colors } from 'styles/theme';
 import ViewIcon from 'components/atoms/icons/ViewIcon';
 
 type StatusType = {
-  comments: number;
-  views: number;
-  likes: number;
+  count: {
+    comments: number;
+    views: number;
+    likes: number;
+  };
 };
-const Status = ({ comments, views, likes }: StatusType) => {
+const Status = ({ count }: StatusType) => {
   return (
     <StyledStatus>
       <li>
         <ChatIcon color={colors.grey} />
-        <div>{comments}</div>
+        <div>{count.comments}</div>
       </li>
       <li>
         <ViewIcon color={colors.blue} />
-        <div>{views}</div>
+        <div>{count.views}</div>
       </li>
       <li>
         <ThumbUpIcon color={colors.red} />
-        <div>{likes}</div>
+        <div>{count.likes}</div>
       </li>
     </StyledStatus>
   );
