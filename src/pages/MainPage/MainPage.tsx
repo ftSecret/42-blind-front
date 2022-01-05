@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'components/atoms/Button/Button';
-import MainHeader from 'components/organisms/MainHeader/MainHeader';
+import MainHeader from 'components/organisms/MainPage/MainHeader/MainHeader';
 import styled from 'styled-components';
 import { PATH_POST_WRITING } from 'components/utils/AppRouter';
-import Board from 'components/organisms/Board/Board';
+import Board from 'components/organisms/Common/Board/Board';
 import { containerStyle } from 'styles/mixin';
 
 const MainPage = () => {

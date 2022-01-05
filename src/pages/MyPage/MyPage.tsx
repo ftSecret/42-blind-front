@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Board from 'components/organisms/Board/Board';
-import MyHeader from 'components/organisms/MyHeader/MyHeader';
-import MyTabBar from 'components/organisms/MyTabBar/MyTabBar';
+import Board from 'components/organisms/Common/Board/Board';
+import MyHeader from 'components/organisms/MyPage/MyHeader/MyHeader';
+import MyTabBar from 'components/organisms/MyPage/MyTabBar/MyTabBar';
 import { containerStyle } from 'styles/mixin';
 import styled from 'styled-components';
 

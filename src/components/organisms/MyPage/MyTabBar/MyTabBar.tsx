@@ -1,6 +1,5 @@
 import TabBar from 'components/molecules/TabBar/TabBar';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
 
@@ -38,5 +37,3 @@ const StyledTabBar = styled(TabBar)`
     border-bottom: 2px solid ${({ theme }) => theme.colors.default};
   }
 `;
-
-const StyledContainer = styled.div``;
