@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCommentsDummies } from 'utils/getDummies';
-import Comment from 'components/atoms/Comment/Comment';
+import Comment from 'components/molecules/Comment/Comment';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 

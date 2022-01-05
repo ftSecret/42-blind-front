@@ -7,7 +7,7 @@ import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
-import { postDetailButton } from 'components/atoms/Comment/Comment';
+import { postDetailButton } from 'components/molecules/Comment/Comment';
 
 type PostTypes = {
   id: number | null;
