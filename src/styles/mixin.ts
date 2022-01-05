@@ -18,7 +18,7 @@ export const headerStyle = css`
   background-color: ${({ theme }) => theme.colors.primary};
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  min-height: 56px;
 `;
 
 export const containerStyle = css`
