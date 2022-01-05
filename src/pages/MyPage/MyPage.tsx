@@ -4,6 +4,8 @@ import MyHeader from 'components/organisms/MyPage/MyHeader/MyHeader';
 import MyTabBar from 'components/organisms/MyPage/MyTabBar/MyTabBar';
 import { containerStyle } from 'styles/mixin';
 import styled from 'styled-components';
+import MyPostBoard from 'components/organisms/MyPage/MyPostBoard/MyPostBoard';
+import MyCommentBoard from 'components/organisms/MyPage/MyCommentBoard/MyCommentBoard';
 
 // TODO: route의 key값은 추후에 삭제되어야함.
 const MyPage = () => {
@@ -13,8 +15,8 @@ const MyPage = () => {
       <MyTabBar />
       <StyledContainer>
         <Routes>
-          <Route path="/post" element={<div key="1" />} />
-          <Route path="/comment" element={<div key="2" />} />
+          <Route path="/post" element={<MyPostBoard />} />
+          <Route path="/comment" element={<MyCommentBoard />} />
         </Routes>
       </StyledContainer>
     </div>
