@@ -7,25 +7,15 @@ export type CustomIconPropTypes = {
   color?: string;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 
-// const CustomIcon = ({ iconName, className, color, ...rest }: CustomIconPropTypes) => {
-//   return (
-//     <span
-//       className={classNames({
-//         'material-icons': true,
-//         [className ?? '']: className,
-//       })}
-//       {...rest}
-//     >
-//       {iconName}
-//     </span>
-//   );
-// };
-const CustomIcon = ({ iconName, className, color, ...rest }: CustomIconPropTypes) => {
-  return <Icon iconName={iconName} className={className} color={color} />;
+// TODO: ref가 포함되었을 때 왜 에러가 나는지 확인하기.
+const CustomIcon = ({ iconName, color, ...rest }: Omit<CustomIconPropTypes, 'ref'>) => {
+  return <Icon iconName={iconName} color={color} {...rest} />;
 };
 
-const MaterialIcon = (props: CustomIconPropTypes) => (
-  <span className={`material-icons ${props.className}`}>{props.iconName}</span>
+const MaterialIcon = ({ className, iconName, ...rest }: CustomIconPropTypes) => (
+  <span className={`material-icons ${className}`} {...rest}>
+    {iconName}
+  </span>
 );
 
 const Icon = styled(MaterialIcon)`

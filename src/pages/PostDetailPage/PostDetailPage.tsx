@@ -1,5 +1,5 @@
 import Comments from 'components/molecules/Comments/Comments';
-import DetailHeader from 'components/molecules/DetailHeader/DetailHeader';
+import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader/PostDetailHeader';
 import PostDetail from 'components/templates/PostDetail/PostDetail';
 
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import { containerStyle } from 'styles/mixin';
 const PostDetailPage = () => {
   return (
     <>
-      <DetailHeader content="42 블라인드 익명 게시판" />
+      <PostDetailHeader content="42 블라인드 익명 게시판" />
       <StyledContainer>
         <DetailWrap>
           <PostDetail />
