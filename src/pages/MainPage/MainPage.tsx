@@ -33,7 +33,6 @@ const MainPage = () => {
   );
 };
 
-// TODO: 여기서 white같은 값들이 테마에 맞는 색으로 변경되어야함. 논의 필요.
 // 버튼을 어디에 저장할 것인지...?
 
 const StyledContainer = styled.div`

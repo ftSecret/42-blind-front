@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Board from 'components/organisms/Board/Board';
 import MyHeader from 'components/organisms/MyHeader/MyHeader';
-import TabBar from 'components/organisms/TabBar/TabBar';
+import MyTabBar from 'components/organisms/MyTabBar/MyTabBar';
 import { containerStyle } from 'styles/mixin';
 import styled from 'styled-components';
 
@@ -11,7 +11,7 @@ const MyPage = () => {
   return (
     <div>
       <MyHeader />
-      <TabBar />
+      <MyTabBar />
       <StyledContainer>
         <Routes>
           <Route path="/post" element={<Board key="1" />} />

@@ -7,6 +7,10 @@ export type Theme = {
   paddings: typeof paddings;
 };
 
+export type FontSize = 'sm' | 'base' | 'lg' | 'xl';
+export type FontWeight = 'light' | 'normal' | 'bold';
+export type FontLineHeight = 'base' | 'large';
+
 type ThemeGroup = {
   [DARK_THEME]: Theme;
   [LIGHT_THEME]: Theme;
@@ -36,7 +40,6 @@ export const fonts = {
     base: '1.5rem',
     lg: '2rem',
     xl: '2.5rem',
-    title: '6rem',
   },
   weight: {
     light: 100,
