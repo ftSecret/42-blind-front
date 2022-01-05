@@ -1,7 +1,6 @@
 import LoadData from 'components/molecules/LoadData/LoadData';
 import PostCards from 'components/molecules/PostCards/PostCards';
 import React, { useState } from 'react';
-import { flexColumn } from 'styles/mixin';
 import { getDummies } from 'utils/getDummies';
 
 const Board = () => {

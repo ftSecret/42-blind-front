@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { getDummies } from 'utils/getDummies';
 import PostCard from 'components/molecules/PostCard/PostCard';
-import LoadData from 'components/molecules/LoadData/LoadData';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import { PATH_POST } from 'components/utils/AppRouter';
