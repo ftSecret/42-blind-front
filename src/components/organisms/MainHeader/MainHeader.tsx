@@ -1,32 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { headerStyle } from 'styles/mixin';
 import ThemeToggle from 'components/molecules/ThemeToggle/ThemeToggle';
-import Typography from 'components/atoms/Typography/Typography';
-import { PATH_MY } from 'components/utils/AppRouter';
+import Header from 'components/molecules/Header/Header';
+import Anchor from 'components/molecules/Anchor/Anchor';
+
+const rightItem = {
+  to: 'my/post',
+  content: '마이페이지',
+};
+
+const middleItem = {
+  to: '/',
+  content: '42 BLIND',
+};
+
+const items = {
+  left: <ThemeToggle />,
+  middle: <Anchor size="xl" weight="bold" linkItem={middleItem} />,
+  right: <Anchor size="sm" weight="bold" linkItem={rightItem} />,
+};
 
 const MainHeader = () => {
-  return (
-    <StyledContainer>
-      <ThemeToggle />
-      <Typography size="xl" weight="bold">
-        42 BLIND
-      </Typography>
-      <StyledMyPage size="sm" weight="bold">
-        <Link to={`${PATH_MY}/post`}>마이페이지</Link>
-      </StyledMyPage>
-    </StyledContainer>
-  );
+  return <Header items={items} />;
 };
 
 export default MainHeader;
-
-const StyledContainer = styled.div`
-  ${headerStyle}
-`;
-
-const StyledMyPage = styled(Typography)`
-  position: absolute;
-  right: 1rem;
-`;

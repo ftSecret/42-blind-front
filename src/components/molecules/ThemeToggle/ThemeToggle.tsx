@@ -20,13 +20,12 @@ const ToggleWrapper = styled(Button)`
   background-color: ${(props) => props.theme.colors.background};
   border: ${(props) => props.theme.colors.background};
   font-size: 20px;
-  position: absolute;
+
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 35px;
-  left: 1rem;
 
   border-radius: 30px;
 `;
