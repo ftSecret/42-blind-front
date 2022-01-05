@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import MyPostBoard from 'components/organisms/MyPage/MyPostBoard/MyPostBoard';
 import MyCommentBoard from 'components/organisms/MyPage/MyCommentBoard/MyCommentBoard';
 
-// TODO: route의 key값은 추후에 삭제되어야함.
 const MyPage = () => {
   return (
     <div>

@@ -7,7 +7,6 @@ type PropTypes = {
   load: () => void;
 };
 
-// TODO: 감지가 왜 1, 2, 3, 4, ... 이런식으로 개수가 늘어나는지 원인 찾기.
 const LoadData = ({ load }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);

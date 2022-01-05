@@ -1,6 +1,6 @@
 import Board from 'components/molecules/Board/Board';
 import React from 'react';
-import { useDummies } from 'utils/useDummies';
+import { useDummies } from 'hooks';
 
 const MyCommentBoard = () => {
   const { items, load } = useDummies();
