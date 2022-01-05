@@ -1,6 +1,6 @@
-import Comments from 'components/molecules/Comments/Comments';
-import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader/PostDetailHeader';
-import PostDetail from 'components/templates/PostDetail/PostDetail';
+import Comments from 'components/molecules/Comments';
+import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
+import PostDetail from 'components/templates/PostDetail';
 
 import styled from 'styled-components';
 import { containerStyle } from 'styles/mixin';

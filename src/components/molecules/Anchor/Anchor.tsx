@@ -1,13 +1,9 @@
 import classNames from 'classnames';
-import Typography from 'components/atoms/Typography/Typography';
+import Typography from 'components/atoms/Typography';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontLineHeight, FontSize, FontWeight } from 'styles/theme';
-
-export type AnchorItem = {
-  to: string;
-  content: string;
-};
+import { AnchorItem } from '.';
 
 type PropTypes = {
   size?: FontSize;

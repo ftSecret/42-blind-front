@@ -1,4 +1,4 @@
-import Board from 'components/molecules/Board/Board';
+import Board from 'components/molecules/Board';
 import React from 'react';
 import { useDummies } from 'hooks';
 

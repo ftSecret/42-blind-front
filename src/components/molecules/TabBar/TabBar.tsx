@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Anchor, { AnchorItem } from '../Anchor/Anchor';
+import Anchor, { AnchorItem } from 'components/molecules/Anchor';
 
-type PropTypes = {
+export type PropTypes = {
   items: AnchorItem[];
   className?: string;
 };

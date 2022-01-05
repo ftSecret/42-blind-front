@@ -1,6 +1,6 @@
-import Typography from 'components/atoms/Typography/Typography';
-import LoadData from 'components/molecules/LoadData/LoadData';
-import PostCards from 'components/molecules/PostCards/PostCards';
+import Typography from 'components/atoms/Typography';
+import LoadData from 'components/molecules/LoadData';
+import PostCards from 'components/molecules/PostCards';
 import React from 'react';
 import { PostCardType } from 'utils/getDummies';
 

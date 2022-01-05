@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toggle, selectTheme } from 'features/theme/themeSlice';
 import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
-import Button from 'components/atoms/Button/Button';
+import Button from 'components/atoms/Button';
 
 export const themeIcon = {
   [DARK_THEME]: '🌚',

@@ -1,6 +1,6 @@
 import React from 'react';
-import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader/PostWritingHeader';
-import PostWritingDetail from 'components/templates/PostWritingDetail/PostWritingDetail';
+import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
+import PostWritingDetail from 'components/templates/PostWritingDetail';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
 

@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
-import Button from 'components/atoms/Button/Button';
-import Header from 'components/molecules/Header/Header';
+import Button from 'components/atoms/Button';
+import Header from 'components/molecules/Header';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
-import Typography from 'components/atoms/Typography/Typography';
+import Typography from 'components/atoms/Typography';
 
 const PostWritingHeader = () => {
   const navigate = useNavigate();

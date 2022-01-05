@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getDummies } from 'utils/getDummies';
-import PostCard from 'components/molecules/PostCard/PostCard';
+import PostCard from 'components/molecules/PostCard';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import { PATH_POST } from 'components/utils/AppRouter';

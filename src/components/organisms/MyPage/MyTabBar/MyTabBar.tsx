@@ -1,4 +1,4 @@
-import TabBar from 'components/molecules/TabBar/TabBar';
+import TabBar from 'components/molecules/TabBar';
 import React from 'react';
 import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';

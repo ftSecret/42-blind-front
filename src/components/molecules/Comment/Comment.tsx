@@ -1,9 +1,8 @@
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
-import styled, { css } from 'styled-components';
-import { flexColumn, flexRow } from 'styles/mixin';
-import Button from 'components/atoms/Button/Button';
-import { lighten } from 'polished';
+import styled from 'styled-components';
+import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
+import Button from 'components/atoms/Button';
 
 type PropType = {
   id: number | null;
@@ -60,14 +59,6 @@ const StyledProfile = styled.div`
   & > h1 {
     font-weight: bold;
   }
-`;
-
-export const postDetailButton = css`
-  all: unset;
-  background-color: ${({ theme }) => lighten(0.1, theme.colors.grey)};
-  font-size: 0.9rem;
-  border-radius: 0.3rem;
-  padding: 0.3em;
 `;
 
 const StyledDate = styled.h3`

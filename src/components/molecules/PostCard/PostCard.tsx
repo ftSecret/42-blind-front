@@ -1,12 +1,12 @@
 import React from 'react';
 import { formatDate } from 'utils/formatDate';
 
-import Status from 'components/molecules/Status/Status';
+import Status from 'components/molecules/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';
 import { PostCardType } from 'utils/getDummies';
-import Typography from 'components/atoms/Typography/Typography';
+import Typography from 'components/atoms/Typography';
 
 const PostCard = ({ title, content, created_at, count, ...rest }: PostCardType) => {
   return (

@@ -1,4 +1,4 @@
-import LoadingSpinner from 'components/atoms/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';

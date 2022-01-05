@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Anchor from 'components/molecules/Anchor/Anchor';
-import Header from 'components/molecules/Header/Header';
+import Anchor from 'components/molecules/Anchor';
+import Header from 'components/molecules/Header';
 
 const middleItem = {
   to: '/',

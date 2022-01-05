@@ -2,9 +2,8 @@ import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
-import { flexColumn, flexRow } from 'styles/mixin';
+import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
-import { postDetailButton } from 'components/molecules/Comment/Comment';
 import { useState } from 'react';
 import { PostCardType } from 'utils/getDummies';
 

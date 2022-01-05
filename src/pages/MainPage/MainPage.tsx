@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Button from 'components/atoms/Button/Button';
-import MainHeader from 'components/organisms/MainPage/MainHeader/MainHeader';
+import Button from 'components/atoms/Button';
+import MainHeader from 'components/organisms/MainPage/MainHeader';
 import styled from 'styled-components';
 import { PATH_POST_WRITING } from 'components/utils/AppRouter';
 import { containerStyle } from 'styles/mixin';
-import MainBoard from 'components/organisms/MainPage/MainBoard/MainBoard';
+import MainBoard from 'components/organisms/MainPage/MainBoard';
 import { useDispatch } from 'react-redux';
 import { setUser } from 'features/user/userSlice';
 

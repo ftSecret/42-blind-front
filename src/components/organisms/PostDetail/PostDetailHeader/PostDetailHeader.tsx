@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from 'components/atoms/icons/ArrowBackIcon';
 import styled from 'styled-components';
-import Header from 'components/molecules/Header/Header';
-import Typography from 'components/atoms/Typography/Typography';
+import Header from 'components/molecules/Header';
+import Typography from 'components/atoms/Typography';
 
 const PostDetailHeader = ({ content }: { content: string }) => {
   const navigate = useNavigate();

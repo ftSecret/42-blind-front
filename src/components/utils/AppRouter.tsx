@@ -2,10 +2,10 @@ import React from 'react';
 import { Routes, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
-import MyPage from 'pages/MyPage/MyPage';
-import MainPage from 'pages/MainPage/MainPage';
-import PostDetailPage from 'pages/PostDetailPage/PostDetailPage';
-import PostWritingPage from 'pages/PostWritingPage/PostWritingPage';
+import MyPage from 'pages/MyPage';
+import MainPage from 'pages/MainPage';
+import PostDetailPage from 'pages/PostDetailPage';
+import PostWritingPage from 'pages/PostWritingPage';
 
 export const PATH_MAIN = '/';
 export const PATH_MY = '/my';

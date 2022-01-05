@@ -1,7 +1,7 @@
 import React from 'react';
-import ThemeToggle from 'components/molecules/ThemeToggle/ThemeToggle';
-import Header from 'components/molecules/Header/Header';
-import Anchor from 'components/molecules/Anchor/Anchor';
+import ThemeToggle from 'components/molecules/ThemeToggle';
+import Header from 'components/molecules/Header';
+import Anchor from 'components/molecules/Anchor';
 
 const rightItem = {
   to: 'my/post',
