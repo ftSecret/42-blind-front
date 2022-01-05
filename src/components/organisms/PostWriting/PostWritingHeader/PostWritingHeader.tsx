@@ -1,40 +1,36 @@
-import React from 'react';
-import Button from 'components/atoms/Button/Button';
-import CloseIcon from 'components/atoms/icons/CloseIcon';
-import { useNavigate } from 'react-router';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-import { headerStyle } from 'styles/mixin';
+import { useNavigate } from 'react-router';
+import Button from 'components/atoms/Button/Button';
+import Header from 'components/molecules/Header/Header';
+import CloseIcon from 'components/atoms/icons/CloseIcon';
 import Typography from 'components/atoms/Typography/Typography';
 
 const PostWritingHeader = () => {
   const navigate = useNavigate();
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     navigate(-1);
-  };
+  }, [navigate]);
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     window.alert('작성되었습니다.');
     navigate(-1);
-  };
+  }, [navigate]);
 
-  return (
-    <StyledHeader>
-      <CloseIcon onClick={handleClose} />
-      <Typography size="base" weight="bold">
-        글 작성
-      </Typography>
-      <StyledSubmitButton children="완료" onClick={handleSubmit} />
-    </StyledHeader>
+  const items = useMemo(
+    () => ({
+      left: <CloseIcon onClick={handleClose} />,
+      middle: <Typography size="base" weight="bold" children="글작성" />,
+      right: <StyledSubmitButton children="완료" onClick={handleSubmit} />,
+    }),
+    [handleClose, handleSubmit],
   );
+
+  return <Header items={items} />;
 };
 
 export default PostWritingHeader;
-
-const StyledHeader = styled.div`
-  ${headerStyle}
-  justify-content: space-between;
-`;
 
 const StyledSubmitButton = styled(Button)`
   font-weight: bold;

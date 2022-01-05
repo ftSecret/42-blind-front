@@ -1,21 +1,18 @@
-import Typography from 'components/atoms/Typography/Typography';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { headerStyle } from 'styles/mixin';
 
-const MyHeader = () => {
-  return (
-    <StyledContainer>
-      <Typography size="xl" weight="bold">
-        <Link to="/">42 BLIND</Link>
-      </Typography>
-    </StyledContainer>
-  );
+import Anchor from 'components/molecules/Anchor/Anchor';
+import Header from 'components/molecules/Header/Header';
+
+const middleItem = {
+  to: '/',
+  content: '42 BLIND',
 };
 
-export default MyHeader;
+const items = {
+  middle: <Anchor size="xl" weight="bold" linkItem={middleItem} />,
+};
 
-const StyledContainer = styled.div`
-  ${headerStyle}
-`;
+const MyHeader = () => {
+  return <Header items={items} />;
+};
+export default MyHeader;
