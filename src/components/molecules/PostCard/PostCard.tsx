@@ -6,12 +6,10 @@ import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';
 import { PostCardType } from 'utils/getDummies';
-import Typography from 'components/atoms/Typography';
 
 const PostCard = ({ title, content, created_at, count, ...rest }: PostCardType) => {
   return (
     <StyledDiv>
-      <Typography>{rest.post_id.toString()}</Typography>
       <StyledTitle>{title}</StyledTitle>
       <StyledContent>{content}</StyledContent>
 

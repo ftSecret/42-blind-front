@@ -1,9 +1,3 @@
-// command + d : 같은 이름찾기
-// option + 화살표 : 옮기기
-// option + shift + 화살표 : 복사하면서 옮기기
-// option + command + 화살표 : 다중 커서
-// option + command + s : 전체 저장
-
 export type PostCardType = {
   post_id: number;
   user_id: number;
@@ -21,16 +15,29 @@ export type PostCardType = {
 export const getDummies = (): PostCardType[] => [
   {
     post_id: Math.floor(Math.random() * 20),
-    user_id: 123,
-    title: '테스트 제목 입니다 1 user01',
+    user_id: 0,
+    title: '테스트 제목 입니다 1',
     content: '테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요',
     created_at: new Date(),
     count: {
-      views: 10,
-      likes: 1,
-      comments: 10,
+      views: Math.floor(Math.random() * 20),
+      likes: Math.floor(Math.random() * 20),
+      comments: Math.floor(Math.random() * 20),
     },
-    modified_at: new Date(),
+    modified_at: undefined,
+  },
+  {
+    post_id: Math.floor(Math.random() * 20),
+    user_id: 1,
+    title: '테스트 제목 입니다 2',
+    content: '테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요',
+    created_at: new Date(),
+    count: {
+      views: Math.floor(Math.random() * 20),
+      likes: Math.floor(Math.random() * 20),
+      comments: Math.floor(Math.random() * 20),
+    },
+    modified_at: undefined,
   },
 ];
 
