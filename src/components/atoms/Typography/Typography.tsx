@@ -14,9 +14,9 @@ const Typography = ({ children, ...rest }: PropTypes) => {
   return <StyledTypography {...rest}>{children}</StyledTypography>;
 };
 
-const StyledTypography = styled.h1<Omit<PropTypes, 'children'>>`
+const StyledTypography = styled.p<Omit<PropTypes, 'children'>>`
+  display: inline-block;
   box-sizing: border-box;
-  text-align: center;
   font-size: ${({ size }) => fonts.size[size ?? 'base']};
   font-weight: ${({ weight }) => fonts.weight[weight ?? 'normal']};
   line-height: ${({ lineHeight }) => fonts.lineHeight[lineHeight ?? 'base']};

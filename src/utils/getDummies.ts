@@ -39,6 +39,19 @@ export const getDummies = (): PostCardType[] => [
     },
     modified_at: undefined,
   },
+  {
+    post_id: 10,
+    user_id: 2,
+    title: '테스트 제목 입니다 2',
+    content: '테스트 내용 테스트 내용 저녁 뭐먹지 추천 부탁드려요',
+    created_at: new Date(),
+    count: {
+      views: Math.floor(Math.random() * 20),
+      likes: Math.floor(Math.random() * 20),
+      comments: Math.floor(Math.random() * 20),
+    },
+    modified_at: undefined,
+  },
 ];
 
 export const getCommentsDummies = [
