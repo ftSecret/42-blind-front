@@ -14,7 +14,7 @@ const PostDetail = () => {
     user_id: -1,
     title: '',
     content: '',
-    created_at: new Date(),
+    created_at: new Date().toString(),
     count: {
       views: 0,
       likes: 0,

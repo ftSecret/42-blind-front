@@ -8,7 +8,7 @@ type PropType = {
   id: number | null;
   user_id: string;
   content: string;
-  created_at: Date | null;
+  created_at: string;
   likes: number | null;
 };
 
@@ -25,7 +25,7 @@ const Comment = ({ id, user_id, content, created_at, likes, ...rest }: PropType)
       <p>{content}</p>
       <StyledWrap>
         <div>
-          <StyledDate>{formatDate(created_at!)}</StyledDate>
+          <StyledDate>{formatDate(created_at)}</StyledDate>
         </div>
         <div>
           <Button children={'답글'} />

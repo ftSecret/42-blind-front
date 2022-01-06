@@ -14,7 +14,6 @@ const LoadData = ({ load }: PropTypes) => {
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
       if (entry.isIntersecting) {
-        console.log('감지됨.');
         setIsLoading(true);
         observer.unobserve(entry.target);
         await load();
