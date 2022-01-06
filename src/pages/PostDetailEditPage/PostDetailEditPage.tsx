@@ -1,5 +1,4 @@
 import React from 'react';
-import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
 import PostDetailEdit from 'components/templates/PostDetailEdit';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
@@ -7,7 +6,7 @@ import { containerStyle, flexColumn } from 'styles/mixin';
 const PostDetailEditPage = () => {
   return (
     <>
-      <PostWritingHeader />
+      {/* <PostWritingHeader /> */}
       <StyledContainer>
         <WritingWrap>
           <PostDetailEdit />

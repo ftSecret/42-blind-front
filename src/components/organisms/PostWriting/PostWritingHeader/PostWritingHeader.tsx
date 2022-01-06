@@ -5,18 +5,26 @@ import Button from 'components/atoms/Button';
 import Header from 'components/molecules/Header';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import Typography from 'components/atoms/Typography';
+import { usePost } from 'hooks';
 
-const PostWritingHeader = () => {
+type PropTypes = {
+  content: string;
+  title: string;
+};
+const PostWritingHeader = ({ content, title }: PropTypes) => {
   const navigate = useNavigate();
+  const { addPost } = usePost();
 
   const handleClose = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
   const handleSubmit = useCallback(() => {
+    addPost(title, content);
     window.alert('작성되었습니다.');
+
     navigate(-1);
-  }, [navigate]);
+  }, [addPost, content, navigate, title]);
 
   const items = useMemo(
     () => ({

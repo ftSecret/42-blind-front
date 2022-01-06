@@ -1,14 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PostWritingDetail = () => {
+type PropTypes = {
+  handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
+  title: string;
+  content: string;
+};
+
+const PostWritingDetail = ({ handleChange, title, content }: PropTypes) => {
   return (
     <WritingContainer>
       <StyledTitle>
-        <input placeholder="제목" />
+        <input placeholder="제목" name="title" onChange={handleChange} value={title} />
       </StyledTitle>
       <StyledContent>
-        <textarea placeholder="내용을 입력하세요." />
+        <textarea
+          placeholder="내용을 입력하세요."
+          name="content"
+          value={content}
+          onChange={handleChange}
+        />
       </StyledContent>
     </WritingContainer>
   );

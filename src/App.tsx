@@ -6,8 +6,8 @@ function App() {
   const { addPost } = usePost();
 
   useEffect(() => {
-    addPost('박민주', 'ㅋㅋㅋㅋ');
-    addPost('박민주', 'ㅋㅋㅋㅋ');
+    addPost('저기 용접하시는 분 뭘까요?', '궁금하네요');
+    addPost('투썸 오늘 신기하다;;', 'ㅋㅋㅋ');
   }, [addPost]);
   return <AppRouter />;
 }

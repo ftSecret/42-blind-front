@@ -5,13 +5,15 @@ import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { useEffect, useState } from 'react';
-import { getDummies, PostCardType } from 'utils/getDummies';
+import { PostCardType } from 'utils/getDummies';
 import { useParams } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';
 import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
+import { usePost } from 'hooks';
 
 const PostDetail = () => {
+  const { getPost } = usePost();
   const [post, setPost] = useState<PostCardType>({
     post_id: -1,
     user_id: -1,
@@ -35,19 +37,9 @@ const PostDetail = () => {
     console.log('수정');
   };
   useEffect(() => {
-    //id로 데이터 가져오는 로직
-    //postId가 있는지 없는지 확인하는 로직이 필요함
-    console.log(postId, userState);
-    const datas = getDummies();
-
-    const temp = datas.find((data: PostCardType) => {
-      if (data.post_id === postId) return true;
-      return false;
-    });
-    console.log(temp);
-    const { post_id, user_id, title, content, created_at, count } = temp as PostCardType;
-    setPost({ post_id, user_id, title, content, created_at, count });
-  }, [postId]);
+    const post = getPost(postId);
+    if (post) setPost(post);
+  }, [getPost, postId]);
 
   return (
     <StyledDetail>
