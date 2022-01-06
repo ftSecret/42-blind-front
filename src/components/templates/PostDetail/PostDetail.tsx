@@ -6,13 +6,16 @@ import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { useEffect, useState } from 'react';
 import { PostCardType } from 'utils/getDummies';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';
 import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
 import { usePost } from 'hooks';
+import { PATH_POST_EDIT } from 'components/utils/AppRouter';
 
 const PostDetail = () => {
+  const navigate = useNavigate();
+
   const { getPost } = usePost();
   const [post, setPost] = useState<PostCardType>({
     post_id: -1,
@@ -28,13 +31,12 @@ const PostDetail = () => {
   });
   const postId = parseInt(useParams()?.postId ?? '');
   const userState = useAppSelector(selectUserId) as PostCardType['user_id'];
-
   const handleDelete = () => {
     console.log('삭제');
   };
 
   const handleEdit = () => {
-    console.log('수정');
+    navigate(`${PATH_POST_EDIT}/${postId}`);
   };
   useEffect(() => {
     const post = getPost(postId);

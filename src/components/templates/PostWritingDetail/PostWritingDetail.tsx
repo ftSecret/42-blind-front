@@ -1,25 +1,20 @@
+import { UseInputPropTypes } from 'hooks/useInput';
 import React from 'react';
 import styled from 'styled-components';
 
 type PropTypes = {
-  handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined;
-  title: string;
-  content: string;
+  titleProps: UseInputPropTypes;
+  contentProps: UseInputPropTypes;
 };
 
-const PostWritingDetail = ({ handleChange, title, content }: PropTypes) => {
+const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
   return (
     <WritingContainer>
       <StyledTitle>
-        <input placeholder="제목" name="title" onChange={handleChange} value={title} />
+        <input placeholder="제목" name="title" {...titleProps} />
       </StyledTitle>
       <StyledContent>
-        <textarea
-          placeholder="내용을 입력하세요."
-          name="content"
-          value={content}
-          onChange={handleChange}
-        />
+        <textarea placeholder="내용을 입력하세요." name="content" {...contentProps} />
       </StyledContent>
     </WritingContainer>
   );
