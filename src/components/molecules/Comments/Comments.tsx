@@ -8,7 +8,7 @@ type CommentType = {
   id: number | null;
   user_id: string;
   content: string;
-  created_at: Date | null;
+  created_at: string;
   likes: number | null;
 };
 const Comments = () => {
