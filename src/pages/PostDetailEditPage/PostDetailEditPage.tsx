@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostDetailEdit from 'components/templates/PostDetailEdit';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
+import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
 
 const PostDetailEditPage = () => {
+  useEffect(() => {});
   return (
     <>
-      {/* <PostWritingHeader /> */}
       <StyledContainer>
         <WritingWrap>
           <PostDetailEdit />

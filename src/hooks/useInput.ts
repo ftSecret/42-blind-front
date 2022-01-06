@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+
+export type UseInputPropTypes = Pick<ReturnType<typeof useInput>, 'props'>['props'];
 
 export const useInput = <
   T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement | HTMLTextAreaElement,
 >(
   initialValue: string,
-  onChange?: React.ChangeEventHandler<T>,
 ) => {
   const [value, setValue] = useState(initialValue);
 
-  const handleChange: React.ChangeEventHandler<T> =
-    onChange === undefined
-      ? (event) => {
-          setValue(event.target.value);
-        }
-      : onChange;
+  const handleChange: React.ChangeEventHandler<T> = useCallback((event) => {
+    setValue(event.target.value);
+  }, []);
 
-  return { value, onChange: handleChange };
+  return { value, setValue, props: { value, onChange: handleChange } };
 };

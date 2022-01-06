@@ -6,4 +6,4 @@ const CloseIcon = (props: Omit<CustomIconPropTypes, 'iconName'>) => {
   return <CustomIcon iconName="close" {...props} />;
 };
 
-export default CloseIcon;
+export default React.memo(CloseIcon);

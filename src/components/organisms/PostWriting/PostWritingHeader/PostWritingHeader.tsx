@@ -22,7 +22,6 @@ const PostWritingHeader = ({ content, title }: PropTypes) => {
   const handleSubmit = useCallback(() => {
     addPost(title, content);
     window.alert('작성되었습니다.');
-
     navigate(-1);
   }, [addPost, content, navigate, title]);
 
