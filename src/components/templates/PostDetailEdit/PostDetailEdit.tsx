@@ -1,22 +1,7 @@
-import { usePost } from 'hooks';
-import { useInput } from 'hooks/useInput';
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
 
-const PostDetailEdit = () => {
-  const { getPost } = usePost();
-  const postId = parseInt(useParams().postId ?? '');
-  const { value: title, setValue: setTitle, props: titleProps } = useInput('');
-  const { value: content, setValue: setContent, props: contentProps } = useInput('');
-
-  useEffect(() => {
-    const prevData = getPost(postId);
-    if (prevData) {
-      setTitle(prevData.title);
-      setContent(prevData.content);
-    }
-  }, []);
+const PostDetailEdit = ({ title, titleProps, content, contentProps }: any) => {
   return (
     <WritingContainer>
       <StyledTitle>

@@ -1,8 +1,9 @@
 import React from 'react';
-import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
-import PostWritingDetail from 'components/templates/PostWritingDetail';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
+import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
+import PostWritingDetail from 'components/templates/PostWritingDetail';
+import { WRITING } from 'components/templates/PostDetailEdit';
 import { useInput } from 'hooks/useInput';
 
 const PostWritingPage = () => {
@@ -11,7 +12,7 @@ const PostWritingPage = () => {
 
   return (
     <>
-      <PostWritingHeader title={title} content={content} />
+      <PostWritingHeader title={title} content={content} type={WRITING} />
       <StyledContainer>
         <WritingWrap>
           <PostWritingDetail titleProps={titleProps} contentProps={contentProps} />

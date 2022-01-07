@@ -16,7 +16,7 @@ import { PATH_POST_EDIT } from 'components/utils/AppRouter';
 const PostDetail = () => {
   const navigate = useNavigate();
 
-  const { getPost } = usePost();
+  const { getPost, deletePost } = usePost();
   const [post, setPost] = useState<PostCardType>({
     post_id: -1,
     user_id: -1,
@@ -32,7 +32,10 @@ const PostDetail = () => {
   const postId = parseInt(useParams()?.postId ?? '');
   const userState = useAppSelector(selectUserId) as PostCardType['user_id'];
   const handleDelete = () => {
-    console.log('삭제');
+    if (window.confirm('삭제 하시겠습니까?')) {
+      deletePost(post.post_id);
+      navigate('/');
+    }
   };
 
   const handleEdit = () => {
