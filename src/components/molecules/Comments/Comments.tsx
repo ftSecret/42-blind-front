@@ -4,15 +4,17 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import { useComment } from 'hooks';
 import { CommentType } from 'features/dummy/dummySlice';
+import { useParams } from 'react-router-dom';
 
 const Comments = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
   const { getCommentsByPostId } = useComment();
+  const params = useParams();
 
   useEffect(() => {
-    //처음에 데이터 가져오기
-    setComments(getCommentsByPostId(0));
-  }, [getCommentsByPostId]);
+    const post_id = Number.parseInt(params.postId ?? '', 10);
+    setComments(getCommentsByPostId(post_id));
+  }, [getCommentsByPostId, params.postId]);
 
   return (
     <StyledComments>

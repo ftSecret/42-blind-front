@@ -13,11 +13,12 @@ function App() {
     dispatch(setUser(1));
     addPost('저기 용접하시는 분 뭘까요?', '궁금하네요');
     addPost('투썸 오늘 신기하다;;', 'ㅋㅋㅋ');
-    addComment(0, '댓글입니다. 1');
-    addComment(0, '답글입니다. 2', 0);
-    addComment(0, '답글입니다. 3', 0);
-    addComment(0, '댓글입니다. 4');
-    addComment(0, '답글입니다. 5', 3);
+    addComment(0, 'ㅋㅋㅋㅋ투썸인가요?');
+    addComment(0, '저도 봤습니다 ㅎ', 0);
+    addComment(0, '이제 마스크로 바꾸셨네요ㅋㅋㅋ', 0);
+    addComment(0, '비밀 댓글입니다.');
+    addComment(0, '비밀 댓글입니다.', 3);
+    addComment(1, '여긴 댓글이 없네요');
     setComment({ comment_id: 0, user_id: 2 });
     setComment({ comment_id: 1, user_id: 2 });
     setComment({ comment_id: 4, user_id: 2 });
