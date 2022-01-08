@@ -1,20 +1,26 @@
 import Comments from 'components/molecules/Comments';
+import CommentInput from 'components/organisms/PostDetail/CommentInput';
 import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 import PostDetail from 'components/templates/PostDetail';
+import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { containerStyle } from 'styles/mixin';
 
 const PostDetailPage = () => {
+  const params = useParams();
+  const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
+
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       <StyledContainer>
         <DetailWrap>
           <PostDetail />
-          <Comments />
+          <Comments postId={postId} />
           <StyledInputWrap>
-            <StyledInput placeholder="댓글을 입력하세요" />
+            <CommentInput postId={postId} />
           </StyledInputWrap>
         </DetailWrap>
       </StyledContainer>
@@ -33,14 +39,4 @@ const DetailWrap = styled.div`
 
 const StyledInputWrap = styled.div`
   padding: 10px;
-`;
-
-const StyledInput = styled.input`
-  width: -webkit-fill-available;
-  height: 40px;
-  border-radius: 5px;
-  border-style: none;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.grey};
-  padding: 0 10px;
 `;

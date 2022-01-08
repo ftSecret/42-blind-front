@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import { useComment } from 'hooks';
 import { CommentType } from 'features/dummy/dummySlice';
-import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export type CommentPropTypes = {
   nickname?: string;
@@ -14,23 +14,17 @@ type UserIndexType = {
   [key: number]: number;
 };
 
-const Comments = () => {
+type PropTypes = {
+  postId: number;
+};
+
+const Comments = ({ postId }: PropTypes) => {
   const [comments, setComments] = useState<CommentPropTypes[]>([]);
   const { getCommentsByPostId } = useComment();
-  const params = useParams();
 
   useEffect(() => {
-    const user_idx_obj: UserIndexType = {};
-    const post_id = Number.parseInt(params.postId ?? '', 10);
-    const rawComments = getCommentsByPostId(post_id) as CommentPropTypes[];
-    setComments(
-      rawComments.map((elem) => {
-        if (user_idx_obj[elem.user_id] === undefined)
-          user_idx_obj[elem.user_id] = Object.keys(user_idx_obj).length + 1;
-        return { ...elem, nickname: `익명${user_idx_obj[elem.user_id]}` };
-      }),
-    );
-  }, [getCommentsByPostId, params.postId]);
+    setComments(sortComments(insertNickname(getCommentsByPostId(postId))));
+  }, [getCommentsByPostId, postId]);
 
   return (
     <StyledComments>
@@ -39,6 +33,49 @@ const Comments = () => {
       ))}
     </StyledComments>
   );
+};
+
+const insertNickname = (rawComments: CommentPropTypes[]) => {
+  const user_idx_obj: UserIndexType = {};
+  return rawComments.map((elem) => {
+    if (user_idx_obj[elem.user_id] === undefined)
+      user_idx_obj[elem.user_id] = Object.keys(user_idx_obj).length + 1;
+    return { ...elem, nickname: `익명${user_idx_obj[elem.user_id]}` };
+  });
+};
+
+/*
+댓글, 답글을 다음 기준으로 정렬합니다.
+1. 답글은 댓글의 자식으로 들어갈 수 있도록 변경합니다.
+2. 댓글, 답글은 생성 순서대로 정렬합니다.
+*/
+type TempCommentTypes = { reply: CommentPropTypes[] } & CommentPropTypes;
+const sortComments = (comments: CommentPropTypes[]) => {
+  const tempComments: TempCommentTypes[] = [];
+  // 시간 순서대로 정렬
+  comments.sort((a, b) => {
+    const a_dayjs = dayjs(a.created_at);
+    const b_dayjs = dayjs(b.created_at);
+    if (a_dayjs > b_dayjs) return 1;
+    else if (a_dayjs === b_dayjs) return 0;
+    else return -1;
+  });
+
+  // 답글은 댓글의 자식으로 이동
+  comments.forEach((comment) => {
+    if (comment.parent_id === -1) {
+      tempComments.push({ ...comment, reply: [] });
+    } else {
+      tempComments.find((elem) => elem.comment_id === comment.parent_id)?.reply.push(comment);
+    }
+  });
+
+  // 자식으로 있던 댓글을 분리
+  const result: CommentPropTypes[] = tempComments.reduce(
+    (prev: CommentPropTypes[], current: TempCommentTypes) => [...prev, current, ...current.reply],
+    [],
+  );
+  return result;
 };
 
 const StyledComments = styled.div`
