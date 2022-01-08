@@ -3,10 +3,10 @@ import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button';
-import { CommentType } from 'features/dummy/dummySlice';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
 import { colors } from 'styles/theme';
 import { darken } from 'polished';
+import { CommentPropTypes } from '../Comments/Comments';
 
 const Comment = ({
   post_user_id,
@@ -15,8 +15,9 @@ const Comment = ({
   created_at,
   likes,
   parent_id,
+  nickname,
   ...rest
-}: CommentType) => {
+}: CommentPropTypes) => {
   return (
     <StyledComment>
       {parent_id !== -1 && <RightArrowIcon />}
@@ -25,7 +26,7 @@ const Comment = ({
           <StyledUserImage>
             <img alt="user" width="25" height="25" src={userImage} />
           </StyledUserImage>
-          <h1>익명1</h1>
+          <h1>{nickname}</h1>
           {post_user_id === user_id && <StyledWriter>작성자</StyledWriter>}
         </StyledProfile>
         <p>{content}</p>
