@@ -10,6 +10,8 @@ export type CommentType = {
   content: string;
   created_at: string;
   modified_at?: string;
+  likes: number;
+  post_user_id: number;
 };
 
 type StateType = {

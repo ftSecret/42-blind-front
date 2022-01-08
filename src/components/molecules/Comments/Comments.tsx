@@ -1,26 +1,23 @@
 import { useState, useEffect } from 'react';
-import { getCommentsDummies } from 'utils/getDummies';
 import Comment from 'components/molecules/Comment';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
+import { useComment } from 'hooks';
+import { CommentType } from 'features/dummy/dummySlice';
 
-type CommentType = {
-  id: number | null;
-  user_id: string;
-  content: string;
-  created_at: string;
-  likes: number | null;
-};
 const Comments = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
+  const { getCommentsByPostId } = useComment();
+
   useEffect(() => {
     //처음에 데이터 가져오기
-    setComments(getCommentsDummies);
-  }, []);
+    setComments(getCommentsByPostId(0));
+  }, [getCommentsByPostId]);
+
   return (
     <StyledComments>
       {comments.map((comment) => (
-        <Comment key={comment.id} {...comment} />
+        <Comment key={comment.comment_id} {...comment} />
       ))}
     </StyledComments>
   );

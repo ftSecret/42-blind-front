@@ -29,8 +29,6 @@ const MainPage = () => {
   );
 };
 
-// 버튼을 어디에 저장할 것인지...?
-
 const StyledContainer = styled.div`
   ${containerStyle}
 `;
