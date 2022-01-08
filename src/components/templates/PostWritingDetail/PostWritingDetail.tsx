@@ -11,10 +11,10 @@ const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
   return (
     <WritingContainer>
       <StyledTitle>
-        <input placeholder="제목" name="title" {...titleProps} />
+        <input placeholder="제목" {...titleProps} />
       </StyledTitle>
       <StyledContent>
-        <textarea placeholder="내용을 입력하세요." name="content" {...contentProps} />
+        <textarea placeholder="내용을 입력하세요." {...contentProps} />
       </StyledContent>
     </WritingContainer>
   );
