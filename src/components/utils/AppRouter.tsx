@@ -19,7 +19,7 @@ export const PATH_LOGIN = '/login';
 
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const isAuth = useAuth();
-  if (isAuth) return <Navigate to={PATH_LOGIN} replace />;
+  if (!isAuth) return <Navigate to={PATH_LOGIN} replace />;
   return children;
 };
 
