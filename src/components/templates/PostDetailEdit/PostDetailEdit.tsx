@@ -1,20 +1,14 @@
-import { UseInputPropTypes } from 'hooks/useInput';
 import React from 'react';
 import styled from 'styled-components';
 
-type PropTypes = {
-  titleProps: UseInputPropTypes;
-  contentProps: UseInputPropTypes;
-};
-
-const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
+const PostDetailEdit = ({ title, titleProps, content, contentProps }: any) => {
   return (
     <WritingContainer>
       <StyledTitle>
-        <input placeholder="제목" {...titleProps} />
+        <input placeholder={'제목'} {...titleProps} />
       </StyledTitle>
       <StyledContent>
-        <textarea placeholder="내용을 입력하세요." {...contentProps} />
+        <textarea placeholder={'내용을 입력하세요.'} {...contentProps} />
       </StyledContent>
     </WritingContainer>
   );
@@ -61,4 +55,4 @@ const StyledContent = styled.div`
   }
 `;
 
-export default PostWritingDetail;
+export default PostDetailEdit;

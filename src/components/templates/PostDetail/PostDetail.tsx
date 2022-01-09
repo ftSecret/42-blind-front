@@ -4,12 +4,20 @@ import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PostCardType } from 'utils/getDummies';
+import { useNavigate, useParams } from 'react-router-dom';
+import Typography from 'components/atoms/Typography';
+import { useAppSelector } from 'app/hooks';
+import { selectUserId } from 'features/user/userSlice';
+import { usePost } from 'hooks';
+import { PATH_POST_EDIT } from 'components/utils/AppRouter';
 
 const PostDetail = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [detail, setDetail] = useState<PostCardType>({
+  const navigate = useNavigate();
+
+  const { getPost, deletePost } = usePost();
+  const [post, setPost] = useState<PostCardType>({
     post_id: -1,
     user_id: -1,
     title: '',
@@ -21,33 +29,44 @@ const PostDetail = () => {
       comments: 0,
     },
   });
-  // const { postId } = useParams();
+  const postId = parseInt(useParams()?.postId ?? '');
+  const userState = useAppSelector(selectUserId) as PostCardType['user_id'];
+  const handleDelete = () => {
+    if (window.confirm('삭제 하시겠습니까?')) {
+      deletePost(post.post_id);
+      navigate('/');
+    }
+  };
 
-  // useEffect(() => {
-  //   //id로 데이터 가져오는 로직
-  //   const datas = getDummies();
-  //   const temp = datas.find((data) => {
-  //     if (`${data.post_id}` === postId) return true;
-  //     return false;
-  //   });
-  //   const { post_id, title, content, created_at, count } = temp as PostCardType;
-  //   setDetail({ post_id, title, content, created_at, count });
-  // }, [postId]);
+  const handleEdit = () => {
+    navigate(`${PATH_POST_EDIT}/${postId}`);
+  };
+  useEffect(() => {
+    const post = getPost(postId);
+    if (post) setPost(post);
+  }, [getPost, postId]);
 
   return (
     <StyledDetail>
-      <StyledProfile>
+      <StyledPostTopWrap>
         <StyledUserImage>
           <img alt="user" width="50" height="50" src={userImage} />
         </StyledUserImage>
-        <StyledProfileInfo>
-          <h2>익명</h2>
-          <h3>{formatDate(detail.created_at!)}</h3>
-        </StyledProfileInfo>
-      </StyledProfile>
-      <h1>{detail.title}</h1>
-      <h1>{detail.content}</h1>
-      <Status count={detail.count} />
+        {post.user_id === userState && (
+          <StyledButtonGroup>
+            <StyledButton onClick={handleEdit} children="수정" />
+            <StyledButton onClick={handleDelete} children="삭제" />
+          </StyledButtonGroup>
+        )}
+      </StyledPostTopWrap>
+
+      <StyledProfileWrap>
+        <PostUserName children="익명" size="sm" weight="bold" />
+        <PostDate children={formatDate(post.created_at)} size="sm" />
+      </StyledProfileWrap>
+      <PostTitle children={post.title} size="sm" weight="bold" />
+      <PostContent children={post.content} size="sm" />
+      <Status count={post.count} />
       <StyledGoodWrap>
         <Button children="좋아요" />
       </StyledGoodWrap>
@@ -60,26 +79,33 @@ export default PostDetail;
 const StyledDetail = styled.div`
   ${flexColumn}
   gap: 0.5em;
+  text-align: left;
   padding: 0.5em;
   border-bottom: 1px solid var(--grey-color);
   color: ${({ theme }) => theme.colors.default};
 `;
 
-const StyledProfile = styled.div`
-  ${flexColumn}
-  gap: 1em;
+const StyledPostTopWrap = styled.div`
+  ${flexRow}
+  justify-content: space-between;
 `;
 
-const StyledProfileInfo = styled.div`
-  text-align: left;
-  & > h2 {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
+const StyledButtonGroup = styled.span`
+  ${flexRow}
+  gap:0.5em;
+  cursor: pointer;
+`;
 
-  & > h3 {
-    color: var(--grey-color);
-  }
+const StyledButton = styled(Button)`
+  all: unset;
+  height: max-content;
+  color: ${({ theme }) => theme.colors.grey};
+  font-size: ${({ theme }) => theme.fonts.size.sm};
+`;
+
+const StyledProfileWrap = styled.div`
+  ${flexRow}
+  gap:0.5em;
 `;
 
 const StyledUserImage = styled.div`
@@ -88,6 +114,14 @@ const StyledUserImage = styled.div`
   background: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
 `;
+
+const PostUserName = styled(Typography)``;
+
+const PostDate = styled(Typography)``;
+
+const PostTitle = styled(Typography)``;
+
+const PostContent = styled(Typography)``;
 
 const StyledGoodWrap = styled.div`
   ${flexRow}

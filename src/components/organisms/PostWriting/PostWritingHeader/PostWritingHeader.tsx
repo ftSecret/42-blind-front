@@ -5,26 +5,41 @@ import Button from 'components/atoms/Button';
 import Header from 'components/molecules/Header';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import Typography from 'components/atoms/Typography';
+import { usePost } from 'hooks';
+import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
 
-const PostWritingHeader = () => {
+type PropTypes = {
+  postId?: number;
+  content: string;
+  title: string;
+  type: typeof EDIT | typeof WRITING;
+};
+const PostWritingHeader = ({ postId, content, title, type }: PropTypes) => {
   const navigate = useNavigate();
+  const { addPost, modifyPost } = usePost();
 
   const handleClose = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
   const handleSubmit = useCallback(() => {
-    window.alert('작성되었습니다.');
+    if (type === WRITING) {
+      addPost(title, content);
+      window.alert('작성되었습니다.');
+    } else if (postId !== undefined && type === EDIT) {
+      modifyPost(postId, title, content);
+      window.alert('수정되었습니다.');
+    }
     navigate(-1);
-  }, [navigate]);
+  }, [addPost, content, modifyPost, navigate, postId, title, type]);
 
   const items = useMemo(
     () => ({
       left: <CloseIcon onClick={handleClose} />,
-      middle: <Typography size="base" weight="bold" children="글작성" />,
+      middle: <Typography size="base" weight="bold" children={type} />,
       right: <StyledSubmitButton children="완료" onClick={handleSubmit} />,
     }),
-    [handleClose, handleSubmit],
+    [handleClose, handleSubmit, type],
   );
 
   return <Header items={items} />;
