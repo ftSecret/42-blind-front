@@ -5,10 +5,10 @@ const PostDetailEdit = ({ title, titleProps, content, contentProps }: any) => {
   return (
     <WritingContainer>
       <StyledTitle>
-        <input placeholder={title} {...titleProps} />
+        <input placeholder={'제목'} {...titleProps} />
       </StyledTitle>
       <StyledContent>
-        <textarea placeholder={content} {...contentProps} />
+        <textarea placeholder={'내용을 입력하세요.'} {...contentProps} />
       </StyledContent>
     </WritingContainer>
   );
