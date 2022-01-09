@@ -53,13 +53,7 @@ type TempCommentTypes = { reply: CommentPropTypes[] } & CommentPropTypes;
 const sortComments = (comments: CommentPropTypes[]) => {
   const tempComments: TempCommentTypes[] = [];
   // 시간 순서대로 정렬
-  comments.sort((a, b) => {
-    const a_dayjs = dayjs(a.created_at);
-    const b_dayjs = dayjs(b.created_at);
-    if (a_dayjs > b_dayjs) return 1;
-    else if (a_dayjs === b_dayjs) return 0;
-    else return -1;
-  });
+  comments.sort((a, b) => (dayjs(a.created_at).isAfter(dayjs(b.created_at)) ? 1 : -1));
 
   // 답글은 댓글의 자식으로 이동
   comments.forEach((comment) => {
