@@ -16,7 +16,7 @@ export type GetPostDataType = {
   id: number;
 };
 
-export type GetPostResponseType = DefaultResponseType<GetPostDataType>;
+export type GetPostResponseType = DefaultResponseType<GetPostDataType[]>;
 
 export type GetPostRequestType = {
   page: number;

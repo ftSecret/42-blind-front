@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { store } from 'app/store';
-import { addPost, deletePost, getPost, modifyPost } from 'features/dummy/dummySlice';
+import { addPost, deletePost, getPost, modifyPost, setPost } from 'features/dummy/dummySlice';
 import { useCallback } from 'react';
 import { PostCardType } from 'utils/getDummies';
 
@@ -52,5 +52,6 @@ export const usePost = () => {
       [dispatch],
     ),
     deletePost: useCallback((post_id: number) => dispatch(deletePost(post_id)), [dispatch]),
+    setPost: useCallback((data: PostCardType[]) => dispatch(setPost(data)), [dispatch]),
   };
 };

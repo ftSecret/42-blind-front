@@ -1,44 +1,13 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  AddPostRequestType,
+  AddPostResponseType,
+  GetPostRequestType,
+  GetPostResponseType,
+} from 'api';
 import { env } from 'constants/env';
 import { Post } from 'types';
-
-export type DefaultResponseType<DataType> = {
-  code: number;
-  message: string;
-  data: DataType;
-};
-
-export type AddPostResponseType = {
-  code: number;
-  data: {
-    post_id: number;
-  };
-  message: string;
-};
-
-export type AddPostRequestType = {
-  content: string;
-  title: string;
-};
-
-export type GetPostDataType = {
-  modified_at: string;
-  created_at: string;
-  contents: string;
-  user_id: number;
-  goods: number;
-  title: string;
-  views: number;
-  id: number;
-};
-
-export type GetPostResponseType = DefaultResponseType<GetPostDataType>;
-
-export type GetPostRequestType = {
-  page: number;
-  size: number;
-};
 
 // Define a service using a base URL and expected endpoints
 export const blindPostAPI = createApi({
