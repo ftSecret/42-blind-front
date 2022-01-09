@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import MyHeader from 'components/organisms/MyPage/MyHeader';
 import MyTabBar from 'components/organisms/MyPage/MyTabBar';
 import { containerStyle } from 'styles/mixin';
@@ -14,6 +14,7 @@ const MyPage = () => {
       <MyTabBar />
       <StyledContainer>
         <Routes>
+          <Route path="/" element={<Navigate to="/post" replace />} />
           <Route path="/post" element={<MyPostBoard />} />
           <Route path="/comment" element={<MyCommentBoard />} />
         </Routes>

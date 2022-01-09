@@ -16,14 +16,14 @@ type ThemeGroup = {
   [LIGHT_THEME]: Theme;
 };
 
-const margins = {
+export const margins = {
   sm: '.5rem',
   base: '1rem',
   lg: '2rem',
   xl: '3rem',
 };
 
-const paddings = {
+export const paddings = {
   sm: '.5rem',
   base: '1rem',
   lg: '2rem',
