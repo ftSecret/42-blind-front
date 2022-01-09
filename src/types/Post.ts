@@ -12,3 +12,24 @@ export type Post = {
     likes: number;
   };
 };
+
+export type Edit = {
+  post_id: number;
+  title: string;
+  content: string;
+};
+
+export type PostEditResponse = {
+  code: number;
+  data: {
+    contents: string;
+    created_at: string;
+    goods: number;
+    id: number;
+    modified_at: string;
+    title: string;
+    user_id: number;
+    views: number;
+  };
+  message: string;
+};

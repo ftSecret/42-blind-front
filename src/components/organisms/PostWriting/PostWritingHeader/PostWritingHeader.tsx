@@ -7,6 +7,7 @@ import CloseIcon from 'components/atoms/icons/CloseIcon';
 import Typography from 'components/atoms/Typography';
 import { usePost } from 'hooks';
 import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
+import { useAddBlindPostMutation } from 'api/blindPost';
 
 type PropTypes = {
   postId?: number;
@@ -17,21 +18,23 @@ type PropTypes = {
 const PostWritingHeader = ({ postId, content, title, type }: PropTypes) => {
   const navigate = useNavigate();
   const { addPost, modifyPost } = usePost();
-
+  const [addBlindPost] = useAddBlindPostMutation();
   const handleClose = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     if (type === WRITING) {
       addPost(title, content);
+      const response = await addBlindPost({ title, content });
+      console.log(response);
       window.alert('작성되었습니다.');
     } else if (postId !== undefined && type === EDIT) {
       modifyPost(postId, title, content);
       window.alert('수정되었습니다.');
     }
     navigate(-1);
-  }, [addPost, content, modifyPost, navigate, postId, title, type]);
+  }, [addBlindPost, addPost, content, modifyPost, navigate, postId, title, type]);
 
   const items = useMemo(
     () => ({
