@@ -14,7 +14,7 @@ const MyPage = () => {
       <MyTabBar />
       <StyledContainer>
         <Routes>
-          <Route path="/" element={<Navigate to="/post" replace />} />
+          <Route path="/" element={<Navigate to="/my/post" replace />} />
           <Route path="/post" element={<MyPostBoard />} />
           <Route path="/comment" element={<MyCommentBoard />} />
         </Routes>
