@@ -3,15 +3,15 @@ import { RootState } from 'app/store';
 import { PostCardType } from 'utils/getDummies';
 
 export type CommentType = {
-  comment_id: number;
   post_id: number;
   user_id: number;
   parent_id: number;
+  comment_id: number;
+  post_user_id: number;
+  goods: number;
   content: string;
   created_at: string;
   modified_at?: string;
-  likes: number;
-  post_user_id: number;
 };
 
 type StateType = {
@@ -35,12 +35,12 @@ export const dummySlice = createSlice({
       state.post = [...state.post, action.payload];
     },
     deletePost: (state, action) => {
-      state.post = [...state.post.filter((elem) => elem.id !== action.payload)];
+      state.post = [...state.post.filter((elem) => elem.post_id !== action.payload)];
     },
     modifyPost: (state, action) => {
       state.post = [
         ...state.post.map((elem) => {
-          if (elem.id === action.payload.post_id) return action.payload;
+          if (elem.post_id === action.payload.post_id) return action.payload;
           return elem;
         }),
       ];

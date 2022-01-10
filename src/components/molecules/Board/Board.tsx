@@ -14,7 +14,7 @@ const Board = ({ items, load }: PropTypes) => {
   // 2. 순회하면서 현재 원소의 post_id가 items에 존재하는지 판단한다.
   // 3. 있으면 modified_at을 확인해서 처리한다.
   const result = items.reduce((prev: PostCardType[], current: PostCardType) => {
-    const target_idx = prev.findIndex((elem) => elem.id === current.id);
+    const target_idx = prev.findIndex((elem) => elem.post_id === current.post_id);
     if (target_idx !== -1) {
       const target = prev[target_idx];
       if (target.modified_at && current.modified_at) {

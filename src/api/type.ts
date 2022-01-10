@@ -6,18 +6,20 @@ export type DefaultResponseType<DataType> = {
 
 export type APIPostCommentType = {
   comments: {
-    id: number;
-    goods: number;
     user_id: number;
-    content: string;
     parent_id: number;
+    comment_id: number;
+
+    goods: number;
+    content: string;
     created_at: string;
     modified_at: string;
   }[];
 
-  id: number;
-  title: string;
+  post_id: number;
   user_id: number;
+
+  title: string;
   content: string;
   created_at: string;
   modified_at: string;

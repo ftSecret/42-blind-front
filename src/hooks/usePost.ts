@@ -11,17 +11,17 @@ const create = (title: string, content: string): PostCardType => {
     content,
     count: {
       comments: 0,
-      likes: 0,
+      goods: 0,
       views: 0,
     },
     created_at: new Date().toString(),
-    id: post.length === 0 ? 0 : post[post.length - 1].id + 1,
+    post_id: post.length === 0 ? 0 : post[post.length - 1].post_id + 1,
     user_id: store.getState().user.id,
   };
 };
 
 const modify = (id: number, title: string, content: string): PostCardType => {
-  const prevPost = store.getState().dummy.post.find((elem) => elem.id === id);
+  const prevPost = store.getState().dummy.post.find((elem) => elem.post_id === id);
   if (prevPost) {
     const modifiedPost = { ...prevPost };
     modifiedPost.title = title;
@@ -37,7 +37,7 @@ export const usePost = () => {
   const dispatch = useAppDispatch();
 
   return {
-    getPost: useCallback((id: number) => post.find((elem) => elem.id === id), [post]),
+    getPost: useCallback((id: number) => post.find((elem) => elem.post_id === id), [post]),
     getPosts: useCallback(
       (page: number, size: number) => post.slice(page * size, (page + 1) * size),
       [post],

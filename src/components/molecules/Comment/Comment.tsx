@@ -21,7 +21,7 @@ const Comment = ({
   content,
   created_at,
   modified_at,
-  likes,
+  goods,
   parent_id,
   nickname,
   comment_id,

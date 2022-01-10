@@ -12,7 +12,9 @@ import { useCallback } from 'react';
 
 const create = (post_id: number, content: string, parent_id?: number): CommentType => {
   const comments = store.getState().dummy.comment;
-  const post_user_id = store.getState().dummy.post.find((elem) => elem.id === post_id)?.user_id;
+  const post_user_id = store
+    .getState()
+    .dummy.post.find((elem) => elem.post_id === post_id)?.user_id;
 
   if (post_user_id === undefined) throw new Error('post_user_id는 undefined일 수 없습니다.');
 
@@ -23,7 +25,7 @@ const create = (post_id: number, content: string, parent_id?: number): CommentTy
     post_user_id: post_user_id,
     parent_id: parent_id ?? -1,
     content: content,
-    likes: 0,
+    goods: 0,
     post_id,
   };
 };
@@ -83,7 +85,7 @@ export const useComment = () => {
         post_id,
         user_id,
         content,
-        likes,
+        goods,
       }: Partial<CommentType>) => {
         if (comment_id === undefined) return;
         const prevComments = [...store.getState().dummy.comment];
@@ -97,7 +99,7 @@ export const useComment = () => {
         if (post_id) prevComment.post_id = post_id;
         if (user_id) prevComment.user_id = user_id;
         if (content) prevComment.content = content;
-        if (likes) prevComment.likes = likes;
+        if (goods) prevComment.goods = goods;
         prevComments.splice(prevCommentIdx, 1, prevComment);
         dispatch(setComment(prevComments));
       },

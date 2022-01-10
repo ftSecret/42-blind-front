@@ -11,7 +11,7 @@ type StatusType = {
   count: {
     comments: number;
     views: number;
-    likes: number;
+    goods: number;
   };
 };
 const Status = ({ count }: StatusType) => {
@@ -27,7 +27,7 @@ const Status = ({ count }: StatusType) => {
       </li>
       <li>
         <ThumbUpIcon color={colors.red} />
-        <div>{count.likes}</div>
+        <div>{count.goods}</div>
       </li>
     </StyledStatus>
   );

@@ -23,35 +23,36 @@ const PostDetail = ({ post }: PropTypes) => {
 
   const { deletePost } = usePost();
   const postId = parseInt(useParams()?.postId ?? '');
-  const userState = useAppSelector(selectUserId) as PostCardType['id'];
+  const userState = useAppSelector(selectUserId) as PostCardType['post_id'];
 
   const handleDelete = () => {
     if (window.confirm('삭제 하시겠습니까?')) {
-      deletePost(post.id);
+      deletePost(post.post_id);
       navigate('/');
     }
   };
 
   const good = async () => {
-    await goodBlindPost({ post_id: post.id });
+    await goodBlindPost({ post_id: post.post_id });
   };
 
   const handleEdit = () => {
     navigate(`${PATH_POST_EDIT}/${postId}`);
   };
-  if (post.id === -1) return null;
+
+  if (post.post_id === -1) return null;
   return (
     <StyledDetail>
       <StyledPostTopWrap>
         <StyledUserImage>
           <img alt="user" width="50" height="50" src={userImage} />
         </StyledUserImage>
-        {/* {post.user_id === userState && (
+        {post.user_id === userState && (
           <StyledButtonGroup>
             <StyledButton onClick={handleEdit} children="수정" />
             <StyledButton onClick={handleDelete} children="삭제" />
           </StyledButtonGroup>
-        )} */}
+        )}
       </StyledPostTopWrap>
 
       <StyledProfileWrap>
@@ -60,7 +61,7 @@ const PostDetail = ({ post }: PropTypes) => {
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" />
       <PostContent children={post.content} size="sm" />
-      {/* <Status count={post.count} /> */}
+      {/* <Status count={count:} /> */}
       <StyledGoodWrap>
         <Button children="좋아요" onClick={good} />
       </StyledGoodWrap>

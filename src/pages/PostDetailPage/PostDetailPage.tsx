@@ -18,7 +18,7 @@ const PostDetailPage = () => {
     content: '',
     created_at: '',
     goods: 0,
-    id: -1,
+    post_id: -1,
     user_id: 0,
     modified_at: '',
     title: '',
