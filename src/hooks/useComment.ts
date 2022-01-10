@@ -27,6 +27,7 @@ const create = (post_id: number, content: string, parent_id?: number): CommentTy
     content: content,
     goods: 0,
     post_id,
+    is_good: false,
   };
 };
 

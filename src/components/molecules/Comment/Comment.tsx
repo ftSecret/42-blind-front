@@ -51,7 +51,7 @@ const Comment = ({
 
   return (
     <StyledComment>
-      {parent_id !== -1 && <RightArrowIcon />}
+      {parent_id !== null && <RightArrowIcon />}
       <StyledCommentWrap>
         <StyledProfile>
           <StyledUserImage>
@@ -59,7 +59,7 @@ const Comment = ({
           </StyledUserImage>
           <h1>{nickname}</h1>
           {post_user_id === user_id && <StyledOption>작성자</StyledOption>}
-          {modified_at !== undefined && <StyledOption>편집됨</StyledOption>}
+          {modified_at !== null && <StyledOption>편집됨</StyledOption>}
         </StyledProfile>
         <p>{content}</p>
         <StyledButtonWrap>

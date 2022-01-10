@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Comment from 'components/molecules/Comment';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
-import { useComment } from 'hooks';
 import dayjs from 'dayjs';
 import { APICommentType } from 'api/type';
 import { CommentType } from 'types';
@@ -17,29 +16,16 @@ type UserIndexType = {
 
 type PropTypes = {
   postId: number;
+  postUserId: number;
   rawComments: APICommentType;
 };
 
-// const formatComment: CommentPropTypes[] = (
-//   rawCommetns: Pick<GetPostDetailDataType, 'comments'>['comments'],
-//   postId: number,
-// ) => {
-//   return rawCommetns.map((comment) => ({
-//     content: comment.content,
-//     post_id: postId,
-//     user_id: comment.id,
-//     parent_id: comment.parent_id,
-//     comment_id: comment.id,
-//   }));
-// };
-
-const Comments = ({ postId, rawComments }: PropTypes) => {
+const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
   const [comments, setComments] = useState<CommentPropTypes[]>([]);
-  const { getCommentsByPostId } = useComment();
 
   useEffect(() => {
-    setComments(sortComments(insertNickname(getCommentsByPostId(postId))));
-  }, [getCommentsByPostId, postId]);
+    setComments(sortComments(insertNickname(formatComments(rawComments, postId, postUserId))));
+  }, [postId, postUserId, rawComments]);
 
   return (
     <StyledComments>
@@ -48,6 +34,18 @@ const Comments = ({ postId, rawComments }: PropTypes) => {
       ))}
     </StyledComments>
   );
+};
+
+const formatComments = (
+  rawComments: APICommentType,
+  postId: number,
+  postUserId: number,
+): CommentPropTypes[] => {
+  return rawComments.map((comment) => ({
+    post_id: postId,
+    post_user_id: postUserId,
+    ...comment,
+  }));
 };
 
 const insertNickname = (rawComments: CommentPropTypes[]) => {
@@ -72,7 +70,7 @@ const sortComments = (comments: CommentPropTypes[]) => {
 
   // 답글은 댓글의 자식으로 이동
   comments.forEach((comment) => {
-    if (comment.parent_id === -1) {
+    if (comment.parent_id === null) {
       tempComments.push({ ...comment, reply: [] });
     } else {
       tempComments.find((elem) => elem.comment_id === comment.parent_id)?.reply.push(comment);

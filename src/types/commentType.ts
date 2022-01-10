@@ -8,4 +8,5 @@ export type CommentType = {
   content: string;
   created_at: string;
   modified_at?: string;
+  is_good: boolean;
 };

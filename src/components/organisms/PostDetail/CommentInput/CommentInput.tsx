@@ -32,6 +32,7 @@ const CommentInput = ({ postId }: PropTypes) => {
   const modifyId = Number.parseInt(query.modifyId, 10);
   const [message, setMessage] = useState('');
   const { addComment, modifyComment } = useComment();
+
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { usePost } from 'hooks';
 import { PostType } from 'types';
 import { useGetBlindPostQuery } from 'api/blindPost';
+import { formatPost } from 'utils/formatPost';
 
 const size = 10;
 
@@ -20,16 +21,7 @@ const MainBoard = () => {
   }, [getBlindPost.data?.data.length, getBlindPost.isLoading]);
 
   useEffect(() => {
-    const postCard = getBlindPost.data?.data.map((item) => {
-      const { views, goods, post_id, content, comment_number, ...rest } = item;
-      return {
-        post_id,
-        content,
-        count: { views, goods: goods, comments: comment_number },
-        ...rest,
-      };
-    });
-    if (postCard) setItems((prev) => [...prev, ...postCard]);
+    setItems((prev) => [...prev, ...formatPost(getBlindPost.data?.data)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 

@@ -12,6 +12,7 @@ export type APIPostCommentType = {
 
     goods: number;
     content: string;
+    is_good: boolean;
     created_at: string;
     modified_at: string;
   }[];
@@ -21,6 +22,7 @@ export type APIPostCommentType = {
 
   title: string;
   content: string;
+  is_good: boolean;
   created_at: string;
   modified_at: string;
 
@@ -28,7 +30,7 @@ export type APIPostCommentType = {
   goods: number;
   comment_number: number;
 };
-export type IsGoodType = { is_good: boolean };
+export type IsGoodType = {};
 export type APICommentType = Pick<APIPostCommentType, 'comments'>['comments'];
 export type APIPostType = Omit<APIPostCommentType, 'comments'>;
 

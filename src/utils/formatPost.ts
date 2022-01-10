@@ -1,7 +1,8 @@
 import { APIPostType } from 'api/type';
 
-export const formatPostCard = (postData: APIPostType[]) =>
-  postData.map((item) => {
+export const formatPost = (postData?: APIPostType[]) => {
+  if (postData === undefined) return [];
+  return postData.map((item) => {
     const { views, goods, post_id, content, ...rest } = item;
     return {
       post_id: post_id,
@@ -10,3 +11,4 @@ export const formatPostCard = (postData: APIPostType[]) =>
       ...rest,
     };
   });
+};

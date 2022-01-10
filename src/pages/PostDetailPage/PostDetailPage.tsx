@@ -12,32 +12,28 @@ import { containerStyle } from 'styles/mixin';
 const PostDetailPage = () => {
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
-  const postDetail = useGetBlindPostDetailQuery({ post_id: postId });
-  const { comments, ...post } = postDetail.data?.data ?? {
-    comments: [],
-    content: '',
-    created_at: '',
-    goods: 0,
-    post_id: -1,
-    user_id: 0,
-    modified_at: '',
-    title: '',
-    views: 0,
-    comment_number: 0,
-  };
-
+  const { data, isLoading } = useGetBlindPostDetailQuery({ post_id: postId });
+  // TODO: undefined 일때 처리
+  if (data === undefined) return null;
+  const {
+    data: { comments, ...post },
+  } = data;
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
-      <StyledContainer>
-        <DetailWrap>
-          <PostDetail post={post} />
-          <Comments postId={postId} rawComments={comments} />
-          <StyledInputWrap>
-            <CommentInput postId={postId} />
-          </StyledInputWrap>
-        </DetailWrap>
-      </StyledContainer>
+      {isLoading ? (
+        <div>로딩중</div>
+      ) : (
+        <StyledContainer>
+          <DetailWrap>
+            <PostDetail post={post} />
+            <Comments postId={postId} rawComments={comments} postUserId={post.user_id} />
+            <StyledInputWrap>
+              <CommentInput postId={postId} />
+            </StyledInputWrap>
+          </DetailWrap>
+        </StyledContainer>
+      )}
     </>
   );
 };
