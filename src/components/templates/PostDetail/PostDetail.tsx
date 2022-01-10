@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { useEffect } from 'react';
-import { PostCardType } from 'utils/getDummies';
+import { PostType } from 'types';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';
 import { useAppSelector } from 'app/hooks';
@@ -23,7 +23,7 @@ const PostDetail = ({ post }: PropTypes) => {
 
   const { deletePost } = usePost();
   const postId = parseInt(useParams()?.postId ?? '');
-  const userState = useAppSelector(selectUserId) as PostCardType['post_id'];
+  const userState = useAppSelector(selectUserId) as PostType['post_id'];
 
   const handleDelete = () => {
     if (window.confirm('삭제 하시겠습니까?')) {

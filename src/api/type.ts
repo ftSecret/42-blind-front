@@ -1,4 +1,4 @@
-export type DefaultResponseType<DataType> = {
+export type ResponseType<DataType> = {
   code: number;
   message: string;
   data: DataType;
@@ -32,14 +32,10 @@ export type IsGoodType = { is_good: boolean };
 export type APICommentType = Pick<APIPostCommentType, 'comments'>['comments'];
 export type APIPostType = Omit<APIPostCommentType, 'comments'>;
 
-export type GetPostResponseType = DefaultResponseType<APIPostType[]>;
-
 export type GetPostRequestType = {
   page: number;
   size: number;
 };
-
-export type GetPostDetailResponseType = DefaultResponseType<APIPostCommentType & IsGoodType>;
 
 export type GetPostDetailRequestType = {
   post_id: number;
@@ -54,16 +50,32 @@ export type AddPostDataType = {
   post_id: number;
 };
 
-export type AddPostResponseType = DefaultResponseType<AddPostDataType>;
-
 export type GoodPostRequestType = {
   post_id: number;
 };
-
-export type GoodPostResponseType = DefaultResponseType<APIPostCommentType>;
 
 export type EditPostRequestType = {
   content: string;
   post_id: number;
   title: string;
+};
+
+export type DeletePostRequestType = {
+  post_id: number;
+};
+
+export type AddCommentRequestType = {
+  content: string;
+  post_id: number;
+  parent_id: number;
+};
+
+export type DeleteCommentRequestType = {
+  comment_id: number;
+  post_id: number;
+};
+export type EditCommentRequestType = {
+  content: string;
+  post_id: number;
+  comment_id: number;
 };

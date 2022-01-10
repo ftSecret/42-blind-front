@@ -1,13 +1,13 @@
 import Board from 'components/molecules/Board';
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { usePost } from 'hooks';
-import { PostCardType } from 'utils/getDummies';
+import { PostType } from 'types';
 import { useGetBlindPostQuery } from 'api/blindPost';
 
 const size = 10;
 
 const MainBoard = () => {
-  const [items, setItems] = useState<PostCardType[]>([]);
+  const [items, setItems] = useState<PostType[]>([]);
   const [page, setPage] = useState(0);
   const getBlindPost = useGetBlindPostQuery({ size, page });
   const prevLength = useRef(size);

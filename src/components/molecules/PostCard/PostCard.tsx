@@ -5,9 +5,9 @@ import Status from 'components/molecules/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';
-import { PostCardType } from 'utils/getDummies';
+import { PostType } from 'types';
 
-const PostCard = ({ title, content, created_at, count, ...rest }: PostCardType) => {
+const PostCard = ({ title, content, created_at, count, ...rest }: PostType) => {
   return (
     <StyledDiv>
       <StyledTitle>{title}</StyledTitle>

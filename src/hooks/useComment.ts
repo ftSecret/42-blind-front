@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { store } from 'app/store';
 import {
   addComment,
-  CommentType,
   deleteComment,
   getComment,
   modifyComment,
   setComment,
 } from 'features/dummy/dummySlice';
 import { useCallback } from 'react';
+import { CommentType } from 'types';
 
 const create = (post_id: number, content: string, parent_id?: number): CommentType => {
   const comments = store.getState().dummy.comment;

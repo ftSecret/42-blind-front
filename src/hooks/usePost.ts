@@ -2,9 +2,9 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { store } from 'app/store';
 import { addPost, deletePost, getPost, modifyPost, setPost } from 'features/dummy/dummySlice';
 import { useCallback } from 'react';
-import { PostCardType } from 'utils/getDummies';
+import { PostType } from 'types';
 
-const create = (title: string, content: string): PostCardType => {
+const create = (title: string, content: string): PostType => {
   const post = store.getState().dummy.post;
   return {
     title,
@@ -20,7 +20,7 @@ const create = (title: string, content: string): PostCardType => {
   };
 };
 
-const modify = (id: number, title: string, content: string): PostCardType => {
+const modify = (id: number, title: string, content: string): PostType => {
   const prevPost = store.getState().dummy.post.find((elem) => elem.post_id === id);
   if (prevPost) {
     const modifiedPost = { ...prevPost };
@@ -49,6 +49,6 @@ export const usePost = () => {
       [dispatch],
     ),
     deletePost: useCallback((id: number) => dispatch(deletePost(id)), [dispatch]),
-    setPost: useCallback((data: PostCardType[]) => dispatch(setPost(data)), [dispatch]),
+    setPost: useCallback((data: PostType[]) => dispatch(setPost(data)), [dispatch]),
   };
 };

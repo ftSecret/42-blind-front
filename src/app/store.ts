@@ -2,16 +2,22 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from 'features/user/userSlice';
 import dummyReducer from 'features/dummy/dummySlice';
 import themeReducer, { themeMiddleware } from 'features/theme/themeSlice';
-import { blindPostAPI } from 'api';
+import { blindPostAPI } from 'api/blindPost';
+import { blindCommentAPI } from 'api/blindComment';
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     user: userReducer,
     dummy: dummyReducer,
     [blindPostAPI.reducerPath]: blindPostAPI.reducer,
+    [blindCommentAPI.reducerPath]: blindCommentAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(blindPostAPI.middleware, themeMiddleware),
+    getDefaultMiddleware().concat(
+      blindPostAPI.middleware,
+      blindCommentAPI.middleware,
+      themeMiddleware,
+    ),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -1,11 +1,9 @@
-import Board from 'components/molecules/Board';
+// import Board from 'components/molecules/Board';
 import React from 'react';
-import { useDummies } from 'hooks';
 
 const MyPostBoard = () => {
-  const { items, load } = useDummies();
-
-  return <Board items={items} load={load} />;
+  return <div>마이 포스트</div>;
+  // return <Board items={items} load={load} />;
 };
 
 export default MyPostBoard;

@@ -3,9 +3,9 @@ import Comment from 'components/molecules/Comment';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import { useComment } from 'hooks';
-import { CommentType } from 'features/dummy/dummySlice';
 import dayjs from 'dayjs';
 import { APICommentType } from 'api/type';
+import { CommentType } from 'types';
 
 export type CommentPropTypes = {
   nickname?: string;

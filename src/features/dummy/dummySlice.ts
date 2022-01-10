@@ -1,21 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
-import { PostCardType } from 'utils/getDummies';
-
-export type CommentType = {
-  post_id: number;
-  user_id: number;
-  parent_id: number;
-  comment_id: number;
-  post_user_id: number;
-  goods: number;
-  content: string;
-  created_at: string;
-  modified_at?: string;
-};
+import { CommentType, PostType } from 'types';
 
 type StateType = {
-  post: PostCardType[];
+  post: PostType[];
   comment: CommentType[];
 };
 

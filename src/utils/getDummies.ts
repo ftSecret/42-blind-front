@@ -1,18 +1,6 @@
-export type PostCardType = {
-  post_id: number;
-  user_id: number;
-  title: string;
-  content: string;
-  created_at: string;
-  modified_at?: string;
-  count: {
-    views: number;
-    goods: number;
-    comments: number;
-  };
-};
+import { PostType } from 'types';
 
-export const getDummies = (): PostCardType[] => [
+export const getDummies = (): PostType[] => [
   {
     post_id: Math.floor(Math.random() * 20),
     user_id: 0,
