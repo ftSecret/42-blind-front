@@ -15,13 +15,13 @@ const create = (title: string, content: string): PostCardType => {
       views: 0,
     },
     created_at: new Date().toString(),
-    post_id: post.length === 0 ? 0 : post[post.length - 1].post_id + 1,
+    id: post.length === 0 ? 0 : post[post.length - 1].id + 1,
     user_id: store.getState().user.id,
   };
 };
 
-const modify = (post_id: number, title: string, content: string): PostCardType => {
-  const prevPost = store.getState().dummy.post.find((elem) => elem.post_id === post_id);
+const modify = (id: number, title: string, content: string): PostCardType => {
+  const prevPost = store.getState().dummy.post.find((elem) => elem.id === id);
   if (prevPost) {
     const modifiedPost = { ...prevPost };
     modifiedPost.title = title;
@@ -37,21 +37,18 @@ export const usePost = () => {
   const dispatch = useAppDispatch();
 
   return {
-    getPost: useCallback(
-      (post_id: number) => post.find((elem) => elem.post_id === post_id),
-      [post],
-    ),
+    getPost: useCallback((id: number) => post.find((elem) => elem.id === id), [post]),
     getPosts: useCallback(
       (page: number, size: number) => post.slice(page * size, (page + 1) * size),
       [post],
     ),
     addPost: useCallback((title, content) => dispatch(addPost(create(title, content))), [dispatch]),
     modifyPost: useCallback(
-      (post_id: number, title: string, content: string) =>
-        dispatch(modifyPost(modify(post_id, title, content))),
+      (id: number, title: string, content: string) =>
+        dispatch(modifyPost(modify(id, title, content))),
       [dispatch],
     ),
-    deletePost: useCallback((post_id: number) => dispatch(deletePost(post_id)), [dispatch]),
+    deletePost: useCallback((id: number) => dispatch(deletePost(id)), [dispatch]),
     setPost: useCallback((data: PostCardType[]) => dispatch(setPost(data)), [dispatch]),
   };
 };

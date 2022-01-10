@@ -7,8 +7,14 @@ import {
   GetPostResponseType,
 } from 'api';
 import { env } from 'constants/env';
-import { Post } from 'types';
-import { GoodPostRequestType, GoodPostResponseType } from './type';
+import {
+  APIPostType,
+  EditPostRequestType,
+  GetPostDetailRequestType,
+  GetPostDetailResponseType,
+  GoodPostRequestType,
+  GoodPostResponseType,
+} from './type';
 
 // Define a service using a base URL and expected endpoints
 export const blindPostAPI = createApi({
@@ -17,20 +23,17 @@ export const blindPostAPI = createApi({
   endpoints: (builder) => ({
     getBlindPost: builder.query<GetPostResponseType, GetPostRequestType>({
       query: ({ size, page }) => `post?size=${size}&page=${page}`,
-      // transformResponse: (response: { data: GetPostResponseType }, meta, arg) => ({
-
-      // }),
     }),
     getBlindPostFromMe: builder.query<GetPostResponseType, void>({
       query: () => `post/me`,
     }),
-    getBlindPostDetail: builder.query<GetPostResponseType, Pick<Post, 'id'>>({
-      query: ({ id }) => `post/detail?post_id=${id}`,
+    getBlindPostDetail: builder.query<GetPostDetailResponseType, GetPostDetailRequestType>({
+      query: ({ post_id }) => `post/detail?post_id=${post_id}`,
     }),
     getBlindPostPopular: builder.query<GetPostResponseType, void>({
       query: () => `post/popular`,
     }),
-    addBlindPost: builder.mutation<AddPostResponseType, Partial<AddPostRequestType>>({
+    addBlindPost: builder.mutation<AddPostResponseType, AddPostRequestType>({
       query: (body) => ({
         url: `post`,
         method: 'POST',
@@ -44,11 +47,16 @@ export const blindPostAPI = createApi({
         body,
       }),
     }),
+    editBlindPost: builder.mutation<APIPostType, EditPostRequestType>({
+      query: (body) => ({
+        url: `post`,
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {
   useGetBlindPostQuery,
   useAddBlindPostMutation,

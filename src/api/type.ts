@@ -4,23 +4,43 @@ export type DefaultResponseType<DataType> = {
   data: DataType;
 };
 
-export type GetPostDataType = {
-  modified_at: string;
-  created_at: string;
-  fakename?: string;
-  contents: string;
-  user_id: number;
-  goods: number;
-  title: string;
-  views: number;
-  id: number;
-};
+export type APIPostCommentType = {
+  comments: {
+    id: number;
+    goods: number;
+    user_id: number;
+    content: string;
+    parent_id: number;
+    created_at: string;
+    modified_at: string;
+  }[];
 
-export type GetPostResponseType = DefaultResponseType<GetPostDataType[]>;
+  id: number;
+  title: string;
+  user_id: number;
+  content: string;
+  created_at: string;
+  modified_at: string;
+
+  views: number;
+  goods: number;
+  comment_number: number;
+};
+export type IsGoodType = { is_good: boolean };
+export type APICommentType = Pick<APIPostCommentType, 'comments'>['comments'];
+export type APIPostType = Omit<APIPostCommentType, 'comments'>;
+
+export type GetPostResponseType = DefaultResponseType<APIPostType[]>;
 
 export type GetPostRequestType = {
   page: number;
   size: number;
+};
+
+export type GetPostDetailResponseType = DefaultResponseType<APIPostCommentType & IsGoodType>;
+
+export type GetPostDetailRequestType = {
+  post_id: number;
 };
 
 export type AddPostRequestType = {
@@ -34,38 +54,14 @@ export type AddPostDataType = {
 
 export type AddPostResponseType = DefaultResponseType<AddPostDataType>;
 
-/*
-"comments": [
-      {
-        "content": "string",
-        "goods": 0,
-        "id": 0,
-        "parent_id": 0
-      }
-    ],
-    "contents": "string",
-    "created_at": "2022-01-10T06:17:07.079Z",
-    "fakename": "string",
-    "goods": 0,
-    "id": 0,
-    "modified_at": "2022-01-10T06:17:07.079Z",
-    "title": "string",
-    "views": 0
-*/
-export type GoodPostDataType = {
-  comments: { content: string; goods: number; id: number; parent_id: number }[];
-  contents: string;
-  created_at: string;
-  fakename: string;
-  goods: number;
-  id: number;
-  modified_at: string;
-  title: string;
-  views: number;
-};
-
 export type GoodPostRequestType = {
   post_id: number;
 };
 
-export type GoodPostResponseType = DefaultResponseType<GoodPostDataType>;
+export type GoodPostResponseType = DefaultResponseType<APIPostCommentType>;
+
+export type EditPostRequestType = {
+  content: string;
+  post_id: number;
+  title: string;
+};

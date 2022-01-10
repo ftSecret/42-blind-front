@@ -12,9 +12,7 @@ import { useCallback } from 'react';
 
 const create = (post_id: number, content: string, parent_id?: number): CommentType => {
   const comments = store.getState().dummy.comment;
-  const post_user_id = store
-    .getState()
-    .dummy.post.find((elem) => elem.post_id === post_id)?.user_id;
+  const post_user_id = store.getState().dummy.post.find((elem) => elem.id === post_id)?.user_id;
 
   if (post_user_id === undefined) throw new Error('post_user_id는 undefined일 수 없습니다.');
 

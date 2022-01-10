@@ -35,12 +35,12 @@ export const dummySlice = createSlice({
       state.post = [...state.post, action.payload];
     },
     deletePost: (state, action) => {
-      state.post = [...state.post.filter((elem) => elem.post_id !== action.payload)];
+      state.post = [...state.post.filter((elem) => elem.id !== action.payload)];
     },
     modifyPost: (state, action) => {
       state.post = [
         ...state.post.map((elem) => {
-          if (elem.post_id === action.payload.post_id) return action.payload;
+          if (elem.id === action.payload.post_id) return action.payload;
           return elem;
         }),
       ];

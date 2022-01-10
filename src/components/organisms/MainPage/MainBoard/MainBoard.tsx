@@ -21,11 +21,11 @@ const MainBoard = () => {
 
   useEffect(() => {
     const postCard = getBlindPost.data?.data.map((item) => {
-      const { views, goods, id, contents, ...rest } = item;
+      const { views, goods, id, content, comment_number, ...rest } = item;
       return {
-        post_id: id,
-        content: contents,
-        count: { views, likes: goods, comments: 0 },
+        id,
+        content,
+        count: { views, likes: goods, comments: comment_number },
         ...rest,
       };
     });

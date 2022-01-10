@@ -5,6 +5,7 @@ import { flexColumn } from 'styles/mixin';
 import { useComment } from 'hooks';
 import { CommentType } from 'features/dummy/dummySlice';
 import dayjs from 'dayjs';
+import { APICommentType } from 'api/type';
 
 export type CommentPropTypes = {
   nickname?: string;
@@ -16,9 +17,23 @@ type UserIndexType = {
 
 type PropTypes = {
   postId: number;
+  rawComments: APICommentType;
 };
 
-const Comments = ({ postId }: PropTypes) => {
+// const formatComment: CommentPropTypes[] = (
+//   rawCommetns: Pick<GetPostDetailDataType, 'comments'>['comments'],
+//   postId: number,
+// ) => {
+//   return rawCommetns.map((comment) => ({
+//     content: comment.content,
+//     post_id: postId,
+//     user_id: comment.id,
+//     parent_id: comment.parent_id,
+//     comment_id: comment.id,
+//   }));
+// };
+
+const Comments = ({ postId, rawComments }: PropTypes) => {
   const [comments, setComments] = useState<CommentPropTypes[]>([]);
   const { getCommentsByPostId } = useComment();
 

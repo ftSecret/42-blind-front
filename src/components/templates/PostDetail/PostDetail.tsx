@@ -4,7 +4,7 @@ import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { PostCardType } from 'utils/getDummies';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';
@@ -13,57 +13,45 @@ import { selectUserId } from 'features/user/userSlice';
 import { usePost } from 'hooks';
 import { PATH_POST_EDIT } from 'components/utils/AppRouter';
 import { useGoodBlindPostMutation } from 'api/blindPost';
+import { APIPostType } from 'api/type';
 
-const PostDetail = () => {
+type PropTypes = { post: APIPostType };
+
+const PostDetail = ({ post }: PropTypes) => {
   const navigate = useNavigate();
   const [goodBlindPost] = useGoodBlindPostMutation();
 
-  const { getPost, deletePost } = usePost();
-  const [post, setPost] = useState<PostCardType>({
-    post_id: -1,
-    user_id: -1,
-    title: '',
-    content: '',
-    created_at: new Date().toString(),
-    count: {
-      views: 0,
-      likes: 0,
-      comments: 0,
-    },
-  });
+  const { deletePost } = usePost();
   const postId = parseInt(useParams()?.postId ?? '');
-  const userState = useAppSelector(selectUserId) as PostCardType['user_id'];
+  const userState = useAppSelector(selectUserId) as PostCardType['id'];
+
   const handleDelete = () => {
     if (window.confirm('삭제 하시겠습니까?')) {
-      deletePost(post.post_id);
+      deletePost(post.id);
       navigate('/');
     }
   };
 
   const good = async () => {
-    await goodBlindPost({ post_id: post.post_id });
+    await goodBlindPost({ post_id: post.id });
   };
 
   const handleEdit = () => {
     navigate(`${PATH_POST_EDIT}/${postId}`);
   };
-  useEffect(() => {
-    const post = getPost(postId);
-    if (post) setPost(post);
-  }, [getPost, postId]);
-
+  if (post.id === -1) return null;
   return (
     <StyledDetail>
       <StyledPostTopWrap>
         <StyledUserImage>
           <img alt="user" width="50" height="50" src={userImage} />
         </StyledUserImage>
-        {post.user_id === userState && (
+        {/* {post.user_id === userState && (
           <StyledButtonGroup>
             <StyledButton onClick={handleEdit} children="수정" />
             <StyledButton onClick={handleDelete} children="삭제" />
           </StyledButtonGroup>
-        )}
+        )} */}
       </StyledPostTopWrap>
 
       <StyledProfileWrap>
@@ -72,7 +60,7 @@ const PostDetail = () => {
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" />
       <PostContent children={post.content} size="sm" />
-      <Status count={post.count} />
+      {/* <Status count={post.count} /> */}
       <StyledGoodWrap>
         <Button children="좋아요" onClick={good} />
       </StyledGoodWrap>

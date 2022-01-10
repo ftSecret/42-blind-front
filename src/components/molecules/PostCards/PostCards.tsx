@@ -14,7 +14,7 @@ const PostCards = ({ items }: PropTypes) => {
   return (
     <StyledCards>
       {items.map((elem, idx) => (
-        <Link key={idx} to={`${PATH_POST}/${elem.post_id}`}>
+        <Link key={idx} to={`${PATH_POST}/${elem.id}`}>
           <PostCard {...elem} />
         </Link>
       ))}
