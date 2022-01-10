@@ -12,7 +12,10 @@ import { containerStyle } from 'styles/mixin';
 const PostDetailPage = () => {
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
-  const { data, isLoading } = useGetBlindPostDetailQuery({ post_id: postId });
+  const { data, isLoading } = useGetBlindPostDetailQuery(
+    { post_id: postId },
+    { refetchOnMountOrArgChange: true },
+  );
   // TODO: undefined 일때 처리
   if (data === undefined) return null;
   const {

@@ -10,7 +10,7 @@ const size = 10;
 const MainBoard = () => {
   const [items, setItems] = useState<PostType[]>([]);
   const [page, setPage] = useState(0);
-  const getBlindPost = useGetBlindPostQuery({ size, page });
+  const getBlindPost = useGetBlindPostQuery({ size, page }, { refetchOnMountOrArgChange: true });
   const prevLength = useRef(size);
   const { setPost } = usePost();
   const load = useCallback(() => {

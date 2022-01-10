@@ -1,12 +1,11 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   AddPostDataType,
   AddPostRequestType,
   APIPostCommentType,
   GetPostRequestType,
-  IsGoodType,
 } from 'api/type';
+import { METHOD_DELETE, METHOD_POST, METHOD_PUT } from 'constants/api';
 import { env } from 'constants/env';
 import {
   APIPostType,
@@ -17,7 +16,6 @@ import {
   GoodPostRequestType,
 } from './type';
 
-// Define a service using a base URL and expected endpoints
 export const blindPostAPI = createApi({
   reducerPath: 'blindPostAPI',
   baseQuery: fetchBaseQuery({ baseUrl: env.url.blindAPI, credentials: 'include' }),
@@ -25,13 +23,10 @@ export const blindPostAPI = createApi({
     getBlindPost: builder.query<ResponseType<APIPostType[]>, GetPostRequestType>({
       query: ({ size, page }) => `post?size=${size}&page=${page}`,
     }),
-    getBlindPostFromMe: builder.query<ResponseType<APIPostType[]>, void>({
+    getBlindPostMe: builder.query<ResponseType<APIPostType[]>, void>({
       query: () => `post/me`,
     }),
-    getBlindPostDetail: builder.query<
-      ResponseType<APIPostCommentType & IsGoodType>,
-      GetPostDetailRequestType
-    >({
+    getBlindPostDetail: builder.query<ResponseType<APIPostCommentType>, GetPostDetailRequestType>({
       query: ({ post_id }) => `post/detail?post_id=${post_id}`,
     }),
     getBlindPostPopular: builder.query<ResponseType<APIPostType[]>, void>({
@@ -40,28 +35,28 @@ export const blindPostAPI = createApi({
     addBlindPost: builder.mutation<ResponseType<AddPostDataType>, AddPostRequestType>({
       query: (body) => ({
         url: `post`,
-        method: 'POST',
+        method: METHOD_POST,
         body,
       }),
     }),
     goodBlindPost: builder.mutation<ResponseType<APIPostCommentType>, GoodPostRequestType>({
       query: (body) => ({
         url: `like/post`,
-        method: 'POST',
+        method: METHOD_POST,
         body,
       }),
     }),
     editBlindPost: builder.mutation<ResponseType<APIPostType>, EditPostRequestType>({
       query: (body) => ({
         url: `post`,
-        method: 'PUT',
+        method: METHOD_PUT,
         body,
       }),
     }),
     deleteBlindPost: builder.mutation<ResponseType<number>, DeletePostRequestType>({
       query: (post_id) => ({
         url: `post/delete?post_id=${post_id}`,
-        method: 'DELETE',
+        method: METHOD_DELETE,
       }),
     }),
   }),
@@ -70,7 +65,7 @@ export const blindPostAPI = createApi({
 export const {
   useGetBlindPostQuery,
   useGetBlindPostDetailQuery,
-  useGetBlindPostFromMeQuery,
+  useGetBlindPostMeQuery,
   useGetBlindPostPopularQuery,
   useAddBlindPostMutation,
   useEditBlindPostMutation,

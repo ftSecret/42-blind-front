@@ -1,4 +1,3 @@
-// Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   APIPostCommentType,
@@ -11,7 +10,6 @@ import {
 import { METHOD_PUT, METHOD_POST, METHOD_DELETE } from 'constants/api';
 import { env } from 'constants/env';
 
-// Define a service using a base URL and expected endpoints
 export const blindCommentAPI = createApi({
   reducerPath: 'blindCommentAPI',
   baseQuery: fetchBaseQuery({ baseUrl: env.url.blindAPI, credentials: 'include' }),

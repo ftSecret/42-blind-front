@@ -30,8 +30,9 @@ export type APIPostCommentType = {
   goods: number;
   comment_number: number;
 };
-export type IsGoodType = {};
+
 export type APICommentType = Pick<APIPostCommentType, 'comments'>['comments'];
+
 export type APIPostType = Omit<APIPostCommentType, 'comments'>;
 
 export type GetPostRequestType = {
