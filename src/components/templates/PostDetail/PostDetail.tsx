@@ -12,9 +12,11 @@ import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
 import { usePost } from 'hooks';
 import { PATH_POST_EDIT } from 'components/utils/AppRouter';
+import { useGoodBlindPostMutation } from 'api/blindPost';
 
 const PostDetail = () => {
   const navigate = useNavigate();
+  const [goodBlindPost] = useGoodBlindPostMutation();
 
   const { getPost, deletePost } = usePost();
   const [post, setPost] = useState<PostCardType>({
@@ -36,6 +38,10 @@ const PostDetail = () => {
       deletePost(post.post_id);
       navigate('/');
     }
+  };
+
+  const good = async () => {
+    await goodBlindPost({ post_id: post.post_id });
   };
 
   const handleEdit = () => {
@@ -68,7 +74,7 @@ const PostDetail = () => {
       <PostContent children={post.content} size="sm" />
       <Status count={post.count} />
       <StyledGoodWrap>
-        <Button children="좋아요" />
+        <Button children="좋아요" onClick={good} />
       </StyledGoodWrap>
     </StyledDetail>
   );
