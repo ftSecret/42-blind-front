@@ -1,6 +1,7 @@
 import { messages } from 'constants/message';
 import { useComment } from 'hooks';
 import { useQueryString } from 'hooks/useQueryString';
+import { lighten } from 'polished';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -90,7 +91,7 @@ const StyledInput = styled.input`
   height: 40px;
   border-radius: 5px;
   border-style: none;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => lighten(0.8, theme.colors.primary)};
   color: ${({ theme }) => theme.colors.grey};
   padding: 0 10px;
 `;

@@ -2,6 +2,7 @@ import { useGetBlindPostDetailQuery } from 'api/blindPost';
 import Comments from 'components/molecules/Comments';
 import CommentInput from 'components/organisms/PostDetail/CommentInput';
 import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
+import ReplyInput from 'components/organisms/PostDetail/ReplyInput';
 import PostDetail from 'components/templates/PostDetail';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
@@ -32,7 +33,8 @@ const PostDetailPage = () => {
             <PostDetail post={post} />
             <Comments postId={postId} rawComments={comments} postUserId={post.user_id} />
             <StyledInputWrap>
-              <CommentInput postId={postId} />
+              {/* <CommentInput postId={postId} />*/}
+              <ReplyInput postId={postId} />
             </StyledInputWrap>
           </DetailWrap>
         </StyledContainer>
