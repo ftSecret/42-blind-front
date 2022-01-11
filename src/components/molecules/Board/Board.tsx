@@ -1,19 +1,15 @@
 import React from 'react';
-import LoadData from 'components/molecules/LoadData';
 import PostCards from 'components/molecules/PostCards';
 import { PostType } from 'types';
 
 type PropTypes = {
   items: PostType[];
-  load?: () => void;
-  isLoadEnd?: boolean;
 };
 
-const Board = ({ items, load, isLoadEnd }: PropTypes) => {
+const Board = ({ items }: PropTypes) => {
   return (
     <>
       <PostCards items={deleteDuplicatePost(items)} />
-      <LoadData load={load} isEnd={isLoadEnd} />
     </>
   );
 };

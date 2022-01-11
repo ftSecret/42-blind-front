@@ -12,7 +12,7 @@ const MyPostBoard = () => {
     setItems(formatPost(rawMyPosts.data?.data));
   }, [rawMyPosts.data?.data]);
 
-  return <Board items={items} isLoadEnd={true} />;
+  return <Board items={items} />;
 };
 
 export default MyPostBoard;

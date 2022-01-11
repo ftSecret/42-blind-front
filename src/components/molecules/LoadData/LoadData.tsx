@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 
 type PropTypes = {
-  load?: () => void;
+  load: () => void;
   isEnd?: boolean;
 };
 
