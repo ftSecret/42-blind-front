@@ -13,6 +13,7 @@ const MainBoard = () => {
   const getBlindPost = useGetBlindPostQuery({ size, page }, { refetchOnMountOrArgChange: true });
   const prevLength = useRef(size);
   const { setPost } = usePost();
+
   const load = useCallback(() => {
     if (prevLength.current === size && !getBlindPost.isLoading) {
       setPage((page) => page + 1);

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   AddPostDataType,
   AddPostRequestType,
-  APIPostCommentType,
+  APIPostCommentsType,
   GetPostRequestType,
 } from 'api/type';
 import { METHOD_DELETE, METHOD_POST, METHOD_PUT } from 'constants/api';
@@ -26,7 +26,7 @@ export const blindPostAPI = createApi({
     getBlindPostMe: builder.query<ResponseType<APIPostType[]>, void>({
       query: () => `post/me`,
     }),
-    getBlindPostDetail: builder.query<ResponseType<APIPostCommentType>, GetPostDetailRequestType>({
+    getBlindPostDetail: builder.query<ResponseType<APIPostCommentsType>, GetPostDetailRequestType>({
       query: ({ post_id }) => `post/detail?post_id=${post_id}`,
     }),
     getBlindPostPopular: builder.query<ResponseType<APIPostType[]>, void>({
@@ -39,7 +39,7 @@ export const blindPostAPI = createApi({
         body,
       }),
     }),
-    goodBlindPost: builder.mutation<ResponseType<APIPostCommentType>, GoodPostRequestType>({
+    goodBlindPost: builder.mutation<ResponseType<APIPostCommentsType>, GoodPostRequestType>({
       query: (body) => ({
         url: `like/post`,
         method: METHOD_POST,

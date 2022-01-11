@@ -3,7 +3,7 @@ import Comment from 'components/molecules/Comment';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import dayjs from 'dayjs';
-import { APICommentType } from 'api/type';
+import { APICommentsType } from 'api/type';
 import { CommentType } from 'types';
 
 export type CommentPropTypes = {
@@ -17,7 +17,7 @@ type UserIndexType = {
 type PropTypes = {
   postId: number;
   postUserId: number;
-  rawComments: APICommentType;
+  rawComments: APICommentsType;
 };
 
 const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
@@ -37,7 +37,7 @@ const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
 };
 
 const formatComments = (
-  rawComments: APICommentType,
+  rawComments: APICommentsType,
   postId: number,
   postUserId: number,
 ): CommentPropTypes[] => {
@@ -45,6 +45,7 @@ const formatComments = (
     post_id: postId,
     post_user_id: postUserId,
     ...comment,
+    parent_id: comment.parent_id ?? -1,
   }));
 };
 
@@ -70,7 +71,7 @@ const sortComments = (comments: CommentPropTypes[]) => {
 
   // 답글은 댓글의 자식으로 이동
   comments.forEach((comment) => {
-    if (comment.parent_id === null) {
+    if (comment.parent_id === -1) {
       tempComments.push({ ...comment, reply: [] });
     } else {
       tempComments.find((elem) => elem.comment_id === comment.parent_id)?.reply.push(comment);
