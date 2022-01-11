@@ -5,21 +5,24 @@ import { PostType } from 'types';
 import { useGetBlindPostQuery } from 'api/blindPost';
 import { formatPost } from 'utils/formatPost';
 
-const size = 10;
+const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
   const [items, setItems] = useState<PostType[]>([]);
   const [page, setPage] = useState(0);
-  const getBlindPost = useGetBlindPostQuery({ size, page }, { refetchOnMountOrArgChange: true });
-  const prevLength = useRef(size);
+  const getBlindPost = useGetBlindPostQuery(
+    { size: DEFAULT_SIZE, page },
+    { refetchOnMountOrArgChange: true },
+  );
+  const prevLength = useRef(DEFAULT_SIZE);
   const { setPost } = usePost();
 
   const load = useCallback(() => {
-    if (prevLength.current === size && !getBlindPost.isLoading) {
-      setPage((page) => page + 1);
+    if (prevLength.current === DEFAULT_SIZE && getBlindPost.isFetching === false) {
+      setPage(page + 1);
       prevLength.current = getBlindPost.data?.data.length ?? 0;
     }
-  }, [getBlindPost.data?.data.length, getBlindPost.isLoading]);
+  }, [getBlindPost.data?.data.length, getBlindPost.isFetching, page]);
 
   useEffect(() => {
     setItems((prev) => [...prev, ...formatPost(getBlindPost.data?.data)]);
@@ -30,7 +33,7 @@ const MainBoard = () => {
     setPost(items);
   }, [items, setPost]);
 
-  return <Board items={items} load={load} isLoadEnd={prevLength.current !== size} />;
+  return <Board items={items} load={load} isLoadEnd={prevLength.current !== DEFAULT_SIZE} />;
 };
 
 export default MainBoard;
