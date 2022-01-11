@@ -29,7 +29,7 @@ const MainBoard = () => {
     setPost(items);
   }, [items, setPost]);
 
-  return <Board items={items} load={load} />;
+  return <Board items={items} load={load} isLoadEnd={prevLength.current !== size} />;
 };
 
 export default MainBoard;

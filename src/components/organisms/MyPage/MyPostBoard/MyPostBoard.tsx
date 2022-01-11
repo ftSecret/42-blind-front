@@ -1,9 +1,18 @@
-// import Board from 'components/molecules/Board';
-import React from 'react';
+import { useGetBlindPostMeQuery } from 'api/blindPost';
+import Board from 'components/molecules/Board';
+import React, { useEffect, useState } from 'react';
+import { PostType } from 'types';
+import { formatPost } from 'utils/formatPost';
 
 const MyPostBoard = () => {
-  return <div>마이 포스트</div>;
-  // return <Board items={items} load={load} />;
+  const [items, setItems] = useState<PostType[]>([]);
+  const rawMyPosts = useGetBlindPostMeQuery();
+
+  useEffect(() => {
+    setItems(formatPost(rawMyPosts.data?.data));
+  }, [rawMyPosts.data?.data]);
+
+  return <Board items={items} isLoadEnd={true} />;
 };
 
 export default MyPostBoard;

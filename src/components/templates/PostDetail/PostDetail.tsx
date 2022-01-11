@@ -1,10 +1,8 @@
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
-import Status from 'components/molecules/Status/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
-import { useEffect } from 'react';
 import { PostType } from 'types';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';

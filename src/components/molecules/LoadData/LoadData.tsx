@@ -4,10 +4,14 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 
 type PropTypes = {
-  load: () => void;
+  load?: () => void;
+  isEnd?: boolean;
 };
 
-const LoadData = ({ load }: PropTypes) => {
+// 1. 불러오는 상태.
+// 2. 대기중인 상태.
+// 3. 더 이상 불러오지 않는 상태.
+const LoadData = ({ load, isEnd }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,7 +20,7 @@ const LoadData = ({ load }: PropTypes) => {
       if (entry.isIntersecting) {
         setIsLoading(true);
         observer.unobserve(entry.target);
-        await load();
+        await load?.();
         setIsLoading(false);
         observer.observe(entry.target);
       }
@@ -35,6 +39,7 @@ const LoadData = ({ load }: PropTypes) => {
     return () => observer && observer.disconnect();
   }, [onIntersect]);
 
+  if (isEnd === true) return null;
   // TODO: div를 감싸야하는 이유가 뭘까...?
   return (
     <LoadingDiv>

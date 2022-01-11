@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { fonts } from 'styles/theme';
 
-// <Typography size={xl} weight={asd} lineHeight={dsfg}></...>
 type PropTypes = {
   children: JSX.Element | string;
   size?: keyof typeof fonts.size;

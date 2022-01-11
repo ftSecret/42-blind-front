@@ -23,12 +23,13 @@ export default MyTabBar;
 
 const StyledTabBar = styled(TabBar)`
   ${headerStyle}
+  min-height: 0px;
   justify-content: space-evenly;
   position: sticky;
   top: 0px;
   padding: 0;
   a {
-    width: 10%;
+    box-sizing: border-box;
     padding: 0.1rem 0;
   }
   & a.selected {
