@@ -1,24 +1,29 @@
-import Board from 'components/molecules/Board';
-import React, { useState, useEffect } from 'react';
-import { PostType } from 'types';
-import { useGetBlindPostQuery } from 'api/blindPost';
-import { formatPost } from 'utils/formatPost';
+import React, { useCallback, useState } from 'react';
+import MainCards from 'components/organisms/MainPage/MainCards';
+import styled from 'styled-components';
+import { flexColumn } from 'styles/mixin';
 
-const DEFAULT_SIZE = 100;
+const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
-  const [items, setItems] = useState<PostType[]>([]);
-  const [page] = useState(0);
-  const getBlindPost = useGetBlindPostQuery(
-    { size: DEFAULT_SIZE, page },
-    { refetchOnMountOrArgChange: true },
+  const [pages, setPages] = useState([0]);
+
+  const addPage = useCallback(() => {
+    setPages((pages) => [...pages, pages.length]);
+  }, []);
+
+  return (
+    <StyledContainer>
+      {pages.map((page) => (
+        <MainCards key={page} page={page} size={DEFAULT_SIZE} addPage={addPage} />
+      ))}
+    </StyledContainer>
   );
-
-  useEffect(() => {
-    if (getBlindPost.data) setItems((prev) => [...prev, ...formatPost(getBlindPost.data?.data)]);
-  }, [getBlindPost.data]);
-
-  return <Board items={items} />;
 };
+
+const StyledContainer = styled.div`
+  ${flexColumn}
+  gap: 0.5rem;
+`;
 
 export default MainBoard;

@@ -4,8 +4,8 @@ import MyHeader from 'components/organisms/MyPage/MyHeader';
 import MyTabBar from 'components/organisms/MyPage/MyTabBar';
 import { containerStyle } from 'styles/mixin';
 import styled from 'styled-components';
-import MyPostBoard from 'components/organisms/MyPage/MyPostBoard';
 import MyCommentBoard from 'components/organisms/MyPage/MyCommentBoard';
+import MyPostBoard from 'components/organisms/MyPage/MyPostBoard';
 
 const MyPage = () => {
   return (
