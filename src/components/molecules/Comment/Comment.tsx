@@ -1,19 +1,22 @@
-import { formatDate } from 'utils/formatDate';
-import userImage from 'assets/images/user.png';
+import { lighten } from 'polished';
 import styled from 'styled-components';
 import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
+
+import { formatDate } from 'utils/formatDate';
+import userImage from 'assets/images/user.png';
+
 import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
-import { lighten } from 'polished';
-import { CommentPropTypes } from '../Comments/Comments';
-import { useNavigate } from 'react-router-dom';
-import {
-  CommentQueryTypes,
-  STATE_DEFAULT,
-  STATE_REPLY,
-} from 'components/organisms/PostDetail/CommentInput/CommentInput';
-import { useQueryString } from 'hooks/useQueryString';
-import { messages } from 'constants/message';
+import { Dispatch, SetStateAction } from 'react';
+import { CommentType } from 'types';
+
+type CommentPropTypes = CommentType & HandleReplyTypes;
+
+type HandleReplyTypes = {
+  setCommentWriter: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
+  findNickname: (parentId: number) => string;
+  inputFocus: () => void;
+};
 
 const Comment = ({
   post_user_id,
@@ -25,28 +28,14 @@ const Comment = ({
   parent_id,
   nickname,
   comment_id,
+  setCommentWriter,
+  findNickname,
+  inputFocus,
   ...rest
 }: CommentPropTypes) => {
-  const navigate = useNavigate();
-  const queryString = useQueryString<CommentQueryTypes>();
-  const state = queryString.state ?? STATE_DEFAULT;
-  const parentId = Number.parseInt(queryString.parentId);
-
   const handleReplyClick = () => {
-    // 특정 상황에서 답글을 눌러도 아무일도 일어나지 않게 함.
-    if (
-      (parent_id === -1 && parentId === comment_id) || // 같은 답글 그룹에서 댓글(부모)의 답글 버튼을 누른 경우,
-      parentId === parent_id // 같은 답글 그룹의 답글 버튼을 누른 경우,
-    )
-      return;
-
-    // 답글, 수정 상태가 아닌 기본 상태일때는 경고를 띄우지 않고 답글 상태로 이동시킴.
-    // 아닐 경우에는 경고창을 띄움.
-    // TODO: 다른 답글로 이동할 경우 바로 링크가 이동되기 때문에 다른 답글을 다 작성하고 나면 이전 답글 상태로 돌아오는 버그가 있음.
-    // 이를 해결하기 위해 현재는 답글 작성중에는 다른 답글을 작성 못하도록 버튼을 비활성화함.
-    if (state === STATE_DEFAULT || window.confirm(messages.alertChangeReplyComment)) {
-      navigate(`?state=${STATE_REPLY}&parentId=${parent_id === -1 ? comment_id : parent_id}`);
-    }
+    nickname && setCommentWriter({ nickname, id: comment_id });
+    inputFocus();
   };
 
   return (
@@ -61,15 +50,16 @@ const Comment = ({
           {post_user_id === user_id && <StyledOption>작성자</StyledOption>}
           {modified_at !== null && <StyledOption>편집됨</StyledOption>}
         </StyledProfile>
-        <p>{content}</p>
+        <StyledContentDiv>
+          {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}  `}</h2>}
+          <p>{content}</p>
+        </StyledContentDiv>
         <StyledButtonWrap>
           <div>
             <StyledDate>{formatDate(created_at)}</StyledDate>
           </div>
           <div>
-            <Button onClick={handleReplyClick} disabled={state !== STATE_DEFAULT}>
-              답글
-            </Button>
+            <Button onClick={handleReplyClick}>답글</Button>
             <Button>좋아요</Button>
           </div>
         </StyledButtonWrap>
@@ -117,6 +107,13 @@ const StyledProfile = styled.div`
 
   & > h1 {
     font-weight: bold;
+  }
+`;
+
+const StyledContentDiv = styled.div`
+  ${flexRow}
+  h2 {
+    color: ${({ theme }) => theme.colors.blue};
   }
 `;
 

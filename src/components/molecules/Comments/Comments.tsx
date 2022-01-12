@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
-import Comment from 'components/molecules/Comment';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+
+import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
-import dayjs from 'dayjs';
-import { APICommentsType } from 'api/type';
+
 import { CommentType } from 'types';
+import { APICommentsType } from 'api/type';
 
-export type CommentPropTypes = {
-  nickname?: string;
-} & CommentType;
-
-type UserIndexType = {
-  [key: number]: number;
-};
+import Comment from 'components/molecules/Comment';
+import CloseIcon from 'components/atoms/icons/CloseIcon';
+import { useAddBlindCommentMutation } from 'api/blindComment';
 
 type PropTypes = {
   postId: number;
@@ -20,8 +17,40 @@ type PropTypes = {
   rawComments: APICommentsType;
 };
 
+const initCommentWriter = () => ({ nickname: '', id: -1 });
+
 const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
-  const [comments, setComments] = useState<CommentPropTypes[]>([]);
+  const [commentWriter, setCommentWriter] = useState(initCommentWriter()); //댓글 주인
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [addBlindComment] = useAddBlindCommentMutation();
+  const [message, setMessage] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const inputFocus = useCallback(() => {
+    inputRef.current && inputRef.current.focus();
+  }, []);
+
+  const findNickname = useCallback(
+    (parentId: number) => comments.find((elem) => elem.parent_id === parentId)?.nickname ?? '',
+    [comments],
+  );
+
+  const handleCloseButton = () => setCommentWriter(initCommentWriter());
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setMessage(event.currentTarget.value);
+  };
+
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    await addBlindComment({
+      content: message,
+      parent_id: commentWriter.id,
+      post_id: postId,
+    });
+    setCommentWriter(initCommentWriter());
+    setMessage('');
+  };
 
   useEffect(() => {
     setComments(sortComments(insertNickname(formatComments(rawComments, postId, postUserId))));
@@ -30,8 +59,30 @@ const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
   return (
     <StyledComments>
       {comments.map((comment) => (
-        <Comment key={comment.comment_id} {...comment} />
+        <Comment
+          key={comment.comment_id}
+          {...comment}
+          setCommentWriter={setCommentWriter}
+          findNickname={findNickname}
+          inputFocus={inputFocus}
+        />
       ))}
+      <form onSubmit={handleSubmit}>
+        {commentWriter.nickname === '' && (
+          <div>
+            <p>`{commentWriter.nickname}에게 답글 남기는 중...`</p>
+            <CloseIcon onClick={handleCloseButton} />
+          </div>
+        )}
+        <StyledInput
+          ref={inputRef}
+          placeholder={
+            commentWriter.nickname === '' ? '댓글 남기기...' : `@${commentWriter.nickname}`
+          }
+          value={message}
+          onChange={handleChange}
+        />
+      </form>
     </StyledComments>
   );
 };
@@ -40,7 +91,7 @@ const formatComments = (
   rawComments: APICommentsType,
   postId: number,
   postUserId: number,
-): CommentPropTypes[] => {
+): CommentType[] => {
   return rawComments.map((comment) => ({
     post_id: postId,
     post_user_id: postUserId,
@@ -49,7 +100,10 @@ const formatComments = (
   }));
 };
 
-const insertNickname = (rawComments: CommentPropTypes[]) => {
+type UserIndexType = {
+  [key: number]: number;
+};
+const insertNickname = (rawComments: CommentType[]) => {
   const user_idx_obj: UserIndexType = {};
   return rawComments.map((elem) => {
     if (user_idx_obj[elem.user_id] === undefined)
@@ -63,8 +117,8 @@ const insertNickname = (rawComments: CommentPropTypes[]) => {
 1. 답글은 댓글의 자식으로 들어갈 수 있도록 변경합니다.
 2. 댓글, 답글은 생성 순서대로 정렬합니다.
 */
-type TempCommentTypes = { reply: CommentPropTypes[] } & CommentPropTypes;
-const sortComments = (comments: CommentPropTypes[]) => {
+type TempCommentTypes = { reply: CommentType[] } & CommentType;
+const sortComments = (comments: CommentType[]) => {
   const tempComments: TempCommentTypes[] = [];
   // 시간 순서대로 정렬
   comments.sort((a, b) => (dayjs(a.created_at).isAfter(dayjs(b.created_at)) ? 1 : -1));
@@ -79,8 +133,8 @@ const sortComments = (comments: CommentPropTypes[]) => {
   });
 
   // 자식으로 있던 댓글을 분리
-  const result: CommentPropTypes[] = tempComments.reduce(
-    (prev: CommentPropTypes[], current: TempCommentTypes) => [...prev, current, ...current.reply],
+  const result: CommentType[] = tempComments.reduce(
+    (prev: CommentType[], current: TempCommentTypes) => [...prev, current, ...current.reply],
     [],
   );
   return result;
@@ -90,6 +144,16 @@ const StyledComments = styled.div`
   ${flexColumn}
   gap: 0.5rem;
   overflow-y: auto;
+`;
+
+const StyledInput = styled.input`
+  width: -webkit-fill-available;
+  height: 40px;
+  border-radius: 5px;
+  border-style: none;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.grey};
+  padding: 0 10px;
 `;
 
 export default Comments;
