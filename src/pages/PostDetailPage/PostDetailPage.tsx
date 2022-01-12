@@ -1,13 +1,14 @@
-import { useGetBlindPostDetailQuery } from 'api/blindPost';
-import Comments from 'components/molecules/Comments';
-import CommentInput from 'components/organisms/PostDetail/CommentInput';
-import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
-import PostDetail from 'components/templates/PostDetail';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 import { containerStyle } from 'styles/mixin';
+
+import { useGetBlindPostDetailQuery } from 'api/blindPost';
+
+import Comments from 'components/molecules/Comments';
+import PostDetail from 'components/templates/PostDetail';
+import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 
 const PostDetailPage = () => {
   const params = useParams();
@@ -31,9 +32,6 @@ const PostDetailPage = () => {
           <DetailWrap>
             <PostDetail post={post} />
             <Comments postId={postId} rawComments={comments} postUserId={post.user_id} />
-            <StyledInputWrap>
-              <CommentInput postId={postId} />
-            </StyledInputWrap>
           </DetailWrap>
         </StyledContainer>
       )}
@@ -48,8 +46,4 @@ const StyledContainer = styled.div`
 `;
 const DetailWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
-`;
-
-const StyledInputWrap = styled.div`
-  padding: 10px;
 `;
