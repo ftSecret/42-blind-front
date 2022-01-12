@@ -21,7 +21,7 @@ const PostDetailEditPage = () => {
   }, [getPost, postId, setContent, setTitle]);
   return (
     <>
-      <PostWritingHeader postId={postId} title={title} content={content} type={EDIT} />
+      <PostWritingHeader postId={postId} title={title} content={content} writingStatus={EDIT} />
       <StyledContainer>
         <WritingWrap>
           <PostDetailEdit

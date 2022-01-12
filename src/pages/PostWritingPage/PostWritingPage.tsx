@@ -12,7 +12,7 @@ const PostWritingPage = () => {
 
   return (
     <>
-      <PostWritingHeader title={title} content={content} type={WRITING} />
+      <PostWritingHeader title={title} content={content} writingStatus={WRITING} />
       <StyledContainer>
         <WritingWrap>
           <PostWritingDetail titleProps={titleProps} contentProps={contentProps} />
