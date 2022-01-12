@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import Cards from 'components/molecules/Cards';
+import MainCards from 'components/organisms/MainPage/MainCards';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 
@@ -15,7 +15,7 @@ const MainBoard = () => {
   return (
     <StyledContainer>
       {pages.map((page) => (
-        <Cards key={page} page={page} size={DEFAULT_SIZE} addPage={addPage} />
+        <MainCards key={page} page={page} size={DEFAULT_SIZE} addPage={addPage} />
       ))}
     </StyledContainer>
   );

@@ -1,4 +1,4 @@
-import { useGetBlindPostQuery } from 'api/blindPost';
+import { useGetBlindPostMeQuery } from 'api/blindPost';
 import { PATH_POST } from 'components/utils/AppRouter';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -9,12 +9,12 @@ import { formatPost } from 'utils/formatPost';
 import Card from 'components/molecules/Card';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
-type PropTypes = { page: number; size: number; addPage: () => void; className?: string };
+type PropTypes = { addPage: () => void; className?: string };
 
-const Cards = ({ page, size, addPage, className }: PropTypes) => {
+const MainCards = ({ addPage, className }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observer = useRef<IntersectionObserver>();
-  const items = useGetBlindPostQuery({ page, size });
+  const items = useGetBlindPostMeQuery();
   const [cards, setCards] = useState<PostType[]>([]);
 
   const onIntersect: IntersectionObserverCallback = useCallback(
@@ -72,4 +72,4 @@ const StyledContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export default Cards;
+export default MainCards;
