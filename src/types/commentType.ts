@@ -4,6 +4,7 @@ export type CommentType = {
   parent_id: number;
   comment_id: number;
   post_user_id: number;
+
   goods: number;
   content: string;
   created_at: string;

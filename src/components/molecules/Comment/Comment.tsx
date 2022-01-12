@@ -51,7 +51,7 @@ const Comment = ({
 
   return (
     <StyledComment>
-      {parent_id !== null && <RightArrowIcon />}
+      {parent_id !== -1 && <RightArrowIcon />}
       <StyledCommentWrap>
         <StyledProfile>
           <StyledUserImage>

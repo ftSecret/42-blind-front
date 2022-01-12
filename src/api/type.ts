@@ -4,7 +4,7 @@ export type ResponseType<DataType> = {
   data: DataType;
 };
 
-export type APIPostCommentType = {
+export type APIPostCommentsType = {
   comments: {
     user_id: number;
     parent_id: number;
@@ -31,9 +31,21 @@ export type APIPostCommentType = {
   comment_number: number;
 };
 
-export type APICommentType = Pick<APIPostCommentType, 'comments'>['comments'];
+export type APICommentsType = Pick<APIPostCommentsType, 'comments'>['comments'];
 
-export type APIPostType = Omit<APIPostCommentType, 'comments'>;
+export type APIPostType = Omit<APIPostCommentsType, 'comments'>;
+
+export type APICommentMeType = {
+  post_id: number;
+  parent_id: number;
+  comment_id: number;
+
+  goods: number;
+  content: string;
+  is_good: boolean;
+  created_at: string;
+  modified_at: string;
+};
 
 export type GetPostRequestType = {
   page: number;

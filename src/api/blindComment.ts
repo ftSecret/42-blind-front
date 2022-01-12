@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
-  APIPostCommentType,
+  APIPostCommentsType,
   AddCommentRequestType,
   EditCommentRequestType,
   DeleteCommentRequestType,
-  APICommentType,
   ResponseType,
+  APICommentMeType,
 } from 'api/type';
 import { METHOD_PUT, METHOD_POST, METHOD_DELETE } from 'constants/api';
 import { env } from 'constants/env';
@@ -14,10 +14,10 @@ export const blindCommentAPI = createApi({
   reducerPath: 'blindCommentAPI',
   baseQuery: fetchBaseQuery({ baseUrl: env.url.blindAPI, credentials: 'include' }),
   endpoints: (builder) => ({
-    getBlindCommentMe: builder.query<ResponseType<APICommentType[]>, void>({
+    getBlindCommentMe: builder.query<ResponseType<APICommentMeType[]>, void>({
       query: () => `comment/me`,
     }),
-    addBlindComment: builder.mutation<ResponseType<APIPostCommentType>, AddCommentRequestType>({
+    addBlindComment: builder.mutation<ResponseType<APIPostCommentsType>, AddCommentRequestType>({
       query: (body) => ({
         url: `comment`,
         method: METHOD_POST,
@@ -25,7 +25,7 @@ export const blindCommentAPI = createApi({
       }),
     }),
     deleteBlindComment: builder.mutation<
-      ResponseType<APIPostCommentType>,
+      ResponseType<APIPostCommentsType>,
       DeleteCommentRequestType
     >({
       query: (body) => ({
@@ -34,7 +34,7 @@ export const blindCommentAPI = createApi({
         body,
       }),
     }),
-    editBlindComment: builder.mutation<ResponseType<APIPostCommentType>, EditCommentRequestType>({
+    editBlindComment: builder.mutation<ResponseType<APIPostCommentsType>, EditCommentRequestType>({
       query: (body) => ({
         url: `comment`,
         method: METHOD_PUT,
@@ -44,4 +44,9 @@ export const blindCommentAPI = createApi({
   }),
 });
 
-export const { useAddBlindCommentMutation, useEditBlindCommentMutation } = blindCommentAPI;
+export const {
+  useGetBlindCommentMeQuery,
+  useAddBlindCommentMutation,
+  useEditBlindCommentMutation,
+  useDeleteBlindCommentMutation,
+} = blindCommentAPI;
