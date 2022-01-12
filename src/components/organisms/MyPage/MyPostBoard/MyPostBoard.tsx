@@ -1,5 +1,4 @@
 import { useGetBlindPostMeQuery } from 'api/blindPost';
-import Board from 'components/molecules/Board';
 import React, { useEffect, useState } from 'react';
 import { PostType } from 'types';
 import { formatPost } from 'utils/formatPost';
@@ -12,7 +11,8 @@ const MyPostBoard = () => {
     setItems(formatPost(rawMyPosts.data?.data));
   }, [rawMyPosts.data?.data]);
 
-  return <Board items={items} />;
+  return null;
+  // return <Board items={items} />;
 };
 
 export default MyPostBoard;

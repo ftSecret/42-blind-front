@@ -14,7 +14,7 @@ const MainPage = () => {
       <StyledContainer>
         <MainBoard />
         <Link to={PATH_POST_WRITING}>
-          <StyledWriteButton children={'글쓰기'} />
+          <StyledWriteButton children={'+'} />
         </Link>
       </StyledContainer>
     </section>
@@ -23,20 +23,20 @@ const MainPage = () => {
 
 const StyledContainer = styled.div`
   ${containerStyle}
+  position: relative;
 `;
 
 const StyledWriteButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.red};
   color: ${({ theme }) => theme.colors.white};
-  width: 80px;
-  height: 40px;
+  width: 3.3rem;
+  height: 3.3rem;
   position: sticky;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
+  left: 100%;
+  bottom: 50px;
+  font-size: 2rem;
   border-radius: 50px;
   border: none;
-  font-weight: bold;
 `;
 
 export default MainPage;

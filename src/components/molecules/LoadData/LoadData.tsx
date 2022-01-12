@@ -38,6 +38,7 @@ const LoadData = ({ load, isEnd }: PropTypes) => {
     }
     return () => observer && observer.disconnect();
   }, [onIntersect]);
+
   if (isEnd === true) return null;
   // TODO: div를 감싸야하는 이유가 뭘까...?
   return (
