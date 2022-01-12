@@ -7,7 +7,7 @@ import { containerStyle } from 'styles/mixin';
 import { useGetBlindPostDetailQuery } from 'api/blindPost';
 
 import Comments from 'components/molecules/Comments';
-import PostDetail from 'components/templates/PostDetail';
+import PostDetail from 'components/organisms/PostDetail/PostDetail';
 import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 
 const PostDetailPage = () => {
