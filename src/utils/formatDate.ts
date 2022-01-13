@@ -7,14 +7,19 @@ dayjs.locale('ko');
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
+const MINUTE = 60000;
+
 export const formatDate = (maybeUTCDate: string) => {
+  let target = dayjs(maybeUTCDate);
   const now = dayjs();
-  const target = dayjs(maybeUTCDate);
   const hoursAgo24 = now.subtract(1, 'day');
-  const minuteDiff = Math.floor(now.diff(target) / 60000); //분
+
+  if (target.isUTC() === false) {
+    target = target.add(9, 'hour');
+  }
 
   if (target.isAfter(hoursAgo24)) {
-    if (minuteDiff >= 1) {
+    if (Math.floor(now.diff(target) / MINUTE) >= 1) {
       //1분 이후부터 -> (1시간 전 ~ 23시간 전, 59분 전 ~ 1분 전)
       return `${target.from(now)}`;
     } else {
@@ -23,8 +28,5 @@ export const formatDate = (maybeUTCDate: string) => {
     }
   }
 
-  if (target.isUTC() === false) {
-    return target.add(9, 'hour').format('MM/DD HH:mm');
-  }
   return target.format('MM/DD HH:mm');
 };
