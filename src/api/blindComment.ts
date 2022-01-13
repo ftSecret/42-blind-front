@@ -6,6 +6,7 @@ import {
   DeleteCommentRequestType,
   ResponseType,
   APICommentMeType,
+  GoodCommentRequestType,
 } from 'api/type';
 import { METHOD_PUT, METHOD_POST, METHOD_DELETE } from 'constants/api';
 import { env } from 'constants/env';
@@ -46,12 +47,20 @@ export const blindCommentAPI = createApi({
         body,
       }),
     }),
+    goodBlindComment: builder.mutation<ResponseType<APIPostCommentsType>, GoodCommentRequestType>({
+      query: (body) => ({
+        url: `like/comment`,
+        method: METHOD_POST,
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetBlindCommentMeQuery,
   useAddBlindCommentMutation,
+  useGoodBlindCommentMutation,
   useEditBlindCommentMutation,
   useDeleteBlindCommentMutation,
 } = blindCommentAPI;

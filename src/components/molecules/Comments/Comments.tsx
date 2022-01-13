@@ -44,7 +44,7 @@ const Comments = ({ postId, postUserId, rawComments, refetch }: PropTypes) => {
           {...comment}
           key={comment.comment_id}
           findNickname={findNickname}
-          setCommentWriter={setSelectedComment}
+          setSelectedComment={setSelectedComment}
           refetch={refetch}
         />
       ))}

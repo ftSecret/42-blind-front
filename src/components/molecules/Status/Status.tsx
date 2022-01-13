@@ -9,26 +9,32 @@ import ViewIcon from 'components/atoms/icons/ViewIcon';
 
 type StatusType = {
   count: {
-    comments: number;
-    views: number;
-    goods: number;
+    comments?: number;
+    views?: number;
+    goods?: number;
   };
 };
 const Status = ({ count }: StatusType) => {
   return (
     <StyledStatus>
-      <li>
-        <ChatIcon color={colors.grey} />
-        <div>{count.comments}</div>
-      </li>
-      <li>
-        <ViewIcon color={colors.blue} />
-        <div>{count.views}</div>
-      </li>
-      <li>
-        <ThumbUpIcon color={colors.red} />
-        <div>{count.goods}</div>
-      </li>
+      {count.comments && (
+        <li>
+          <ChatIcon color={colors.grey} />
+          <div>{count.comments}</div>
+        </li>
+      )}
+      {count.views && (
+        <li>
+          <ViewIcon color={colors.blue} />
+          <div>{count.views}</div>
+        </li>
+      )}
+      {count.goods && (
+        <li>
+          <ThumbUpIcon color={colors.red} />
+          <div>{count.goods}</div>
+        </li>
+      )}
     </StyledStatus>
   );
 };

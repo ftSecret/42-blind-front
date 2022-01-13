@@ -9,11 +9,13 @@ import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
 import { Dispatch, SetStateAction } from 'react';
 import { CommentType } from 'types';
+import GoodButton from '../GoodButton';
+import { useGoodBlindCommentMutation } from 'api/blindComment';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
 
 type HandleReplyTypes = {
-  setCommentWriter: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
+  setSelectedComment: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
   findNickname: (parentId: number) => string;
   refetch: () => void;
 };
@@ -28,13 +30,20 @@ const Comment = ({
   parent_id,
   nickname,
   comment_id,
-  setCommentWriter: setSelectedComment,
+  setSelectedComment,
   findNickname,
   refetch,
+  is_good,
   ...rest
 }: CommentPropTypes) => {
+  const [goodBlindComment] = useGoodBlindCommentMutation();
   const handleReplyClick = () => {
     nickname && setSelectedComment({ nickname, id: comment_id });
+  };
+
+  const toggleGood = async () => {
+    await goodBlindComment({ comment_id, is_good });
+    refetch();
   };
 
   return (
@@ -58,7 +67,10 @@ const Comment = ({
           </div>
           <div>
             <Button onClick={handleReplyClick}>답글</Button>
-            <Button>좋아요</Button>
+            <StyledGoodWrap>
+              <GoodButton is_good={is_good} onClick={toggleGood} />
+              <div>{goods}</div>
+            </StyledGoodWrap>
           </div>
         </StyledButtonWrap>
       </StyledCommentWrap>
@@ -108,6 +120,10 @@ const StyledProfile = styled.div`
   }
 `;
 
+const StyledGoodWrap = styled.div`
+  ${flexRow}
+`;
+
 const StyledContentDiv = styled.div`
   ${flexRow}
   h2 {
@@ -130,11 +146,6 @@ const StyledButtonWrap = styled.div`
   & > div > button {
     ${postDetailButton}
     cursor: pointer;
-  }
-  & > div > button:disabled {
-    ${postDetailButton}
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 `;
 

@@ -70,6 +70,11 @@ export type GoodPostRequestType = {
   is_good: boolean;
 };
 
+export type GoodCommentRequestType = {
+  comment_id: number;
+  is_good: boolean;
+};
+
 export type EditPostRequestType = {
   content: string;
   post_id: number;

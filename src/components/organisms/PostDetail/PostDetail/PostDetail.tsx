@@ -1,7 +1,7 @@
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
-import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
+import { flexColumn, flexRow } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { PostType } from 'types';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,13 +13,11 @@ import { PATH_MAIN, PATH_POST_EDIT } from 'components/utils/AppRouter';
 import { useGoodBlindPostMutation } from 'api/blindPost';
 import { APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
-import GoodIcon from 'components/atoms/icons/GoodIcon';
-import NoGoodIcon from 'components/atoms/icons/NoGoodIcon';
-import { colors } from 'styles/theme';
+import GoodButton from 'components/molecules/GoodButton';
 
-type PropTypes = { post: APIPostType; refetch: () => void };
+type PropTypes = { post: APIPostType; refetch: () => void; comment_number: number };
 
-const PostDetail = ({ post, refetch }: PropTypes) => {
+const PostDetail = ({ post, refetch, comment_number }: PropTypes) => {
   const navigate = useNavigate();
   const [goodBlindPost] = useGoodBlindPostMutation();
 
@@ -43,7 +41,7 @@ const PostDetail = ({ post, refetch }: PropTypes) => {
     navigate(`${PATH_POST_EDIT}/${postId}`);
   };
 
-  const count = { goods: post.goods, views: post.views, comments: post.comment_number };
+  const count = { goods: post.goods, views: post.views, comments: comment_number };
 
   if (post.post_id === -1) return null;
   return (
@@ -66,10 +64,10 @@ const PostDetail = ({ post, refetch }: PropTypes) => {
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" />
       <PostContent children={post.content} size="sm" />
-      <Status count={count} />
-      <StyledGoodWrap>
-        {post.is_good ? <GoodButton onClick={toggleGood} /> : <NoGoodButton onClick={toggleGood} />}
-      </StyledGoodWrap>
+      <StyledStatusWrap>
+        <Status count={count} />
+        <GoodButton onClick={toggleGood} is_good={post.is_good} />
+      </StyledStatusWrap>
     </StyledDetail>
   );
 };
@@ -103,16 +101,6 @@ const StyledButton = styled(Button)`
   cursor: pointer;
 `;
 
-const GoodButton = styled(GoodIcon)`
-  color: ${colors.red};
-  cursor: pointer;
-`;
-
-const NoGoodButton = styled(NoGoodIcon)`
-  color: ${({ theme }) => theme.colors.default};
-  cursor: pointer;
-`;
-
 const StyledProfileWrap = styled.div`
   ${flexRow}
   gap:0.5em;
@@ -133,12 +121,9 @@ const PostTitle = styled(Typography)``;
 
 const PostContent = styled(Typography)``;
 
-const StyledGoodWrap = styled.div`
+const StyledStatusWrap = styled.div`
   ${flexRow}
-  justify-content: flex-end;
+  padding: 0.5rem;
   width: 100%;
-
-  & > button {
-    ${postDetailButton}
-  }
+  justify-content: space-between;
 `;

@@ -31,7 +31,7 @@ const PostDetailPage = () => {
       ) : (
         <StyledContainer>
           <DetailWrap>
-            <PostDetail post={post} refetch={refetch} />
+            <PostDetail post={post} refetch={refetch} comment_number={comments.length} />
             <Comments
               postId={postId}
               rawComments={comments}
