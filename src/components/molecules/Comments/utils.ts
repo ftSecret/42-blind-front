@@ -39,13 +39,13 @@ export const sortComments = (comments: CommentType[]) => {
   // 시간 순서대로 정렬
   comments.sort((a, b) => (dayjs(a.created_at).isAfter(dayjs(b.created_at)) ? 1 : -1));
 
+  // reply 추가
+  comments.forEach((comment) => tempComments.push({ ...comment, reply: [] }));
+
   // 답글은 댓글의 자식으로 이동
   comments.forEach((comment) => {
-    if (comment.parent_id === -1) {
-      tempComments.push({ ...comment, reply: [] });
-    } else {
+    if (comment.parent_id !== -1)
       tempComments.find((elem) => elem.comment_id === comment.parent_id)?.reply.push(comment);
-    }
   });
 
   // 자식으로 있던 댓글을 분리
