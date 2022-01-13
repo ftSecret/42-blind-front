@@ -19,12 +19,12 @@ import {
   GoodPostRequestType,
 } from './type';
 
-const prepareToken = async (headers: Headers) => {
+export const prepareAuth = async (headers: Headers) => {
   const cookies = new Cookies();
 
   if (cookies.get('refresh') === undefined) {
     // 로그인 화면으로 이동
-    window.location.href = `https://42blind.com${PATH_LOGIN}`;
+    window.location.href = `${document.location.origin}${PATH_LOGIN}`;
   } else if (cookies.get('jwt') === undefined) {
     // 헬스체크 api 호출
     if (env.url.blindAPI) {
@@ -48,7 +48,7 @@ export const blindPostAPI = createApi({
   reducerPath: 'blindPostAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: env.url.blindAPI,
-    prepareHeaders: prepareToken,
+    prepareHeaders: prepareAuth,
   }),
   endpoints: (builder) => ({
     getBlindPost: builder.query<ResponseType<APIPostType[]>, GetPostRequestType>({

@@ -9,12 +9,14 @@ import {
 } from 'api/type';
 import { METHOD_PUT, METHOD_POST, METHOD_DELETE } from 'constants/api';
 import { env } from 'constants/env';
+import { prepareAuth } from './blindPost';
 
 export const blindCommentAPI = createApi({
   reducerPath: 'blindCommentAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: env.url.blindAPI,
     credentials: 'include',
+    prepareHeaders: prepareAuth,
   }),
   endpoints: (builder) => ({
     getBlindCommentMe: builder.query<ResponseType<APICommentMeType[]>, void>({

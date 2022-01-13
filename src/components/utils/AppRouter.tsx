@@ -9,6 +9,7 @@ import PostWritingPage from 'pages/PostWritingPage';
 import PostDetailEditPage from 'pages/PostDetailEditPage';
 import LoginPage from 'pages/LoginPage';
 import { useAuth } from 'hooks/useAuth';
+import { isAuth } from 'utils/isAuth';
 
 export const PATH_MAIN = '/';
 export const PATH_MY = '/my';
@@ -57,7 +58,7 @@ export const routes = [
       </RequireAuth>
     ),
   },
-  { path: PATH_LOGIN, element: <LoginPage /> },
+  { path: PATH_LOGIN, element: isAuth() ? <Navigate to={PATH_MAIN} replace /> : <LoginPage /> },
 ];
 
 const AppRouter = () => {
