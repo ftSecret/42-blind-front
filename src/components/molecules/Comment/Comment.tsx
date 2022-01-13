@@ -122,6 +122,8 @@ const StyledProfile = styled.div`
 
 const StyledGoodWrap = styled.div`
   ${flexRow}
+  gap: 0.3rem;
+  align-items: center;
 `;
 
 const StyledContentDiv = styled.div`

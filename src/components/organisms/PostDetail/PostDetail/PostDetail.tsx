@@ -123,9 +123,7 @@ const PostContent = styled(Typography)``;
 
 const StyledStatusWrap = styled.div`
   ${flexRow}
-  padding: 0.5rem 0;
+  padding-top: 0.5rem;
   width: 100%;
-  gap: 0.3rem;
   justify-content: space-between;
-  align-items: center;
 `;
