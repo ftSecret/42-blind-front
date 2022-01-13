@@ -59,7 +59,7 @@ const PostDetail = ({ post }: PropTypes) => {
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" />
       <PostContent children={post.content} size="sm" />
-      {/* <Status count={count:} /> */}
+      {/* <Status count={count} /> */}
       <StyledGoodWrap>
         <Button children="좋아요" onClick={good} />
       </StyledGoodWrap>

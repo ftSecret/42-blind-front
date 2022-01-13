@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import utc from 'dayjs/plugin/utc';
+import 'dayjs/locale/ko';
 
+dayjs.locale('ko');
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
@@ -21,6 +23,8 @@ export const formatDate = (maybeUTCDate: string) => {
     }
   }
 
-  if (target.isUTC() === false) target.add(9, 'hour');
-  return target.format('MM/DD HH:MM');
+  if (target.isUTC() === false) {
+    return target.add(9, 'hour').format('MM/DD HH:mm');
+  }
+  return target.format('MM/DD HH:mm');
 };
