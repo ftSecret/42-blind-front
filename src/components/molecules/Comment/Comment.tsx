@@ -15,7 +15,6 @@ type CommentPropTypes = CommentType & HandleReplyTypes;
 type HandleReplyTypes = {
   setCommentWriter: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
   findNickname: (parentId: number) => string;
-  inputFocus: () => void;
 };
 
 const Comment = ({
@@ -28,14 +27,12 @@ const Comment = ({
   parent_id,
   nickname,
   comment_id,
-  setCommentWriter,
+  setCommentWriter: setSelectedComment,
   findNickname,
-  inputFocus,
   ...rest
 }: CommentPropTypes) => {
   const handleReplyClick = () => {
-    nickname && setCommentWriter({ nickname, id: comment_id });
-    inputFocus();
+    nickname && setSelectedComment({ nickname, id: comment_id });
   };
 
   return (
@@ -48,7 +45,6 @@ const Comment = ({
           </StyledUserImage>
           <h1>{nickname}</h1>
           {post_user_id === user_id && <StyledOption>작성자</StyledOption>}
-          {modified_at !== null && <StyledOption>편집됨</StyledOption>}
         </StyledProfile>
         <StyledContentDiv>
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}  `}</h2>}

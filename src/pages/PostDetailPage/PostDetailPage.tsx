@@ -22,6 +22,7 @@ const PostDetailPage = () => {
   const {
     data: { comments, ...post },
   } = data;
+
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
