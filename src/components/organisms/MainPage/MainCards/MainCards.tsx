@@ -31,7 +31,7 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   useEffect(() => {
     if (items.isSuccess === true && observer.current === undefined) {
       setCards(formatPost(items.data?.data));
-      if (targetRef?.current && items.data?.data.length !== 0) {
+      if (targetRef?.current && items.data !== undefined && items.data.data.length > 0) {
         observer.current = new IntersectionObserver(onIntersect, {
           threshold: 0.5,
         });

@@ -48,7 +48,6 @@ export const blindPostAPI = createApi({
   reducerPath: 'blindPostAPI',
   baseQuery: fetchBaseQuery({
     baseUrl: env.url.blindAPI,
-    credentials: 'include',
     prepareHeaders: prepareToken,
   }),
   endpoints: (builder) => ({
