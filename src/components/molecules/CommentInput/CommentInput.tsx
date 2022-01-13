@@ -35,7 +35,7 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
     });
     initSelectedComment();
     setValue('');
-    navigate(location.pathname, { replace: false });
+    navigate(location.pathname, { replace: true });
   };
 
   return (
