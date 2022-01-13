@@ -67,6 +67,7 @@ export type AddPostDataType = {
 
 export type GoodPostRequestType = {
   post_id: number;
+  is_good: boolean;
 };
 
 export type EditPostRequestType = {

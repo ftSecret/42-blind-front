@@ -12,6 +12,10 @@ import { usePost } from 'hooks';
 import { PATH_MAIN, PATH_POST_EDIT } from 'components/utils/AppRouter';
 import { useGoodBlindPostMutation } from 'api/blindPost';
 import { APIPostType } from 'api/type';
+import Status from 'components/molecules/Status';
+import GoodIcon from 'components/atoms/icons/GoodIcon';
+import NoGoodIcon from 'components/atoms/icons/NoGoodIcon';
+import { colors } from 'styles/theme';
 
 type PropTypes = { post: APIPostType; refetch: () => void };
 
@@ -30,14 +34,16 @@ const PostDetail = ({ post, refetch }: PropTypes) => {
     }
   };
 
-  const good = async () => {
-    await goodBlindPost({ post_id: post.post_id });
+  const toggleGood = async () => {
+    await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
     refetch();
   };
 
   const handleEdit = () => {
     navigate(`${PATH_POST_EDIT}/${postId}`);
   };
+
+  const count = { goods: post.goods, views: post.views, comments: post.comment_number };
 
   if (post.post_id === -1) return null;
   return (
@@ -60,9 +66,9 @@ const PostDetail = ({ post, refetch }: PropTypes) => {
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" />
       <PostContent children={post.content} size="sm" />
-      {/* <Status count={count} /> */}
+      <Status count={count} />
       <StyledGoodWrap>
-        <Button children="좋아요" onClick={good} />
+        {post.is_good ? <GoodButton onClick={toggleGood} /> : <NoGoodButton onClick={toggleGood} />}
       </StyledGoodWrap>
     </StyledDetail>
   );
@@ -87,7 +93,6 @@ const StyledPostTopWrap = styled.div`
 const StyledButtonGroup = styled.span`
   ${flexRow}
   gap:0.5em;
-  cursor: pointer;
 `;
 
 const StyledButton = styled(Button)`
@@ -95,6 +100,17 @@ const StyledButton = styled(Button)`
   height: max-content;
   color: ${({ theme }) => theme.colors.grey};
   font-size: ${({ theme }) => theme.fonts.size.sm};
+  cursor: pointer;
+`;
+
+const GoodButton = styled(GoodIcon)`
+  color: ${colors.red};
+  cursor: pointer;
+`;
+
+const NoGoodButton = styled(NoGoodIcon)`
+  color: ${({ theme }) => theme.colors.default};
+  cursor: pointer;
 `;
 
 const StyledProfileWrap = styled.div`
