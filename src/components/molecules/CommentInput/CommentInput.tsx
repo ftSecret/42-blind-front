@@ -3,6 +3,7 @@ import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { useInput } from 'hooks';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { flexRow } from 'styles/mixin';
 import { SelectedCommentType } from '../Comments/Comments';
 
 type PropTypes = {
@@ -36,10 +37,10 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
   return (
     <form onSubmit={handleSubmit}>
       {selectedComment.nickname !== '' && (
-        <div>
+        <StyledReplyMessage>
           <p>{`${selectedComment.nickname}에게 답글 남기는 중...`}</p>
           <CloseIcon onClick={handleCloseButton} />
-        </div>
+        </StyledReplyMessage>
       )}
       <StyledInput
         {...inputProps}
@@ -51,6 +52,15 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
     </form>
   );
 };
+
+const StyledReplyMessage = styled.div`
+  ${flexRow}
+  align-items: center;
+  gap: 1rem;
+  & span {
+    cursor: pointer;
+  }
+`;
 
 const StyledInput = styled.input`
   width: -webkit-fill-available;

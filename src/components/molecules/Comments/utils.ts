@@ -43,9 +43,12 @@ export const sortComments = (comments: CommentType[]) => {
   comments.forEach((comment) => tempComments.push({ ...comment, reply: [] }));
 
   // 답글은 댓글의 자식으로 이동
-  comments.forEach((comment) => {
-    if (comment.parent_id !== -1)
-      tempComments.find((elem) => elem.comment_id === comment.parent_id)?.reply.push(comment);
+  tempComments.forEach((comment) => {
+    if (comment.parent_id !== -1) {
+      const idx = tempComments.findIndex((elem) => elem.comment_id === comment.parent_id);
+      tempComments[idx].reply.push({ ...comment });
+      tempComments.splice(idx, 1);
+    }
   });
 
   // 자식으로 있던 댓글을 분리
