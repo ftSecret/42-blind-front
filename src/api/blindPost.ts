@@ -37,7 +37,7 @@ const prepareToken = async (headers: Headers) => {
       }
     }
   }
-  headers.set('cookies', cookies.get('jwt'));
+  headers.set('cookie', `jwt=${cookies.get('jwt')};`);
   console.log('[document.cookie]', document.cookie);
   console.log('[jwt]', cookies.get('jwt'));
   console.log('[after]', new Cookies());
