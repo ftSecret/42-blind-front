@@ -1,6 +1,6 @@
 import { useCookies } from 'react-cookie';
 
-const cookieName = 'jwt';
+const cookieName = 'refresh';
 
 export const useAuth = () => {
   const [cookies] = useCookies([cookieName]);
