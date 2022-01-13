@@ -58,7 +58,7 @@ const Comment = ({
           {post_user_id === user_id && <StyledOption>작성자</StyledOption>}
         </StyledProfile>
         <StyledContentDiv>
-          {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}  `}</h2>}
+          {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}
           <p>{content}</p>
         </StyledContentDiv>
         <StyledButtonWrap>
@@ -126,6 +126,8 @@ const StyledGoodWrap = styled.div`
 
 const StyledContentDiv = styled.div`
   ${flexRow}
+  gap: 0.2rem;
+  line-height: 1.2;
   h2 {
     color: ${({ theme }) => theme.colors.blue};
   }
