@@ -78,7 +78,7 @@ const StyledDetail = styled.div`
   ${flexColumn}
   gap: 0.5em;
   text-align: left;
-  padding: 0.5em 0;
+  padding: 0.5em;
   border-bottom: 1px solid var(--grey-color);
   color: ${({ theme }) => theme.colors.default};
 `;
@@ -123,7 +123,7 @@ const PostContent = styled(Typography)``;
 
 const StyledStatusWrap = styled.div`
   ${flexRow}
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   width: 100%;
   gap: 0.3rem;
   justify-content: space-between;

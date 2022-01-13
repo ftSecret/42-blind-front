@@ -11,9 +11,9 @@ type PropTypes = {
   content?: string;
   created_at: string;
   count?: {
-    goods: number;
-    views: number;
-    comments: number;
+    goods?: number;
+    views?: number;
+    comments?: number;
   };
 };
 

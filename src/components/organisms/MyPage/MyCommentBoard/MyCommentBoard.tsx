@@ -13,7 +13,11 @@ const MyCommentBoard = () => {
     <StyledCards>
       {myComments.data?.data.map((comment) => (
         <Link key={comment.comment_id} to={`${PATH_POST}/${comment.post_id}`}>
-          <Card title={comment.content} created_at={comment.created_at} />
+          <Card
+            title={comment.content}
+            created_at={comment.created_at}
+            count={{ goods: comment.goods }}
+          />
         </Link>
       ))}
     </StyledCards>
