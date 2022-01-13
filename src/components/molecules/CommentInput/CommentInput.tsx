@@ -1,7 +1,7 @@
 import { useAddBlindCommentMutation } from 'api/blindComment';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { useInput } from 'hooks';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
@@ -16,6 +16,7 @@ type PropTypes = {
 const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropTypes) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue, props: inputProps } = useInput('');
+  const [temp, setTemp] = useState(0);
   const [addBlindComment] = useAddBlindCommentMutation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -35,7 +36,8 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
     });
     initSelectedComment();
     setValue('');
-    navigate(location.pathname, { replace: true });
+    setTemp((temp) => temp + 1);
+    navigate(`${location.pathname}?temp=${temp}`, { replace: true });
   };
 
   return (
