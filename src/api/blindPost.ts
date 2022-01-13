@@ -5,8 +5,11 @@ import {
   APIPostCommentsType,
   GetPostRequestType,
 } from 'api/type';
+import axios from 'axios';
+import { PATH_LOGIN } from 'components/utils/AppRouter';
 import { METHOD_DELETE, METHOD_POST, METHOD_PUT } from 'constants/api';
 import { env } from 'constants/env';
+import { Cookies } from 'react-cookie';
 import {
   APIPostType,
   ResponseType,
@@ -15,13 +18,9 @@ import {
   GetPostDetailRequestType,
   GoodPostRequestType,
 } from './type';
-import { Cookies } from 'react-cookie';
-import axios from 'axios';
-import { PATH_LOGIN } from 'components/utils/AppRouter';
 
 const prepareToken = async (headers: Headers) => {
   const cookies = new Cookies();
-  console.log('[before]', cookies);
 
   if (cookies.get('refresh') === undefined) {
     // 로그인 화면으로 이동
@@ -30,17 +29,18 @@ const prepareToken = async (headers: Headers) => {
     // 헬스체크 api 호출
     if (env.url.blindAPI) {
       try {
-        const test = await axios.get(env.url.blindAPI, { withCredentials: true });
-        console.log(test);
+        await axios.get(env.url.blindAPI, {
+          withCredentials: true,
+          headers: {
+            authorization: `refresh ${cookies.get('refresh')}`,
+          },
+        });
       } catch {
-        // throw new Error('jwt를 가져오는데 실패했습니다.');
+        throw new Error('jwt를 가져오는데 실패했습니다.');
       }
     }
   }
-  headers.set('cookie', `jwt=${cookies.get('jwt')};`);
-  console.log('[document.cookie]', document.cookie);
-  console.log('[jwt]', cookies.get('jwt'));
-  console.log('[after]', new Cookies());
+  headers.set('authorization', `bearer ${cookies.get('jwt')}`);
   return headers;
 };
 
