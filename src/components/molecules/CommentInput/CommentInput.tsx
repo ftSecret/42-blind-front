@@ -56,7 +56,8 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
 const StyledReplyMessage = styled.div`
   ${flexRow}
   align-items: center;
-  gap: 1rem;
+  padding: 0.5rem;
+  justify-content: space-between;
   & span {
     cursor: pointer;
   }
@@ -64,12 +65,12 @@ const StyledReplyMessage = styled.div`
 
 const StyledInput = styled.input`
   width: -webkit-fill-available;
-  height: 40px;
-  border-radius: 5px;
+  height: 2.5rem;
+  border-radius: 0.3rem;
   border-style: none;
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.grey};
-  padding: 0 10px;
+  color: ${({ theme }) => theme.colors.default};
+  padding: 0 0.5rem;
 `;
 
 export default CommentInput;
