@@ -30,7 +30,7 @@ const prepareToken = async (headers: Headers) => {
     // 헬스체크 api 호출
     if (env.url.blindAPI) {
       try {
-        const test = await axios.get(env.url.blindAPI);
+        const test = await axios.get(env.url.blindAPI, { withCredentials: true });
         console.log(test);
       } catch {
         // throw new Error('jwt를 가져오는데 실패했습니다.');
