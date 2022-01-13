@@ -15,6 +15,7 @@ type CommentPropTypes = CommentType & HandleReplyTypes;
 type HandleReplyTypes = {
   setCommentWriter: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
   findNickname: (parentId: number) => string;
+  refetch: () => void;
 };
 
 const Comment = ({
@@ -29,6 +30,7 @@ const Comment = ({
   comment_id,
   setCommentWriter: setSelectedComment,
   findNickname,
+  refetch,
   ...rest
 }: CommentPropTypes) => {
   const handleReplyClick = () => {

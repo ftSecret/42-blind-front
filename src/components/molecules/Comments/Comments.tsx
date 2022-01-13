@@ -14,6 +14,7 @@ type PropTypes = {
   postId: number;
   postUserId: number;
   rawComments: APICommentsType;
+  refetch: () => void;
 };
 
 export type SelectedCommentType = {
@@ -21,7 +22,7 @@ export type SelectedCommentType = {
   id: number;
 };
 
-const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
+const Comments = ({ postId, postUserId, rawComments, refetch }: PropTypes) => {
   const [selectedComment, setSelectedComment] = useState({ nickname: '', id: -1 }); //댓글 주인
   const [comments, setComments] = useState<CommentType[]>([]);
 
@@ -44,12 +45,14 @@ const Comments = ({ postId, postUserId, rawComments }: PropTypes) => {
           key={comment.comment_id}
           findNickname={findNickname}
           setCommentWriter={setSelectedComment}
+          refetch={refetch}
         />
       ))}
       <CommentInput
         postId={postId}
         selectedComment={selectedComment}
         initSelectedComment={initSelectedComment}
+        refetch={refetch}
       />
     </StyledComments>
   );

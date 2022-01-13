@@ -9,13 +9,13 @@ import Typography from 'components/atoms/Typography';
 import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
 import { usePost } from 'hooks';
-import { PATH_POST_EDIT } from 'components/utils/AppRouter';
+import { PATH_MAIN, PATH_POST_EDIT } from 'components/utils/AppRouter';
 import { useGoodBlindPostMutation } from 'api/blindPost';
 import { APIPostType } from 'api/type';
 
-type PropTypes = { post: APIPostType };
+type PropTypes = { post: APIPostType; refetch: () => void };
 
-const PostDetail = ({ post }: PropTypes) => {
+const PostDetail = ({ post, refetch }: PropTypes) => {
   const navigate = useNavigate();
   const [goodBlindPost] = useGoodBlindPostMutation();
 
@@ -26,12 +26,13 @@ const PostDetail = ({ post }: PropTypes) => {
   const handleDelete = () => {
     if (window.confirm('삭제 하시겠습니까?')) {
       deletePost(post.post_id);
-      navigate('/');
+      navigate(PATH_MAIN);
     }
   };
 
   const good = async () => {
     await goodBlindPost({ post_id: post.post_id });
+    refetch();
   };
 
   const handleEdit = () => {

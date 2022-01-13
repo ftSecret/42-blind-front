@@ -14,7 +14,7 @@ type PropTypes = { page: number; size: number; addPage: () => void; className?: 
 const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observer = useRef<IntersectionObserver>();
-  const items = useGetBlindPostQuery({ page, size });
+  const items = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
   const [cards, setCards] = useState<PostType[]>([]);
 
   const onIntersect: IntersectionObserverCallback = useCallback(

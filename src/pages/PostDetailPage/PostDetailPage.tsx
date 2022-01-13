@@ -13,7 +13,7 @@ import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 const PostDetailPage = () => {
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
-  const { data, isLoading } = useGetBlindPostDetailQuery(
+  const { data, isLoading, refetch } = useGetBlindPostDetailQuery(
     { post_id: postId },
     { refetchOnMountOrArgChange: true },
   );
@@ -27,12 +27,17 @@ const PostDetailPage = () => {
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       {isLoading ? (
-        <div>로딩중</div>
+        <div>로딩중...</div>
       ) : (
         <StyledContainer>
           <DetailWrap>
-            <PostDetail post={post} />
-            <Comments postId={postId} rawComments={comments} postUserId={post.user_id} />
+            <PostDetail post={post} refetch={refetch} />
+            <Comments
+              postId={postId}
+              rawComments={comments}
+              postUserId={post.user_id}
+              refetch={refetch}
+            />
           </DetailWrap>
         </StyledContainer>
       )}

@@ -1,8 +1,7 @@
 import { useAddBlindCommentMutation } from 'api/blindComment';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { useInput } from 'hooks';
-import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
 import { SelectedCommentType } from '../Comments/Comments';
@@ -11,15 +10,13 @@ type PropTypes = {
   postId: number;
   selectedComment: SelectedCommentType;
   initSelectedComment: () => void;
+  refetch: () => void;
 };
 
-const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropTypes) => {
+const CommentInput = ({ selectedComment, postId, initSelectedComment, refetch }: PropTypes) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue, props: inputProps } = useInput('');
-  const [temp, setTemp] = useState(0);
   const [addBlindComment] = useAddBlindCommentMutation();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     if (selectedComment.nickname !== '') inputRef.current?.focus();
@@ -36,8 +33,7 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment }: PropType
     });
     initSelectedComment();
     setValue('');
-    setTemp((temp) => temp + 1);
-    navigate(`${location.pathname}?temp=${temp}`, { replace: true });
+    refetch();
   };
 
   return (
