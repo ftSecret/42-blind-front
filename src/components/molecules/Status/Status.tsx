@@ -17,19 +17,19 @@ type StatusType = {
 const Status = ({ count }: StatusType) => {
   return (
     <StyledStatus>
-      {count.comments && (
+      {count.comments !== undefined && (
         <li>
           <ChatIcon color={colors.grey} />
           <div>{count.comments}</div>
         </li>
       )}
-      {count.views && (
+      {count.views !== undefined && (
         <li>
           <ViewIcon color={colors.blue} />
           <div>{count.views}</div>
         </li>
       )}
-      {count.goods && (
+      {count.goods !== undefined && (
         <li>
           <ThumbUpIcon color={colors.red} />
           <div>{count.goods}</div>
