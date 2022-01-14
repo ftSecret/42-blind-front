@@ -36,7 +36,6 @@ const StyledDiv = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   ${flexColumn}
   border-radius: 0.3rem;
-  transition: 0.5s;
   padding: 0.5em;
   width: 100%;
   gap: 1em;
