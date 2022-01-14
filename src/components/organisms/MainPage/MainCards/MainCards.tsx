@@ -13,7 +13,7 @@ type PropTypes = { page: number; size: number; addPage: () => void; className?: 
 
 const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const observer = useRef<IntersectionObserver>();
+  const observerRef = useRef<IntersectionObserver>();
   const items = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
   const [cards, setCards] = useState<PostType[]>([]);
 
@@ -29,20 +29,23 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   );
 
   useEffect(() => {
-    observer.current = undefined;
-  }, []);
+    if (items.data !== undefined) {
+      if (items.data.data.length > 0) addPage();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addPage]);
 
   useEffect(() => {
-    if (items.isSuccess === true && observer.current === undefined) {
+    if (items.isSuccess === true && observerRef.current === undefined) {
       setCards(formatPost(items.data?.data));
       if (targetRef?.current && items.data !== undefined && items.data.data.length > 0) {
-        observer.current = new IntersectionObserver(onIntersect, {
+        observerRef.current = new IntersectionObserver(onIntersect, {
           threshold: 0.5,
         });
-        observer.current.observe(targetRef?.current);
+        observerRef.current.observe(targetRef?.current);
       }
-      return () => observer.current && observer.current.disconnect();
     }
+    return () => observerRef.current && observerRef.current.disconnect();
   }, [onIntersect, items]);
 
   return (
