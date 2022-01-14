@@ -61,7 +61,6 @@ const Comments = ({ postId, postUserId, rawComments, setPostDetail }: PropTypes)
 const StyledComments = styled.div`
   ${flexColumn}
   gap: 0.5rem;
-  overflow-y: auto;
 `;
 
 export default Comments;

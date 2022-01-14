@@ -13,6 +13,7 @@ import GoodButton from '../GoodButton';
 import { useGoodBlindCommentMutation } from 'api/blindComment';
 import Typography from 'components/atoms/Typography';
 import { APIPostType, APICommentsType } from 'api/type';
+import { colors } from 'styles/theme';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
 
@@ -71,9 +72,9 @@ const Comment = ({
         </StyledContentDiv>
         <StyledInfoWrap>
           <StyledInfoDiv>
-            <Typography children={formatDate(created_at)} size="ssm" color="secondary" />
+            <Typography children={formatDate(created_at)} size="ssm" color="grey" />
             <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
-            <Typography children={`좋아요${goods}개`} size="ssm" weight="bold" />
+            <Typography children={`좋아요 ${goods}개`} size="ssm" weight="bold" color="grey" />
           </StyledInfoDiv>
           <GoodButton is_good={is_good} onClick={toggleGood} />
         </StyledInfoWrap>
@@ -135,6 +136,7 @@ const ReplyButton = styled(Button)`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fonts.size.ssm};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  color: ${colors.grey};
 `;
 
 const StyledContentDiv = styled.div`

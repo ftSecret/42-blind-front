@@ -49,7 +49,7 @@ const CommentInput = ({
   }, [data, setPostDetail]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       {selectedComment.nickname !== '' && (
         <StyledReplyMessage>
           <p>{`${selectedComment.nickname}에게 답글 남기는 중...`}</p>
@@ -63,7 +63,7 @@ const CommentInput = ({
           selectedComment.nickname === '' ? '댓글 남기기...' : `@${selectedComment.nickname}`
         }
       />
-    </form>
+    </StyledForm>
   );
 };
 
@@ -80,12 +80,16 @@ const StyledReplyMessage = styled.div`
 const StyledInput = styled.input`
   width: -webkit-fill-available;
   height: 2.5rem;
-  border-radius: 0.3rem;
   border-style: none;
-  background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.default};
   font-size: 1rem;
   padding: 0 0.5rem;
+`;
+
+const StyledForm = styled.form`
+  position: sticky;
+  bottom: 0px;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 export default CommentInput;
