@@ -1,6 +1,6 @@
 import { lighten } from 'polished';
 import styled from 'styled-components';
-import { flexColumn, flexRow, postDetailButton } from 'styles/mixin';
+import { flexColumn, flexRow } from 'styles/mixin';
 
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import { CommentType } from 'types';
 import GoodButton from '../GoodButton';
 import { useGoodBlindCommentMutation } from 'api/blindComment';
+import Typography from 'components/atoms/Typography';
 import { APIPostType, APICommentsType } from 'api/type';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
@@ -68,18 +69,14 @@ const Comment = ({
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}
           <p>{content}</p>
         </StyledContentDiv>
-        <StyledButtonWrap>
-          <div>
-            <StyledDate>{formatDate(created_at)}</StyledDate>
-          </div>
-          <div>
-            <Button onClick={handleReplyClick}>답글</Button>
-            <StyledGoodWrap>
-              <GoodButton is_good={is_good} onClick={toggleGood} />
-              <div>{goods}</div>
-            </StyledGoodWrap>
-          </div>
-        </StyledButtonWrap>
+        <StyledInfoWrap>
+          <StyledInfoDiv>
+            <Typography children={formatDate(created_at)} size="ssm" color="secondary" />
+            <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
+            <Typography children={`좋아요${goods}개`} size="ssm" weight="bold" />
+          </StyledInfoDiv>
+          <GoodButton is_good={is_good} onClick={toggleGood} />
+        </StyledInfoWrap>
       </StyledCommentWrap>
     </StyledComment>
   );
@@ -127,10 +124,17 @@ const StyledProfile = styled.div`
   }
 `;
 
-const StyledGoodWrap = styled.div`
+const StyledInfoDiv = styled.div`
   ${flexRow}
   gap: 0.3rem;
   align-items: center;
+`;
+
+const ReplyButton = styled(Button)`
+  all: unset;
+  cursor: pointer;
+  font-size: ${({ theme }) => theme.fonts.size.ssm};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
 `;
 
 const StyledContentDiv = styled.div`
@@ -142,22 +146,9 @@ const StyledContentDiv = styled.div`
   }
 `;
 
-const StyledDate = styled.h3`
-  color: ${({ theme }) => theme.colors.secondary};
-`;
-
-const StyledButtonWrap = styled.div`
+const StyledInfoWrap = styled.div`
   ${flexRow}
   justify-content:space-between;
-  gap: 0.5rem;
-  & > div {
-    ${flexRow}
-    gap: 0.3rem
-  }
-  & > div > button {
-    ${postDetailButton}
-    cursor: pointer;
-  }
 `;
 
 export default Comment;

@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fonts } from 'styles/theme';
+import theme, { fonts } from 'styles/theme';
 
 type PropTypes = {
   children: JSX.Element | string;
   size?: keyof typeof fonts.size;
   weight?: keyof typeof fonts.weight;
+  color?: keyof typeof theme.dark.colors;
   lineHeight?: keyof typeof fonts.lineHeight;
 };
 
@@ -18,7 +19,7 @@ const StyledTypography = styled.p<Omit<PropTypes, 'children'>>`
   font-size: ${({ size }) => fonts.size[size ?? 'base']};
   font-weight: ${({ weight }) => fonts.weight[weight ?? 'normal']};
   line-height: ${({ lineHeight }) => fonts.lineHeight[lineHeight ?? 'base']};
-  color: ${({ theme }) => theme.colors.default};
+  color: ${({ theme, color }) => theme.colors[color ?? 'default']};
 `;
 
 export default Typography;
