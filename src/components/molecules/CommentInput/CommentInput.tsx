@@ -82,6 +82,7 @@ const StyledInput = styled.input`
   height: 2.5rem;
   border-style: none;
   color: ${({ theme }) => theme.colors.default};
+  background-color: rgba(0, 0, 0, 0);
   font-size: 1rem;
   padding: 0 0.5rem;
 `;
