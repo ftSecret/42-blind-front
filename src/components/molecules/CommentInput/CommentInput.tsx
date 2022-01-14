@@ -39,11 +39,14 @@ const CommentInput = ({
     });
     initSelectedComment();
     setValue('');
+  };
+
+  useEffect(() => {
     if (data !== undefined && data.data !== undefined) {
       const { comments, ...post } = data.data;
       setPostDetail(post, comments);
     }
-  };
+  }, [data, setPostDetail]);
 
   return (
     <form onSubmit={handleSubmit}>

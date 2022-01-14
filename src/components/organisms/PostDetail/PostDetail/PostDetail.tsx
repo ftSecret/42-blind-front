@@ -14,6 +14,7 @@ import { useGoodBlindPostMutation } from 'api/blindPost';
 import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
+import { useEffect } from 'react';
 
 type PropTypes = {
   post: APIPostType;
@@ -38,11 +39,14 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
 
   const toggleGood = async () => {
     await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
+  };
+
+  useEffect(() => {
     if (data !== undefined && data.data !== undefined) {
       const { comments, ...post } = data.data;
       setPostDetail(post, comments);
     }
-  };
+  }, [data, setPostDetail]);
 
   const handleEdit = () => {
     navigate(`${PATH_POST_EDIT}/${postId}`);

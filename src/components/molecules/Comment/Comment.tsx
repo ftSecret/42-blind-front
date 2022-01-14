@@ -7,7 +7,7 @@ import userImage from 'assets/images/user.png';
 
 import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { CommentType } from 'types';
 import GoodButton from '../GoodButton';
 import { useGoodBlindCommentMutation } from 'api/blindComment';
@@ -44,11 +44,14 @@ const Comment = ({
 
   const toggleGood = async () => {
     await goodBlindComment({ comment_id, is_good: !is_good });
+  };
+
+  useEffect(() => {
     if (data !== undefined && data.data !== undefined) {
       const { comments, ...post } = data.data;
       setPostDetail(post, comments);
     }
-  };
+  }, [data, setPostDetail]);
 
   return (
     <StyledComment>
