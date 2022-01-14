@@ -7,45 +7,52 @@ import userImage from 'assets/images/user.png';
 
 import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { CommentType } from 'types';
 import GoodButton from '../GoodButton';
 import { useGoodBlindCommentMutation } from 'api/blindComment';
 import Typography from 'components/atoms/Typography';
+import { APIPostType, APICommentsType } from 'api/type';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
 
 type HandleReplyTypes = {
-  setSelectedComment: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
   findNickname: (parentId: number) => string;
-  refetch: () => void;
+  setPostDetail: (post: APIPostType, comments: APICommentsType) => void;
+  setSelectedComment: Dispatch<SetStateAction<{ nickname: string; id: number }>>;
 };
 
 const Comment = ({
-  post_user_id,
+  goods,
   user_id,
   content,
+  is_good,
+  nickname,
   created_at,
   modified_at,
-  goods,
   parent_id,
-  nickname,
   comment_id,
-  setSelectedComment,
+  post_user_id,
   findNickname,
-  refetch,
-  is_good,
+  setPostDetail,
+  setSelectedComment,
   ...rest
 }: CommentPropTypes) => {
-  const [goodBlindComment] = useGoodBlindCommentMutation();
+  const [goodBlindComment, { data }] = useGoodBlindCommentMutation();
   const handleReplyClick = () => {
     nickname && setSelectedComment({ nickname, id: comment_id });
   };
 
   const toggleGood = async () => {
-    await goodBlindComment({ comment_id, is_good });
-    refetch();
+    await goodBlindComment({ comment_id, is_good: !is_good });
   };
+
+  useEffect(() => {
+    if (data !== undefined && data.data !== undefined) {
+      const { comments, ...post } = data.data;
+      setPostDetail(post, comments);
+    }
+  }, [data, setPostDetail]);
 
   return (
     <StyledComment>

@@ -25,6 +25,7 @@ export const prepareAuth = async (headers: Headers) => {
   if (cookies.get('refresh') === undefined) {
     // 로그인 화면으로 이동
     window.location.href = `${document.location.origin}${PATH_LOGIN}`;
+    return headers;
   } else if (cookies.get('jwt') === undefined) {
     // 헬스체크 api 호출
     if (env.url.blindAPI) {
