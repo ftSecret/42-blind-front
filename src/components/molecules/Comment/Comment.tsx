@@ -71,9 +71,9 @@ const Comment = ({
         </StyledContentDiv>
         <StyledInfoWrap>
           <StyledInfoDiv>
-            <Typography children={formatDate(created_at)} size="sm" color="secondary" />
-            <Button onClick={handleReplyClick}>답글달기</Button>
-            <Typography children={`좋아요${goods}개`} size="sm" />
+            <Typography children={formatDate(created_at)} size="ssm" color="secondary" />
+            <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
+            <Typography children={`좋아요${goods}개`} size="ssm" weight="bold" />
           </StyledInfoDiv>
           <GoodButton is_good={is_good} onClick={toggleGood} />
         </StyledInfoWrap>
@@ -128,6 +128,13 @@ const StyledInfoDiv = styled.div`
   ${flexRow}
   gap: 0.3rem;
   align-items: center;
+`;
+
+const ReplyButton = styled(Button)`
+  all: unset;
+  cursor: pointer;
+  font-size: ${({ theme }) => theme.fonts.size.ssm};
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
 `;
 
 const StyledContentDiv = styled.div`
