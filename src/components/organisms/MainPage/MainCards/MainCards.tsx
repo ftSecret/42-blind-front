@@ -15,7 +15,7 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observer = useRef<IntersectionObserver>();
   const items = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
-  const [cards, setCards] = useState<PostType[]>([]);
+  const [cards, setCards] = useState<PostType[] | undefined>();
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
@@ -29,7 +29,7 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   );
 
   useEffect(() => {
-    if (items.isSuccess === true && observer.current === undefined) {
+    if (items.isSuccess === true && cards === undefined) {
       setCards(formatPost(items.data?.data));
       if (targetRef?.current && items.data !== undefined && items.data.data.length > 0) {
         observer.current = new IntersectionObserver(onIntersect, {
@@ -39,18 +39,18 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
       }
       return () => observer.current && observer.current.disconnect();
     }
-  }, [onIntersect, items]);
+  }, [onIntersect, items, cards]);
 
   return (
     <StyledContainer ref={targetRef} className={className}>
       {items.isLoading === true && <LoadingSpinner />}
       {items.isSuccess &&
-        cards.map((card) => (
+        cards?.map((card) => (
           <Link to={`${PATH_POST}/${card.post_id}`} key={`${card.post_id} ${card.modified_at}`}>
             <Card {...card} />
           </Link>
         ))}
-      {items.isSuccess === true && cards.length === 0 && (
+      {items.isSuccess === true && cards?.length === 0 && (
         <StyledMessage>마지막 글입니다.</StyledMessage>
       )}
       {items.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
