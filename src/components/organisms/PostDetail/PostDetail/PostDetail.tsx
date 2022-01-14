@@ -11,15 +11,19 @@ import { selectUserId } from 'features/user/userSlice';
 import { usePost } from 'hooks';
 import { PATH_MAIN, PATH_POST_EDIT } from 'components/utils/AppRouter';
 import { useGoodBlindPostMutation } from 'api/blindPost';
-import { APIPostType } from 'api/type';
+import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
 
-type PropTypes = { post: APIPostType; refetch: () => void; comment_number: number };
+type PropTypes = {
+  post: APIPostType;
+  comment_number: number;
+  setPostDetail: (post: APIPostType, comments: APICommentsType) => void;
+};
 
-const PostDetail = ({ post, refetch, comment_number }: PropTypes) => {
+const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   const navigate = useNavigate();
-  const [goodBlindPost] = useGoodBlindPostMutation();
+  const [goodBlindPost, { data }] = useGoodBlindPostMutation();
 
   const { deletePost } = usePost();
   const postId = parseInt(useParams()?.postId ?? '');
@@ -34,7 +38,10 @@ const PostDetail = ({ post, refetch, comment_number }: PropTypes) => {
 
   const toggleGood = async () => {
     await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
-    refetch();
+    if (data !== undefined && data.data !== undefined) {
+      const { comments, ...post } = data.data;
+      setPostDetail(post, comments);
+    }
   };
 
   const handleEdit = () => {

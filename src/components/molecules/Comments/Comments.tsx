@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 
 import { CommentType } from 'types';
-import { APICommentsType } from 'api/type';
+import { APICommentsType, APIPostType } from 'api/type';
 
 import Comment from 'components/molecules/Comment';
 import { formatComments, insertNickname, sortComments } from './utils';
@@ -14,7 +14,7 @@ type PropTypes = {
   postId: number;
   postUserId: number;
   rawComments: APICommentsType;
-  refetch: () => void;
+  setPostDetail: (post: APIPostType, comments: APICommentsType) => void;
 };
 
 export type SelectedCommentType = {
@@ -22,7 +22,7 @@ export type SelectedCommentType = {
   id: number;
 };
 
-const Comments = ({ postId, postUserId, rawComments, refetch }: PropTypes) => {
+const Comments = ({ postId, postUserId, rawComments, setPostDetail }: PropTypes) => {
   const [selectedComment, setSelectedComment] = useState({ nickname: '', id: -1 }); //댓글 주인
   const [comments, setComments] = useState<CommentType[]>([]);
 
@@ -44,15 +44,15 @@ const Comments = ({ postId, postUserId, rawComments, refetch }: PropTypes) => {
           {...comment}
           key={comment.comment_id}
           findNickname={findNickname}
+          setPostDetail={setPostDetail}
           setSelectedComment={setSelectedComment}
-          refetch={refetch}
         />
       ))}
       <CommentInput
         postId={postId}
+        setPostDetail={setPostDetail}
         selectedComment={selectedComment}
         initSelectedComment={initSelectedComment}
-        refetch={refetch}
       />
     </StyledComments>
   );

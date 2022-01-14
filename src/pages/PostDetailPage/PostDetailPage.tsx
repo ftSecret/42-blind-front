@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -9,20 +9,33 @@ import { useGetBlindPostDetailQuery } from 'api/blindPost';
 import Comments from 'components/molecules/Comments';
 import PostDetail from 'components/organisms/PostDetail/PostDetail';
 import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
+import { APICommentsType, APIPostType } from 'api/type';
 
 const PostDetailPage = () => {
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
-  const { data, isLoading, refetch } = useGetBlindPostDetailQuery(
+  const [post, setPost] = useState<APIPostType>();
+  const [comments, setComments] = useState<APICommentsType>();
+  const { data, isLoading, isSuccess } = useGetBlindPostDetailQuery(
     { post_id: postId },
     { refetchOnMountOrArgChange: true },
   );
-  // TODO: undefined 일때 처리
-  if (data === undefined) return null;
-  const {
-    data: { comments, ...post },
-  } = data;
 
+  const setPostDeitail = useCallback((post: APIPostType, comments: APICommentsType) => {
+    setPost(post);
+    setComments(comments);
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess && data !== undefined) {
+      const {
+        data: { comments, ...post },
+      } = data;
+      setPostDeitail(post, comments);
+    }
+  }, [data, isSuccess, setPostDeitail]);
+
+  if (post === undefined || comments === undefined) return null;
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
@@ -31,12 +44,16 @@ const PostDetailPage = () => {
       ) : (
         <StyledContainer>
           <DetailWrap>
-            <PostDetail post={post} refetch={refetch} comment_number={comments.length} />
+            <PostDetail
+              post={post}
+              setPostDetail={setPostDeitail}
+              comment_number={comments.length}
+            />
             <Comments
               postId={postId}
               rawComments={comments}
               postUserId={post.user_id}
-              refetch={refetch}
+              setPostDetail={setPostDeitail}
             />
           </DetailWrap>
         </StyledContainer>

@@ -1,4 +1,5 @@
 import { useAddBlindCommentMutation } from 'api/blindComment';
+import { APIPostType, APICommentsType } from 'api/type';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { useInput } from 'hooks';
 import React, { useEffect, useRef } from 'react';
@@ -8,15 +9,20 @@ import { SelectedCommentType } from '../Comments/Comments';
 
 type PropTypes = {
   postId: number;
-  selectedComment: SelectedCommentType;
   initSelectedComment: () => void;
-  refetch: () => void;
+  selectedComment: SelectedCommentType;
+  setPostDetail: (post: APIPostType, comments: APICommentsType) => void;
 };
 
-const CommentInput = ({ selectedComment, postId, initSelectedComment, refetch }: PropTypes) => {
+const CommentInput = ({
+  postId,
+  selectedComment,
+  setPostDetail,
+  initSelectedComment,
+}: PropTypes) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue, props: inputProps } = useInput('');
-  const [addBlindComment] = useAddBlindCommentMutation();
+  const [addBlindComment, { data }] = useAddBlindCommentMutation();
 
   useEffect(() => {
     if (selectedComment.nickname !== '') inputRef.current?.focus();
@@ -33,7 +39,10 @@ const CommentInput = ({ selectedComment, postId, initSelectedComment, refetch }:
     });
     initSelectedComment();
     setValue('');
-    refetch();
+    if (data !== undefined && data.data !== undefined) {
+      const { comments, ...post } = data.data;
+      setPostDetail(post, comments);
+    }
   };
 
   return (
