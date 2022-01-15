@@ -1,7 +1,6 @@
-import LoginButton from 'components/molecules/LoginButton';
-import React from 'react';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
+import LoginButton from 'components/molecules/LoginButton';
 
 const LoginPage = () => {
   return (
