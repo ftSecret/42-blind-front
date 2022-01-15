@@ -58,7 +58,7 @@ export const blindPostAPI = createApi({
       }),
     }),
     deleteBlindPost: builder.mutation<ResponseType<number>, DeletePostRequestType>({
-      query: (post_id) => ({
+      query: ({ post_id }) => ({
         url: `post/delete?post_id=${post_id}`,
         method: METHOD_DELETE,
       }),

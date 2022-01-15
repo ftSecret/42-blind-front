@@ -74,7 +74,9 @@ const Comment = ({
           <StyledInfoDiv>
             <Typography children={formatDate(created_at)} size="ssm" color="grey" />
             <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
-            <Typography children={`좋아요 ${goods}개`} size="ssm" weight="bold" color="grey" />
+            {goods > 0 && (
+              <Typography children={`좋아요 ${goods}개`} size="ssm" weight="bold" color="grey" />
+            )}
           </StyledInfoDiv>
           <GoodButton is_good={is_good} onClick={toggleGood} />
         </StyledInfoWrap>
