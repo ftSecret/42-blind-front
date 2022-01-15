@@ -51,7 +51,7 @@ export const routes = [
     ),
   },
   {
-    path: `${PATH_POST_EDIT}/:postId`,
+    path: `${PATH_POST_EDIT}`,
     element: (
       <RequireAuth>
         <PostDetailEditPage />

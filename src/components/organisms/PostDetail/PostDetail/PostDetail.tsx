@@ -1,20 +1,20 @@
+import React, { useEffect } from 'react';
+
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { PostType } from 'types';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Typography from 'components/atoms/Typography';
 import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
-import { usePost } from 'hooks';
 import { PATH_MAIN, PATH_POST_EDIT } from 'components/utils/AppRouter';
-import { useGoodBlindPostMutation } from 'api/blindPost';
+import { useDeleteBlindPostMutation, useGoodBlindPostMutation } from 'api/blindPost';
 import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
-import { useEffect } from 'react';
 
 type PropTypes = {
   post: APIPostType;
@@ -24,21 +24,28 @@ type PropTypes = {
 
 const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   const navigate = useNavigate();
+  const [deleteBlindPost] = useDeleteBlindPostMutation();
   const [goodBlindPost, { data }] = useGoodBlindPostMutation();
 
-  const { deletePost } = usePost();
-  const postId = parseInt(useParams()?.postId ?? '');
   const userState = useAppSelector(selectUserId) as PostType['post_id'];
 
-  const handleDelete = () => {
-    if (window.confirm('삭제 하시겠습니까?')) {
-      deletePost(post.post_id);
+  const toggleGood = async () => {
+    await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      await deleteBlindPost({ post_id: post.post_id });
       navigate(PATH_MAIN);
     }
   };
 
-  const toggleGood = async () => {
-    await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
+  const handleEdit = () => {
+    if (window.confirm('수정하시겠습니까?')) {
+      navigate(`${PATH_POST_EDIT}`, {
+        state: { title: post.title, content: post.content, postId: post.post_id },
+      });
+    }
   };
 
   useEffect(() => {
@@ -47,10 +54,6 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
       setPostDetail(post, comments);
     }
   }, [data, setPostDetail]);
-
-  const handleEdit = () => {
-    navigate(`${PATH_POST_EDIT}/${postId}`);
-  };
 
   const count = { goods: post.goods, views: post.views, comments: comment_number };
 

@@ -1,24 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PostDetailEdit, { EDIT } from 'components/templates/PostDetailEdit';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
 import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
 import { useInput } from 'hooks/useInput';
-import { useParams } from 'react-router-dom';
-import { usePost } from 'hooks';
+import { useLocation } from 'react-router-dom';
 
+type PrevType = {
+  title: string;
+  content: string;
+  postId: number;
+};
 const PostDetailEditPage = () => {
   const { value: title, setValue: setTitle, props: titleProps } = useInput('');
   const { value: content, setValue: setContent, props: contentProps } = useInput('');
-  const postId = parseInt(useParams().postId ?? '');
-  const { getPost } = usePost();
+  const [postId, setPostId] = useState(-1);
+  const location = useLocation();
+
   useEffect(() => {
-    const prevData = getPost(postId);
-    if (prevData) {
-      setTitle(prevData.title);
-      setContent(prevData.content);
+    const { title, content, postId } = location.state as PrevType;
+    if (postId !== -1) {
+      setPostId(postId);
+      setTitle(title);
+      setContent(content);
     }
-  }, [getPost, postId, setContent, setTitle]);
+  }, [location.state, setContent, setTitle]);
+
   return (
     <>
       <PostWritingHeader postId={postId} title={title} content={content} writingStatus={EDIT} />
