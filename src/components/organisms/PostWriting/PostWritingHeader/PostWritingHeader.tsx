@@ -35,13 +35,13 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
     } else if (postId !== undefined && writingStatus === EDIT) {
       await editBlindPost({ content, post_id: postId, title });
       window.alert('수정되었습니다.');
-      navigate(`${PATH_POST}/${postId}`);
+      navigate(`${PATH_POST}/${postId}`, { replace: true });
     }
   }, [addBlindPost, content, editBlindPost, navigate, postId, title, writingStatus]);
 
   const items = useMemo(
     () => ({
-      left: <CloseIcon onClick={handleClose} />,
+      left: <StyledCloseIcon onClick={handleClose} />,
       middle: <Typography size="base" weight="bold" children={writingStatus} />,
       right: <StyledSubmitButton children="완료" onClick={handleSubmit} />,
     }),
@@ -62,4 +62,8 @@ const StyledSubmitButton = styled(Button)`
   width: 4rem;
   height: 2.3rem;
   border-radius: 50px;
+`;
+
+const StyledCloseIcon = styled(CloseIcon)`
+  cursor: pointer;
 `;
