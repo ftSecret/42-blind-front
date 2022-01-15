@@ -5,11 +5,9 @@ import {
   APIPostCommentsType,
   GetPostRequestType,
 } from 'api/type';
-import axios from 'axios';
-import { PATH_LOGIN } from 'components/utils/AppRouter';
 import { METHOD_DELETE, METHOD_POST, METHOD_PUT } from 'constants/api';
 import { env } from 'constants/env';
-import { Cookies } from 'react-cookie';
+import { prepareAuth } from 'api/prepareAuth';
 import {
   APIPostType,
   ResponseType,
@@ -18,32 +16,6 @@ import {
   GetPostDetailRequestType,
   GoodPostRequestType,
 } from './type';
-
-export const prepareAuth = async (headers: Headers) => {
-  const cookies = new Cookies();
-
-  if (cookies.get('refresh') === undefined) {
-    // 로그인 화면으로 이동
-    window.location.href = `${document.location.origin}${PATH_LOGIN}`;
-    return headers;
-  } else if (cookies.get('jwt') === undefined) {
-    // 헬스체크 api 호출
-    if (env.url.blindAPI) {
-      try {
-        await axios.get(env.url.blindAPI, {
-          withCredentials: true,
-          headers: {
-            authorization: `refresh ${cookies.get('refresh')}`,
-          },
-        });
-      } catch {
-        throw new Error('jwt를 가져오는데 실패했습니다.');
-      }
-    }
-  }
-  headers.set('authorization', `bearer ${cookies.get('jwt')}`);
-  return headers;
-};
 
 export const blindPostAPI = createApi({
   reducerPath: 'blindPostAPI',

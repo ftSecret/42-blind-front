@@ -7,7 +7,7 @@ import GlobalStyles from 'styles/GlobalStyles';
 import { useAppSelector } from 'app/hooks';
 import { selectTheme } from 'features/theme/themeSlice';
 
-const ThemeProviders = ({ children }: { children: JSX.Element }) => {
+const ThemeProviders = ({ children }: { children: JSX.Element | JSX.Element[] | string }) => {
   const themeState = useAppSelector(selectTheme);
 
   return (
@@ -18,7 +18,7 @@ const ThemeProviders = ({ children }: { children: JSX.Element }) => {
   );
 };
 
-const Providers = ({ children }: { children: JSX.Element }) => {
+const Providers = ({ children }: { children: JSX.Element | JSX.Element[] | string }) => {
   return (
     <React.StrictMode>
       <Provider store={store}>

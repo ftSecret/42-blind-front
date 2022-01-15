@@ -10,7 +10,7 @@ import {
 } from 'api/type';
 import { METHOD_PUT, METHOD_POST, METHOD_DELETE } from 'constants/api';
 import { env } from 'constants/env';
-import { prepareAuth } from './blindPost';
+import { prepareAuth } from 'api/prepareAuth';
 
 export const blindCommentAPI = createApi({
   reducerPath: 'blindCommentAPI',
