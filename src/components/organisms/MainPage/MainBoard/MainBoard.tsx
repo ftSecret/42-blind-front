@@ -39,6 +39,8 @@ const MainBoard = () => {
 const StyledContainer = styled.div`
   ${flexColumn}
   gap: 0.5rem;
+  width: 100%;
+  align-items: center;
 `;
 
 export default MainBoard;
