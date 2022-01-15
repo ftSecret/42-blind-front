@@ -10,9 +10,9 @@ import LoadingSpinner from 'components/atoms/LoadingSpinner';
 const MyCommentBoard = () => {
   const myComments = useGetBlindCommentMeQuery();
 
-  if (myComments.isLoading === true) return <LoadingSpinner />;
   return (
     <StyledCards>
+      {myComments.isLoading === false && <LoadingSpinner />}
       {myComments.data?.data.map((comment) => (
         <Link key={comment.comment_id} to={`${PATH_POST}/${comment.post_id}`}>
           <Card

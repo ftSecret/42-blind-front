@@ -8,6 +8,7 @@ const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
   const [pages, setPages] = useState([0]);
+  console.log(pages);
 
   const addPage = useCallback(() => {
     setPages((pages) => [...pages, pages.length]);

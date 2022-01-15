@@ -36,17 +36,25 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
   }, [addPage]);
 
   useEffect(() => {
-    if (items.isSuccess === true && observerRef.current === undefined) {
-      setCards(formatPost(items.data?.data));
-      if (targetRef?.current && items.data !== undefined && items.data.data.length > 0) {
-        observerRef.current = new IntersectionObserver(onIntersect, {
-          threshold: 0.5,
-        });
-        observerRef.current.observe(targetRef?.current);
-      }
+    if (
+      targetRef.current !== null &&
+      items.data !== undefined &&
+      items.data.data.length > 0 &&
+      observerRef.current === undefined
+    ) {
+      observerRef.current = new IntersectionObserver(onIntersect, {
+        threshold: 0.5,
+      });
+      observerRef.current.observe(targetRef?.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [onIntersect, items]);
+  }, [items.data, onIntersect]);
+
+  useEffect(() => {
+    if (items.isSuccess === true) {
+      setCards(formatPost(items.data?.data));
+    }
+  }, [items]);
 
   return (
     <StyledContainer ref={targetRef} className={className}>
