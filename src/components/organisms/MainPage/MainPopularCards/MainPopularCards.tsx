@@ -1,58 +1,34 @@
 import { useGetBlindPostPopularQuery } from 'api/blindPost';
 import { PATH_POST } from 'components/utils/AppRouter';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
-import { PostType } from 'types';
-import { formatPost } from 'utils/formatPost';
 import Card from 'components/molecules/Card';
-import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import { colors } from 'styles/theme';
+import { useEffect } from 'react';
 
-type PropTypes = { addPage?: () => void; className?: string };
+type PropTypes = { className?: string; endLoading: () => void };
 
-const MainPopularCards = ({ addPage, className }: PropTypes) => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const observer = useRef<IntersectionObserver>();
-  const items = useGetBlindPostPopularQuery();
-  const [cards, setCards] = useState<PostType[]>([]);
-
-  const onIntersect: IntersectionObserverCallback = useCallback(
-    async ([entry], observer) => {
-      if (entry.isIntersecting) {
-        observer.unobserve(entry.target);
-        observer.disconnect();
-        if (addPage) addPage();
-      }
-    },
-    [addPage],
-  );
+const MainPopularCards = ({ className, endLoading }: PropTypes) => {
+  const posts = useGetBlindPostPopularQuery();
+  const cards = posts.data?.data ?? [];
 
   useEffect(() => {
-    if (items.isSuccess === true && observer.current === undefined) {
-      setCards(formatPost(items.data?.data));
-      if (targetRef?.current && items.data?.data.length !== 0) {
-        observer.current = new IntersectionObserver(onIntersect, {
-          threshold: 0.5,
-        });
-        observer.current.observe(targetRef?.current);
-      }
-      return () => observer.current && observer.current.disconnect();
+    if (posts.isSuccess === true && cards.length > 0) {
+      endLoading();
     }
-  }, [onIntersect, items]);
+  }, [cards.length, endLoading, posts.isSuccess]);
 
-  if (items.isSuccess === true && cards.length === 0) return null;
+  if (posts.isSuccess === true && cards.length === 0) return null;
   return (
-    <StyledContainer ref={targetRef} className={className}>
-      {items.isLoading === true && <LoadingSpinner />}
-      {items.isSuccess &&
+    <StyledContainer>
+      {posts.isSuccess &&
         cards.map((card) => (
           <Link to={`${PATH_POST}/${card.post_id}`} key={`${card.post_id} ${card.modified_at}`}>
             <StyledPopularCard {...card} />
           </Link>
         ))}
-      {items.isError === true && <StyledMessage>인기 글을 불러오는데 실패했습니다.</StyledMessage>}
+      {posts.isError === true && <StyledMessage>인기 글을 불러오는데 실패했습니다.</StyledMessage>}
     </StyledContainer>
   );
 };

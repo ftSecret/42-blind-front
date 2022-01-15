@@ -3,22 +3,34 @@ import MainCards from 'components/organisms/MainPage/MainCards';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import MainPopularCards from '../MainPopularCards';
+import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
   const [pages, setPages] = useState([0]);
-  console.log(pages);
+  const [isLoading, setIsLoading] = useState(true);
 
   const addPage = useCallback(() => {
     setPages((pages) => [...pages, pages.length]);
   }, []);
 
+  const endLoading = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <StyledContainer>
-      <MainPopularCards />
+      {isLoading === true && <LoadingSpinner />}
+      <MainPopularCards endLoading={endLoading} />
       {pages.map((page) => (
-        <MainCards key={page} page={page} size={DEFAULT_SIZE} addPage={addPage} />
+        <MainCards
+          key={page}
+          page={page}
+          size={DEFAULT_SIZE}
+          addPage={addPage}
+          endLoading={endLoading}
+        />
       ))}
     </StyledContainer>
   );

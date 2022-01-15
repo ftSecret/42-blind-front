@@ -12,7 +12,7 @@ const MyCommentBoard = () => {
 
   return (
     <StyledCards>
-      {myComments.isLoading === false && <LoadingSpinner />}
+      {myComments.isLoading === false && myComments.data === undefined && <LoadingSpinner />}
       {myComments.data?.data.map((comment) => (
         <Link key={comment.comment_id} to={`${PATH_POST}/${comment.post_id}`}>
           <Card

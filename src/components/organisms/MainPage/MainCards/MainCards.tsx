@@ -7,11 +7,16 @@ import { flexColumn } from 'styles/mixin';
 import { PostType } from 'types';
 import { formatPost } from 'utils/formatPost';
 import Card from 'components/molecules/Card';
-import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
-type PropTypes = { page: number; size: number; addPage: () => void; className?: string };
+type PropTypes = {
+  page: number;
+  size: number;
+  addPage: () => void;
+  className?: string;
+  endLoading: () => void;
+};
 
-const MainCards = ({ page, size, addPage, className }: PropTypes) => {
+const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver>();
   const items = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
@@ -23,9 +28,10 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
         observer.unobserve(entry.target);
         observer.disconnect();
         addPage();
+        endLoading();
       }
     },
-    [addPage],
+    [addPage, endLoading],
   );
 
   useEffect(() => {
@@ -58,7 +64,6 @@ const MainCards = ({ page, size, addPage, className }: PropTypes) => {
 
   return (
     <StyledContainer ref={targetRef} className={className}>
-      {items.isLoading === true && <LoadingSpinner />}
       {items.isSuccess &&
         cards.map((card) => (
           <Link to={`${PATH_POST}/${card.post_id}`} key={`${card.post_id} ${card.modified_at}`}>
