@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 import Button from 'components/atoms/Button';
 import Header from 'components/molecules/Header';
 import Typography from 'components/atoms/Typography';
-import { PATH_POST } from 'components/utils/AppRouter';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
 
@@ -35,7 +34,7 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
     } else if (postId !== undefined && writingStatus === EDIT) {
       await editBlindPost({ content, post_id: postId, title });
       window.alert('수정되었습니다.');
-      navigate(`${PATH_POST}/${postId}`, { replace: true });
+      navigate(-1);
     }
   }, [addBlindPost, content, editBlindPost, navigate, postId, title, writingStatus]);
 
