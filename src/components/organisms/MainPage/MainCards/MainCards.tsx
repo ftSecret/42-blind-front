@@ -24,48 +24,47 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
+      console.log(`[${page}] entry`, entry);
+      console.log(`[${page}] entry.isInter`, entry.isIntersecting);
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
         observer.disconnect();
         addPage();
-        endLoading();
       }
     },
-    [addPage, endLoading],
+    [addPage, page],
   );
 
   useEffect(() => {
-    if (posts.data !== undefined) {
-      if (posts.data.data.length > 0) addPage();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addPage]);
-
-  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
-  useEffect(() => {
-    if (posts.isSuccess === true || posts.isError === true) endLoading();
-  }, [endLoading, posts]);
-
-  useEffect(() => {
+    console.log(`${page} :`, targetRef.current);
+    console.log(`${page} :`, posts.data);
+    console.log(`${page} :`, posts.data?.data.length);
+    console.log(`${page} :`, observerRef.current);
     if (
       targetRef.current !== null &&
       posts.data !== undefined &&
       posts.data.data.length > 0 &&
       observerRef.current === undefined
     ) {
+      console.log(`[${page}] useEffect`);
       observerRef.current = new IntersectionObserver(onIntersect, {
         threshold: 0.5,
       });
       observerRef.current.observe(targetRef?.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts.data, onIntersect]);
+  }, [posts.data, onIntersect, page]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {
       setCards(formatPost(posts.data?.data));
     }
   }, [posts]);
+
+  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
+  useEffect(() => {
+    if (posts.isSuccess === true || posts.isError === true) endLoading();
+  }, [endLoading, posts]);
 
   return (
     <StyledContainer ref={targetRef} className={className}>
