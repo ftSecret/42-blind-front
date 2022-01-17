@@ -12,7 +12,7 @@ import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 import { APICommentsType, APIPostType } from 'api/type';
 import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
 import Button from 'components/atoms/Button';
-import { CODE_404, CODE_200 } from 'constants/api';
+import { CODE_4040, CODE_2000 } from 'constants/api';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const PostDetailPage = () => {
@@ -36,7 +36,7 @@ const PostDetailPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isSuccess && data?.code === CODE_200 && data !== undefined) {
+    if (isSuccess && data?.code === CODE_2000 && data !== undefined) {
       const {
         data: { comments, ...post },
       } = data;
@@ -44,7 +44,7 @@ const PostDetailPage = () => {
     }
   }, [comments, data, isSuccess, setPostDeitail]);
 
-  if (isSuccess && data?.code === CODE_404)
+  if (isSuccess && data?.code === CODE_4040)
     return (
       <StyledDeletedPostSection>
         <ErrorOutlineIcon size={40} />

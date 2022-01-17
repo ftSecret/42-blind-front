@@ -35,6 +35,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
   );
 
   useEffect(() => {
+    console.log(`${page} : `, observerRef.current);
     if (
       isLoaded === false &&
       posts.isSuccess === true &&
@@ -48,7 +49,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
       observerRef.current.observe(targetRef.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts, onIntersect, isLoaded]);
+  }, [posts, onIntersect, isLoaded, page]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {
