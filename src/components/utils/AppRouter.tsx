@@ -59,6 +59,10 @@ export const routes = [
     ),
   },
   { path: PATH_LOGIN, element: isAuth() ? <Navigate to={PATH_MAIN} replace /> : <LoginPage /> },
+  {
+    path: '*',
+    element: isAuth() ? <Navigate to={PATH_MAIN} replace /> : <Navigate to={PATH_LOGIN} replace />,
+  },
 ];
 
 const AppRouter = () => {
