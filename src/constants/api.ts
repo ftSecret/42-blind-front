@@ -8,5 +8,5 @@ export const TOKEN_JWT = 'jwt';
 export const TOKEN_REFRESH = 'refresh';
 
 //code
-export const CODE_404 = 404;
-export const CODE_200 = 200;
+export const CODE_404 = 4040;
+export const CODE_200 = 2000;
