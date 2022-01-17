@@ -19,7 +19,7 @@ type PropTypes = {
 const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver>();
-  const items = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
+  const posts = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
   const [cards, setCards] = useState<PostType[]>([]);
 
   const onIntersect: IntersectionObserverCallback = useCallback(
@@ -35,17 +35,22 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
   );
 
   useEffect(() => {
-    if (items.data !== undefined) {
-      if (items.data.data.length > 0) addPage();
+    if (posts.data !== undefined) {
+      if (posts.data.data.length > 0) addPage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addPage]);
 
+  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
+  useEffect(() => {
+    if (posts.isSuccess === true || posts.isError === true) endLoading();
+  }, [endLoading, posts]);
+
   useEffect(() => {
     if (
       targetRef.current !== null &&
-      items.data !== undefined &&
-      items.data.data.length > 0 &&
+      posts.data !== undefined &&
+      posts.data.data.length > 0 &&
       observerRef.current === undefined
     ) {
       observerRef.current = new IntersectionObserver(onIntersect, {
@@ -54,26 +59,26 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
       observerRef.current.observe(targetRef?.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [items.data, onIntersect]);
+  }, [posts.data, onIntersect]);
 
   useEffect(() => {
-    if (items.isSuccess === true) {
-      setCards(formatPost(items.data?.data));
+    if (posts.isSuccess === true) {
+      setCards(formatPost(posts.data?.data));
     }
-  }, [items]);
+  }, [posts]);
 
   return (
     <StyledContainer ref={targetRef} className={className}>
-      {items.isSuccess &&
+      {posts.isSuccess &&
         cards.map((card) => (
           <Link to={`${PATH_POST}/${card.post_id}`} key={`${card.post_id} ${card.modified_at}`}>
             <Card {...card} />
           </Link>
         ))}
-      {items.isSuccess === true && cards.length === 0 && (
+      {posts.isSuccess === true && cards.length === 0 && (
         <StyledMessage>마지막 글입니다.</StyledMessage>
       )}
-      {items.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
+      {posts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
     </StyledContainer>
   );
 };

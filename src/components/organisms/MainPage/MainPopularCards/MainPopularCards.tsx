@@ -15,11 +15,10 @@ const MainPopularCards = ({ className, endLoading }: PropTypes) => {
   const posts = useGetBlindPostPopularQuery();
   const [cards, setCards] = useState<PostType[]>([]);
 
+  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
   useEffect(() => {
-    if (posts.isSuccess === true && cards.length > 0) {
-      endLoading();
-    }
-  }, [cards.length, endLoading, posts.isSuccess]);
+    if (posts.isSuccess === true || posts.isError === true) endLoading();
+  }, [endLoading, posts]);
 
   useEffect(() => {
     if (posts.isSuccess === true) setCards(formatPost(posts.data.data));
