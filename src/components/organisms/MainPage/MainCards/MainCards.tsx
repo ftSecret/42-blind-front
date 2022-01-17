@@ -28,44 +28,36 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
         observer.unobserve(entry.target);
         observer.disconnect();
         addPage();
-        endLoading();
       }
     },
-    [addPage, endLoading],
+    [addPage],
   );
 
   useEffect(() => {
-    if (posts.data !== undefined) {
-      if (posts.data.data.length > 0) addPage();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addPage]);
-
-  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
-  useEffect(() => {
-    if (posts.isSuccess === true || posts.isError === true) endLoading();
-  }, [endLoading, posts]);
-
-  useEffect(() => {
     if (
-      targetRef.current !== null &&
-      posts.data !== undefined &&
+      posts.isSuccess === true &&
       posts.data.data.length > 0 &&
+      targetRef.current !== null &&
       observerRef.current === undefined
     ) {
       observerRef.current = new IntersectionObserver(onIntersect, {
-        threshold: 0.5,
+        threshold: 0,
       });
-      observerRef.current.observe(targetRef?.current);
+      observerRef.current.observe(targetRef.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts.data, onIntersect]);
+  }, [posts, onIntersect]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {
       setCards(formatPost(posts.data?.data));
     }
   }, [posts]);
+
+  // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
+  useEffect(() => {
+    if (posts.isSuccess === true || posts.isError === true) endLoading();
+  }, [endLoading, posts]);
 
   return (
     <StyledContainer ref={targetRef} className={className}>
