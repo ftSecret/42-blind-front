@@ -13,6 +13,7 @@ import { APICommentsType, APIPostType } from 'api/type';
 import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
 import Button from 'components/atoms/Button';
 import { CODE_404 } from 'constants/api';
+import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const PostDetailPage = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const PostDetailPage = () => {
     }
   }, [comments, data, isSuccess, setPostDeitail]);
 
-  if (post === undefined || comments === undefined || data?.code === CODE_404)
+  if (isSuccess && data?.code === CODE_404)
     return (
       <StyledDeletedPostSection>
         <ErrorOutlineIcon size={40} />
@@ -55,8 +56,8 @@ const PostDetailPage = () => {
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
-      {isLoading ? (
-        <div>로딩중...</div>
+      {isLoading || post === undefined || comments === undefined ? (
+        <LoadingSpinner />
       ) : (
         <StyledContainer>
           <DetailWrap>
