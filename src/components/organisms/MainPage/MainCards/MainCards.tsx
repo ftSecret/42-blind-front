@@ -61,6 +61,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
     if (posts.isSuccess === true || posts.isError === true) endLoading();
   }, [endLoading, posts]);
 
+  // TODO: isLoaded === false 조건을 다른 방법으로 처리할 수 있는지 고민해보기.
   return (
     <StyledContainer ref={targetRef} className={className}>
       {posts.isSuccess &&
@@ -69,7 +70,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
             <Card {...card} />
           </Link>
         ))}
-      {posts.isSuccess === true && cards.length === 0 && (
+      {posts.isSuccess === true && cards.length === 0 && isLoaded === false && (
         <StyledMessage>마지막 글입니다.</StyledMessage>
       )}
       {posts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}

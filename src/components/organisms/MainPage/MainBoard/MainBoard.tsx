@@ -10,7 +10,7 @@ import { selectPages, appendPage } from 'features/mainBoard/mainBoardSlice';
 const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
-  const pages = useAppSelector(selectPages);
+  const pages = useAppSelector(selectPages); // [true : 10, true : 0, false : 0]
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
