@@ -35,14 +35,13 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
   );
 
   useEffect(() => {
-    console.log(`${page} : `, observerRef.current);
     if (
       isLoaded === false &&
       posts.isSuccess === true &&
       posts.data.data.length > 0 &&
-      targetRef.current !== null &&
-      observerRef.current === undefined
+      targetRef.current !== null
     ) {
+      if (observerRef.current !== undefined) observerRef.current.disconnect();
       observerRef.current = new IntersectionObserver(onIntersect, {
         threshold: 0.5,
       });
