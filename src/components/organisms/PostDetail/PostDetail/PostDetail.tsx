@@ -15,6 +15,8 @@ import { useDeleteBlindPostMutation, useGoodBlindPostMutation } from 'api/blindP
 import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
+import { colors } from 'styles/theme';
+import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
 
 type PropTypes = {
   post: APIPostType;
@@ -28,6 +30,10 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   const [goodBlindPost, { data }] = useGoodBlindPostMutation();
 
   const userState = useAppSelector(selectUserId) as PostType['post_id'];
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const toggleGood = async () => {
     await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
@@ -57,7 +63,16 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
 
   const count = { goods: post.goods, views: post.views, comments: comment_number };
 
-  if (post.post_id === -1) return null;
+  if (data?.code === 4040) {
+    return (
+      <StyledDeletedPostSection>
+        <ErrorOutlineIcon size={40} />
+        <p>해당 게시글이 삭제되어 글을 볼 수 없습니다.</p>
+        <BackButton onClick={goBack} children={'이전페이지'} />
+      </StyledDeletedPostSection>
+    );
+  }
+
   return (
     <StyledDetail>
       <StyledPostTopWrap>
@@ -88,12 +103,32 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
 
 export default PostDetail;
 
+const StyledDeletedPostSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+  font-size: 1.05rem;
+  margin: 120px 0;
+  color: ${colors.grey};
+`;
+
+const BackButton = styled(Button)`
+  all: unset;
+  background-color: ${colors.red};
+  width: 150px;
+  height: 50px;
+  border-radius: 25px;
+  color: ${colors.white};
+`;
+
 const StyledDetail = styled.div`
   ${flexColumn}
   gap: 0.5em;
   text-align: left;
   padding: 0.5em;
-  border-bottom: 1px solid var(--grey-color);
+  border-bottom: 1px solid ${colors.grey};
   color: ${({ theme }) => theme.colors.default};
 `;
 
@@ -110,7 +145,7 @@ const StyledButtonGroup = styled.span`
 const StyledButton = styled(Button)`
   all: unset;
   height: max-content;
-  color: ${({ theme }) => theme.colors.grey};
+  color: ${colors.grey};
   font-size: ${({ theme }) => theme.fonts.size.sm};
   cursor: pointer;
 `;

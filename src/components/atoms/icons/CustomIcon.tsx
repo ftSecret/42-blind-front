@@ -5,6 +5,7 @@ export type CustomIconPropTypes = {
   iconName: string;
   className?: string;
   color?: string;
+  size?: number;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>;
 
 // TODO: ref가 포함되었을 때 왜 에러가 나는지 확인하기.
@@ -20,6 +21,7 @@ const MaterialIcon = ({ className, iconName, ...rest }: CustomIconPropTypes) => 
 
 const Icon = styled(MaterialIcon)`
   color: ${(props: CustomIconPropTypes) => props.color};
+  font-size: ${(props: CustomIconPropTypes) => `${props.size}px`};
 `;
 
 export default CustomIcon;
