@@ -14,9 +14,10 @@ type PropTypes = {
   addPage: () => void;
   className?: string;
   endLoading: () => void;
+  isLoaded: boolean;
 };
 
-const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) => {
+const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver>();
   const posts = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
@@ -35,18 +36,19 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
 
   useEffect(() => {
     if (
+      isLoaded === false &&
       posts.isSuccess === true &&
       posts.data.data.length > 0 &&
       targetRef.current !== null &&
       observerRef.current === undefined
     ) {
       observerRef.current = new IntersectionObserver(onIntersect, {
-        threshold: 0,
+        threshold: 0.5,
       });
       observerRef.current.observe(targetRef.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts, onIntersect]);
+  }, [posts, onIntersect, isLoaded]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {

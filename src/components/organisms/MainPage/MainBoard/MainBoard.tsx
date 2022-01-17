@@ -4,16 +4,19 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import MainPopularCards from '../MainPopularCards';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { selectPages, appendPage } from 'features/mainBoard/mainBoardSlice';
 
 const DEFAULT_SIZE = 10;
 
 const MainBoard = () => {
-  const [pages, setPages] = useState([0]);
+  const pages = useAppSelector(selectPages);
+  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
   const addPage = useCallback(() => {
-    setPages((pages) => [...pages, pages.length]);
-  }, []);
+    dispatch(appendPage());
+  }, [dispatch]);
 
   const endLoading = useCallback(() => {
     setIsLoading(false);
@@ -23,10 +26,11 @@ const MainBoard = () => {
     <StyledContainer>
       {isLoading === true && <LoadingSpinner />}
       <MainPopularCards endLoading={endLoading} />
-      {pages.map((page) => (
+      {pages.map((page, idx) => (
         <MainCards
-          key={page}
-          page={page}
+          key={idx}
+          page={idx}
+          isLoaded={page}
           size={DEFAULT_SIZE}
           addPage={addPage}
           endLoading={endLoading}
