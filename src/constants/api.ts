@@ -9,3 +9,4 @@ export const TOKEN_REFRESH = 'refresh';
 
 //code
 export const CODE_404 = 404;
+export const CODE_200 = 200;

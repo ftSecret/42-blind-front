@@ -12,7 +12,7 @@ import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 import { APICommentsType, APIPostType } from 'api/type';
 import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
 import Button from 'components/atoms/Button';
-import { CODE_404 } from 'constants/api';
+import { CODE_404, CODE_200 } from 'constants/api';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const PostDetailPage = () => {
@@ -36,7 +36,7 @@ const PostDetailPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isSuccess && data !== undefined) {
+    if (isSuccess && data?.code === CODE_200 && data !== undefined) {
       const {
         data: { comments, ...post },
       } = data;
@@ -94,7 +94,7 @@ const StyledDeletedPostSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   text-align: center;
   font-size: 1.05rem;
   margin: 120px 0;
