@@ -35,13 +35,13 @@ const PostDetailPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isSuccess && data !== undefined) {
+    if (isSuccess && data !== undefined && comments !== undefined) {
       const {
         data: { comments, ...post },
       } = data;
       setPostDeitail(post, comments);
     }
-  }, [data, isSuccess, setPostDeitail]);
+  }, [comments, data, isSuccess, setPostDeitail]);
 
   if (post === undefined || comments === undefined || data?.code === CODE_404)
     return (
