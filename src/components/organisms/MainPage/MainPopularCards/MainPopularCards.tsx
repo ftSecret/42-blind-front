@@ -5,19 +5,25 @@ import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
 import Card from 'components/molecules/Card';
 import { colors } from 'styles/theme';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { PostType } from 'types';
+import { formatPost } from 'utils/formatPost';
 
 type PropTypes = { className?: string; endLoading: () => void };
 
 const MainPopularCards = ({ className, endLoading }: PropTypes) => {
   const posts = useGetBlindPostPopularQuery();
-  const cards = posts.data?.data ?? [];
+  const [cards, setCards] = useState<PostType[]>([]);
 
   useEffect(() => {
     if (posts.isSuccess === true && cards.length > 0) {
       endLoading();
     }
   }, [cards.length, endLoading, posts.isSuccess]);
+
+  useEffect(() => {
+    if (posts.isSuccess === true) setCards(formatPost(posts.data.data));
+  }, [posts]);
 
   if (posts.isSuccess === true && cards.length === 0) return null;
   return (
