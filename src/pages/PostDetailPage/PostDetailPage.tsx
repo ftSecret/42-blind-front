@@ -36,7 +36,7 @@ const PostDetailPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isSuccess && data !== undefined && comments !== undefined) {
+    if (isSuccess && data !== undefined) {
       const {
         data: { comments, ...post },
       } = data;
@@ -57,7 +57,9 @@ const PostDetailPage = () => {
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       {isLoading || post === undefined || comments === undefined ? (
-        <LoadingSpinner />
+        <StyledContainer>
+          <LoadingSpinner />
+        </StyledContainer>
       ) : (
         <StyledContainer>
           <DetailWrap>
