@@ -24,36 +24,29 @@ const MainCards = ({ page, size, addPage, className, endLoading }: PropTypes) =>
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
-      console.log(`[${page}] entry`, entry);
-      console.log(`[${page}] entry.isInter`, entry.isIntersecting);
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
         observer.disconnect();
         addPage();
       }
     },
-    [addPage, page],
+    [addPage],
   );
 
   useEffect(() => {
-    console.log(`${page} :`, targetRef.current);
-    console.log(`${page} :`, posts.data);
-    console.log(`${page} :`, posts.data?.data.length);
-    console.log(`${page} :`, observerRef.current);
     if (
-      targetRef.current !== null &&
-      posts.data !== undefined &&
+      posts.isSuccess === true &&
       posts.data.data.length > 0 &&
+      targetRef.current !== null &&
       observerRef.current === undefined
     ) {
-      console.log(`[${page}] useEffect`);
       observerRef.current = new IntersectionObserver(onIntersect, {
-        threshold: 0.5,
+        threshold: 0,
       });
-      observerRef.current.observe(targetRef?.current);
+      observerRef.current.observe(targetRef.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts.data, onIntersect, page]);
+  }, [posts, onIntersect]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {

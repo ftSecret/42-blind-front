@@ -5,7 +5,7 @@ import themeReducer, { themeMiddleware } from 'features/theme/themeSlice';
 import { blindPostAPI } from 'api/blindPost';
 import { blindCommentAPI } from 'api/blindComment';
 export const store = configureStore({
-  devTools: process.env.REACT_APP_ENV === 'local' ? true : true,
+  devTools: process.env.REACT_APP_ENV === 'local' ? true : false,
   reducer: {
     theme: themeReducer,
     user: userReducer,
