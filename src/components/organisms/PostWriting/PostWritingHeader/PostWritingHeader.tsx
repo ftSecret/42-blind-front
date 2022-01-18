@@ -31,10 +31,8 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
   const handleSubmit = useCallback(async () => {
     if (writingStatus === WRITING) {
       await addBlindPost({ title, content });
-      window.alert('작성되었습니다.');
     } else if (postId !== undefined && writingStatus === EDIT) {
       await editBlindPost({ content, post_id: postId, title });
-      window.alert('수정되었습니다.');
       navigate(-1);
     }
   }, [addBlindPost, content, editBlindPost, navigate, postId, title, writingStatus]);
