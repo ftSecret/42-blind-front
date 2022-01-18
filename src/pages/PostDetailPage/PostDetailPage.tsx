@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { containerStyle } from 'styles/mixin';
+import { containerStyle, flexColumn } from 'styles/mixin';
 
 import { useGetBlindPostDetailQuery } from 'api/blindPost';
 
@@ -21,7 +21,7 @@ const PostDetailPage = () => {
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
   const [post, setPost] = useState<APIPostType>();
   const [comments, setComments] = useState<APICommentsType>();
-  const { data, isLoading, isSuccess } = useGetBlindPostDetailQuery(
+  const { data, isLoading, isSuccess, isError } = useGetBlindPostDetailQuery(
     { post_id: postId },
     { refetchOnMountOrArgChange: true },
   );
@@ -44,7 +44,17 @@ const PostDetailPage = () => {
     }
   }, [comments, data, isSuccess, setPostDeitail]);
 
-  if (isSuccess && data?.code === CODE_4040)
+  if (isError === true) {
+    return (
+      <StyledDeletedPostSection>
+        <ErrorOutlineIcon size={40} />
+        <p>에러가 발생하여 데이터를 읽어오는데 실패했습니다.</p>
+        <BackButton onClick={goBack} children={'이전페이지'} />
+      </StyledDeletedPostSection>
+    );
+  }
+
+  if (isSuccess === true && data?.code === CODE_4040)
     return (
       <StyledDeletedPostSection>
         <ErrorOutlineIcon size={40} />
@@ -56,11 +66,12 @@ const PostDetailPage = () => {
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
-      {isLoading || post === undefined || comments === undefined ? (
+      {isLoading && (
         <StyledContainer>
           <LoadingSpinner />
         </StyledContainer>
-      ) : (
+      )}
+      {post && comments && (
         <StyledContainer>
           <DetailWrap>
             <PostDetail
@@ -85,16 +96,18 @@ export default PostDetailPage;
 
 const StyledContainer = styled.div`
   ${containerStyle}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const DetailWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 const StyledDeletedPostSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${flexColumn}
   gap: 1rem;
+  align-items: center;
   text-align: center;
   font-size: 1.05rem;
   margin: 120px 0;
