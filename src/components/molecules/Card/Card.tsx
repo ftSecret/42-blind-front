@@ -4,12 +4,16 @@ import Status from 'components/molecules/Status';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 import { darken } from 'polished';
+import Tag from 'components/atoms/Tag';
+import { useAppSelector } from 'app/hooks';
+import { selectUserId } from 'features/user/userSlice';
 
 type PropTypes = {
   className?: string;
   title: string;
   content?: string;
   created_at: string;
+  user_id?: number;
   count?: {
     goods?: number;
     views?: number;
@@ -17,22 +21,27 @@ type PropTypes = {
   };
 };
 
-const Card = ({ title, content, created_at, count, className, ...rest }: PropTypes) => {
+const Card = ({ title, content, created_at, count, className, user_id, ...rest }: PropTypes) => {
+  const myUserId = useAppSelector(selectUserId);
+
   return (
-    <StyledDiv className={className}>
+    <StyledCard className={className}>
       <StyledTitle>{title}</StyledTitle>
       {content && <StyledContent>{content}</StyledContent>}
       <StyledInfo>
-        <div>{formatDate(created_at)}</div>
+        <StyledDiv>
+          <div>{formatDate(created_at)}</div>
+          {user_id === myUserId && <Tag>나</Tag>}
+        </StyledDiv>
         {count && <Status count={count} />}
       </StyledInfo>
-    </StyledDiv>
+    </StyledCard>
   );
 };
 
 export default Card;
 
-const StyledDiv = styled.div`
+const StyledCard = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   ${flexColumn}
   border-radius: 0.3rem;
@@ -43,6 +52,11 @@ const StyledDiv = styled.div`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const StyledDiv = styled.div`
+  ${flexRow}
+  gap: 0.5rem;
 `;
 
 const StyledInfo = styled.div`

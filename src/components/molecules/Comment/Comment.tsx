@@ -1,4 +1,3 @@
-import { lighten } from 'polished';
 import styled from 'styled-components';
 import { flexColumn, flexRow } from 'styles/mixin';
 
@@ -14,6 +13,9 @@ import { useGoodBlindCommentMutation } from 'api/blindComment';
 import Typography from 'components/atoms/Typography';
 import { APIPostType, APICommentsType } from 'api/type';
 import { colors } from 'styles/theme';
+import Tag from 'components/atoms/Tag';
+import { useAppSelector } from 'app/hooks';
+import { selectUserId } from 'features/user/userSlice';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
 
@@ -43,6 +45,7 @@ const Comment = ({
   const handleReplyClick = () => {
     nickname && setSelectedComment({ nickname, id: comment_id });
   };
+  const myUserId = useAppSelector(selectUserId);
 
   const toggleGood = async () => {
     await goodBlindComment({ comment_id, is_good: !is_good });
@@ -64,7 +67,8 @@ const Comment = ({
             <img alt="user" width="25" height="25" src={userImage} />
           </StyledUserImage>
           <h1>{nickname}</h1>
-          {post_user_id === user_id && <StyledOption>작성자</StyledOption>}
+          {post_user_id === user_id && <Tag>작성자</Tag>}
+          {myUserId === user_id && <Tag>나</Tag>}
         </StyledProfile>
         <StyledContentDiv>
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}
@@ -97,17 +101,6 @@ const StyledCommentWrap = styled.div`
   ${flexColumn}
   width: 100%;
   gap: 0.5rem;
-`;
-
-const StyledOption = styled.div`
-  ${flexRow}
-  background-color: ${({ theme }) => lighten(0.1, theme.colors.primary)};
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.colors.default};
-  border-radius: 0.5rem;
-  padding: 0.3rem;
-  justify-content: center;
-  align-items: center;
 `;
 
 const StyledUserImage = styled.div`
