@@ -77,7 +77,7 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
         <PostDate children={formatDate(post.created_at)} size="sm" />
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" forwardedAs="h1" />
-      <PostContent children={post.content} size="sm" forwardedAs="pre" />
+      <PostContent children={post.content} size="sm" />
       <StyledStatusWrap>
         <Status count={count} />
         <GoodButton onClick={toggleGood} is_good={post.is_good} />
@@ -135,6 +135,7 @@ const PostTitle = styled(Typography)``;
 
 const PostContent = styled(Typography)`
   line-height: 1.3;
+  white-space: pre-wrap;
 `;
 
 const StyledStatusWrap = styled.div`

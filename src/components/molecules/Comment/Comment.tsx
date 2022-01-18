@@ -70,10 +70,10 @@ const Comment = ({
           {post_user_id === user_id && <Tag>작성자</Tag>}
           {myUserId === user_id && <Tag>본인</Tag>}
         </StyledProfile>
-        <StyledContentPre>
+        <StyledContent>
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}
           <p>{content}</p>
-        </StyledContentPre>
+        </StyledContent>
         <StyledInfoWrap>
           <StyledInfoDiv>
             <Typography children={formatDate(created_at)} size="ssm" color="grey" />
@@ -134,10 +134,11 @@ const ReplyButton = styled(Button)`
   color: ${colors.grey};
 `;
 
-const StyledContentPre = styled.pre`
+const StyledContent = styled.p`
   ${flexRow}
   gap: 0.2rem;
   line-height: 1.2;
+  white-space: pre-wrap;
   h2 {
     color: ${({ theme }) => theme.colors.blue};
   }
