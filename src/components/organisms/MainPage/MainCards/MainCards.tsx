@@ -14,10 +14,10 @@ type PropTypes = {
   addPage: () => void;
   className?: string;
   endLoading: () => void;
-  isLoaded: boolean;
+  lastPage: number;
 };
 
-const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: PropTypes) => {
+const MainCards = ({ page, size, addPage, className, endLoading, lastPage }: PropTypes) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver>();
   const posts = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
@@ -36,7 +36,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
 
   useEffect(() => {
     if (
-      isLoaded === false &&
+      lastPage === page &&
       posts.isSuccess === true &&
       posts.data.data.length > 0 &&
       targetRef.current !== null
@@ -48,7 +48,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
       observerRef.current.observe(targetRef.current);
     }
     return () => observerRef.current && observerRef.current.disconnect();
-  }, [posts, onIntersect, isLoaded, page]);
+  }, [posts, onIntersect, lastPage, page]);
 
   useEffect(() => {
     if (posts.isSuccess === true) {
@@ -61,7 +61,6 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
     if (posts.isSuccess === true || posts.isError === true) endLoading();
   }, [endLoading, posts]);
 
-  // TODO: isLoaded === false 조건을 다른 방법으로 처리할 수 있는지 고민해보기.
   return (
     <StyledContainer ref={targetRef} className={className}>
       {posts.isSuccess &&
@@ -70,7 +69,7 @@ const MainCards = ({ page, size, addPage, className, endLoading, isLoaded }: Pro
             <Card {...card} />
           </Link>
         ))}
-      {posts.isSuccess === true && cards.length === 0 && isLoaded === false && (
+      {posts.isSuccess === true && cards.length === 0 && lastPage === page && (
         <StyledMessage>마지막 글입니다.</StyledMessage>
       )}
       {posts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
