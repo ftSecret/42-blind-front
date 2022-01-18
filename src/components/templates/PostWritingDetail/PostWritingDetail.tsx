@@ -49,19 +49,18 @@ const StyledTitle = styled.div`
 `;
 
 const StyledContent = styled.div`
-  padding: 1em 0;
+  ${flexColumn}
   box-sizing: border-box;
-  height: 100%;
+  flex: auto;
   color: ${({ theme }) => theme.colors.default};
 
   & > textarea {
+    flex: auto;
     font-size: 1rem;
     background-color: rgba(0, 0, 0, 0);
     border-style: none;
     color: ${({ theme }) => theme.colors.default};
     font-weight: bold;
-    width: 100%;
-    height: 100%;
     outline: none;
   }
 `;
