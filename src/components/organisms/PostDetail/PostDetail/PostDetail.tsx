@@ -76,8 +76,8 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
         <PostUserName children="익명" size="sm" weight="bold" />
         <PostDate children={formatDate(post.created_at)} size="sm" />
       </StyledProfileWrap>
-      <PostTitle children={post.title} size="sm" weight="bold" />
-      <PostContent children={post.content} size="sm" />
+      <PostTitle children={post.title} size="sm" weight="bold" forwardedAs="h1" />
+      <PostContent children={post.content} size="sm" forwardedAs="pre" />
       <StyledStatusWrap>
         <Status count={count} />
         <GoodButton onClick={toggleGood} is_good={post.is_good} />
