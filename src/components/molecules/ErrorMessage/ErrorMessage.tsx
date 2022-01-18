@@ -10,7 +10,7 @@ type PropTypes = {
   isError: boolean;
 };
 
-const ErrorMessage = ({ message = '에러가 발생했습니다.', isError }: PropTypes) => {
+const ErrorMessage = ({ message = '에러가 발생했습니다.', isError = true }: PropTypes) => {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -32,10 +32,11 @@ export default ErrorMessage;
 const StyledDeletedPostSection = styled.section`
   ${flexColumn}
   gap: 1rem;
+  justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 1.05rem;
-  margin: 120px 0;
+  height: 90vh;
   color: ${({ theme }) => theme.colors.grey};
 `;
 

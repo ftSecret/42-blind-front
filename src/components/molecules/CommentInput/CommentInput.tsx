@@ -32,6 +32,7 @@ const CommentInput = ({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
+    if (value === '') return;
     await addBlindComment({
       content: value,
       post_id: postId,

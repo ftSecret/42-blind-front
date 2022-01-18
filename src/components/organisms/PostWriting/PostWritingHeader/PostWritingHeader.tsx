@@ -29,6 +29,10 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
   }, [navigate]);
 
   const handleSubmit = useCallback(async () => {
+    if (title === '' || content === '') {
+      window.alert('제목과 내용은 필수 입력 사항입니다.');
+      return;
+    }
     if (writingStatus === WRITING) {
       await addBlindPost({ title, content });
     } else if (postId !== undefined && writingStatus === EDIT) {

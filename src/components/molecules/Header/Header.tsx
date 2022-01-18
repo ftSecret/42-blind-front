@@ -22,7 +22,6 @@ const Header = ({ items, className }: PropTypes) => {
 
 export const HeaderContainer = styled.div`
   ${headerStyle}
-  position:relative;
 `;
 
 const StyledLeftItem = styled.span`

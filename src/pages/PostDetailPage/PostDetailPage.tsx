@@ -38,15 +38,6 @@ const PostDetailPage = () => {
     }
   }, [data, isSuccess, setPostDeitail]);
 
-  <ErrorMessage
-    isError={isError === true}
-    message="에러가 발생하여 데이터를 읽어오는데 실패했습니다."
-  />;
-  <ErrorMessage
-    isError={data?.code === CODE_4040}
-    message="해당 게시글이 삭제되어 글을 볼 수 없습니다."
-  />;
-
   return (
     <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
@@ -72,6 +63,14 @@ const PostDetailPage = () => {
           </DetailWrap>
         </StyledContainer>
       )}
+      <ErrorMessage
+        isError={isError === true}
+        message="에러가 발생하여 데이터를 읽어오는데 실패했습니다."
+      />
+      <ErrorMessage
+        isError={data?.code === CODE_4040}
+        message="해당 게시글이 삭제되어 글을 볼 수 없습니다."
+      />
     </>
   );
 };

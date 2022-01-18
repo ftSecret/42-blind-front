@@ -7,8 +7,9 @@ const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
 ${reset}
 
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -21,8 +22,9 @@ body {
 }
 
 html {
-  width: 100%;
-  height: 100%;
+  width: -webkit-fill-available;
+  height: 100vh;
+  max-height: 100vh;
   scrollbar-gutter: stable;
 }
 
@@ -47,7 +49,7 @@ code {
 
 a {
   all: unset;
-  width: 100%;
+  width: -webkit-fill-available;
 }
 a:hover,
 button:hover {
@@ -62,6 +64,10 @@ input:focus {
   box-sizing: border-box;
 }
 
+#root {
+  height: 100%;
+  max-height: 100vh;
+}
 
 `;
 
