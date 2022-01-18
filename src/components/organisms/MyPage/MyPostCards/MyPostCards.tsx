@@ -1,6 +1,6 @@
 import { useGetBlindPostMeQuery } from 'api/blindPost';
 import { PATH_POST } from 'components/utils/AppRouter';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
@@ -9,51 +9,26 @@ import { formatPost } from 'utils/formatPost';
 import Card from 'components/molecules/Card';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
-type PropTypes = { addPage: () => void; className?: string };
+type PropTypes = { className?: string };
 
-const MainCards = ({ addPage, className }: PropTypes) => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const observer = useRef<IntersectionObserver>();
-  const items = useGetBlindPostMeQuery();
+const MainCards = ({ className }: PropTypes) => {
+  const myPosts = useGetBlindPostMeQuery();
   const [cards, setCards] = useState<PostType[]>([]);
 
-  const onIntersect: IntersectionObserverCallback = useCallback(
-    async ([entry], observer) => {
-      if (entry.isIntersecting) {
-        observer.unobserve(entry.target);
-        observer.disconnect();
-        addPage();
-      }
-    },
-    [addPage],
-  );
-
   useEffect(() => {
-    if (items.isSuccess === true && observer.current === undefined) {
-      setCards(formatPost(items.data?.data));
-      if (targetRef?.current && items.data?.data.length !== 0) {
-        observer.current = new IntersectionObserver(onIntersect, {
-          threshold: 0.5,
-        });
-        observer.current.observe(targetRef?.current);
-      }
-      return () => observer.current && observer.current.disconnect();
-    }
-  }, [onIntersect, items]);
+    if (myPosts.isSuccess === true) setCards(formatPost(myPosts.data?.data));
+  }, [myPosts]);
 
   return (
-    <StyledContainer ref={targetRef} className={className}>
-      {items.isLoading === true && <LoadingSpinner />}
-      {items.isSuccess &&
+    <StyledContainer className={className}>
+      {myPosts.isLoading === true && <LoadingSpinner />}
+      {myPosts.isSuccess === true &&
         cards.map((card) => (
           <Link to={`${PATH_POST}/${card.post_id}`} key={`${card.post_id} ${card.modified_at}`}>
             <Card {...card} />
           </Link>
         ))}
-      {items.isSuccess === true && cards.length === 0 && (
-        <StyledMessage>마지막 글입니다.</StyledMessage>
-      )}
-      {items.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
+      {myPosts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
     </StyledContainer>
   );
 };
