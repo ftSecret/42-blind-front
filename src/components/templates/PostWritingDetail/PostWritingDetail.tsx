@@ -24,7 +24,7 @@ const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
 const WritingContainer = styled.div`
   ${containerStyle}
   ${flexColumn};
-  margin-top: 0.5em;
+  margin: 0.5em auto;
   padding: 0.5em;
   gap: 1rem;
   height: -webkit-fill-available;
@@ -53,6 +53,7 @@ const StyledContent = styled.div`
   box-sizing: border-box;
   flex: auto;
   color: ${({ theme }) => theme.colors.default};
+  padding-bottom: 3rem;
 
   & > textarea {
     flex: auto;
