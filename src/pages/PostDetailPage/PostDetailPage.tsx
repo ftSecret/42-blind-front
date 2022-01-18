@@ -102,6 +102,7 @@ const StyledContainer = styled.div`
 `;
 const DetailWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
+  width: 100%;
 `;
 
 const StyledDeletedPostSection = styled.section`
