@@ -17,9 +17,12 @@ export const headerStyle = css`
   align-items: center;
   justify-content: center;
   min-height: 56px;
+  position: sticky;
+  top: 0;
 `;
 
 export const containerStyle = css`
+  width: 100%;
   max-width: ${size.tablet};
   min-width: ${size.mobile};
   margin: auto;

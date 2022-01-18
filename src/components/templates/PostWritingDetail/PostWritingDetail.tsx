@@ -27,8 +27,7 @@ const WritingContainer = styled.div`
   margin-top: 0.5em;
   padding: 0.5em;
   gap: 1rem;
-  min-height: 300px;
-  height: 90vh;
+  height: -webkit-fill-available;
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 
