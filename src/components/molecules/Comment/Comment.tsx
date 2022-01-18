@@ -68,7 +68,7 @@ const Comment = ({
           </StyledUserImage>
           <h1>{nickname}</h1>
           {post_user_id === user_id && <Tag>작성자</Tag>}
-          {myUserId === user_id && <Tag>나</Tag>}
+          {myUserId === user_id && <Tag>본인</Tag>}
         </StyledProfile>
         <StyledContentDiv>
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}

@@ -31,7 +31,7 @@ const Card = ({ title, content, created_at, count, className, user_id, ...rest }
       <StyledInfo>
         <StyledDiv>
           <div>{formatDate(created_at)}</div>
-          {user_id === myUserId && <Tag>나</Tag>}
+          {user_id === myUserId && <Tag>본인</Tag>}
         </StyledDiv>
         {count && <Status count={count} />}
       </StyledInfo>
@@ -57,6 +57,7 @@ const StyledCard = styled.div`
 const StyledDiv = styled.div`
   ${flexRow}
   gap: 0.5rem;
+  align-items: center;
 `;
 
 const StyledInfo = styled.div`

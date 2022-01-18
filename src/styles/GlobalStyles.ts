@@ -28,10 +28,6 @@ html {
   scrollbar-gutter: stable;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
 *::-webkit-scrollbar {
   width: 0.3rem;
   background-color: rgba(0, 0, 0, 0);
@@ -67,6 +63,11 @@ input:focus {
 #root {
   height: 100%;
   max-height: 100vh;
+}
+
+textarea {
+  all:unset;
+  line-height: 1.5;
 }
 
 `;
