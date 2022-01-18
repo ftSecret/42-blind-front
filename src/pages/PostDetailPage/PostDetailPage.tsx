@@ -42,7 +42,7 @@ const PostDetailPage = () => {
       } = data;
       setPostDeitail(post, comments);
     }
-  }, [comments, data, isSuccess, setPostDeitail]);
+  }, [data, isSuccess, setPostDeitail]);
 
   if (isError === true) {
     return (
