@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { containerStyle, flexColumn } from 'styles/mixin';
+import { containerStyle } from 'styles/mixin';
 
 import { useGetBlindPostDetailQuery } from 'api/blindPost';
 
@@ -10,13 +10,11 @@ import Comments from 'components/molecules/Comments';
 import PostDetail from 'components/organisms/PostDetail/PostDetail';
 import PostDetailHeader from 'components/organisms/PostDetail/PostDetailHeader';
 import { APICommentsType, APIPostType } from 'api/type';
-import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
-import Button from 'components/atoms/Button';
-import { CODE_4040, CODE_2000 } from 'constants/api';
+import { CODE_2000, CODE_4040 } from 'constants/api';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
+import ErrorMessage from 'components/molecules/ErrorMessage';
 
 const PostDetailPage = () => {
-  const navigate = useNavigate();
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
   const [post, setPost] = useState<APIPostType>();
@@ -25,10 +23,6 @@ const PostDetailPage = () => {
     { post_id: postId },
     { refetchOnMountOrArgChange: true },
   );
-
-  const goBack = () => {
-    navigate(-1);
-  };
 
   const setPostDeitail = useCallback((post: APIPostType, comments: APICommentsType) => {
     setPost(post);
@@ -44,24 +38,14 @@ const PostDetailPage = () => {
     }
   }, [data, isSuccess, setPostDeitail]);
 
-  if (isError === true) {
-    return (
-      <StyledDeletedPostSection>
-        <ErrorOutlineIcon size={40} />
-        <p>에러가 발생하여 데이터를 읽어오는데 실패했습니다.</p>
-        <BackButton onClick={goBack} children={'이전페이지'} />
-      </StyledDeletedPostSection>
-    );
-  }
-
-  if (isSuccess === true && data?.code === CODE_4040)
-    return (
-      <StyledDeletedPostSection>
-        <ErrorOutlineIcon size={40} />
-        <p>해당 게시글이 삭제되어 글을 볼 수 없습니다.</p>
-        <BackButton onClick={goBack} children={'이전페이지'} />
-      </StyledDeletedPostSection>
-    );
+  <ErrorMessage
+    isError={isError === true}
+    message="에러가 발생하여 데이터를 읽어오는데 실패했습니다."
+  />;
+  <ErrorMessage
+    isError={data?.code === CODE_4040}
+    message="해당 게시글이 삭제되어 글을 볼 수 없습니다."
+  />;
 
   return (
     <>
@@ -103,23 +87,4 @@ const StyledContainer = styled.div`
 const DetailWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   width: 100%;
-`;
-
-const StyledDeletedPostSection = styled.section`
-  ${flexColumn}
-  gap: 1rem;
-  align-items: center;
-  text-align: center;
-  font-size: 1.05rem;
-  margin: 120px 0;
-  color: ${({ theme }) => theme.colors.grey};
-`;
-
-const BackButton = styled(Button)`
-  all: unset;
-  background-color: ${({ theme }) => theme.colors.red};
-  width: 150px;
-  height: 50px;
-  border-radius: 25px;
-  color: ${({ theme }) => theme.colors.white};
 `;
