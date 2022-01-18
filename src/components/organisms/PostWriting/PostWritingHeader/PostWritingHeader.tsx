@@ -11,6 +11,7 @@ import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
 import { useAddBlindPostMutation, useEditBlindPostMutation } from 'api/blindPost';
 import { CODE_2000 } from 'constants/api';
 import { PATH_POST } from 'components/utils/AppRouter';
+import { isEmpty } from 'utils/isEmpty';
 
 type StatusType = typeof EDIT | typeof WRITING;
 
@@ -29,7 +30,7 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
   }, [navigate]);
 
   const handleSubmit = useCallback(async () => {
-    if (title === '' || content === '') {
+    if (isEmpty(title) || isEmpty(content)) {
       window.alert('제목과 내용은 필수 입력 사항입니다.');
       return;
     }

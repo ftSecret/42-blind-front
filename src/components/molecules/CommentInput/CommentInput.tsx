@@ -5,6 +5,7 @@ import { useInput } from 'hooks';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { flexRow } from 'styles/mixin';
+import { isEmpty } from 'utils/isEmpty';
 import { SelectedCommentType } from '../Comments/Comments';
 
 type PropTypes = {
@@ -32,7 +33,7 @@ const CommentInput = ({
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    if (value === '') return;
+    if (isEmpty(value) === true) return;
     await addBlindComment({
       content: value,
       post_id: postId,

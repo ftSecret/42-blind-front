@@ -133,7 +133,9 @@ const PostDate = styled(Typography)``;
 
 const PostTitle = styled(Typography)``;
 
-const PostContent = styled(Typography)``;
+const PostContent = styled(Typography)`
+  line-height: 1.3;
+`;
 
 const StyledStatusWrap = styled.div`
   ${flexRow}
