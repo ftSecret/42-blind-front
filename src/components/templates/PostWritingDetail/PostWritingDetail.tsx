@@ -1,6 +1,7 @@
 import { UseInputPropTypes } from 'hooks/useInput';
 import React from 'react';
 import styled from 'styled-components';
+import { containerStyle, flexColumn } from 'styles/mixin';
 
 type PropTypes = {
   titleProps: UseInputPropTypes;
@@ -21,7 +22,12 @@ const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
 };
 
 const WritingContainer = styled.div`
-  padding: 0.5rem;
+  ${containerStyle}
+  ${flexColumn};
+  margin-top: 0.5em;
+  padding: 0.5em;
+  gap: 1rem;
+  min-height: 300px;
   height: 90vh;
   background-color: ${({ theme }) => theme.colors.primary};
 `;

@@ -11,19 +11,17 @@ const PostDetailHeader = ({ content }: { content: string }) => {
     navigate(-1);
   }, [navigate]);
 
-  const items = useMemo(
-    () => ({
-      left: <StyledArrowBackIcon onClick={goBack} />,
-      middle: (
-        <Typography size="sm" weight="bold">
-          {content}
-        </Typography>
-      ),
-    }),
-    [content, goBack],
+  const left = useMemo(() => <StyledArrowBackIcon onClick={goBack} />, [goBack]);
+  const middle = useMemo(
+    () => (
+      <Typography size="sm" weight="bold">
+        {content}
+      </Typography>
+    ),
+    [content],
   );
 
-  return <Header items={items} />;
+  return <Header left={left} middle={middle} />;
 };
 
 const StyledArrowBackIcon = styled(ArrowBackIcon)`

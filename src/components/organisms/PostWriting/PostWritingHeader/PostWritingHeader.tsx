@@ -48,16 +48,17 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
     }
   }, [navigate, writingData]);
 
-  const items = useMemo(
-    () => ({
-      left: <StyledCloseIcon onClick={handleClose} />,
-      middle: <Typography size="base" weight="bold" children={writingStatus} />,
-      right: <StyledSubmitButton children="완료" onClick={handleSubmit} />,
-    }),
-    [handleClose, handleSubmit, writingStatus],
+  const left = useMemo(() => <StyledCloseIcon onClick={handleClose} />, [handleClose]);
+  const right = useMemo(
+    () => <StyledSubmitButton children="완료" onClick={handleSubmit} />,
+    [handleSubmit],
+  );
+  const middle = useMemo(
+    () => <Typography size="base" weight="bold" children={writingStatus} />,
+    [writingStatus],
   );
 
-  return <Header items={items} />;
+  return <Header left={left} right={right} middle={middle} />;
 };
 
 export default PostWritingHeader;

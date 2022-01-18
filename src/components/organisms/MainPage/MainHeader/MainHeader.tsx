@@ -14,14 +14,12 @@ const middleItem = {
   content: '42 BLIND',
 };
 
-const items = {
-  left: <ThemeToggle />,
-  middle: <Anchor size="xl" weight="bold" linkItem={middleItem} />,
-  right: <Anchor size="sm" weight="bold" linkItem={rightItem} />,
-};
+const left = <ThemeToggle />;
+const middle = <Anchor size="xl" weight="bold" linkItem={middleItem} />;
+const right = <Anchor size="sm" weight="bold" linkItem={rightItem} />;
 
 const MainHeader = () => {
-  return <Header items={items} />;
+  return <Header left={left} middle={middle} right={right} />;
 };
 
 export default MainHeader;

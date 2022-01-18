@@ -29,4 +29,4 @@ const Anchor = ({ size, lineHeight, weight, linkItem, isSelected }: PropTypes) =
   );
 };
 
-export default Anchor;
+export default React.memo(Anchor);

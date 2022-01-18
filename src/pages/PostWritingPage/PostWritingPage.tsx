@@ -1,6 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import { containerStyle, flexColumn } from 'styles/mixin';
 import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
 import PostWritingDetail from 'components/templates/PostWritingDetail';
 import { WRITING } from 'components/templates/PostDetailEdit';
@@ -13,23 +11,9 @@ const PostWritingPage = () => {
   return (
     <>
       <PostWritingHeader title={title} content={content} writingStatus={WRITING} />
-      <StyledContainer>
-        <WritingWrap>
-          <PostWritingDetail titleProps={titleProps} contentProps={contentProps} />
-        </WritingWrap>
-      </StyledContainer>
+      <PostWritingDetail titleProps={titleProps} contentProps={contentProps} />
     </>
   );
 };
-
-const StyledContainer = styled.div`
-  ${containerStyle}
-`;
-
-const WritingWrap = styled.div`
-  ${flexColumn};
-  padding: 0.5em 0;
-  gap: 1rem;
-`;
 
 export default PostWritingPage;

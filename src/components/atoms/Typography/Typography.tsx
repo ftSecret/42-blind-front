@@ -22,4 +22,4 @@ const StyledTypography = styled.p<Omit<PropTypes, 'children'>>`
   color: ${({ theme, color }) => theme.colors[color ?? 'default']};
 `;
 
-export default Typography;
+export default React.memo(Typography);

@@ -20,11 +20,9 @@ const ThemeProviders = ({ children }: { children: JSX.Element | JSX.Element[] | 
 
 const Providers = ({ children }: { children: JSX.Element | JSX.Element[] | string }) => {
   return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <ThemeProviders>{children}</ThemeProviders>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <ThemeProviders>{children}</ThemeProviders>
+    </Provider>
   );
 };
 

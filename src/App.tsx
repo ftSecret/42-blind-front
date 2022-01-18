@@ -7,9 +7,11 @@ function App() {
   useInit();
 
   return (
-    <Providers>
-      <AppRouter />
-    </Providers>
+    <React.StrictMode>
+      <Providers>
+        <AppRouter />
+      </Providers>
+    </React.StrictMode>
   );
 }
 

@@ -3,19 +3,17 @@ import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
 
 type PropTypes = {
-  items: {
-    left?: JSX.Element | string;
-    middle: JSX.Element | string;
-    right?: JSX.Element | string;
-  };
+  left?: JSX.Element | string;
+  middle: JSX.Element | string;
+  right?: JSX.Element | string;
   className?: string;
 };
-const Header = ({ items, className }: PropTypes) => {
+const Header = ({ left, right, middle, className }: PropTypes) => {
   return (
     <HeaderContainer className={className}>
-      <StyledLeftItem>{items.left}</StyledLeftItem>
-      <StyledMiddleItem>{items.middle}</StyledMiddleItem>
-      <StyledRightItem>{items.right}</StyledRightItem>
+      <StyledLeftItem>{left}</StyledLeftItem>
+      <StyledMiddleItem>{middle}</StyledMiddleItem>
+      <StyledRightItem>{right}</StyledRightItem>
     </HeaderContainer>
   );
 };
