@@ -2,6 +2,7 @@ import TabBar from 'components/molecules/TabBar';
 import React from 'react';
 import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
+import { colors } from 'styles/theme';
 
 // TODO: ${PATH_MY}를 못 쓰는 이유 알아보기
 const linkData = [
@@ -23,14 +24,17 @@ export default MyTabBar;
 
 const StyledTabBar = styled(TabBar)`
   ${headerStyle}
-  min-height: 0px;
+  min-height: 0rem;
   justify-content: space-evenly;
   position: sticky;
   top: 0px;
   padding: 0;
-  a {
+  & a {
     box-sizing: border-box;
     padding: 0.1rem 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: ${colors.grey};
   }
   & a.selected {
     color: ${({ theme }) => theme.colors.default};

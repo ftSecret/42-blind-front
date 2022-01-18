@@ -22,9 +22,19 @@ const MyCommentBoard = () => {
           />
         </Link>
       ))}
+      {myComments.isError === true && (
+        <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>
+      )}
     </StyledCards>
   );
 };
+
+const StyledMessage = styled.div`
+  color: ${({ theme }) => theme.colors.default};
+  background-color: ${({ theme }) => theme.colors.primary};
+  padding: 1rem;
+  border-radius: 2rem;
+`;
 
 const StyledCards = styled.div`
   ${flexColumn}

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 
@@ -9,6 +9,8 @@ import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
 
 import { useAddBlindPostMutation, useEditBlindPostMutation } from 'api/blindPost';
+import { CODE_2000 } from 'constants/api';
+import { PATH_POST } from 'components/utils/AppRouter';
 
 type StatusType = typeof EDIT | typeof WRITING;
 
@@ -20,7 +22,7 @@ type PropTypes = {
 };
 const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes) => {
   const navigate = useNavigate();
-  const [addBlindPost] = useAddBlindPostMutation();
+  const [addBlindPost, { data: writingData }] = useAddBlindPostMutation();
   const [editBlindPost] = useEditBlindPostMutation();
   const handleClose = useCallback(() => {
     navigate(-1);
@@ -30,13 +32,18 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
     if (writingStatus === WRITING) {
       await addBlindPost({ title, content });
       window.alert('작성되었습니다.');
-      navigate(-1);
     } else if (postId !== undefined && writingStatus === EDIT) {
       await editBlindPost({ content, post_id: postId, title });
       window.alert('수정되었습니다.');
       navigate(-1);
     }
   }, [addBlindPost, content, editBlindPost, navigate, postId, title, writingStatus]);
+
+  useEffect(() => {
+    if (writingData?.code === CODE_2000) {
+      navigate(`${PATH_POST}/${writingData.data.post_id}`, { replace: true });
+    }
+  }, [navigate, writingData]);
 
   const items = useMemo(
     () => ({
