@@ -4,35 +4,34 @@ import { PATH_POST_WRITING } from 'components/utils/AppRouter';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { centerRowStyle } from 'styles/mixin';
 
 const PostWritingButton = () => {
   return (
     <Link to={PATH_POST_WRITING}>
       <StyledWriteButton>
-        <AddIcon />
+        <StyledAddIcon size={20} />
       </StyledWriteButton>
     </Link>
   );
 };
 
+const StyledAddIcon = styled(AddIcon)`
+  ${centerRowStyle}
+  border: 2px solid ${({ theme }) => theme.colors.default};
+  border-radius: 5px;
+  height: 25px;
+  width: 25px;
+`;
+
 const StyledWriteButton = styled(Button)`
   all: unset;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.red};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: rgba(0, 0, 0, 0);
 
   align-items: center;
   justify-content: center;
   text-align: center;
-
-  font-size: 2.2rem;
-  width: 1.8em;
-  height: 1.8em;
-  border-radius: 50%;
-  border: none;
-  position: fixed;
-  bottom: 2.3rem;
-  right: 2rem;
 `;
 
 export default React.memo(PostWritingButton);

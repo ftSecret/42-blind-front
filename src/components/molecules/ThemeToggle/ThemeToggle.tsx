@@ -17,16 +17,11 @@ const ThemeToggle = () => {
 };
 
 const ToggleWrapper = styled(Button)`
-  background-color: ${(props) => props.theme.colors.background};
   border: ${(props) => props.theme.colors.background};
   font-size: 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 35px;
-
-  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0);
 `;
 export default ThemeToggle;
