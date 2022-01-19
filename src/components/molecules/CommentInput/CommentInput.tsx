@@ -1,6 +1,7 @@
 import { useAddBlindCommentMutation } from 'api/blindComment';
 import { APIPostType, APICommentsType } from 'api/type';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
+import { MAX_COMMENT_COUNT } from 'constants/comment';
 import { useInput } from 'hooks';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
@@ -34,6 +35,9 @@ const CommentInput = ({
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     if (isEmpty(value) === true) return;
+    if (value.length > MAX_COMMENT_COUNT) {
+      window.alert(`댓글은 ${MAX_COMMENT_COUNT}자 이하여야합니다.`);
+    }
     await addBlindComment({
       content: value,
       post_id: postId,

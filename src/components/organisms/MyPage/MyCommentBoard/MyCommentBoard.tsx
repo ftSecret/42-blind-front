@@ -8,20 +8,21 @@ import { flexColumn } from 'styles/mixin';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const MyCommentBoard = () => {
-  const myComments = useGetBlindCommentMeQuery();
+  const myComments = useGetBlindCommentMeQuery(undefined, { refetchOnMountOrArgChange: true });
 
   return (
     <StyledCards>
       {myComments.isLoading === true && myComments.data === undefined && <LoadingSpinner />}
-      {myComments.data?.data.map((comment) => (
-        <Link key={comment.comment_id} to={`${PATH_POST}/${comment.post_id}`}>
-          <Card
-            title={comment.content}
-            created_at={comment.created_at}
-            count={{ goods: comment.goods }}
-          />
-        </Link>
-      ))}
+      {myComments.data !== undefined &&
+        myComments.data?.data.map((comment) => (
+          <Link key={comment.comment_id} to={`${PATH_POST}/${comment.post_id}`}>
+            <Card
+              title={comment.content}
+              created_at={comment.created_at}
+              count={{ goods: comment.goods }}
+            />
+          </Link>
+        ))}
       {myComments.isError === true && (
         <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>
       )}

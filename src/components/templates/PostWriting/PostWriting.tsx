@@ -1,7 +1,8 @@
+import { MAX_CONTENT_COUNT } from 'constants/post';
 import { UseInputPropTypes } from 'hooks/useInput';
 import React from 'react';
 import styled from 'styled-components';
-import { containerStyle, flexColumn } from 'styles/mixin';
+import { containerStyle, flexColumn, flexRow } from 'styles/mixin';
 
 type PropTypes = {
   titleProps: UseInputPropTypes;
@@ -15,7 +16,11 @@ const PostWriting = ({ titleProps, contentProps }: PropTypes) => {
         <input placeholder="제목" {...titleProps} />
       </StyledTitle>
       <StyledContent>
-        <textarea placeholder="내용을 입력하세요." {...contentProps} />
+        <textarea
+          placeholder="내용을 입력하세요. 페이지를 나가면 내용이 삭제됩니다."
+          {...contentProps}
+        />
+        <ContentCount>{`${contentProps.value.length}/${MAX_CONTENT_COUNT}`}</ContentCount>
       </StyledContent>
     </WritingContainer>
   );
@@ -24,7 +29,7 @@ const PostWriting = ({ titleProps, contentProps }: PropTypes) => {
 const WritingContainer = styled.div`
   ${containerStyle}
   ${flexColumn}
-  margin: 0.5em auto;
+  margin: 0.5em auto 0.5em auto;
   gap: 1rem;
   height: -webkit-fill-available;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -56,8 +61,14 @@ const StyledContent = styled.div`
     background-color: rgba(0, 0, 0, 0);
     color: ${({ theme }) => theme.colors.default};
     font-weight: bold;
-    padding-bottom: 3rem;
   }
+`;
+
+const ContentCount = styled.p`
+  ${flexRow}
+  width: -webkit-fill-available;
+  justify-content: flex-end;
+  color: ${({ theme }) => theme.colors.default};
 `;
 
 export default PostWriting;
