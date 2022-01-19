@@ -37,7 +37,7 @@ export const fonts = {
   },
   size: {
     xxs: '0.5rem',
-    xs: '0.9rem',
+    xs: '0.75rem',
     sm: '1rem',
     base: '1.3rem',
     lg: '2rem',

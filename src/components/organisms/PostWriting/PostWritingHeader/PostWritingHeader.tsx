@@ -60,7 +60,7 @@ const PostWritingHeader = ({ postId = -1, content, title, writingStatus }: PropT
   return (
     <Header>
       <StyledCloseIcon onClick={handleClose} />
-      <StyledTitle size="base" weight="bold" children={writingStatus} />
+      <StyledTitle size="sm" weight="bold" children={writingStatus} />
       <StyledSpan>
         <StyledSubmitButton children="완료" onClick={handleSubmit} />
       </StyledSpan>
@@ -96,6 +96,6 @@ const StyledSubmitButton = styled(Button)`
   border-style: none;
   color: ${({ theme }) => theme.colors.white};
   border-radius: 50px;
-  height: 2.3rem;
-  width: 4rem;
+  height: 1.8rem;
+  width: 3.3rem;
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexColumn, flexRow } from 'styles/mixin';
+import { flexColumn, flexRow, preventDragStyle } from 'styles/mixin';
 
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
@@ -150,6 +150,7 @@ const ReplyButton = styled(Button)`
   font-size: ${({ theme }) => theme.fonts.size.xs};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${colors.grey};
+  ${preventDragStyle}
 `;
 
 const StyledContent = styled.p`
