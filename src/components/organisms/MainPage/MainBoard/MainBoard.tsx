@@ -29,6 +29,7 @@ const MainBoard = () => {
       <MainPopularCards endLoading={endLoading} />
       {pages.map((page) => (
         <MainCards
+          isLoading={isLoading}
           key={page}
           page={page}
           lastPage={lastPage}
