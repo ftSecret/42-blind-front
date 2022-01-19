@@ -24,7 +24,7 @@ const PostWriting = ({ titleProps, contentProps }: PropTypes) => {
 const WritingContainer = styled.div`
   ${containerStyle}
   ${flexColumn}
-  margin: 0.5em auto;
+  margin: 0.5em auto 0.5em auto;
   gap: 1rem;
   height: -webkit-fill-available;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -56,7 +56,6 @@ const StyledContent = styled.div`
     background-color: rgba(0, 0, 0, 0);
     color: ${({ theme }) => theme.colors.default};
     font-weight: bold;
-    padding-bottom: 3rem;
   }
 `;
 

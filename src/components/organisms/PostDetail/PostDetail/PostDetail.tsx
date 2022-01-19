@@ -42,11 +42,9 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   };
 
   const handleEdit = () => {
-    if (window.confirm('수정하시겠습니까?')) {
-      navigate(`${PATH_POST_EDIT}`, {
-        state: { title: post.title, content: post.content, postId: post.post_id },
-      });
-    }
+    navigate(`${PATH_POST_EDIT}`, {
+      state: { title: post.title, content: post.content, postId: post.post_id },
+    });
   };
 
   useEffect(() => {
