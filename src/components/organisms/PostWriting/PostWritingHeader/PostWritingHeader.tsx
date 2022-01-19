@@ -6,14 +6,14 @@ import Button from 'components/atoms/Button';
 import Header from 'components/molecules/Header';
 import Typography from 'components/atoms/Typography';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
-import { EDIT, WRITING } from 'components/templates/PostDetailEdit';
 
 import { useAddBlindPostMutation, useEditBlindPostMutation } from 'api/blindPost';
 import { CODE_2000 } from 'constants/api';
 import { PATH_POST } from 'components/utils/AppRouter';
 import { isEmpty } from 'utils/isEmpty';
+import { POST_WRITING, POST_EDITING } from 'constants/post';
 
-type StatusType = typeof EDIT | typeof WRITING;
+type StatusType = typeof POST_EDITING | typeof POST_WRITING;
 
 type PropTypes = {
   postId?: number;
@@ -34,9 +34,9 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
       window.alert('제목과 내용은 필수 입력 사항입니다.');
       return;
     }
-    if (writingStatus === WRITING) {
+    if (writingStatus === POST_WRITING) {
       await addBlindPost({ title, content });
-    } else if (postId !== undefined && writingStatus === EDIT) {
+    } else if (postId !== undefined && writingStatus === POST_EDITING) {
       await editBlindPost({ content, post_id: postId, title });
       navigate(-1);
     }

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import PostDetailEdit, { EDIT } from 'components/templates/PostDetailEdit';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
 import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
 import { useInput } from 'hooks/useInput';
 import { useLocation } from 'react-router-dom';
+import PostWriting from 'components/templates/PostWriting';
+import { POST_EDITING } from 'constants/post';
 
 type PrevType = {
   title: string;
   content: string;
   postId: number;
 };
-const PostDetailEditPage = () => {
+const PostEditingPage = () => {
   const { value: title, setValue: setTitle, props: titleProps } = useInput('');
   const { value: content, setValue: setContent, props: contentProps } = useInput('');
   const [postId, setPostId] = useState(-1);
@@ -28,15 +29,15 @@ const PostDetailEditPage = () => {
 
   return (
     <>
-      <PostWritingHeader postId={postId} title={title} content={content} writingStatus={EDIT} />
+      <PostWritingHeader
+        postId={postId}
+        title={title}
+        content={content}
+        writingStatus={POST_EDITING}
+      />
       <StyledContainer>
         <WritingWrap>
-          <PostDetailEdit
-            title={title}
-            titleProps={titleProps}
-            content={content}
-            contentProps={contentProps}
-          />
+          <PostWriting titleProps={titleProps} contentProps={contentProps} />
         </WritingWrap>
       </StyledContainer>
     </>
@@ -50,4 +51,4 @@ const WritingWrap = styled.div`
   padding: 0.5em 0;
   gap: 1rem;
 `;
-export default PostDetailEditPage;
+export default PostEditingPage;

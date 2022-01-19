@@ -6,7 +6,7 @@ import MyPage from 'pages/MyPage';
 import MainPage from 'pages/MainPage';
 import PostDetailPage from 'pages/PostDetailPage';
 import PostWritingPage from 'pages/PostWritingPage';
-import PostDetailEditPage from 'pages/PostDetailEditPage';
+import PostEditingPage from 'pages/PostEditingPage';
 import LoginPage from 'pages/LoginPage';
 import { useAuth } from 'hooks/useAuth';
 import { isAuth } from 'utils/isAuth';
@@ -15,7 +15,7 @@ export const PATH_MAIN = '/';
 export const PATH_MY = '/my';
 export const PATH_POST = '/post';
 export const PATH_POST_WRITING = '/post-writing';
-export const PATH_POST_EDIT = '/post-edit';
+export const PATH_POST_EDIT = '/post-editing';
 export const PATH_LOGIN = '/login';
 
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
@@ -54,7 +54,7 @@ export const routes = [
     path: `${PATH_POST_EDIT}`,
     element: (
       <RequireAuth>
-        <PostDetailEditPage />
+        <PostEditingPage />
       </RequireAuth>
     ),
   },

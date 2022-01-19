@@ -1,10 +1,10 @@
 import React from 'react';
 import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeader';
-import PostWritingDetail from 'components/templates/PostWritingDetail';
-import { WRITING } from 'components/templates/PostDetailEdit';
+import PostWriting from 'components/templates/PostWriting';
 import { useInput } from 'hooks/useInput';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/mixin';
+import { POST_WRITING } from 'constants/post';
 
 const PostWritingPage = () => {
   const { value: title, props: titleProps } = useInput('');
@@ -12,8 +12,8 @@ const PostWritingPage = () => {
 
   return (
     <Wrapper>
-      <PostWritingHeader title={title} content={content} writingStatus={WRITING} />
-      <PostWritingDetail titleProps={titleProps} contentProps={contentProps} />
+      <PostWritingHeader title={title} content={content} writingStatus={POST_WRITING} />
+      <PostWriting titleProps={titleProps} contentProps={contentProps} />
     </Wrapper>
   );
 };

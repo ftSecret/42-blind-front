@@ -8,7 +8,7 @@ type PropTypes = {
   contentProps: UseInputPropTypes;
 };
 
-const PostWritingDetail = ({ titleProps, contentProps }: PropTypes) => {
+const PostWriting = ({ titleProps, contentProps }: PropTypes) => {
   return (
     <WritingContainer>
       <StyledTitle>
@@ -66,4 +66,4 @@ const StyledContent = styled.div`
   }
 `;
 
-export default PostWritingDetail;
+export default PostWriting;

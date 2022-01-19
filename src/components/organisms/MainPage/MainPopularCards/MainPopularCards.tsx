@@ -12,7 +12,7 @@ import { formatPost } from 'utils/formatPost';
 type PropTypes = { className?: string; endLoading: () => void };
 
 const MainPopularCards = ({ className, endLoading }: PropTypes) => {
-  const posts = useGetBlindPostPopularQuery();
+  const posts = useGetBlindPostPopularQuery(undefined, { refetchOnMountOrArgChange: true });
   const [cards, setCards] = useState<PostType[]>([]);
 
   // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
