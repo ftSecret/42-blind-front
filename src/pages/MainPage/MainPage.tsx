@@ -19,7 +19,6 @@ const MainPage = () => {
 
 const StyledContainer = styled.div`
   ${containerStyle}
-  position: relative;
 `;
 
 export default MainPage;

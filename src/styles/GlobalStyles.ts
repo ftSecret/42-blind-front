@@ -5,9 +5,6 @@ import { Theme } from './theme';
 
 const globalCss = css`
   body {
-    width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
       'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -17,28 +14,26 @@ const globalCss = css`
     color: ${({ theme }) => theme.colors.default};
   }
 
-  html {
-    width: -webkit-fill-available;
-    height: 100vh;
-    max-height: 100vh;
-  }
-
   *::-webkit-scrollbar {
     width: 0.3rem;
+    height: 0.3rem;
     background-color: rgba(0, 0, 0, 0);
   }
   *::-webkit-scrollbar-thumb {
     width: 0.3rem;
+    height: 0.3rem;
     background-color: ${({ theme }) => theme.colors.grey};
   }
   *::-webkit-scrollbar-track {
     width: 0.3rem;
+    height: 0.3rem;
   }
 
   a {
     all: unset;
     width: -webkit-fill-available;
   }
+
   a:hover,
   button:hover {
     cursor: pointer;
@@ -54,7 +49,6 @@ const globalCss = css`
 
   #root {
     height: 100%;
-    max-height: 100vh;
   }
 
   textarea {
