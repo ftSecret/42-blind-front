@@ -2,6 +2,7 @@ import React from 'react';
 
 import Anchor from 'components/molecules/Anchor';
 import Header from 'components/molecules/Header';
+import styled from 'styled-components';
 
 const middleItem = {
   to: '/',
@@ -11,6 +12,11 @@ const middleItem = {
 const middle = <Anchor size="xl" weight="bold" linkItem={middleItem} />;
 
 const MyHeader = () => {
-  return <Header middle={middle} />;
+  return <StyledHeader middle={middle} />;
 };
+
+const StyledHeader = styled(Header)`
+  position: relative;
+`;
+
 export default MyHeader;
