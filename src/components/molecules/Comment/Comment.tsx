@@ -6,7 +6,7 @@ import userImage from 'assets/images/user.png';
 
 import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { CommentType } from 'types';
 import GoodButton from '../GoodButton';
 import { useGoodBlindCommentMutation } from 'api/blindComment';
@@ -46,10 +46,28 @@ const Comment = ({
     nickname && setSelectedComment({ nickname, id: comment_id });
   };
   const myUserId = useAppSelector(selectUserId);
+  const canGoodRef = useRef<Boolean>(true);
+  const goodTimerRef = useRef<NodeJS.Timeout>();
 
   const toggleGood = async () => {
-    await goodBlindComment({ comment_id, is_good: !is_good });
+    if (canGoodRef.current === true) {
+      await goodBlindComment({ comment_id, is_good: !is_good });
+      canGoodRef.current = false;
+      if (goodTimerRef.current !== undefined) clearTimeout(goodTimerRef.current);
+      goodTimerRef.current = setTimeout(() => {
+        canGoodRef.current = true;
+      }, 500);
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (goodTimerRef.current !== undefined) {
+        clearTimeout(goodTimerRef.current);
+        goodTimerRef.current = undefined;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (data !== undefined && data.data !== undefined) {

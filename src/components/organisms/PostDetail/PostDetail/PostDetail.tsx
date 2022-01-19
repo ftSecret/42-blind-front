@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
@@ -27,12 +27,30 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   const navigate = useNavigate();
   const [deleteBlindPost] = useDeleteBlindPostMutation();
   const [goodBlindPost, { data }] = useGoodBlindPostMutation();
+  const canGoodRef = useRef<Boolean>(true);
+  const goodTimerRef = useRef<NodeJS.Timeout>();
 
   const userState = useAppSelector(selectUserId) as PostType['post_id'];
 
   const toggleGood = async () => {
-    await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
+    if (canGoodRef.current === true) {
+      await goodBlindPost({ post_id: post.post_id, is_good: !post.is_good });
+      canGoodRef.current = false;
+      if (goodTimerRef.current !== undefined) clearTimeout(goodTimerRef.current);
+      goodTimerRef.current = setTimeout(() => {
+        canGoodRef.current = true;
+      }, 500);
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (goodTimerRef.current !== undefined) {
+        clearTimeout(goodTimerRef.current);
+        goodTimerRef.current = undefined;
+      }
+    };
+  }, []);
 
   const handleDelete = async () => {
     if (window.confirm('삭제하시겠습니까?')) {
