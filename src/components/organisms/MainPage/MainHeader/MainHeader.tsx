@@ -34,7 +34,7 @@ const MainHeader = () => {
 const StyledLeft = styled.div`
   ${flexRow}
   align-items: center;
-  gap: 0.2em;
+  gap: 0.3rem;
   ${preventDragStyle}
 `;
 

@@ -17,6 +17,7 @@ const PostDetailHeader = ({ content }: { content: string }) => {
       <Typography size="sm" weight="bold">
         {content}
       </Typography>
+      <Spacing />
     </Header>
   );
 };
@@ -27,6 +28,11 @@ const StyledArrowBackIcon = styled(ArrowBackIcon)`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const Spacing = styled.span`
+  width: 20px;
+  height: 20px;
 `;
 
 export default PostDetailHeader;

@@ -22,5 +22,6 @@ const ToggleWrapper = styled(Button)`
   border: ${(props) => props.theme.colors.background};
   font-size: ${({ theme }) => theme.fonts.size.base};
   background-color: rgba(0, 0, 0, 0);
+  padding: 0;
 `;
 export default ThemeToggle;
