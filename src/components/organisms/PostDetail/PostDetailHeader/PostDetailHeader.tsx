@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from 'components/atoms/icons/ArrowBackIcon';
 import styled from 'styled-components';
@@ -11,17 +11,14 @@ const PostDetailHeader = ({ content }: { content: string }) => {
     navigate(-1);
   }, [navigate]);
 
-  const left = useMemo(() => <StyledArrowBackIcon onClick={goBack} />, [goBack]);
-  const middle = useMemo(
-    () => (
+  return (
+    <Header>
+      <StyledArrowBackIcon onClick={goBack} />
       <Typography size="sm" weight="bold">
         {content}
       </Typography>
-    ),
-    [content],
+    </Header>
   );
-
-  return <Header left={left} middle={middle} />;
 };
 
 const StyledArrowBackIcon = styled(ArrowBackIcon)`

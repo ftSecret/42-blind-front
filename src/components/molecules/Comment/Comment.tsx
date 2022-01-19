@@ -94,10 +94,10 @@ const Comment = ({
         </StyledContent>
         <StyledInfoWrap>
           <StyledInfoDiv>
-            <Typography children={formatDate(created_at)} size="ssm" color="grey" />
+            <Typography children={formatDate(created_at)} size="xs" color="grey" />
             <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
             {goods > 0 && (
-              <Typography children={`좋아요 ${goods}개`} size="ssm" weight="bold" color="grey" />
+              <Typography children={`좋아요 ${goods}개`} size="xs" weight="bold" color="grey" />
             )}
           </StyledInfoDiv>
           <GoodButton is_good={is_good} onClick={toggleGood} />
@@ -147,7 +147,7 @@ const StyledInfoDiv = styled.div`
 const ReplyButton = styled(Button)`
   all: unset;
   cursor: pointer;
-  font-size: ${({ theme }) => theme.fonts.size.ssm};
+  font-size: ${({ theme }) => theme.fonts.size.xs};
   font-weight: ${({ theme }) => theme.fonts.weight.bold};
   color: ${colors.grey};
 `;

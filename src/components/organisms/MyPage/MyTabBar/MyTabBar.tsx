@@ -26,16 +26,23 @@ const StyledTabBar = styled(TabBar)`
   ${headerStyle}
   min-height: 0rem;
   justify-content: space-evenly;
-  position: sticky;
   top: 0px;
-  padding: 0;
+  height: 40px;
+
+  & p {
+    height: 100%;
+  }
+
   & a {
     box-sizing: border-box;
-    padding: 0.1rem 0;
-    font-size: 1.2rem;
+    display: block;
+    height: 100%;
+    font-size: ${({ theme }) => theme.fonts.size.sm};
     font-weight: 400;
+    padding-top: 0.5rem;
     color: ${colors.grey};
   }
+
   & a.selected {
     color: ${({ theme }) => theme.colors.default};
     font-weight: bold;

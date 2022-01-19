@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 
@@ -12,6 +12,7 @@ import { CODE_2000 } from 'constants/api';
 import { PATH_POST } from 'components/utils/AppRouter';
 import { isEmpty } from 'utils/isEmpty';
 import { POST_WRITING, POST_EDITING, MAX_CONTENT_COUNT, MAX_TITLE_COUNT } from 'constants/post';
+import { centerRowStyle } from 'styles/mixin';
 
 type StatusType = typeof POST_EDITING | typeof POST_WRITING;
 
@@ -56,32 +57,45 @@ const PostWritingHeader = ({ postId = -1, content, title, writingStatus }: PropT
     }
   }, [navigate, writingData]);
 
-  const left = useMemo(() => <StyledCloseIcon onClick={handleClose} />, [handleClose]);
-  const right = useMemo(
-    () => <StyledSubmitButton children="완료" onClick={handleSubmit} />,
-    [handleSubmit],
+  return (
+    <Header>
+      <StyledCloseIcon onClick={handleClose} />
+      <StyledTitle size="base" weight="bold" children={writingStatus} />
+      <StyledSpan>
+        <StyledSubmitButton children="완료" onClick={handleSubmit} />
+      </StyledSpan>
+    </Header>
   );
-  const middle = useMemo(
-    () => <Typography size="base" weight="bold" children={writingStatus} />,
-    [writingStatus],
-  );
-
-  return <Header left={left} right={right} middle={middle} />;
 };
 
 export default PostWritingHeader;
 
+const StyledCloseIcon = styled(CloseIcon)`
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+  flex: 1;
+`;
+
+const StyledTitle = styled(Typography)`
+  ${centerRowStyle}
+  flex: 4;
+`;
+
+const StyledSpan = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+`;
+
 const StyledSubmitButton = styled(Button)`
   font-weight: bold;
+  font-size: ${({ theme }) => theme.fonts.size.xs};
   background-color: ${({ theme }) => theme.colors.red};
   border-color: ${({ theme }) => theme.colors.white};
   border-style: none;
   color: ${({ theme }) => theme.colors.white};
-  width: 4rem;
-  height: 2.3rem;
   border-radius: 50px;
-`;
-
-const StyledCloseIcon = styled(CloseIcon)`
-  cursor: pointer;
+  height: 2.3rem;
+  width: 4rem;
 `;

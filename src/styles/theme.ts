@@ -7,7 +7,7 @@ export type Theme = {
   paddings: typeof paddings;
 };
 
-export type FontSize = 'ssm' | 'sm' | 'base' | 'lg' | 'xl';
+export type FontSize = 'xxs' | 'xs' | 'sm' | 'base' | 'lg' | 'xl' | 'xxl';
 export type FontWeight = 'light' | 'normal' | 'bold';
 export type FontLineHeight = 'base' | 'large';
 
@@ -36,11 +36,13 @@ export const fonts = {
     title: `'Merriweather', serif`,
   },
   size: {
-    ssm: '0.9rem',
+    xxs: '0.5rem',
+    xs: '0.9rem',
     sm: '1rem',
-    base: '1.5rem',
+    base: '1.3rem',
     lg: '2rem',
     xl: '2.5rem',
+    xxl: '2.8rem',
   },
   weight: {
     light: 100,

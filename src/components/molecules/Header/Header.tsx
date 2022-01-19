@@ -3,19 +3,11 @@ import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
 
 type PropTypes = {
-  left?: JSX.Element | string;
-  middle?: JSX.Element | string;
-  right?: JSX.Element | string;
+  children?: JSX.Element[] | JSX.Element | string;
   className?: string;
 };
-const Header = ({ left, right, middle, className }: PropTypes) => {
-  return (
-    <HeaderContainer className={className}>
-      {left}
-      {middle}
-      {right}
-    </HeaderContainer>
-  );
+const Header = ({ children, className }: PropTypes) => {
+  return <HeaderContainer className={className}>{children}</HeaderContainer>;
 };
 
 export const HeaderContainer = styled.div`

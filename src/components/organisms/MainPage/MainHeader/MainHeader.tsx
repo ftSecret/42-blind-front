@@ -16,6 +16,21 @@ const rightItem = {
   content: 'MY',
 };
 
+const MainHeader = () => {
+  return (
+    <Header>
+      <StyledLeft>
+        <Anchor size="base" weight="bold" linkItem={leftItem} />
+        <ThemeToggle />
+      </StyledLeft>
+      <StyledRight>
+        <PostWritingButton />
+        <StyledMy size="xxs" weight="bold" linkItem={rightItem} />
+      </StyledRight>
+    </Header>
+  );
+};
+
 const StyledLeft = styled.div`
   ${flexRow}
   align-items: center;
@@ -36,25 +51,6 @@ const StyledMy = styled(Anchor)`
   padding: 0.25rem 0;
   height: 25px;
   min-width: 25px;
-  font-size: 0.5rem;
 `;
-
-const left = (
-  <StyledLeft>
-    <Anchor size="base" weight="bold" linkItem={leftItem} />
-    <ThemeToggle />
-  </StyledLeft>
-);
-
-const right = (
-  <StyledRight>
-    <PostWritingButton />
-    <StyledMy weight="bold" linkItem={rightItem} />
-  </StyledRight>
-);
-
-const MainHeader = () => {
-  return <Header left={left} right={right} />;
-};
 
 export default MainHeader;
