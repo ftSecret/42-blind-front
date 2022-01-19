@@ -79,7 +79,7 @@ const CommentInput = ({
 
 const StyledCloseIcon = styled(CloseIcon)`
   ${centerRowStyle}
-  min-width: 28px;
+  min-width: 40px;
 `;
 
 const InputDiv = styled.div`
@@ -87,17 +87,21 @@ const InputDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 0.5rem;
+  gap: 0.3rem;
 `;
 
 const SubmitButton = styled(Button)`
-  all: unset;
   ${centerRowStyle}
   font-size:${({ theme }) => theme.fonts.size.sm};
   color: ${({ theme }) => theme.colors.red};
-  min-width: 28px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  min-width: 40px;
+  padding: 0px;
 
   &:disabled {
     opacity: 0.3;
+    cursor: not-allowed;
   }
 `;
 
@@ -117,7 +121,8 @@ const StyledInput = styled.input`
   border-style: none;
   color: ${({ theme }) => theme.colors.default};
   background-color: rgba(0, 0, 0, 0);
-  font-size: 1rem;
+  font-size: ${({ theme }) => theme.fonts.size.sm};
+  padding: 0;
 `;
 
 const StyledForm = styled.form`
