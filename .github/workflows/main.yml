@@ -19,6 +19,7 @@ jobs:
         run: yarn build
         env:
           REACT_APP_BLIND_API_DOMAIN: https://api.42blind.com
+          REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
       - name: S3 Deploy
         run: aws s3 sync ./build s3://42-blind/ --acl bucket-owner-full-control
