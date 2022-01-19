@@ -8,7 +8,7 @@ import { flexColumn } from 'styles/mixin';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 const MyCommentBoard = () => {
-  const myComments = useGetBlindCommentMeQuery();
+  const myComments = useGetBlindCommentMeQuery(undefined, { refetchOnMountOrArgChange: true });
 
   return (
     <StyledCards>

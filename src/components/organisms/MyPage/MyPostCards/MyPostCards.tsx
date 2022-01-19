@@ -11,8 +11,8 @@ import LoadingSpinner from 'components/atoms/LoadingSpinner';
 
 type PropTypes = { className?: string };
 
-const MainCards = ({ className }: PropTypes) => {
-  const myPosts = useGetBlindPostMeQuery();
+const MyPostCards = ({ className }: PropTypes) => {
+  const myPosts = useGetBlindPostMeQuery(undefined, { refetchOnMountOrArgChange: true });
   const [cards, setCards] = useState<PostType[]>([]);
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const StyledContainer = styled.div`
   gap: 0.5rem;
 `;
 
-export default MainCards;
+export default MyPostCards;
