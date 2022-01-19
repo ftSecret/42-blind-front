@@ -3,7 +3,7 @@ import PostWritingHeader from 'components/organisms/PostWriting/PostWritingHeade
 import PostWriting from 'components/templates/PostWriting';
 import { useInput } from 'hooks/useInput';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
+import { wrapperStyle } from 'styles/mixin';
 import { POST_WRITING } from 'constants/post';
 
 const PostWritingPage = () => {
@@ -11,16 +11,15 @@ const PostWritingPage = () => {
   const { value: content, props: contentProps } = useInput('');
 
   return (
-    <Wrapper>
+    <PostWritingWrapper>
       <PostWritingHeader title={title} content={content} writingStatus={POST_WRITING} />
       <PostWriting titleProps={titleProps} contentProps={contentProps} />
-    </Wrapper>
+    </PostWritingWrapper>
   );
 };
 
-const Wrapper = styled.div`
-  height: -webkit-fill-available;
-  ${flexColumn}
+const PostWritingWrapper = styled.div`
+  ${wrapperStyle}
 `;
 
 export default PostWritingPage;

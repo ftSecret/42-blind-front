@@ -21,7 +21,7 @@ type PropTypes = {
   title: string;
   writingStatus: StatusType;
 };
-const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes) => {
+const PostWritingHeader = ({ postId = -1, content, title, writingStatus }: PropTypes) => {
   const navigate = useNavigate();
   const [addBlindPost, { data: writingData }] = useAddBlindPostMutation();
   const [editBlindPost] = useEditBlindPostMutation();
@@ -36,7 +36,7 @@ const PostWritingHeader = ({ postId, content, title, writingStatus }: PropTypes)
     }
     if (writingStatus === POST_WRITING) {
       await addBlindPost({ title, content });
-    } else if (postId !== undefined && writingStatus === POST_EDITING) {
+    } else if (postId !== -1 && writingStatus === POST_EDITING) {
       await editBlindPost({ content, post_id: postId, title });
       navigate(-1);
     }

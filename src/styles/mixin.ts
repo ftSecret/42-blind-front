@@ -29,3 +29,8 @@ export const containerStyle = css`
   margin: auto;
   padding: 0.5em;
 `;
+
+export const wrapperStyle = css`
+  ${flexColumn}
+  height: 100vh;
+`;

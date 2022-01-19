@@ -47,10 +47,6 @@ const globalCss = css`
     box-sizing: border-box;
   }
 
-  #root {
-    height: 100%;
-  }
-
   textarea {
     all: unset;
     line-height: 1.5;

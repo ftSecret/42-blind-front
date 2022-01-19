@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import PostWriting from 'components/templates/PostWriting';
 import { POST_EDITING } from 'constants/post';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
+import { wrapperStyle } from 'styles/mixin';
 
 type PrevType = {
   title: string;
@@ -31,7 +31,7 @@ const PostEditingPage = () => {
   }, [location.state, setContent, setTitle]);
 
   return (
-    <Wrapper>
+    <PostEditingWrapper>
       <PostWritingHeader
         postId={postId}
         title={title}
@@ -39,13 +39,12 @@ const PostEditingPage = () => {
         writingStatus={POST_EDITING}
       />
       <PostWriting titleProps={titleProps} contentProps={contentProps} />
-    </Wrapper>
+    </PostEditingWrapper>
   );
 };
 
-const Wrapper = styled.div`
-  height: -webkit-fill-available;
-  ${flexColumn}
+const PostEditingWrapper = styled.div`
+  ${wrapperStyle}
 `;
 
 export default PostEditingPage;
