@@ -44,7 +44,6 @@ const MainCards = ({
     [addPage],
   );
 
-  console.log(posts.data);
   useEffect(() => {
     if (
       posts.data &&
