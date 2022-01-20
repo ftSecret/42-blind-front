@@ -175,6 +175,9 @@ const globalCSS = css`
 
   * {
     box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
   }
 
   textarea {
