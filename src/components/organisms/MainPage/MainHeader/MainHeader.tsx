@@ -3,7 +3,7 @@ import ThemeToggle from 'components/molecules/ThemeToggle';
 import Header from 'components/molecules/Header';
 import Anchor from 'components/molecules/Anchor';
 import styled from 'styled-components';
-import { centerRowStyle, flexRow, preventDragStyle } from 'styles/mixin';
+import { centerRowStyle, flexRow } from 'styles/mixin';
 import PostWritingButton from '../PostWritingButton';
 
 const leftItem = {
@@ -35,14 +35,12 @@ const StyledLeft = styled.div`
   ${flexRow}
   align-items: center;
   gap: 0.3rem;
-  ${preventDragStyle}
 `;
 
 const StyledRight = styled.div`
   ${flexRow}
   align-items: center;
   gap: 1rem;
-  ${preventDragStyle}
 `;
 
 const StyledMy = styled(Anchor)`

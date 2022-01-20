@@ -10,7 +10,15 @@ export const flexRow = css`
   display: flex;
 `;
 
+export const preventDragStyle = css`
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`;
+
 export const headerStyle = css`
+  ${preventDragStyle}
   ${flexRow}
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
@@ -46,11 +54,4 @@ export const centerColumnStyle = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-export const preventDragStyle = css`
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 `;
