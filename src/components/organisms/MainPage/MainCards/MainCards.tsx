@@ -44,8 +44,10 @@ const MainCards = ({
     [addPage],
   );
 
+  console.log(posts.data);
   useEffect(() => {
     if (
+      posts.data &&
       lastPage === page &&
       posts.isSuccess === true &&
       posts.data.data.length > 0 &&
