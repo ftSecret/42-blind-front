@@ -15,7 +15,6 @@ export const headerStyle = css`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
   align-items: center;
-  justify-content: space-between;
   min-height: 56px;
   position: sticky;
   padding: 0 0.8rem;

@@ -1,17 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { headerStyle } from 'styles/mixin';
+import { containerStyle, flexRow, headerStyle } from 'styles/mixin';
 
 type PropTypes = {
   children?: JSX.Element[] | JSX.Element | string;
   className?: string;
 };
 const Header = ({ children, className }: PropTypes) => {
-  return <HeaderContainer className={className}>{children}</HeaderContainer>;
+  return (
+    <HeaderContainer className={className}>
+      <HeaderItem>{children}</HeaderItem>
+    </HeaderContainer>
+  );
 };
 
 export const HeaderContainer = styled.div`
   ${headerStyle}
+`;
+
+export const HeaderItem = styled.div`
+  ${containerStyle}
+  ${flexRow}
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default Header;
