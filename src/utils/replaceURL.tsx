@@ -1,7 +1,14 @@
 import React from 'react';
-import { urlPattern } from './urlPattern';
 
-const makeATag = (href: string) => <a href={href}>{href}</a>;
+const urlPattern =
+  // eslint-disable-next-line no-useless-escape
+  /http(s)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/g;
+
+const makeATag = (href: string) => (
+  <a href={href} target="_blank" rel="noreferrer">
+    {href}
+  </a>
+);
 
 export const replaceURL = (content: string) => {
   let startIdx = 0;
