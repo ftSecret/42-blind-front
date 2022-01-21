@@ -9,8 +9,8 @@ export const replaceURL = (content: string) => {
   const result: JSX.Element[] = [];
   let res = new RegExp(urlPattern).exec(content);
   while (res !== null) {
-    endIdx = content.search(res[0]);
-    result.push(<>{content.substring(startIdx, endIdx)}</>);
+    endIdx = content.indexOf(res[0]);
+    if (startIdx < endIdx) result.push(<>{content.substring(startIdx, endIdx)}</>);
     result.push(makeATag(res[0]));
     startIdx = endIdx + res[0].length;
     res = new RegExp(urlPattern).exec(content.substring(startIdx));

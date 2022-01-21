@@ -16,6 +16,7 @@ import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
 import { colors } from 'styles/theme';
+import { replaceURL } from 'utils/replaceURL';
 
 type PropTypes = {
   post: APIPostType;
@@ -93,7 +94,7 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
         <PostDate children={formatDate(post.created_at)} size="sm" />
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" forwardedAs="h1" />
-      <PostContent children={post.content} size="sm" />
+      <PostContent size="sm">{replaceURL(post.content)}</PostContent>
       <StyledStatusWrap>
         <Status count={count} />
         <GoodButton onClick={toggleGood} is_good={post.is_good} />
