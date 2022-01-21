@@ -8,73 +8,85 @@ import styled from 'styled-components';
 import { centerRowStyle } from 'styles/mixin';
 import { size } from 'styles/theme';
 import { formatDate } from 'utils/formatDate';
+import dayjs from 'dayjs';
 
-type NotiListItemType = {
+type NotyListItemPropType = {
   isChecked: boolean;
 };
+
 const data = {
   data: [
     {
       notification_id: 0,
-      type: 'comment', // 알림의 타입, good은 미정이나 추후에 추가될 가능성이 높아보임.
+      type: 'comment' as const,
 
-      redirect_id: 2, // 이동시킬 id, 현재 상황에서는 post_id가 들어갈 것으로 예상.
-      created_at: new Date(), // 알림의 생성 시간
+      redirect_id: 2,
+      created_at: new Date(),
 
-      parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '진짜 진짜 배고프지 않아요?', // type이 comment일 경우 comment_content를 넣음.
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
 
       children_id: 2,
       children_value: '아 진짜 진짜 진짜 진짜요?',
 
-      is_checked: false, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
+      is_checked: false,
     },
     {
       notification_id: 1,
-      type: 'comment', // 알림의 타입, good은 미정이나 추후에 추가될 가능성이 높아보임.
+      type: 'comment' as const,
 
-      redirect_id: 2, // 이동시킬 id, 현재 상황에서는 post_id가 들어갈 것으로 예상.
-      created_at: new Date(), // 알림의 생성 시간
+      redirect_id: 2,
+      created_at: dayjs().subtract(15, 'hour'),
 
-      parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!', // type이 comment일 경우 comment_content를 넣음.
+      parent_id: 1,
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
 
       children_id: 2,
       children_value: '당떨어져..',
 
-      is_checked: false, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
+      is_checked: false,
     },
     {
       notification_id: 2,
-      type: 'comment', // 알림의 타입, good은 미정이나 추후에 추가될 가능성이 높아보임.
+      type: 'comment' as const,
 
-      redirect_id: 2, // 이동시킬 id, 현재 상황에서는 post_id가 들어갈 것으로 예상.
-      created_at: new Date(), // 알림의 생성 시간
+      redirect_id: 2,
+      created_at: dayjs().subtract(1, 'day'),
 
-      parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '진짜 진짜 배고프지 않아요?', // type이 comment일 경우 comment_content를 넣음.
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
 
       children_id: 2,
       children_value: '아 진짜 진짜 진짜 진짜요?',
 
-      is_checked: true, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
+      is_checked: true,
     },
     {
       notification_id: 3,
-      type: 'reply', // 알림의 타입, good은 미정이나 추후에 추가될 가능성이 높아보임.
+      type: 'reply' as const,
 
-      redirect_id: 2, // 이동시킬 id, 현재 상황에서는 post_id가 들어갈 것으로 예상.
-      created_at: new Date(), // 알림의 생성 시간
+      redirect_id: 2,
+      created_at: dayjs().subtract(2, 'day'),
 
-      parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '댓글 달아주세요', // type이 comment일 경우 comment_content를 넣음.
+      parent_id: 1,
+      parent_value: '댓글 달아주세요',
 
       children_id: 2,
       children_value: '2',
 
-      is_checked: false, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
+      is_checked: false,
     },
   ],
+};
+
+type NotyType = 'reply' | 'comment' | 'good_comment' | 'good_post';
+
+const getMessage = (type: NotyType) => {
+  if (type === 'reply') return '댓글에 답글이 달렸습니다. ';
+  else if (type === 'comment') return '게시글에 댓글이 달렸습니다. ';
+  else if (type === 'good_comment') return '댓글에 좋아요가 눌렸습니다.';
+  else if (type === 'good_post') return '게시글에 좋아요가 눌렸습니다.';
+  else throw new Error(`${type}은 유효하지 않은 타입입니다.`);
 };
 
 const Notifications = () => {
@@ -84,7 +96,6 @@ const Notifications = () => {
     data.data.filter((elem) => elem.is_checked === false).length,
   );
 
-  //const modalRef = useRef<HTMLDivElement>(null);
   const handleClick = () => {
     setNotificationIsHidden(!notificationIsHidden);
   };
@@ -97,19 +108,19 @@ const Notifications = () => {
         ) : (
           <StyledNotificationsIcon size={25} />
         )}
-        <>{number > 0 && <StyledNumber>{number}</StyledNumber>}</>
+        <StyledNumber hidden={number <= 0} aria-hidden={number <= 0}>
+          {number}
+        </StyledNumber>
       </StyledNotificationsButton>
-      <NotificationList hidden={notificationIsHidden}>
+      <NotificationList hidden={notificationIsHidden} aria-hidden={notificationIsHidden}>
         {data?.data.map((item) => {
           return (
             <NotiListItem isChecked={item.is_checked}>
               <Link key={item.notification_id} to={`${PATH_POST}/${item.redirect_id}`}>
                 <StyledContent>
                   <strong>"{item.parent_value}"</strong>&nbsp;
-                  {item.type === 'reply'
-                    ? '댓글에 답글이 달렸습니다. '
-                    : '게시글에 댓글이 달렸습니다. '}
-                  <strong>"{item.children_value}"&nbsp;</strong>
+                  <p>{getMessage(item.type)}:</p>&nbsp;
+                  <strong>"{item.children_value}"</strong>&nbsp;
                   <p>{formatDate(item.created_at.toString())}</p>
                 </StyledContent>
               </Link>
@@ -137,13 +148,13 @@ const StyledNotificationsButton = styled(Button)`
 const StyledNumber = styled.span`
   font-size: ${({ theme }) => theme.fonts.size.xxs};
   position: absolute;
-  z-index: 1;
   background-color: ${({ theme }) => theme.colors.red};
   padding: 0.15rem;
   border-radius: 50%;
   font-weight: bold;
   min-width: 15px;
   min-height: 15px;
+  z-index: 1;
   top: 0px;
   right: 0px;
   transform: translate(30%);
@@ -153,9 +164,8 @@ const NotificationList = styled.ul`
   width: 90vw;
   min-height: 100px;
   max-width: ${size.tablet};
-  max-height: 35vh;
+  max-height: 40vh;
   overflow-y: auto;
-  text-align: justify;
   position: absolute;
   font-size: ${({ theme }) => theme.fonts.size.sm};
   border: 2px solid ${({ theme }) => theme.colors.grey};
@@ -167,25 +177,37 @@ const NotificationList = styled.ul`
   transform: translate(-50%);
 `;
 
-const NotiListItem = styled.li<NotiListItemType>`
-  overflow: auto;
+const NotiListItem = styled.li<NotyListItemPropType>`
   padding: 1rem 0.5rem;
-  line-height: 1.2;
   background-color: ${({ theme }) => theme.colors.primary};
-  opacity: ${({ isChecked }) => (isChecked ? 0.3 : '')};
 
-  & strong {
-    font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  & p,
+  strong {
+    opacity: ${({ isChecked }) => (isChecked ? 0.3 : '')};
   }
-  & p {
-    display: inline-block;
-    color: ${({ theme }) => theme.colors.grey};
-  }
+
   &:not(:last-child) {
     border-bottom: 1px solid grey;
   }
 `;
 
-const StyledContent = styled.div``;
+const StyledContent = styled.div`
+  line-height: 1.2;
+  word-break: break-all;
+  word-wrap: break-word;
+  text-align: left;
+
+  & strong {
+    font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  }
+
+  & p {
+    display: inline-block;
+  }
+
+  & p:nth-last-child(1) {
+    color: ${({ theme }) => theme.colors.grey};
+  }
+`;
 
 export default Notifications;
