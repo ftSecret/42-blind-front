@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
-import { flexColumn, flexRow, preventDragStyle } from 'styles/mixin';
+import { flexColumn, flexRow, linkStyle, preventDragStyle } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { PostType } from 'types';
 import { useNavigate } from 'react-router-dom';
@@ -154,6 +154,10 @@ const PostTitle = styled(Typography)``;
 const PostContent = styled(Typography)`
   line-height: 1.3;
   white-space: pre-wrap;
+
+  & a {
+    ${linkStyle}
+  }
 `;
 
 const StyledStatusWrap = styled.div`

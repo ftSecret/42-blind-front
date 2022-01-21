@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { css } from 'styled-components';
 import { size } from './theme';
 
@@ -53,4 +54,10 @@ export const centerColumnStyle = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const linkStyle = css`
+  color: ${({ theme }) => darken(0.15, theme.colors.blue)};
+  text-decoration: underline;
+  display: inline-block;
 `;
