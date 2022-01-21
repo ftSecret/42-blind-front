@@ -47,6 +47,126 @@ const data = {
       is_checked: false,
     },
     {
+      notification_id: 0,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: new Date(),
+
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
+
+      children_id: 2,
+      children_value: '아 진짜 진짜 진짜 진짜요?',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 1,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: dayjs().subtract(15, 'hour'),
+
+      parent_id: 1,
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
+
+      children_id: 2,
+      children_value: '당떨어져..',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 0,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: new Date(),
+
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
+
+      children_id: 2,
+      children_value: '아 진짜 진짜 진짜 진짜요?',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 1,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: dayjs().subtract(15, 'hour'),
+
+      parent_id: 1,
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
+
+      children_id: 2,
+      children_value: '당떨어져..',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 0,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: new Date(),
+
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
+
+      children_id: 2,
+      children_value: '아 진짜 진짜 진짜 진짜요?',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 1,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: dayjs().subtract(15, 'hour'),
+
+      parent_id: 1,
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
+
+      children_id: 2,
+      children_value: '당떨어져..',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 0,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: new Date(),
+
+      parent_id: 1,
+      parent_value: '진짜 진짜 배고프지 않아요?',
+
+      children_id: 2,
+      children_value: '아 진짜 진짜 진짜 진짜요?',
+
+      is_checked: false,
+    },
+    {
+      notification_id: 1,
+      type: 'comment' as const,
+
+      redirect_id: 2,
+      created_at: dayjs().subtract(15, 'hour'),
+
+      parent_id: 1,
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
+
+      children_id: 2,
+      children_value: '당떨어져..',
+
+      is_checked: false,
+    },
+    {
       notification_id: 2,
       type: 'comment' as const,
 
@@ -89,6 +209,8 @@ const getMessage = (type: NotyType) => {
   else throw new Error(`${type}은 유효하지 않은 타입입니다.`);
 };
 
+const formatNumber = (number: number) => (number > 9 ? '9+' : number.toString());
+
 const Notifications = () => {
   const [notyIsHidden, setNotyIsHidden] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -100,12 +222,16 @@ const Notifications = () => {
     setNotyIsHidden(!notyIsHidden);
   };
 
+  const hiddenNoty = () => {
+    setNotyIsHidden(true);
+  };
+
   return (
     <>
       <StyledNotyButton onClick={handleClick}>
         {notyIsHidden ? <StyledNotyOutlineIcon size={25} /> : <StyledNotyIcon size={25} />}
         <StyledNumber hidden={number <= 0} aria-hidden={number <= 0}>
-          {number}
+          {formatNumber(number)}
         </StyledNumber>
       </StyledNotyButton>
       <NotyList hidden={notyIsHidden} aria-hidden={notyIsHidden}>
@@ -113,20 +239,30 @@ const Notifications = () => {
           return (
             <NotiListItem isChecked={item.is_checked}>
               <Link key={item.notification_id} to={`${PATH_POST}/${item.redirect_id}`}>
-                <StyledContent>
+                <NotyContent>
                   <strong>"{item.parent_value}"</strong>&nbsp;
                   <p>{getMessage(item.type)}:</p>&nbsp;
                   <strong>"{item.children_value}"</strong>&nbsp;
                   <p>{formatDate(item.created_at.toString())}</p>
-                </StyledContent>
+                </NotyContent>
               </Link>
             </NotiListItem>
           );
         })}
       </NotyList>
+      <NotyOverlay onClick={hiddenNoty} hidden={notyIsHidden} aria-hidden={notyIsHidden} />
     </>
   );
 };
+
+const NotyOverlay = styled.div`
+  z-index: 2;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+`;
 
 const StyledNotyIcon = styled(NotificationsIcon)`
   height: ${size.icon};
@@ -165,7 +301,7 @@ const NotyList = styled.ul`
   width: 90vw;
   min-height: 100px;
   max-width: ${size.tablet};
-  max-height: 40vh;
+  max-height: 35vh;
   overflow-y: auto;
   position: absolute;
   font-size: ${({ theme }) => theme.fonts.size.sm};
@@ -176,6 +312,7 @@ const NotyList = styled.ul`
   top: calc(${size.header} + 1rem);
   left: 50%;
   transform: translate(-50%);
+  z-index: 3;
 `;
 
 const NotiListItem = styled.li<NotyListItemPropType>`
@@ -192,7 +329,7 @@ const NotiListItem = styled.li<NotyListItemPropType>`
   }
 `;
 
-const StyledContent = styled.div`
+const NotyContent = styled.div`
   line-height: 1.2;
   word-break: break-all;
   word-wrap: break-word;
