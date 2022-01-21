@@ -90,29 +90,25 @@ const getMessage = (type: NotyType) => {
 };
 
 const Notifications = () => {
-  const [notificationIsHidden, setNotificationIsHidden] = useState(false);
+  const [notyIsHidden, setNotyIsHidden] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [number, setNumber] = useState(
     data.data.filter((elem) => elem.is_checked === false).length,
   );
 
   const handleClick = () => {
-    setNotificationIsHidden(!notificationIsHidden);
+    setNotyIsHidden(!notyIsHidden);
   };
 
   return (
     <>
-      <StyledNotificationsButton onClick={handleClick}>
-        {notificationIsHidden ? (
-          <NotificationsOutlineIcon size={25} />
-        ) : (
-          <StyledNotificationsIcon size={25} />
-        )}
+      <StyledNotyButton onClick={handleClick}>
+        {notyIsHidden ? <StyledNotyOutlineIcon size={25} /> : <StyledNotyIcon size={25} />}
         <StyledNumber hidden={number <= 0} aria-hidden={number <= 0}>
           {number}
         </StyledNumber>
-      </StyledNotificationsButton>
-      <NotificationList hidden={notificationIsHidden} aria-hidden={notificationIsHidden}>
+      </StyledNotyButton>
+      <NotyList hidden={notyIsHidden} aria-hidden={notyIsHidden}>
         {data?.data.map((item) => {
           return (
             <NotiListItem isChecked={item.is_checked}>
@@ -127,17 +123,22 @@ const Notifications = () => {
             </NotiListItem>
           );
         })}
-      </NotificationList>
+      </NotyList>
     </>
   );
 };
 
-const StyledNotificationsIcon = styled(NotificationsIcon)`
+const StyledNotyIcon = styled(NotificationsIcon)`
   height: ${size.icon};
   width: ${size.icon};
 `;
 
-const StyledNotificationsButton = styled(Button)`
+const StyledNotyOutlineIcon = styled(NotificationsOutlineIcon)`
+  height: ${size.icon};
+  width: ${size.icon};
+`;
+
+const StyledNotyButton = styled(Button)`
   all: unset;
   ${centerRowStyle}
   text-align: center;
@@ -160,7 +161,7 @@ const StyledNumber = styled.span`
   transform: translate(30%);
 `;
 
-const NotificationList = styled.ul`
+const NotyList = styled.ul`
   width: 90vw;
   min-height: 100px;
   max-width: ${size.tablet};
