@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { flexColumn, flexRow, preventDragStyle } from 'styles/mixin';
-
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
-
 import Button from 'components/atoms/Button';
 import RightArrowIcon from 'components/atoms/icons/RightArrowIcon';
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
@@ -16,6 +14,8 @@ import { colors } from 'styles/theme';
 import Tag from 'components/atoms/Tag';
 import { useAppSelector } from 'app/hooks';
 import { selectUserId } from 'features/user/userSlice';
+import { replaceURL } from 'utils/replaceURL';
+import { darken } from 'polished';
 
 type CommentPropTypes = CommentType & HandleReplyTypes;
 
@@ -90,7 +90,7 @@ const Comment = ({
         </StyledProfile>
         <StyledContent>
           {parent_id !== -1 && <h2>{`@${findNickname(parent_id)}`}</h2>}
-          <p>{content}</p>
+          <p>{replaceURL(content)}</p>
         </StyledContent>
         <StyledInfoWrap>
           <StyledInfoDiv>
@@ -160,6 +160,12 @@ const StyledContent = styled.p`
   white-space: pre-wrap;
   h2 {
     color: ${({ theme }) => theme.colors.blue};
+  }
+
+  a {
+    color: ${({ theme }) => darken(0.15, theme.colors.blue)};
+    text-decoration: underline;
+    display: inline-block;
   }
 `;
 
