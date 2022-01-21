@@ -46,6 +46,7 @@ const MainCards = ({
 
   useEffect(() => {
     if (
+      posts.data &&
       lastPage === page &&
       posts.isSuccess === true &&
       posts.data.data.length > 0 &&

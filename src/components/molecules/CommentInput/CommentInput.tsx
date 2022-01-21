@@ -1,11 +1,12 @@
 import { useAddBlindCommentMutation } from 'api/blindComment';
 import { APIPostType, APICommentsType } from 'api/type';
+import Button from 'components/atoms/Button';
 import CloseIcon from 'components/atoms/icons/CloseIcon';
 import { MAX_COMMENT_COUNT } from 'constants/comment';
 import { useInput } from 'hooks';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { flexRow } from 'styles/mixin';
+import { centerRowStyle, flexRow } from 'styles/mixin';
 import { isEmpty } from 'utils/isEmpty';
 import { SelectedCommentType } from '../Comments/Comments';
 
@@ -59,19 +60,50 @@ const CommentInput = ({
       {selectedComment.nickname !== '' && (
         <StyledReplyMessage>
           <p>{`${selectedComment.nickname}에게 답글 남기는 중...`}</p>
-          <CloseIcon onClick={handleCloseButton} />
+          <StyledCloseIcon onClick={handleCloseButton} size={18} />
         </StyledReplyMessage>
       )}
-      <StyledInput
-        {...inputProps}
-        ref={inputRef}
-        placeholder={
-          selectedComment.nickname === '' ? '댓글 남기기...' : `@${selectedComment.nickname}`
-        }
-      />
+      <InputDiv>
+        <StyledInput
+          {...inputProps}
+          ref={inputRef}
+          placeholder={
+            selectedComment.nickname === '' ? '댓글 남기기...' : `@${selectedComment.nickname}`
+          }
+        />
+        <SubmitButton disabled={isEmpty(value)}>입력</SubmitButton>
+      </InputDiv>
     </StyledForm>
   );
 };
+
+const StyledCloseIcon = styled(CloseIcon)`
+  ${centerRowStyle}
+  min-width: 40px;
+`;
+
+const InputDiv = styled.div`
+  ${flexRow}
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  gap: 0.3rem;
+`;
+
+const SubmitButton = styled(Button)`
+  ${centerRowStyle}
+  font-size:${({ theme }) => theme.fonts.size.sm};
+  color: ${({ theme }) => theme.colors.red};
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  min-width: 40px;
+  padding: 0px;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+`;
 
 const StyledReplyMessage = styled.div`
   ${flexRow}
@@ -89,8 +121,8 @@ const StyledInput = styled.input`
   border-style: none;
   color: ${({ theme }) => theme.colors.default};
   background-color: rgba(0, 0, 0, 0);
-  font-size: 1rem;
-  padding: 0 0.5rem;
+  font-size: ${({ theme }) => theme.fonts.size.sm};
+  padding: 0;
 `;
 
 const StyledForm = styled.form`

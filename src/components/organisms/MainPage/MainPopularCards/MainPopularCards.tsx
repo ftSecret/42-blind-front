@@ -21,7 +21,7 @@ const MainPopularCards = ({ className, endLoading }: PropTypes) => {
   }, [endLoading, posts]);
 
   useEffect(() => {
-    if (posts.isSuccess === true) setCards(formatPost(posts.data.data));
+    if (posts.isSuccess === true && posts.data) setCards(formatPost(posts.data.data));
   }, [posts]);
 
   if (posts.isSuccess === true && cards.length === 0) return null;

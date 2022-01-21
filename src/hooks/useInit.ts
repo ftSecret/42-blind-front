@@ -13,6 +13,7 @@ const initSentry = () => {
     Sentry.init({
       dsn: process.env.REACT_APP_SENTRY_DSN,
       integrations: [new Integrations.BrowserTracing()],
+      environment: process.env.REACT_APP_ENV,
       tracesSampleRate: 0.3,
     });
   }

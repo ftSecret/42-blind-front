@@ -2,24 +2,55 @@ import React from 'react';
 import ThemeToggle from 'components/molecules/ThemeToggle';
 import Header from 'components/molecules/Header';
 import Anchor from 'components/molecules/Anchor';
-import { isAuth } from 'utils/isAuth';
+import styled from 'styled-components';
+import { centerRowStyle, flexRow } from 'styles/mixin';
+import PostWritingButton from '../PostWritingButton';
 
-const rightItem = {
-  to: isAuth() ? '/my' : '/login',
-  content: isAuth() ? '마이페이지' : '로그인',
-};
-
-const middleItem = {
+const leftItem = {
   to: '/',
   content: '42 BLIND',
 };
 
-const left = <ThemeToggle />;
-const middle = <Anchor size="xl" weight="bold" linkItem={middleItem} />;
-const right = <Anchor size="sm" weight="bold" linkItem={rightItem} />;
+const rightItem = {
+  to: '/my',
+  content: 'MY',
+};
 
 const MainHeader = () => {
-  return <Header left={left} middle={middle} right={right} />;
+  return (
+    <Header>
+      <StyledLeft>
+        <Anchor size="base" weight="bold" linkItem={leftItem} />
+        <ThemeToggle />
+      </StyledLeft>
+      <StyledRight>
+        <PostWritingButton />
+        <StyledMy size="xxs" weight="bold" linkItem={rightItem} />
+      </StyledRight>
+    </Header>
+  );
 };
+
+const StyledLeft = styled.div`
+  ${flexRow}
+  align-items: center;
+  gap: 0.3rem;
+`;
+
+const StyledRight = styled.div`
+  ${flexRow}
+  align-items: center;
+  gap: 1rem;
+`;
+
+const StyledMy = styled(Anchor)`
+  ${centerRowStyle}
+  text-align: center;
+  border: 2px solid ${({ theme }) => theme.colors.default};
+  border-radius: 5px;
+  padding: 0.25rem 0;
+  height: 25px;
+  min-width: 25px;
+`;
 
 export default MainHeader;

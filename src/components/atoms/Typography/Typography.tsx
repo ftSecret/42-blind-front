@@ -4,6 +4,7 @@ import theme, { fonts } from 'styles/theme';
 
 type PropTypes = {
   children: JSX.Element | string;
+  className?: string;
   size?: keyof typeof fonts.size;
   weight?: keyof typeof fonts.weight;
   color?: keyof typeof theme.dark.colors;

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toggle, selectTheme } from 'features/theme/themeSlice';
 import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
 import Button from 'components/atoms/Button';
+import { centerRowStyle } from 'styles/mixin';
 
 export const themeIcon = {
   [DARK_THEME]: '🌚',
@@ -17,16 +18,10 @@ const ThemeToggle = () => {
 };
 
 const ToggleWrapper = styled(Button)`
-  background-color: ${(props) => props.theme.colors.background};
+  ${centerRowStyle}
   border: ${(props) => props.theme.colors.background};
-  font-size: 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60px;
-  height: 35px;
-
-  border-radius: 30px;
+  font-size: ${({ theme }) => theme.fonts.size.base};
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
 `;
 export default ThemeToggle;

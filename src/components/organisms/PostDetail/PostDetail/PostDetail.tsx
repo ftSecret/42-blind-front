@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
-import { flexColumn, flexRow } from 'styles/mixin';
+import { flexColumn, flexRow, preventDragStyle } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { PostType } from 'types';
 import { useNavigate } from 'react-router-dom';
@@ -129,6 +129,7 @@ const StyledButton = styled(Button)`
   color: ${colors.grey};
   font-size: ${({ theme }) => theme.fonts.size.sm};
   cursor: pointer;
+  ${preventDragStyle}
 `;
 
 const StyledProfileWrap = styled.div`

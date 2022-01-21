@@ -11,11 +11,12 @@ type PropTypes = {
   weight?: FontWeight;
   linkItem: AnchorItem;
   isSelected?: boolean;
+  className?: string;
 };
 
-const Anchor = ({ size, lineHeight, weight, linkItem, isSelected }: PropTypes) => {
+const Anchor = ({ size, lineHeight, weight, linkItem, isSelected, className }: PropTypes) => {
   return (
-    <Typography size={size} lineHeight={lineHeight} weight={weight}>
+    <Typography size={size} lineHeight={lineHeight} weight={weight} className={className}>
       <Link
         to={linkItem.to}
         key={linkItem.to}
