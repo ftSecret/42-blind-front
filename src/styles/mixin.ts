@@ -59,5 +59,4 @@ export const centerColumnStyle = css`
 export const linkStyle = css`
   color: ${({ theme }) => darken(0.15, theme.colors.blue)};
   text-decoration: underline;
-  display: inline-block;
 `;
