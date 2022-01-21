@@ -11,12 +11,13 @@ const makeATag = (href: string) => (
 );
 
 export const replaceURL = (content: string) => {
+  const result: JSX.Element[] = [];
   let startIdx = 0;
   let endIdx = 0;
-  const result: JSX.Element[] = [];
   let res = new RegExp(urlPattern).exec(content);
+
   while (res !== null) {
-    endIdx = content.indexOf(res[0]);
+    endIdx = content.indexOf(res[0], startIdx);
     if (startIdx < endIdx) result.push(<>{content.substring(startIdx, endIdx)}</>);
     result.push(makeATag(res[0]));
     startIdx = endIdx + res[0].length;
