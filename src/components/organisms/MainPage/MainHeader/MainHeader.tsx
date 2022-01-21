@@ -6,12 +6,12 @@ import styled from 'styled-components';
 import { centerRowStyle, flexRow } from 'styles/mixin';
 import PostWritingButton from '../PostWritingButton';
 
-const leftItem = {
+const titleItem = {
   to: '/',
   content: '42 BLIND',
 };
 
-const rightItem = {
+const myItem = {
   to: '/my',
   content: 'MY',
 };
@@ -20,12 +20,12 @@ const MainHeader = () => {
   return (
     <Header>
       <StyledLeft>
-        <Anchor size="base" weight="bold" linkItem={leftItem} />
+        <Anchor size="base" weight="bold" linkItem={titleItem} />
         <ThemeToggle />
       </StyledLeft>
       <StyledRight>
         <PostWritingButton />
-        <StyledMy size="xxs" weight="bold" linkItem={rightItem} />
+        <StyledMy size="xxs" weight="bold" linkItem={myItem} />
       </StyledRight>
     </Header>
   );

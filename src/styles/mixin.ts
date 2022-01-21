@@ -25,7 +25,6 @@ export const headerStyle = css`
   align-items: center;
   min-height: 56px;
   position: sticky;
-  padding: 0 0.8rem;
   top: 0;
   z-index: 1;
 `;

@@ -23,7 +23,7 @@ export const HeaderItem = styled.div`
   ${flexRow}
   justify-content: space-between;
   align-items: center;
-  padding: 0;
+  padding: 0 1rem;
 `;
 
 export default Header;
