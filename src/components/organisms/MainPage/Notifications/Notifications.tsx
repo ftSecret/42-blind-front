@@ -1,14 +1,17 @@
+import React, { useState } from 'react';
 import Button from 'components/atoms/Button';
 import NotificationsIcon from 'components/atoms/icons/NotificationsIcon';
 import NotificationsOutlineIcon from 'components/atoms/icons/NotificationsOutlineIcon';
 import { PATH_POST } from 'components/utils/AppRouter';
-import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { centerRowStyle } from 'styles/mixin';
 import { size } from 'styles/theme';
 import { formatDate } from 'utils/formatDate';
 
+type NotiListItemType = {
+  isChecked: boolean;
+};
 const data = {
   data: [
     {
@@ -34,10 +37,10 @@ const data = {
       created_at: new Date(), // 알림의 생성 시간
 
       parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '진짜 진짜 배고프지 않아요?', // type이 comment일 경우 comment_content를 넣음.
+      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!', // type이 comment일 경우 comment_content를 넣음.
 
       children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
+      children_value: '당떨어져..',
 
       is_checked: false, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
     },
@@ -64,10 +67,10 @@ const data = {
       created_at: new Date(), // 알림의 생성 시간
 
       parent_id: 1, // type이 comment일 경우 comment_id를 넣음. (추후에 포커싱을 할 수 있으므로)
-      parent_value: '진짜 진짜 배고프지 않아요?', // type이 comment일 경우 comment_content를 넣음.
+      parent_value: '댓글 달아주세요', // type이 comment일 경우 comment_content를 넣음.
 
       children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
+      children_value: '2',
 
       is_checked: false, // 이 알림이 체크되었는지 안되었는지, 이것은 선택 사항입니다.
     },
@@ -81,7 +84,7 @@ const Notifications = () => {
     data.data.filter((elem) => elem.is_checked === false).length,
   );
 
-  const modalRef = useRef<HTMLDivElement>(null);
+  //const modalRef = useRef<HTMLDivElement>(null);
   const handleClick = () => {
     setNotificationIsHidden(!notificationIsHidden);
   };
@@ -96,22 +99,24 @@ const Notifications = () => {
         )}
         <>{number > 0 && <StyledNumber>{number}</StyledNumber>}</>
       </StyledNotificationsButton>
-      <StyledNotificationsModal ref={modalRef} hidden={notificationIsHidden}>
+      <NotificationList hidden={notificationIsHidden}>
         {data?.data.map((item) => {
           return (
-            <Link key={item.notification_id} to={`${PATH_POST}/${item.redirect_id}`}>
-              <StyledNotiItem>
-                <strong>"{item.parent_value}"</strong>&nbsp;
-                {item.type === 'reply'
-                  ? '댓글에 답글이 달렸습니다. '
-                  : '게시글에 댓글이 달렸습니다. '}
-                <strong>"{item.children_value}"&nbsp;</strong>
-                <p>{formatDate(item.created_at.toString())}</p>
-              </StyledNotiItem>
-            </Link>
+            <NotiListItem isChecked={item.is_checked}>
+              <Link key={item.notification_id} to={`${PATH_POST}/${item.redirect_id}`}>
+                <StyledContent>
+                  <strong>"{item.parent_value}"</strong>&nbsp;
+                  {item.type === 'reply'
+                    ? '댓글에 답글이 달렸습니다. '
+                    : '게시글에 댓글이 달렸습니다. '}
+                  <strong>"{item.children_value}"&nbsp;</strong>
+                  <p>{formatDate(item.created_at.toString())}</p>
+                </StyledContent>
+              </Link>
+            </NotiListItem>
           );
         })}
-      </StyledNotificationsModal>
+      </NotificationList>
     </>
   );
 };
@@ -144,7 +149,7 @@ const StyledNumber = styled.span`
   transform: translate(30%);
 `;
 
-const StyledNotificationsModal = styled.div`
+const NotificationList = styled.ul`
   width: 90vw;
   min-height: 100px;
   max-width: ${size.tablet};
@@ -162,19 +167,25 @@ const StyledNotificationsModal = styled.div`
   transform: translate(-50%);
 `;
 
-const StyledNotiItem = styled.div`
+const NotiListItem = styled.li<NotiListItemType>`
   overflow: auto;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   line-height: 1.2;
+  background-color: ${({ theme }) => theme.colors.primary};
+  opacity: ${({ isChecked }) => (isChecked ? 0.3 : '')};
 
   & strong {
     font-weight: ${({ theme }) => theme.fonts.weight.bold};
   }
-
   & p {
     display: inline-block;
     color: ${({ theme }) => theme.colors.grey};
   }
+  &:not(:last-child) {
+    border-bottom: 1px solid grey;
+  }
 `;
+
+const StyledContent = styled.div``;
 
 export default Notifications;
