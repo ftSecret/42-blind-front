@@ -35,7 +35,7 @@ export const containerStyle = css`
   max-width: ${size.tablet};
   min-width: ${size.mobile};
   margin: auto;
-  padding: 0.5em;
+  padding: 0.5em 1rem;
 `;
 
 export const wrapperStyle = css`
