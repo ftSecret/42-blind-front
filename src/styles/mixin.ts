@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { css } from 'styled-components';
 import { size } from './theme';
 
@@ -25,7 +26,6 @@ export const headerStyle = css`
   align-items: center;
   min-height: 56px;
   position: sticky;
-  padding: 0 0.8rem;
   top: 0;
   z-index: 1;
 `;
@@ -54,4 +54,10 @@ export const centerColumnStyle = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const linkStyle = css`
+  color: ${({ theme }) => darken(0.15, theme.colors.blue)};
+  text-decoration: underline;
+  display: inline-block;
 `;

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { formatDate } from 'utils/formatDate';
 import userImage from 'assets/images/user.png';
 import styled from 'styled-components';
-import { flexColumn, flexRow, preventDragStyle } from 'styles/mixin';
+import { flexColumn, flexRow, linkStyle, preventDragStyle } from 'styles/mixin';
 import Button from 'components/atoms/Button/Button';
 import { PostType } from 'types';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { APICommentsType, APIPostType } from 'api/type';
 import Status from 'components/molecules/Status';
 import GoodButton from 'components/molecules/GoodButton';
 import { colors } from 'styles/theme';
+import { replaceURL } from 'utils/replaceURL';
 
 type PropTypes = {
   post: APIPostType;
@@ -93,7 +94,7 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
         <PostDate children={formatDate(post.created_at)} size="sm" />
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" forwardedAs="h1" />
-      <PostContent children={post.content} size="sm" />
+      <PostContent size="sm">{replaceURL(post.content)}</PostContent>
       <StyledStatusWrap>
         <Status count={count} />
         <GoodButton onClick={toggleGood} is_good={post.is_good} />
@@ -153,6 +154,10 @@ const PostTitle = styled(Typography)``;
 const PostContent = styled(Typography)`
   line-height: 1.3;
   white-space: pre-wrap;
+
+  & a {
+    ${linkStyle}
+  }
 `;
 
 const StyledStatusWrap = styled.div`
