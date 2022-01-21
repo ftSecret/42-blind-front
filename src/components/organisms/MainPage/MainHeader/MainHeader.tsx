@@ -5,6 +5,8 @@ import Anchor from 'components/molecules/Anchor';
 import styled from 'styled-components';
 import { centerRowStyle, flexRow } from 'styles/mixin';
 import PostWritingButton from '../PostWritingButton';
+import { size } from 'styles/theme';
+import NotificationsButton from '../Notifications';
 
 const titleItem = {
   to: '/',
@@ -24,6 +26,7 @@ const MainHeader = () => {
         <ThemeToggle />
       </StyledLeft>
       <StyledRight>
+        <NotificationsButton />
         <PostWritingButton />
         <StyledMy size="xxs" weight="bold" linkItem={myItem} />
       </StyledRight>
@@ -49,8 +52,8 @@ const StyledMy = styled(Anchor)`
   border: 2px solid ${({ theme }) => theme.colors.default};
   border-radius: 5px;
   padding: 0.25rem 0;
-  height: 25px;
-  min-width: 25px;
+  height: ${size.icon};
+  min-width: ${size.icon};
 `;
 
 export default MainHeader;
