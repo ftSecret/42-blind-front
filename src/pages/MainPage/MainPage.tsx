@@ -26,7 +26,7 @@ const MainPage = () => {
 
 const StyledSection = styled.section`
   ${flexColumn}
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const StyledContainer = styled.div`

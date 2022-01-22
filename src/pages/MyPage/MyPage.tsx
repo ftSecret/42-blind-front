@@ -38,7 +38,7 @@ const MyPage = () => {
 
 const StyledMyPageContainer = styled.div`
   ${flexColumn}
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 const StyledContainer = styled.div`

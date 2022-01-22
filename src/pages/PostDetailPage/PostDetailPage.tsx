@@ -46,7 +46,7 @@ const PostDetailPage = () => {
   }, [data, isSuccess, setPostDeitail]);
 
   return (
-    <StyledSection {...swipeHandler}>
+    <StyledSection>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       {isLoading && (
         <StyledContainer>
@@ -54,7 +54,7 @@ const PostDetailPage = () => {
         </StyledContainer>
       )}
       {post && comments && (
-        <StyledContainer>
+        <StyledContainer {...swipeHandler}>
           <DetailWrap>
             <PostDetail
               post={post}
@@ -86,7 +86,7 @@ export default PostDetailPage;
 
 const StyledSection = styled.section`
   ${flexColumn}
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 `;
 
@@ -98,7 +98,9 @@ const StyledContainer = styled.div`
   justify-content: center;
 `;
 
+// TODO: 이 친구의 공간이 왜 부모를 따라가는지 알아낼 것.
 const DetailWrap = styled.div`
-  background-color: ${({ theme }) => theme.colors.primary};
+  /* background-color: ${({ theme }) => theme.colors.primary}; */
   width: 100%;
+  flex: none;
 `;

@@ -112,6 +112,7 @@ const StyledDetail = styled.div`
   padding: 0.5em;
   border-bottom: 1px solid ${colors.grey};
   color: ${({ theme }) => theme.colors.default};
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 const StyledPostTopWrap = styled.div`
