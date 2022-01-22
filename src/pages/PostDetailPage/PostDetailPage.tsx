@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
-import { containerStyle } from 'styles/mixin';
+import { containerStyle, flexColumn } from 'styles/mixin';
 
 import { useGetBlindPostDetailQuery } from 'api/blindPost';
 
@@ -13,8 +13,15 @@ import { APICommentsType, APIPostType } from 'api/type';
 import { CODE_2000, CODE_4040 } from 'constants/api';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import ErrorMessage from 'components/molecules/ErrorMessage';
+import { useSwipeable } from 'react-swipeable';
 
 const PostDetailPage = () => {
+  const navigate = useNavigate();
+  const swipeHandler = useSwipeable({
+    onSwipedRight: () => {
+      navigate(-1);
+    },
+  });
   const params = useParams();
   const postId = useMemo(() => parseInt(params?.postId ?? ''), [params?.postId]);
   const [post, setPost] = useState<APIPostType>();
@@ -39,7 +46,7 @@ const PostDetailPage = () => {
   }, [data, isSuccess, setPostDeitail]);
 
   return (
-    <>
+    <StyledSection {...swipeHandler}>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       {isLoading && (
         <StyledContainer>
@@ -71,18 +78,26 @@ const PostDetailPage = () => {
         isError={data?.code === CODE_4040}
         message="해당 게시글이 삭제되어 글을 볼 수 없습니다."
       />
-    </>
+    </StyledSection>
   );
 };
 
 export default PostDetailPage;
 
+const StyledSection = styled.section`
+  ${flexColumn}
+  height: 100vh;
+  width: 100%;
+`;
+
 const StyledContainer = styled.div`
   ${containerStyle}
   display: flex;
+  flex: auto;
+  margin: 0 auto;
   justify-content: center;
-  align-items: center;
 `;
+
 const DetailWrap = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   width: 100%;
