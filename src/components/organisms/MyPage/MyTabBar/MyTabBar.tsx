@@ -58,14 +58,13 @@ const MyTabBarContainer = styled.div`
       position: relative;
       color: ${({ theme }) => theme.colors.red};
       font-weight: bold;
-      //border-bottom: 2px solid ${({ theme }) => theme.colors.red};
     }
+
     .selected::after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 50%;
-      bottom: -5px;
       transform: translate(-50%);
       width: 100%;
       max-width: 348px;
