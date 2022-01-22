@@ -40,6 +40,8 @@ const MyTabBarContainer = styled.div`
 
     & p {
       height: 100%;
+      width: 100%;
+      text-align: center;
     }
 
     & a {
@@ -52,10 +54,24 @@ const MyTabBarContainer = styled.div`
       color: ${colors.grey};
     }
 
-    & a.selected {
-      color: ${({ theme }) => theme.colors.default};
+    .selected {
+      position: relative;
+      color: ${({ theme }) => theme.colors.red};
       font-weight: bold;
-      border-bottom: 2px solid ${({ theme }) => theme.colors.default};
+      //border-bottom: 2px solid ${({ theme }) => theme.colors.red};
+    }
+    .selected::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      bottom: -5px;
+      transform: translate(-50%);
+      width: 100%;
+      max-width: 348px;
+      height: 2px;
+      background-color: ${({ theme }) => theme.colors.red};
+      border-bottom: 2px solid ${({ theme }) => theme.colors.red};
     }
   }
 `;
