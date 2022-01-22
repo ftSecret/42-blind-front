@@ -1,7 +1,7 @@
 import TabBar from 'components/molecules/TabBar';
 import React from 'react';
 import styled from 'styled-components';
-import { centerRowStyle, containerStyle, headerStyle } from 'styles/mixin';
+import { containerStyle, flexRow, headerStyle } from 'styles/mixin';
 import { colors } from 'styles/theme';
 
 // TODO: ${PATH_MY}를 못 쓰는 이유 알아보기
@@ -31,10 +31,10 @@ const MyTabBarContainer = styled.div`
 
   & div {
     ${containerStyle}
-    ${centerRowStyle}
-    padding: 0;
+    ${flexRow}
+    margin: 0 auto;
+    padding: 0 0.5rem;
     min-height: 0rem;
-    justify-content: space-evenly;
     top: 0px;
     height: 100%;
 
@@ -50,7 +50,7 @@ const MyTabBarContainer = styled.div`
       height: 100%;
       font-size: ${({ theme }) => theme.fonts.size.sm};
       font-weight: 400;
-      padding-top: 0.5rem;
+      padding: 0.5rem 0;
       color: ${colors.grey};
     }
 
@@ -63,11 +63,10 @@ const MyTabBarContainer = styled.div`
     .selected::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       left: 50%;
       transform: translate(-50%);
       width: 100%;
-      max-width: 348px;
       height: 2px;
       background-color: ${({ theme }) => theme.colors.red};
       border-bottom: 2px solid ${({ theme }) => theme.colors.red};
