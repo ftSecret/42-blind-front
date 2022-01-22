@@ -19,6 +19,7 @@ const TabBar = ({ items, className }: PropTypes) => {
           lineHeight="large"
           linkItem={item}
           isSelected={item.to === location.pathname}
+          replace={true}
         />
       ))}
     </div>

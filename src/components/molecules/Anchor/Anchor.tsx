@@ -12,9 +12,18 @@ type PropTypes = {
   linkItem: AnchorItem;
   isSelected?: boolean;
   className?: string;
+  replace?: boolean;
 };
 
-const Anchor = ({ size, lineHeight, weight, linkItem, isSelected, className }: PropTypes) => {
+const Anchor = ({
+  size,
+  lineHeight,
+  weight,
+  linkItem,
+  isSelected,
+  className,
+  replace = false,
+}: PropTypes) => {
   return (
     <Typography size={size} lineHeight={lineHeight} weight={weight} className={className}>
       <Link
@@ -23,6 +32,7 @@ const Anchor = ({ size, lineHeight, weight, linkItem, isSelected, className }: P
         className={classNames({
           selected: isSelected,
         })}
+        replace={replace}
       >
         {linkItem.content}
       </Link>
