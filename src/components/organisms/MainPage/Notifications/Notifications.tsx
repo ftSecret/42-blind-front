@@ -33,7 +33,9 @@ const DEFAULT_SIZE = 100;
 
 const Notifications = () => {
   const [notificationIsHidden, setNotificationIsHidden] = useState(true);
-  const { data: countData } = useGetBlindNotificationCountQuery();
+  const { data: countData } = useGetBlindNotificationCountQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   const [notificationTrigger, notificationData] = useLazyGetBlindNotificationQuery();
   const [checkNotification] = useCheckBlindNotificationMutation();
   const notifications = useMemo(() => notificationData?.data?.data ?? [], [notificationData?.data]);
@@ -69,11 +71,13 @@ const Notifications = () => {
       </StyledNotificationButton>
       <NotificationList hidden={notificationIsHidden} aria-hidden={notificationIsHidden}>
         {notificationData.isLoading && <LoadingSpinner />}
-        {notificationData.isSuccess && notifications.length === 0 && '알림이 없습니다.'}
+        {notificationData.isSuccess && notifications.length === 0 && (
+          <ErrorSection>알림이 없습니다.</ErrorSection>
+        )}
         {notifications.length > 0 &&
           notifications.map((item) => {
             return (
-              <NotiListItem isChecked={item.deleted_at === null}>
+              <NotiListItem isChecked={item.deleted_at !== null}>
                 <Link
                   onClick={() => {
                     clickCheckNotification(item.notification_id);
@@ -153,10 +157,8 @@ const StyledNumber = styled.span`
 `;
 
 const NotificationList = styled.ul`
-  width: 90vw;
-  min-height: 100px;
-  max-width: ${size.tablet};
-  max-height: 35vh;
+  width: clamp(calc(${size.mobile} - 2rem), 90vw, calc(${size.tablet} - 2rem));
+  height: clamp(100px, 120px, 35vh);
   overflow-y: auto;
   position: absolute;
   font-size: ${({ theme }) => theme.fonts.size.sm};
@@ -164,7 +166,7 @@ const NotificationList = styled.ul`
   border-radius: 0.3rem;
   padding: 0.3rem;
   background-color: ${({ theme }) => theme.colors.primary};
-  top: calc(${size.header} + 1rem);
+  top: calc(${size.header});
   left: 50%;
   transform: translate(-50%);
   z-index: 3;
