@@ -7,6 +7,8 @@ import { centerRowStyle, flexRow } from 'styles/mixin';
 import PostWritingButton from '../PostWritingButton';
 import Logo from 'components/molecules/Logo';
 import { Link } from 'react-router-dom';
+import Notifications from '../Notifications';
+import { size } from 'styles/theme';
 
 const myItem = {
   to: '/my',
@@ -23,6 +25,7 @@ const MainHeader = () => {
         <ThemeToggle />
       </StyledLeft>
       <StyledRight>
+        <Notifications />
         <PostWritingButton />
         <StyledMy size="xxs" weight="bold" linkItem={myItem} />
       </StyledRight>
@@ -48,8 +51,8 @@ const StyledMy = styled(Anchor)`
   border: 2px solid ${({ theme }) => theme.colors.default};
   border-radius: 5px;
   padding: 0.25rem 0;
-  height: 25px;
-  min-width: 25px;
+  height: ${size.icon};
+  min-width: ${size.icon};
 `;
 
 export default MainHeader;

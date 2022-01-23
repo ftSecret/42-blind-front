@@ -3,7 +3,7 @@ import React from 'react';
 type ButtonTypes = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
-  children?: JSX.Element | string;
+  children?: JSX.Element[] | JSX.Element | string;
   disabled?: boolean;
 };
 

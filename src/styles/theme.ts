@@ -68,6 +68,8 @@ export const size = {
   mobile: '280px',
   tablet: '768px',
   desktop: '1440px',
+  icon: '25px',
+  header: '56px',
 };
 
 const device = {

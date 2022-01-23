@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { centerRowStyle } from 'styles/mixin';
+import { size } from 'styles/theme';
 
 const PostWritingButton = () => {
   return (
@@ -20,17 +21,14 @@ const StyledAddIcon = styled(AddIcon)`
   ${centerRowStyle}
   border: 2px solid ${({ theme }) => theme.colors.default};
   border-radius: 5px;
-  height: 25px;
-  width: 25px;
+  height: ${size.icon};
+  width: ${size.icon};
 `;
 
 const StyledWriteButton = styled(Button)`
   all: unset;
-  display: flex;
+  ${centerRowStyle}
   background-color: rgba(0, 0, 0, 0);
-
-  align-items: center;
-  justify-content: center;
   text-align: center;
 `;
 
