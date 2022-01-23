@@ -102,6 +102,10 @@ const StyledContainer = styled.div`
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+
+  a {
+    width: -webkit-fill-available;
+  }
 `;
 
 export default MainCards;

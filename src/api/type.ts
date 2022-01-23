@@ -100,3 +100,31 @@ export type EditCommentRequestType = {
   post_id: number;
   comment_id: number;
 };
+
+export type NotificationCountDataType = {
+  number: number;
+};
+
+export enum NotificationType {
+  'POST',
+  'COMMENT',
+}
+
+export type NotificationDataType = {
+  notification_id: number;
+  post_id: number;
+  type: NotificationType;
+  parent_id: number;
+  comment_content: string;
+  created_at: Date;
+  deleted_at: Date;
+};
+
+export type NotificationRequestType = {
+  size: number;
+  page: number;
+};
+
+export type NotificationCheckRequestType = {
+  notification_id: number;
+};

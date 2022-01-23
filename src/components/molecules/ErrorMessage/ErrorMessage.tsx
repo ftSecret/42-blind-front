@@ -19,17 +19,17 @@ const ErrorMessage = ({ message = '에러가 발생했습니다.', isError = tru
 
   if (isError === false) return null;
   return (
-    <StyledDeletedPostSection>
+    <StyledErrorSection>
       <ErrorOutlineIcon size={40} />
       <p>{message}</p>
       <BackButton onClick={goBack} children={'이전페이지'} />
-    </StyledDeletedPostSection>
+    </StyledErrorSection>
   );
 };
 
 export default ErrorMessage;
 
-const StyledDeletedPostSection = styled.section`
+export const StyledErrorSection = styled.section`
   ${flexColumn}
   gap: 1rem;
   justify-content: center;

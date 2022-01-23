@@ -4,6 +4,8 @@ import mainBoardReducer from 'features/mainBoard/mainBoardSlice';
 import themeReducer, { themeMiddleware } from 'features/theme/themeSlice';
 import { blindPostAPI } from 'api/blindPost';
 import { blindCommentAPI } from 'api/blindComment';
+import { blindNotificationAPI } from 'api/blindNotification';
+
 export const store = configureStore({
   devTools: process.env.REACT_APP_ENV === 'local' ? true : false,
   reducer: {
@@ -12,6 +14,7 @@ export const store = configureStore({
     mainBoard: mainBoardReducer,
     [blindPostAPI.reducerPath]: blindPostAPI.reducer,
     [blindCommentAPI.reducerPath]: blindCommentAPI.reducer,
+    [blindNotificationAPI.reducerPath]: blindNotificationAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

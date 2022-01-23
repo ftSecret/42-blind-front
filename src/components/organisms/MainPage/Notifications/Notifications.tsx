@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Button from 'components/atoms/Button';
 import NotificationsIcon from 'components/atoms/icons/NotificationsIcon';
 import NotificationsOutlineIcon from 'components/atoms/icons/NotificationsOutlineIcon';
@@ -8,254 +8,109 @@ import styled from 'styled-components';
 import { centerRowStyle } from 'styles/mixin';
 import { size } from 'styles/theme';
 import { formatDate } from 'utils/formatDate';
-import dayjs from 'dayjs';
+import { NotificationType } from 'api/type';
+import {
+  useCheckBlindNotificationMutation,
+  useGetBlindNotificationCountQuery,
+  useLazyGetBlindNotificationQuery,
+} from 'api/blindNotification';
+import LoadingSpinner from 'components/atoms/LoadingSpinner';
+import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
+import { StyledErrorSection } from 'components/molecules/ErrorMessage/ErrorMessage';
 
-type NotyListItemPropType = {
+type NotificationListItemPropType = {
   isChecked: boolean;
 };
 
-const data = {
-  data: [
-    {
-      notification_id: 0,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: new Date(),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 1,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(15, 'hour'),
-
-      parent_id: 1,
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
-
-      children_id: 2,
-      children_value: '당떨어져..',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 0,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: new Date(),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 1,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(15, 'hour'),
-
-      parent_id: 1,
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
-
-      children_id: 2,
-      children_value: '당떨어져..',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 0,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: new Date(),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 1,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(15, 'hour'),
-
-      parent_id: 1,
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
-
-      children_id: 2,
-      children_value: '당떨어져..',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 0,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: new Date(),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 1,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(15, 'hour'),
-
-      parent_id: 1,
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
-
-      children_id: 2,
-      children_value: '당떨어져..',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 0,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: new Date(),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 1,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(15, 'hour'),
-
-      parent_id: 1,
-      parent_value: '클러스터 오아시스에 커피자판기나 카누 블랙 상시 있으면 좋을것 같아요!',
-
-      children_id: 2,
-      children_value: '당떨어져..',
-
-      is_checked: false,
-    },
-    {
-      notification_id: 2,
-      type: 'comment' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(1, 'day'),
-
-      parent_id: 1,
-      parent_value: '진짜 진짜 배고프지 않아요?',
-
-      children_id: 2,
-      children_value: '아 진짜 진짜 진짜 진짜요?',
-
-      is_checked: true,
-    },
-    {
-      notification_id: 3,
-      type: 'reply' as const,
-
-      redirect_id: 2,
-      created_at: dayjs().subtract(2, 'day'),
-
-      parent_id: 1,
-      parent_value: '댓글 달아주세요',
-
-      children_id: 2,
-      children_value: '2',
-
-      is_checked: false,
-    },
-  ],
-};
-
-type NotyType = 'reply' | 'comment' | 'good_comment' | 'good_post';
-
-const getMessage = (type: NotyType) => {
-  if (type === 'reply') return '댓글에 답글이 달렸습니다. ';
-  else if (type === 'comment') return '게시글에 댓글이 달렸습니다. ';
-  else if (type === 'good_comment') return '댓글에 좋아요가 눌렸습니다.';
-  else if (type === 'good_post') return '게시글에 좋아요가 눌렸습니다.';
+const getMessage = (type: NotificationType) => {
+  if (type === NotificationType.COMMENT) return '댓글에 답글이 달렸습니다. ';
+  else if (type === NotificationType.POST) return '게시글에 댓글이 달렸습니다. ';
   else throw new Error(`${type}은 유효하지 않은 타입입니다.`);
 };
 
 const formatNumber = (number: number) => (number > 9 ? '9+' : number.toString());
+const DEFAULT_SIZE = 100;
 
 const Notifications = () => {
-  const [notyIsHidden, setNotyIsHidden] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [number, setNumber] = useState(
-    data.data.filter((elem) => elem.is_checked === false).length,
-  );
+  const [notificationIsHidden, setNotificationIsHidden] = useState(true);
+  const { data: countData } = useGetBlindNotificationCountQuery();
+  const [notificationTrigger, notificationData] = useLazyGetBlindNotificationQuery();
+  const [checkNotification] = useCheckBlindNotificationMutation();
+  const notifications = useMemo(() => notificationData?.data?.data ?? [], [notificationData?.data]);
+  const count = useMemo(() => countData?.data.number ?? 0, [countData?.data.number]);
 
   const handleClick = () => {
-    setNotyIsHidden(!notyIsHidden);
+    setNotificationIsHidden(!notificationIsHidden);
   };
 
-  const hiddenNoty = () => {
-    setNotyIsHidden(true);
+  const hiddenNotification = () => {
+    setNotificationIsHidden(true);
   };
+
+  const clickCheckNotification = (notification_id: number) => {
+    checkNotification({ notification_id });
+  };
+
+  useEffect(() => {
+    if (notificationIsHidden === false) notificationTrigger({ page: 0, size: DEFAULT_SIZE });
+  }, [notificationIsHidden, notificationTrigger]);
 
   return (
     <>
-      <StyledNotyButton onClick={handleClick}>
-        {notyIsHidden ? <StyledNotyOutlineIcon size={25} /> : <StyledNotyIcon size={25} />}
-        <StyledNumber hidden={number <= 0} aria-hidden={number <= 0}>
-          {formatNumber(number)}
+      <StyledNotificationButton onClick={handleClick}>
+        {notificationIsHidden ? (
+          <StyledNotificationOutlineIcon size={25} />
+        ) : (
+          <StyledNotificationIcon size={25} />
+        )}
+        <StyledNumber hidden={count <= 0} aria-hidden={count <= 0}>
+          {formatNumber(count)}
         </StyledNumber>
-      </StyledNotyButton>
-      <NotyList hidden={notyIsHidden} aria-hidden={notyIsHidden}>
-        {data?.data.map((item) => {
-          return (
-            <NotiListItem isChecked={item.is_checked}>
-              <Link key={item.notification_id} to={`${PATH_POST}/${item.redirect_id}`}>
-                <NotyContent>
-                  <strong>"{item.parent_value}"</strong>&nbsp;
-                  <p>{getMessage(item.type)}:</p>&nbsp;
-                  <strong>"{item.children_value}"</strong>&nbsp;
-                  <p>{formatDate(item.created_at.toString())}</p>
-                </NotyContent>
-              </Link>
-            </NotiListItem>
-          );
-        })}
-      </NotyList>
-      <NotyOverlay onClick={hiddenNoty} hidden={notyIsHidden} aria-hidden={notyIsHidden} />
+      </StyledNotificationButton>
+      <NotificationList hidden={notificationIsHidden} aria-hidden={notificationIsHidden}>
+        {notificationData.isLoading && <LoadingSpinner />}
+        {notificationData.isSuccess && notifications.length === 0 && '알림이 없습니다.'}
+        {notifications.length > 0 &&
+          notifications.map((item) => {
+            return (
+              <NotiListItem isChecked={item.deleted_at === null}>
+                <Link
+                  onClick={() => {
+                    clickCheckNotification(item.notification_id);
+                  }}
+                  key={item.notification_id}
+                  to={`${PATH_POST}/${item.post_id}`}
+                >
+                  <NotificationContent>
+                    <p>{getMessage(item.type)}:</p>&nbsp;
+                    <strong>"{item.comment_content}"</strong>&nbsp;
+                    <p>{formatDate(item.created_at.toString())}</p>
+                  </NotificationContent>
+                </Link>
+              </NotiListItem>
+            );
+          })}
+        {notificationData.isError && (
+          <ErrorSection>
+            <ErrorOutlineIcon size={40} />
+            알림을 가져오는데 에러가 발생했습니다.
+          </ErrorSection>
+        )}
+      </NotificationList>
+      <NotificationOverlay
+        onClick={hiddenNotification}
+        hidden={notificationIsHidden}
+        aria-hidden={notificationIsHidden}
+      />
     </>
   );
 };
 
-const NotyOverlay = styled.div`
+const ErrorSection = styled(StyledErrorSection)`
+  height: 100%;
+  padding: 2rem;
+`;
+const NotificationOverlay = styled.div`
   z-index: 2;
   position: fixed;
   width: 100vw;
@@ -264,17 +119,17 @@ const NotyOverlay = styled.div`
   left: 0;
 `;
 
-const StyledNotyIcon = styled(NotificationsIcon)`
+const StyledNotificationIcon = styled(NotificationsIcon)`
   height: ${size.icon};
   width: ${size.icon};
 `;
 
-const StyledNotyOutlineIcon = styled(NotificationsOutlineIcon)`
+const StyledNotificationOutlineIcon = styled(NotificationsOutlineIcon)`
   height: ${size.icon};
   width: ${size.icon};
 `;
 
-const StyledNotyButton = styled(Button)`
+const StyledNotificationButton = styled(Button)`
   all: unset;
   ${centerRowStyle}
   text-align: center;
@@ -297,7 +152,7 @@ const StyledNumber = styled.span`
   transform: translate(30%);
 `;
 
-const NotyList = styled.ul`
+const NotificationList = styled.ul`
   width: 90vw;
   min-height: 100px;
   max-width: ${size.tablet};
@@ -315,7 +170,7 @@ const NotyList = styled.ul`
   z-index: 3;
 `;
 
-const NotiListItem = styled.li<NotyListItemPropType>`
+const NotiListItem = styled.li<NotificationListItemPropType>`
   padding: 1rem 0.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
 
@@ -329,7 +184,7 @@ const NotiListItem = styled.li<NotyListItemPropType>`
   }
 `;
 
-const NotyContent = styled.div`
+const NotificationContent = styled.div`
   line-height: 1.2;
   word-break: break-all;
   word-wrap: break-word;
