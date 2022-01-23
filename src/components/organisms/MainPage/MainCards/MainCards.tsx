@@ -73,7 +73,7 @@ const MainCards = ({
   }, [endLoading, posts]);
 
   return (
-    <StyledContainer ref={targetRef} className={className}>
+    <StyledCardsSection ref={targetRef} className={className}>
       {posts.isLoading === true && isLoading === false && <LoadingSpinner />}
       {posts.isSuccess &&
         cards.map((card) => (
@@ -85,7 +85,7 @@ const MainCards = ({
         <StyledMessage>마지막 글입니다.</StyledMessage>
       )}
       {posts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
-    </StyledContainer>
+    </StyledCardsSection>
   );
 };
 
@@ -96,9 +96,8 @@ const StyledMessage = styled.div`
   border-radius: 2rem;
 `;
 
-const StyledContainer = styled.div`
+export const StyledCardsSection = styled.section`
   ${flexColumn}
-  justify-content: center;
   align-items: center;
   gap: 0.5rem;
   width: 100%;

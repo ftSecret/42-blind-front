@@ -3,11 +3,11 @@ import { PATH_POST } from 'components/utils/AppRouter';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
 import { PostType } from 'types';
 import { formatPost } from 'utils/formatPost';
 import Card from 'components/molecules/Card';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
+import { StyledCardsSection } from 'components/organisms/MainPage/MainCards/MainCards';
 
 type PropTypes = { className?: string };
 
@@ -20,7 +20,7 @@ const MyPostCards = ({ className }: PropTypes) => {
   }, [myPosts]);
 
   return (
-    <StyledContainer className={className}>
+    <StyledCardsSection className={className}>
       {myPosts.isLoading === true && <LoadingSpinner />}
       {myPosts.isSuccess === true &&
         cards.map((card) => (
@@ -29,7 +29,7 @@ const MyPostCards = ({ className }: PropTypes) => {
           </Link>
         ))}
       {myPosts.isError === true && <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>}
-    </StyledContainer>
+    </StyledCardsSection>
   );
 };
 
@@ -38,17 +38,6 @@ const StyledMessage = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   padding: 1rem;
   border-radius: 2rem;
-`;
-
-const StyledContainer = styled.div`
-  ${flexColumn}
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-
-  a {
-    width: -webkit-fill-available;
-  }
 `;
 
 export default MyPostCards;

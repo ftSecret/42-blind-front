@@ -4,14 +4,14 @@ import Card from 'components/molecules/Card';
 import { PATH_POST } from 'components/utils/AppRouter';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
+import { StyledCardsSection } from 'components/organisms/MainPage/MainCards/MainCards';
 
-const MyCommentBoard = () => {
+const MyCommentCards = () => {
   const myComments = useGetBlindCommentMeQuery(undefined, { refetchOnMountOrArgChange: true });
 
   return (
-    <StyledCards>
+    <StyledCardsSection>
       {myComments.isLoading === true && myComments.data === undefined && <LoadingSpinner />}
       {myComments.data !== undefined &&
         myComments.data?.data.map((comment) => (
@@ -26,7 +26,7 @@ const MyCommentBoard = () => {
       {myComments.isError === true && (
         <StyledMessage>데이터를 불러오는데 실패했습니다.</StyledMessage>
       )}
-    </StyledCards>
+    </StyledCardsSection>
   );
 };
 
@@ -37,14 +37,4 @@ const StyledMessage = styled.div`
   border-radius: 2rem;
 `;
 
-const StyledCards = styled.div`
-  ${flexColumn}
-  align-items: center;
-  gap: 0.5rem;
-
-  a {
-    width: -webkit-fill-available;
-  }
-`;
-
-export default MyCommentBoard;
+export default MyCommentCards;

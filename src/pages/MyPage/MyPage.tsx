@@ -4,8 +4,8 @@ import MyHeader from 'components/organisms/MyPage/MyHeader';
 import MyTabBar from 'components/organisms/MyPage/MyTabBar';
 import { containerStyle, flexColumn } from 'styles/mixin';
 import styled from 'styled-components';
-import MyCommentBoard from 'components/organisms/MyPage/MyCommentBoard';
-import MyPostBoard from 'components/organisms/MyPage/MyPostBoard';
+import MyCommentCards from 'components/organisms/MyPage/MyCommentCards';
+import MyPostCards from 'components/organisms/MyPage/MyPostCards';
 import { useSwipeable } from 'react-swipeable';
 
 const MyPage = () => {
@@ -28,8 +28,8 @@ const MyPage = () => {
       <StyledContainer {...swipeHandler}>
         <Routes>
           <Route path="/" element={<Navigate to="/my/post" replace />} />
-          <Route path="/post" element={<MyPostBoard />} />
-          <Route path="/comment" element={<MyCommentBoard />} />
+          <Route path="/post" element={<MyPostCards />} />
+          <Route path="/comment" element={<MyCommentCards />} />
         </Routes>
       </StyledContainer>
     </StyledMyPageContainer>
