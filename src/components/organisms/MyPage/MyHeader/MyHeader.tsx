@@ -1,19 +1,16 @@
 import React from 'react';
-
-import Anchor from 'components/molecules/Anchor';
 import Header from 'components/molecules/Header';
 import styled from 'styled-components';
 import { headerStyle } from 'styles/mixin';
-
-const middleItem = {
-  to: '/',
-  content: '42 BLIND',
-};
+import Logo from 'components/molecules/Logo';
+import { Link } from 'react-router-dom';
 
 const MyHeader = () => {
   return (
     <StyledHeader>
-      <Anchor size="base" weight="bold" linkItem={middleItem} />
+      <Link to="/">
+        <Logo />
+      </Link>
     </StyledHeader>
   );
 };

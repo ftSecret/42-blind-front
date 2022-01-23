@@ -5,11 +5,8 @@ import Anchor from 'components/molecules/Anchor';
 import styled from 'styled-components';
 import { centerRowStyle, flexRow } from 'styles/mixin';
 import PostWritingButton from '../PostWritingButton';
-
-const titleItem = {
-  to: '/',
-  content: '42 BLIND',
-};
+import Logo from 'components/molecules/Logo';
+import { Link } from 'react-router-dom';
 
 const myItem = {
   to: '/my',
@@ -20,7 +17,9 @@ const MainHeader = () => {
   return (
     <Header>
       <StyledLeft>
-        <Anchor size="base" weight="bold" linkItem={titleItem} />
+        <Link to="/">
+          <Logo />
+        </Link>
         <ThemeToggle />
       </StyledLeft>
       <StyledRight>

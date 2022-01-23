@@ -161,7 +161,6 @@ const globalCSS = css`
 
   a {
     all: unset;
-    width: -webkit-fill-available;
   }
 
   a:hover,
