@@ -105,10 +105,10 @@ export type NotificationCountDataType = {
   number: number;
 };
 
-export enum NotificationType {
-  'POST',
-  'COMMENT',
-}
+export const NOTIFICATION_POST_TYPE = 'POST';
+export const NOTIFICATION_COMMENT_TYPE = 'COMMENT';
+
+export type NotificationType = typeof NOTIFICATION_POST_TYPE | typeof NOTIFICATION_COMMENT_TYPE;
 
 export type NotificationDataType = {
   notification_id: number;

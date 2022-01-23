@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { centerRowStyle } from 'styles/mixin';
 import { size } from 'styles/theme';
 import { formatDate } from 'utils/formatDate';
-import { NotificationType } from 'api/type';
+import { NotificationType, NOTIFICATION_COMMENT_TYPE, NOTIFICATION_POST_TYPE } from 'api/type';
 import {
   useCheckBlindNotificationMutation,
   useGetBlindNotificationCountQuery,
@@ -23,8 +23,8 @@ type NotificationListItemPropType = {
 };
 
 const getMessage = (type: NotificationType) => {
-  if (type === NotificationType.COMMENT) return '댓글에 답글이 달렸습니다. ';
-  else if (type === NotificationType.POST) return '게시글에 댓글이 달렸습니다. ';
+  if (type === NOTIFICATION_COMMENT_TYPE) return '댓글에 답글이 달렸습니다. ';
+  else if (type === NOTIFICATION_POST_TYPE) return '게시글에 댓글이 달렸습니다. ';
   else throw new Error(`${type}은 유효하지 않은 타입입니다.`);
 };
 

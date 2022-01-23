@@ -51,6 +51,10 @@ const StyledContainer = styled.div`
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+
+  a {
+    width: 100%;
+  }
 `;
 
 const StyledPopularCard = styled(Card)`
