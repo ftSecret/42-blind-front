@@ -41,6 +41,10 @@ const StyledCards = styled.div`
   ${flexColumn}
   align-items: center;
   gap: 0.5rem;
+
+  a {
+    width: -webkit-fill-available;
+  }
 `;
 
 export default MyCommentBoard;
