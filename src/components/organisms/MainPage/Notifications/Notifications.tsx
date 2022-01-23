@@ -158,7 +158,8 @@ const StyledNumber = styled.span`
 
 const NotificationList = styled.ul`
   width: clamp(calc(${size.mobile} - 2rem), 90vw, calc(${size.tablet} - 2rem));
-  height: clamp(100px, 120px, 35vh);
+  min-height: 100px;
+  max-height: 35vh;
   overflow-y: auto;
   position: absolute;
   font-size: ${({ theme }) => theme.fonts.size.sm};
