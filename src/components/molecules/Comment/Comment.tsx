@@ -121,8 +121,6 @@ const StyledComment = styled.div`
 
   &:focus {
     outline: 2px solid ${({ theme }) => theme.colors.red};
-    /* outline: none; */
-    /* border: 2px solid ${({ theme }) => theme.colors.red}; */
   }
   pointer-events: none;
 `;
