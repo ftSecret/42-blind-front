@@ -76,7 +76,13 @@ const Comment = ({
   }, [data, setPostDetail]);
 
   return (
-    <StyledComment>
+    <StyledComment
+      tabIndex={0}
+      id={`comment_${comment_id}`}
+      onClick={(event) => {
+        event.preventDefault();
+      }}
+    >
       {parent_id !== -1 && <RightArrowIcon />}
       <StyledCommentWrap>
         <StyledProfile>
@@ -112,6 +118,13 @@ const StyledComment = styled.div`
   color: ${({ theme }) => theme.colors.default};
   padding: ${({ theme }) => theme.paddings.sm};
   gap: 0.5rem;
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.red};
+    /* outline: none; */
+    /* border: 2px solid ${({ theme }) => theme.colors.red}; */
+  }
+  pointer-events: none;
 `;
 
 const StyledCommentWrap = styled.div`

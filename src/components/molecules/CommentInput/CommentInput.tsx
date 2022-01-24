@@ -15,6 +15,7 @@ type PropTypes = {
   initSelectedComment: () => void;
   selectedComment: SelectedCommentType;
   setPostDetail: (post: APIPostType, comments: APICommentsType) => void;
+  focusNewComment: () => void;
 };
 
 const CommentInput = ({
@@ -22,6 +23,7 @@ const CommentInput = ({
   selectedComment,
   setPostDetail,
   initSelectedComment,
+  focusNewComment,
 }: PropTypes) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue, props: inputProps } = useInput('');
@@ -54,6 +56,11 @@ const CommentInput = ({
       setPostDetail(post, comments);
     }
   }, [data, setPostDetail]);
+
+  useEffect(() => {
+    if (data?.data.comment_number !== undefined) focusNewComment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.data.comment_number]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>

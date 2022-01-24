@@ -31,7 +31,8 @@ export const blindPostAPI = createApi({
       query: () => `post/me`,
     }),
     getBlindPostDetail: builder.query<ResponseType<APIPostCommentsType>, GetPostDetailRequestType>({
-      query: ({ post_id }) => `post/detail?post_id=${post_id}`,
+      // query: ({ post_id }) => `post/detail?post_id=${post_id}`,
+      query: ({ post_id }) => `post-detail`,
     }),
     getBlindPostPopular: builder.query<ResponseType<APIPostType[]>, void>({
       query: () => `post/popular`,
