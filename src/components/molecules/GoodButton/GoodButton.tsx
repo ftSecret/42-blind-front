@@ -5,9 +5,22 @@ import { colors } from 'styles/theme';
 
 type PropTypes = {
   is_good: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const GoodButton = styled(ThumbUpIcon)<PropTypes>`
+const GoodButton = ({ is_good, onClick }: PropTypes) => {
+  return (
+    <StyledButton onClick={onClick}>
+      <GoodIcon is_good={is_good} />
+    </StyledButton>
+  );
+};
+
+const StyledButton = styled.button`
+  all: unset;
+`;
+
+const GoodIcon = styled(ThumbUpIcon)<Omit<PropTypes, 'onClick'>>`
   color: ${(props) => (props.is_good ? colors.red : colors.grey)};
   cursor: pointer;
   ${preventDragStyle}
