@@ -46,7 +46,7 @@ const PostDetailPage = () => {
   }, [data, isSuccess, setPostDeitail]);
 
   return (
-    <StyledSection>
+    <>
       <PostDetailHeader content="42 블라인드 익명 게시판" />
       {isLoading && (
         <StyledContainer>
@@ -55,19 +55,13 @@ const PostDetailPage = () => {
       )}
       {post && comments && (
         <StyledContainer {...swipeHandler}>
-          <DetailWrap>
-            <PostDetail
-              post={post}
-              setPostDetail={setPostDeitail}
-              comment_number={comments.length}
-            />
-            <Comments
-              postId={postId}
-              rawComments={comments}
-              postUserId={post.user_id}
-              setPostDetail={setPostDeitail}
-            />
-          </DetailWrap>
+          <PostDetail post={post} setPostDetail={setPostDeitail} comment_number={comments.length} />
+          <Comments
+            postId={postId}
+            rawComments={comments}
+            postUserId={post.user_id}
+            setPostDetail={setPostDeitail}
+          />
         </StyledContainer>
       )}
       <ErrorMessage
@@ -78,29 +72,16 @@ const PostDetailPage = () => {
         isError={data?.code === CODE_4040}
         message="해당 게시글이 삭제되어 글을 볼 수 없습니다."
       />
-    </StyledSection>
+    </>
   );
 };
 
 export default PostDetailPage;
 
-const StyledSection = styled.section`
-  ${flexColumn}
-  min-height: 100vh;
-  width: 100%;
-`;
-
-const StyledContainer = styled.div`
+const StyledContainer = styled.main`
   ${containerStyle}
-  display: flex;
+  ${flexColumn}
   flex: auto;
   margin: 0 auto;
   justify-content: center;
-`;
-
-// TODO: 이 친구의 공간이 왜 부모를 따라가는지 알아낼 것.
-const DetailWrap = styled.div`
-  /* background-color: ${({ theme }) => theme.colors.primary}; */
-  width: 100%;
-  flex: none;
 `;

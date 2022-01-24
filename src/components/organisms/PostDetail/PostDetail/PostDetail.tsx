@@ -76,7 +76,7 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
   const count = { goods: post.goods, views: post.views, comments: comment_number };
 
   return (
-    <StyledDetail>
+    <StyledArticle>
       <StyledPostTopWrap>
         <StyledUserImage>
           <img alt="user" width="50" height="50" src={userImage} />
@@ -90,8 +90,8 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
       </StyledPostTopWrap>
 
       <StyledProfileWrap>
-        <PostUserName children="익명" size="sm" weight="bold" />
-        <PostDate children={formatDate(post.created_at)} size="sm" />
+        <PostUserName children="익명" size="sm" weight="bold" forwardedAs="h6" />
+        <PostDate children={formatDate(post.created_at)} size="sm" forwardedAs="time" />
       </StyledProfileWrap>
       <PostTitle children={post.title} size="sm" weight="bold" forwardedAs="h1" />
       <PostContent size="sm">{replaceURL(post.content)}</PostContent>
@@ -99,13 +99,13 @@ const PostDetail = ({ post, comment_number, setPostDetail }: PropTypes) => {
         <Status count={count} />
         <GoodButton onClick={toggleGood} is_good={post.is_good} />
       </StyledStatusWrap>
-    </StyledDetail>
+    </StyledArticle>
   );
 };
 
 export default PostDetail;
 
-const StyledDetail = styled.div`
+const StyledArticle = styled.article`
   ${flexColumn}
   gap: 0.5em;
   text-align: left;
@@ -139,7 +139,7 @@ const StyledProfileWrap = styled.div`
   gap:0.5em;
 `;
 
-const StyledUserImage = styled.div`
+const StyledUserImage = styled.figure`
   width: 50px;
   height: 50px;
   background: ${({ theme }) => theme.colors.white};

@@ -76,20 +76,21 @@ const Comment = ({
   }, [data, setPostDetail]);
 
   return (
-    <StyledComment
+    <StyledCotainer
       tabIndex={0}
       id={`comment_${comment_id}`}
       onClick={(event) => {
         event.preventDefault();
       }}
+      className={parent_id !== -1 ? 'reply' : ''}
     >
       {parent_id !== -1 && <RightArrowIcon />}
-      <StyledCommentWrap>
+      <StyledComment>
         <StyledProfile>
           <StyledUserImage>
             <img alt="user" width="25" height="25" src={userImage} />
           </StyledUserImage>
-          <h1>{nickname}</h1>
+          <h2>{nickname}</h2>
           {post_user_id === user_id && <Tag>작성자</Tag>}
           {myUserId === user_id && <Tag>본인</Tag>}
         </StyledProfile>
@@ -99,7 +100,7 @@ const Comment = ({
         </StyledContent>
         <StyledInfoWrap>
           <StyledInfoDiv>
-            <Typography children={formatDate(created_at)} size="xs" color="grey" />
+            <Typography children={formatDate(created_at)} size="xs" color="grey" as="time" />
             <ReplyButton onClick={handleReplyClick}>답글 달기</ReplyButton>
             {goods > 0 && (
               <Typography children={`좋아요 ${goods}개`} size="xs" weight="bold" color="grey" />
@@ -107,12 +108,12 @@ const Comment = ({
           </StyledInfoDiv>
           <GoodButton is_good={is_good} onClick={toggleGood} />
         </StyledInfoWrap>
-      </StyledCommentWrap>
-    </StyledComment>
+      </StyledComment>
+    </StyledCotainer>
   );
 };
 
-const StyledComment = styled.div`
+const StyledCotainer = styled.li`
   ${flexRow}
   border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
   color: ${({ theme }) => theme.colors.default};
@@ -130,13 +131,13 @@ const StyledComment = styled.div`
   }
 `;
 
-const StyledCommentWrap = styled.div`
+const StyledComment = styled.div`
   ${flexColumn}
-  width: 100%;
   gap: 0.5rem;
+  width: -webkit-fill-available;
 `;
 
-const StyledUserImage = styled.div`
+const StyledUserImage = styled.figure`
   width: 25px;
   height: 25px;
   background: ${({ theme }) => theme.colors.white};
