@@ -94,7 +94,7 @@ const Comment = ({
           {myUserId === user_id && <Tag>본인</Tag>}
         </StyledProfile>
         <StyledContent>
-          {parent_id !== -1 && <strong>{`@${findNickname(parent_id)}`}</strong>}&nbsp;
+          {parent_id !== -1 && <strong>{`@${findNickname(parent_id)}`}&nbsp;</strong>}
           {replaceURL(content)}
         </StyledContent>
         <StyledInfoWrap>
@@ -169,9 +169,9 @@ const ReplyButton = styled(Button)`
 `;
 
 const StyledContent = styled.p`
-  gap: 0.2rem;
   line-height: 1.2;
   white-space: pre-wrap;
+
   strong {
     color: ${({ theme }) => theme.colors.blue};
   }
