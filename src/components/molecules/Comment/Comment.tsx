@@ -169,7 +169,6 @@ const ReplyButton = styled(Button)`
 `;
 
 const StyledContent = styled.p`
-  ${flexRow}
   gap: 0.2rem;
   line-height: 1.2;
   white-space: pre-wrap;
