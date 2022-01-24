@@ -29,7 +29,7 @@ const MyTabBarContainer = styled.div`
   padding: 0;
   min-height: 40px;
 
-  & div {
+  & ul {
     ${containerStyle}
     ${flexRow}
     margin: 0 auto;
@@ -38,7 +38,7 @@ const MyTabBarContainer = styled.div`
     top: 0px;
     height: 100%;
 
-    & p {
+    & li {
       height: 100%;
       width: 100%;
       text-align: center;

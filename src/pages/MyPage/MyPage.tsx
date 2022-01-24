@@ -41,7 +41,7 @@ const StyledMyPageContainer = styled.div`
   min-height: 100vh;
 `;
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.main`
   ${containerStyle}
   flex:auto;
 `;

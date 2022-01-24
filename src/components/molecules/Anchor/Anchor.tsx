@@ -13,6 +13,7 @@ type PropTypes = {
   isSelected?: boolean;
   className?: string;
   replace?: boolean;
+  as?: string;
 };
 
 const Anchor = ({
@@ -23,9 +24,10 @@ const Anchor = ({
   isSelected,
   className,
   replace = false,
+  as,
 }: PropTypes) => {
   return (
-    <Typography size={size} lineHeight={lineHeight} weight={weight} className={className}>
+    <Typography size={size} lineHeight={lineHeight} weight={weight} className={className} as={as}>
       <Link
         to={linkItem.to}
         key={linkItem.to}

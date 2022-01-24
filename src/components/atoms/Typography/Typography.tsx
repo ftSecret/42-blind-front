@@ -9,12 +9,12 @@ type PropTypes = {
   weight?: keyof typeof fonts.weight;
   color?: keyof typeof theme.dark.colors;
   lineHeight?: keyof typeof fonts.lineHeight;
-  forwardedAs?: any;
+  as?: any;
 };
 
-const Typography = ({ children, forwardedAs, ...rest }: PropTypes) => {
+const Typography = ({ children, as = 'p', ...rest }: PropTypes) => {
   return (
-    <StyledTypography {...rest} forwardedAs={forwardedAs}>
+    <StyledTypography {...rest} as={as}>
       {children}
     </StyledTypography>
   );

@@ -1,22 +1,22 @@
 import React from 'react';
 import Header from 'components/molecules/Header';
 import styled from 'styled-components';
-import { headerStyle } from 'styles/mixin';
 import Logo from 'components/molecules/Logo';
 import { Link } from 'react-router-dom';
 
 const MyHeader = () => {
   return (
     <StyledHeader>
-      <Link to="/">
-        <Logo />
-      </Link>
+      <h1>
+        <Link to="/">
+          <Logo />
+        </Link>
+      </h1>
     </StyledHeader>
   );
 };
 
 const StyledHeader = styled(Header)`
-  ${headerStyle}
   position: relative;
 `;
 

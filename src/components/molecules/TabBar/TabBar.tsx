@@ -11,9 +11,10 @@ const TabBar = ({ items, className }: PropTypes) => {
   const location = useLocation();
 
   return (
-    <div className={className}>
+    <ul className={className}>
       {items.map((item, idx) => (
         <Anchor
+          as="li"
           key={idx}
           size="sm"
           lineHeight="large"
@@ -22,7 +23,7 @@ const TabBar = ({ items, className }: PropTypes) => {
           replace={true}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
