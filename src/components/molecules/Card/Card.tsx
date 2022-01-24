@@ -29,10 +29,8 @@ const Card = ({ title, content, created_at, count, className, user_id, ...rest }
       <StyledTitle>{title}</StyledTitle>
       {content && <StyledContent>{content}</StyledContent>}
       <StyledInfo>
-        <StyledDiv>
-          <div>{formatDate(created_at)}</div>
-          {user_id === myUserId && <Tag>본인</Tag>}
-        </StyledDiv>
+        <p>{formatDate(created_at)}</p>
+        {user_id === myUserId && <Tag>본인</Tag>}
         {count && <Status count={count} />}
       </StyledInfo>
     </StyledCard>
@@ -54,10 +52,14 @@ const StyledCard = styled.div`
   }
 `;
 
-const StyledDiv = styled.div`
-  ${flexRow}
-  gap: 0.5rem;
-  align-items: center;
+const StyledTitle = styled.h1`
+  color: ${({ theme }) => theme.colors.default};
+  font-weight: bold;
+  font-size: 1.2em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const StyledInfo = styled.div`
@@ -66,20 +68,10 @@ const StyledInfo = styled.div`
   color: ${({ theme }) => theme.colors.default};
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled.p`
   width: 100%;
   line-height: 1.2;
   color: ${({ theme }) => darken(0.3, theme.colors.default)};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const StyledTitle = styled.div`
-  color: ${({ theme }) => theme.colors.default};
-  font-weight: bold;
-  font-size: 1.2em;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

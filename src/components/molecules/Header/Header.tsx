@@ -14,7 +14,7 @@ const Header = ({ children, className }: PropTypes) => {
   );
 };
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   ${headerStyle}
 `;
 

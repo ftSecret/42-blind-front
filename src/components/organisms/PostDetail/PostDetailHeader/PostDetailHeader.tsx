@@ -14,7 +14,7 @@ const PostDetailHeader = ({ content }: { content: string }) => {
   return (
     <Header>
       <StyledArrowBackIcon onClick={goBack} />
-      <Typography size="sm" weight="bold">
+      <Typography as="h1" size="sm" weight="bold">
         {content}
       </Typography>
       <Spacing />

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import MainCards from 'components/organisms/MainPage/MainCards';
 import styled from 'styled-components';
-import { flexColumn } from 'styles/mixin';
+import { containerStyle, flexColumn } from 'styles/mixin';
 import MainPopularCards from '../MainPopularCards';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -9,7 +9,12 @@ import { selectLastPages, addLastPage } from 'features/mainBoard/mainBoardSlice'
 
 const DEFAULT_SIZE = 10;
 
-const MainBoard = () => {
+type PropTypes = {
+  onMouseDown?: (event: React.MouseEvent<Element, MouseEvent>) => void;
+  ref?: React.RefObject<HTMLDivElement>;
+};
+
+const MainBoard = ({ onMouseDown, ref }: PropTypes) => {
   const lastPage = useAppSelector(selectLastPages);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -42,11 +47,12 @@ const MainBoard = () => {
   );
 };
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.main`
+  ${containerStyle}
   ${flexColumn}
   gap: 0.5rem;
   width: 100%;
   align-items: center;
 `;
 
-export default MainBoard;
+export default React.forwardRef<HTMLDivElement, PropTypes>(MainBoard);

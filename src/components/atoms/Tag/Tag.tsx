@@ -9,7 +9,7 @@ const Tag = ({ children }: PropTypes) => {
   return <StyledTag>{children}</StyledTag>;
 };
 
-const StyledTag = styled.div`
+const StyledTag = styled.span`
   ${flexRow}
   background-color: ${({ theme }) => darken(0.1, theme.colors.grey)};
   font-size: 0.8rem;

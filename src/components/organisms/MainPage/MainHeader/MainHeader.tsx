@@ -33,13 +33,13 @@ const MainHeader = () => {
   );
 };
 
-const StyledLeft = styled.div`
+const StyledLeft = styled.h1`
   ${flexRow}
   align-items: center;
   gap: 0.3rem;
 `;
 
-const StyledRight = styled.div`
+const StyledRight = styled.nav`
   ${flexRow}
   align-items: center;
   gap: 1rem;

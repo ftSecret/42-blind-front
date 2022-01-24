@@ -16,7 +16,7 @@ import {
 } from 'api/blindNotification';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import ErrorOutlineIcon from 'components/atoms/icons/ErrorOutlineIcon';
-import { StyledErrorSection } from 'components/molecules/ErrorMessage/ErrorMessage';
+import { StyledErrorArticle } from 'components/molecules/ErrorMessage/ErrorMessage';
 
 type NotificationListItemPropType = {
   isChecked: boolean;
@@ -72,7 +72,7 @@ const Notifications = () => {
       <NotificationList hidden={notificationIsHidden} aria-hidden={notificationIsHidden}>
         {notificationData.isLoading && <LoadingSpinner />}
         {notificationData.isSuccess && notifications.length === 0 && (
-          <ErrorSection>알림이 없습니다.</ErrorSection>
+          <ErrorArticle>알림이 없습니다.</ErrorArticle>
         )}
         {notifications.length > 0 &&
           notifications.map((item) => {
@@ -95,10 +95,10 @@ const Notifications = () => {
             );
           })}
         {notificationData.isError && (
-          <ErrorSection>
+          <ErrorArticle>
             <ErrorOutlineIcon size={40} />
             알림을 가져오는데 에러가 발생했습니다.
-          </ErrorSection>
+          </ErrorArticle>
         )}
       </NotificationList>
       <NotificationOverlay
@@ -110,7 +110,7 @@ const Notifications = () => {
   );
 };
 
-const ErrorSection = styled(StyledErrorSection)`
+const ErrorArticle = styled(StyledErrorArticle)`
   height: 100%;
   padding: 2rem;
 `;
