@@ -10,7 +10,7 @@ import LogoBlack from 'assets/logo/logo-black.png';
 
 const Logo = () => {
   const themeState = useAppSelector(selectTheme);
-  return <StyledLogo src={themeState === DARK_THEME ? LogoWhite : LogoBlack} alt="logo" />;
+  return <StyledLogo alt="logo" src={themeState === DARK_THEME ? LogoWhite : LogoBlack} />;
 };
 
 const StyledLogo = styled.img`

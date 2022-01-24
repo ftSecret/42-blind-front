@@ -88,7 +88,7 @@ const Notifications = () => {
                   <NotificationContent>
                     <p>{getMessage(item.type)}:</p>&nbsp;
                     <strong>"{item.comment_content}"</strong>&nbsp;
-                    <p>{formatDate(item.created_at.toString())}</p>
+                    <time>{formatDate(item.created_at.toString())}</time>
                   </NotificationContent>
                 </Link>
               </NotiListItem>

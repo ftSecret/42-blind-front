@@ -30,7 +30,7 @@ const Card = ({ title, content, created_at, count, className, user_id, ...rest }
       {content && <StyledContent>{content}</StyledContent>}
       <StyledInfo>
         <StyledDiv>
-          <p>{formatDate(created_at)}</p>
+          <time>{formatDate(created_at)}</time>
           {user_id === myUserId && <Tag>본인</Tag>}
         </StyledDiv>
         {count && <Status count={count} />}
