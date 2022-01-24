@@ -96,7 +96,7 @@ const StyledMessage = styled.div`
   border-radius: 2rem;
 `;
 
-export const StyledCardsSection = styled.article`
+export const StyledCardsSection = styled.section`
   ${flexColumn}
   align-items: center;
   gap: 0.5rem;

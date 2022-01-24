@@ -20,19 +20,19 @@ const Status = ({ count }: StatusType) => {
       {count.comments !== undefined && (
         <li>
           <ChatIcon color={colors.grey} />
-          <div>{count.comments}</div>
+          <p>{count.comments}</p>
         </li>
       )}
       {count.views !== undefined && (
         <li>
           <ViewIcon color={colors.blue} />
-          <div>{count.views}</div>
+          <path>{count.views}</path>
         </li>
       )}
       {count.goods !== undefined && (
         <li>
           <ThumbUpIcon color={colors.red} />
-          <div>{count.goods}</div>
+          <p>{count.goods}</p>
         </li>
       )}
     </StyledStatus>

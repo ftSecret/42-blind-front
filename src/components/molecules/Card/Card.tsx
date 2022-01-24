@@ -41,7 +41,7 @@ const Card = ({ title, content, created_at, count, className, user_id, ...rest }
 
 export default Card;
 
-const StyledCard = styled.div`
+const StyledCard = styled.article`
   background-color: ${({ theme }) => theme.colors.primary};
   ${flexColumn}
   border-radius: 0.3rem;
