@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# mock
+/mockJSON
+
 # production
 /build
 
