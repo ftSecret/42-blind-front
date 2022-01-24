@@ -83,5 +83,5 @@ const StyledContainer = styled.main`
   ${flexColumn}
   flex: auto;
   margin: 0 auto;
-  justify-content: center;
+  align-items: center;
 `;

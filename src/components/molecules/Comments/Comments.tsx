@@ -80,6 +80,7 @@ const Comments = ({ postId, postUserId, rawComments, setPostDetail }: PropTypes)
 const StyledComments = styled.ul`
   ${flexColumn}
   gap: 0.5rem;
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 

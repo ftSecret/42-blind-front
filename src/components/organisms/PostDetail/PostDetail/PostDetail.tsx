@@ -110,6 +110,7 @@ const StyledArticle = styled.article`
   gap: 0.5em;
   text-align: left;
   padding: 0.5em;
+  width: 100%;
   border-bottom: 1px solid ${colors.grey};
   color: ${({ theme }) => theme.colors.default};
   background-color: ${({ theme }) => theme.colors.primary};
