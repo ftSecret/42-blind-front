@@ -29,8 +29,10 @@ const Card = ({ title, content, created_at, count, className, user_id, ...rest }
       <StyledTitle>{title}</StyledTitle>
       {content && <StyledContent>{content}</StyledContent>}
       <StyledInfo>
-        <p>{formatDate(created_at)}</p>
-        {user_id === myUserId && <Tag>본인</Tag>}
+        <StyledDiv>
+          <p>{formatDate(created_at)}</p>
+          {user_id === myUserId && <Tag>본인</Tag>}
+        </StyledDiv>
         {count && <Status count={count} />}
       </StyledInfo>
     </StyledCard>
@@ -66,6 +68,11 @@ const StyledInfo = styled.div`
   ${flexRow}
   justify-content: space-between;
   color: ${({ theme }) => theme.colors.default};
+`;
+
+const StyledDiv = styled.div`
+  ${flexRow};
+  gap: 0.2rem;
 `;
 
 const StyledContent = styled.p`
