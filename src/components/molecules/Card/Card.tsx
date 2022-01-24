@@ -72,7 +72,8 @@ const StyledInfo = styled.div`
 
 const StyledDiv = styled.div`
   ${flexRow};
-  gap: 0.2rem;
+  align-items: center;
+  gap: 0.3rem;
 `;
 
 const StyledContent = styled.p`
