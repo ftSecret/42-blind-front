@@ -123,6 +123,11 @@ const StyledComment = styled.div`
     outline: 2px solid ${({ theme }) => theme.colors.red};
   }
   pointer-events: none;
+
+  & button,
+  a {
+    pointer-events: auto;
+  }
 `;
 
 const StyledCommentWrap = styled.div`

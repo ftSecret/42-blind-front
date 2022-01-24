@@ -58,6 +58,7 @@ const CommentInput = ({
   }, [data, setPostDetail]);
 
   useEffect(() => {
+    console.log(data?.data.comment_number);
     if (data?.data.comment_number !== undefined) focusNewComment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.data.comment_number]);
