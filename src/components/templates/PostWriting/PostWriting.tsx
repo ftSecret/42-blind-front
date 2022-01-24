@@ -26,7 +26,7 @@ const PostWriting = ({ titleProps, contentProps }: PropTypes) => {
   );
 };
 
-const WritingContainer = styled.section`
+const WritingContainer = styled.main`
   ${containerStyle}
   ${flexColumn}
   margin: 0.5em auto 0.5em auto;

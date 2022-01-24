@@ -59,8 +59,10 @@ const PostWritingHeader = ({ postId = -1, content, title, writingStatus }: PropT
 
   return (
     <Header>
-      <StyledCloseIcon onClick={handleClose} />
-      <StyledTitle size="sm" weight="bold" children={writingStatus} />
+      <CloseButton onClick={handleClose}>
+        <StyledCloseIcon />
+      </CloseButton>
+      <StyledTitle forwardedAs="h1" size="sm" weight="bold" children={writingStatus} />
       <StyledSpan>
         <StyledSubmitButton children="완료" onClick={handleSubmit} />
       </StyledSpan>
@@ -70,6 +72,9 @@ const PostWritingHeader = ({ postId = -1, content, title, writingStatus }: PropT
 
 export default PostWritingHeader;
 
+const CloseButton = styled(Button)`
+  all: unset;
+`;
 const StyledCloseIcon = styled(CloseIcon)`
   display: flex;
   justify-content: flex-start;
