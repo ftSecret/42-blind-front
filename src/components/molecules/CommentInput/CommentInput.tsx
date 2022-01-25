@@ -58,10 +58,10 @@ const CommentInput = ({
   }, [data, setPostDetail]);
 
   useEffect(() => {
-    console.log(data?.data.comment_number);
-    if (data?.data.comment_number !== undefined) focusNewComment();
+    console.log(data?.data.comments.length);
+    if (data?.data.comments.length !== undefined) focusNewComment();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.data.comment_number]);
+  }, [data?.data.comments.length]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
