@@ -178,7 +178,8 @@ const NotiListItem = styled.li<NotificationListItemPropType>`
   background-color: ${({ theme }) => theme.colors.primary};
 
   & p,
-  strong {
+  strong,
+  time {
     opacity: ${({ isChecked }) => (isChecked ? 0.3 : '')};
   }
 
