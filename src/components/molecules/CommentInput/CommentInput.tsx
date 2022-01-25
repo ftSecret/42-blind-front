@@ -51,6 +51,11 @@ const CommentInput = ({
     setValue('');
   };
 
+  /*
+    1, 2번 useEffect의 위치는 붙어있을 필요는 없으나, 1번이 항상 위에 있어야함.
+    변경될 경우 포커싱 로직이 제대로 작동하지 않음.
+  */
+  // 1. 댓글이 업데이트되면 포커싱하는 useEffect
   useEffect(() => {
     if (isUpdatedComments.current === true) {
       focusNewComment();
@@ -58,6 +63,7 @@ const CommentInput = ({
     }
   }, [data?.data.comments.length, focusNewComment]);
 
+  // 2. 댓글을 작성하면 최상위 data를 업데이트 시키는 useEffect
   useEffect(() => {
     if (data !== undefined && data.data !== undefined) {
       const { comments, ...post } = data.data;
