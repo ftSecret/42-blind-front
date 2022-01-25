@@ -28,6 +28,7 @@ const CommentInput = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue, props: inputProps } = useInput('');
   const [addBlindComment, { data }] = useAddBlindCommentMutation();
+  const isUpdatedComments = useRef(false);
 
   useEffect(() => {
     if (selectedComment.nickname !== '') inputRef.current?.focus();
@@ -51,17 +52,19 @@ const CommentInput = ({
   };
 
   useEffect(() => {
+    if (isUpdatedComments.current === true) {
+      focusNewComment();
+      isUpdatedComments.current = false;
+    }
+  }, [data?.data.comments.length, focusNewComment]);
+
+  useEffect(() => {
     if (data !== undefined && data.data !== undefined) {
       const { comments, ...post } = data.data;
       setPostDetail(post, comments);
+      isUpdatedComments.current = true;
     }
   }, [data, setPostDetail]);
-
-  useEffect(() => {
-    console.log(data?.data.comments.length);
-    if (data?.data.comments.length !== undefined) focusNewComment();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.data.comments.length]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
