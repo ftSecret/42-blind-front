@@ -5,7 +5,7 @@ import NotificationsOutlineIcon from 'components/atoms/icons/NotificationsOutlin
 import { PATH_POST } from 'components/utils/AppRouter';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { centerRowStyle } from 'styles/mixin';
+import { centerRowStyle, flexRow } from 'styles/mixin';
 import { size } from 'styles/theme';
 import { formatDate } from 'utils/formatDate';
 import { NotificationType, NOTIFICATION_COMMENT_TYPE, NOTIFICATION_POST_TYPE } from 'api/type';
@@ -33,7 +33,7 @@ const DEFAULT_SIZE = 100;
 
 const Notifications = () => {
   const [notificationIsHidden, setNotificationIsHidden] = useState(true);
-  const { data: countData } = useGetBlindNotificationCountQuery(undefined, {
+  const { data: countData, refetch: refetchCount } = useGetBlindNotificationCountQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   const [notificationTrigger, notificationData] = useLazyGetBlindNotificationQuery();
@@ -51,6 +51,15 @@ const Notifications = () => {
 
   const clickCheckNotification = (notification_id: number) => {
     checkNotification({ notification_id });
+  };
+
+  const clickCheckAllNotification = () => {
+    notifications.forEach(async (elem) => {
+      if (elem.deleted_at === null)
+        await checkNotification({ notification_id: elem.notification_id });
+    });
+    notificationTrigger({ page: 0, size: DEFAULT_SIZE });
+    refetchCount();
   };
 
   useEffect(() => {
@@ -74,26 +83,34 @@ const Notifications = () => {
         {notificationData.isSuccess && notifications.length === 0 && (
           <ErrorArticle>알림이 없습니다.</ErrorArticle>
         )}
-        {notifications.length > 0 &&
-          notifications.map((item) => {
-            return (
-              <NotiListItem isChecked={item.deleted_at !== null}>
-                <Link
-                  onClick={() => {
-                    clickCheckNotification(item.notification_id);
-                  }}
-                  key={item.notification_id}
-                  to={`${PATH_POST}/${item.post_id}`}
-                >
-                  <NotificationContent>
-                    <p>{getMessage(item.type)}:</p>&nbsp;
-                    <strong>"{item.comment_content}"</strong>&nbsp;
-                    <time>{formatDate(item.created_at.toString())}</time>
-                  </NotificationContent>
-                </Link>
-              </NotiListItem>
-            );
-          })}
+        {notifications.length > 0 && (
+          <>
+            <NotificationOption>
+              <strong>알림</strong>
+              <button onClick={clickCheckAllNotification}>전체 확인</button>
+            </NotificationOption>
+            {notifications.map((item) => {
+              return (
+                <NotificationListItem isChecked={item.deleted_at !== null}>
+                  <Link
+                    onClick={() => {
+                      clickCheckNotification(item.notification_id);
+                    }}
+                    key={item.notification_id}
+                    to={`${PATH_POST}/${item.post_id}`}
+                  >
+                    <NotificationContent>
+                      <p>{getMessage(item.type)}:</p>&nbsp;
+                      <strong>"{item.comment_content}"</strong>&nbsp;
+                      <time>{formatDate(item.created_at.toString())}</time>
+                    </NotificationContent>
+                  </Link>
+                </NotificationListItem>
+              );
+            })}
+          </>
+        )}
+
         {notificationData.isError && (
           <ErrorArticle>
             <ErrorOutlineIcon size={40} />
@@ -114,6 +131,7 @@ const ErrorArticle = styled(StyledErrorArticle)`
   height: 100%;
   padding: 2rem;
 `;
+
 const NotificationOverlay = styled.div`
   z-index: 2;
   position: fixed;
@@ -173,7 +191,7 @@ const NotificationList = styled.ul`
   z-index: 3;
 `;
 
-const NotiListItem = styled.li<NotificationListItemPropType>`
+const NotificationListItem = styled.li<NotificationListItemPropType>`
   padding: 1rem 0.5rem;
   background-color: ${({ theme }) => theme.colors.primary};
 
@@ -185,6 +203,29 @@ const NotiListItem = styled.li<NotificationListItemPropType>`
 
   &:not(:last-child) {
     border-bottom: 1px solid grey;
+  }
+`;
+
+const NotificationOption = styled.div`
+  ${flexRow}
+  justify-content: space-between;
+  align-items: center;
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
+  padding: 0.3rem 0.5rem 0rem 0.5rem;
+
+  strong {
+    font-size: 1.1rem;
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.red};
+    font-size: 0.9rem;
+  }
+
+  button:active {
+    opacity: 0.7;
   }
 `;
 
