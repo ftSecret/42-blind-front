@@ -36,7 +36,7 @@ const Notifications = () => {
   const { data: countData, refetch: refetchCount } = useGetBlindNotificationCountQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const [notificationTrigger, notificationData] = useLazyGetBlindNotificationQuery();
+  const [getNotificationData, notificationData] = useLazyGetBlindNotificationQuery();
   const [checkNotification] = useCheckBlindNotificationMutation();
   const notifications = useMemo(() => notificationData?.data?.data ?? [], [notificationData?.data]);
   const count = useMemo(() => countData?.data.number ?? 0, [countData?.data.number]);
@@ -50,21 +50,22 @@ const Notifications = () => {
   };
 
   const clickCheckNotification = (notification_id: number) => {
-    checkNotification({ notification_id });
+    if (notifications.find((elem) => elem.notification_id === notification_id)?.deleted_at === null)
+      checkNotification({ notification_id });
   };
 
-  const clickCheckAllNotification = () => {
-    notifications.forEach(async (elem) => {
+  const clickCheckAllNotification = async () => {
+    await notifications.forEach(async (elem) => {
       if (elem.deleted_at === null)
         await checkNotification({ notification_id: elem.notification_id });
     });
-    notificationTrigger({ page: 0, size: DEFAULT_SIZE });
+    getNotificationData({ page: 0, size: DEFAULT_SIZE });
     refetchCount();
   };
 
   useEffect(() => {
-    if (notificationIsHidden === false) notificationTrigger({ page: 0, size: DEFAULT_SIZE });
-  }, [notificationIsHidden, notificationTrigger]);
+    if (notificationIsHidden === false) getNotificationData({ page: 0, size: DEFAULT_SIZE });
+  }, [notificationIsHidden, getNotificationData]);
 
   return (
     <>
@@ -87,7 +88,7 @@ const Notifications = () => {
           <>
             <NotificationOption>
               <strong>알림</strong>
-              <button onClick={clickCheckAllNotification}>전체 확인</button>
+              <button onClick={clickCheckAllNotification}>모두 읽음</button>
             </NotificationOption>
             {notifications.map((item) => {
               return (
