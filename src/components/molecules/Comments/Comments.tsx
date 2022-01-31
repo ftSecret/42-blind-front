@@ -34,11 +34,9 @@ const getMaxCommentId = (comments: CommentType[], userId: number) =>
     (big, cur) => (userId === cur.user_id && big < cur.comment_id ? cur.comment_id : big),
     -100,
   );
-/*
-1. focusComment
-*/
+
 const Comments = ({ postId, postUserId, rawComments, setPostDetail }: PropTypes) => {
-  const [selectedComment, setSelectedComment] = useState({ nickname: '', id: -1 }); //댓글 주인
+  const [selectedComment, setSelectedComment] = useState({ nickname: '', id: -1 });
   const [comments, setComments] = useState<CommentType[]>([]);
   const userId = useAppSelector(selectUserId);
 

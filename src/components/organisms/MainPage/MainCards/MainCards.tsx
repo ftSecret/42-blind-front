@@ -31,7 +31,7 @@ const MainCards = ({
   const targetRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver>();
   const posts = useGetBlindPostQuery({ page, size }, { refetchOnMountOrArgChange: true });
-  const [cards, setCards] = useState<PostType[]>([]);
+  const [cards, setCards] = useState<PostType[]>(formatPost(posts.data?.data));
 
   const onIntersect: IntersectionObserverCallback = useCallback(
     async ([entry], observer) => {
