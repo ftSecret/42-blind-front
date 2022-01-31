@@ -2,27 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'app/store';
 
 type MainBoardType = {
-  lastPage: number;
+  pages: number[];
 };
 const initialState: MainBoardType = {
-  lastPage: 0,
+  pages: [0],
 };
 
 export const mainBoardSlice = createSlice({
   name: 'mainBoard',
   initialState,
   reducers: {
-    setLastPage: (state, action) => {
-      state.lastPage = action.payload;
+    setPages: (state, action) => {
+      state.pages = action.payload;
     },
-    addLastPage: (state) => {
-      state.lastPage = state.lastPage + 1;
+    addPages: (state) => {
+      state.pages = [...state.pages, state.pages.length];
     },
   },
 });
 
-export const { setLastPage, addLastPage } = mainBoardSlice.actions;
+export const { setPages, addPages } = mainBoardSlice.actions;
 
-export const selectLastPages = (state: RootState) => state.mainBoard.lastPage;
+export const selectPages = (state: RootState) => state.mainBoard.pages;
 
 export default mainBoardSlice.reducer;

@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import MainCards from 'components/organisms/MainPage/MainCards';
 import styled from 'styled-components';
 import { containerStyle, flexColumn } from 'styles/mixin';
 import MainPopularCards from '../MainPopularCards';
 import LoadingSpinner from 'components/atoms/LoadingSpinner';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { selectLastPages, addLastPage } from 'features/mainBoard/mainBoardSlice';
+import { selectPages, addPages } from 'features/mainBoard/mainBoardSlice';
 
 const DEFAULT_SIZE = 10;
 
@@ -15,13 +15,12 @@ type PropTypes = {
 };
 
 const MainBoard = ({ onMouseDown, ref }: PropTypes) => {
-  const lastPage = useAppSelector(selectLastPages);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  const pages = useMemo(() => Array.from({ length: lastPage + 1 }, (v, i) => i), [lastPage]); // lastPage만큼 배열을 생성하는 로직. ex: if (lastpage === 3) -> pages = [0, 1, 2]
+  const pages = useAppSelector(selectPages);
 
   const addPage = useCallback(() => {
-    dispatch(addLastPage());
+    dispatch(addPages());
   }, [dispatch]);
 
   const endLoading = useCallback(() => {
@@ -29,7 +28,7 @@ const MainBoard = ({ onMouseDown, ref }: PropTypes) => {
   }, []);
 
   return (
-    <StyledContainer>
+    <StyledContainer onMouseDown={onMouseDown} ref={ref}>
       {isLoading === true && <LoadingSpinner />}
       <MainPopularCards endLoading={endLoading} />
       {pages.map((page) => (
@@ -37,7 +36,7 @@ const MainBoard = ({ onMouseDown, ref }: PropTypes) => {
           isLoading={isLoading}
           key={page}
           page={page}
-          lastPage={lastPage}
+          lastPage={pages.length - 1}
           size={DEFAULT_SIZE}
           addPage={addPage}
           endLoading={endLoading}
