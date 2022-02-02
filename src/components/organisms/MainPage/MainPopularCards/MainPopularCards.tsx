@@ -13,7 +13,7 @@ type PropTypes = { className?: string; endLoading: () => void };
 
 const MainPopularCards = ({ className, endLoading }: PropTypes) => {
   const posts = useGetBlindPostPopularQuery(undefined, { refetchOnMountOrArgChange: true });
-  const [cards, setCards] = useState<PostType[]>([]);
+  const [cards, setCards] = useState<PostType[]>(formatPost(posts.data?.data));
 
   // 성공 혹은 에러를 반환 시에, 로딩 스피너를 감춘다.
   useEffect(() => {
