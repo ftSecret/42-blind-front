@@ -1,25 +1,31 @@
 # 42BLIND
 
 다크모드 메인화면
-<img width="1437" alt="darkmode-main" src="https://user-images.githubusercontent.com/61973070/160445847-e01820a9-8034-46fc-a2d6-c61a0122cc62.png">
-라이트모드 메인화면
-<img width="1440" alt="lightmode-main" src="https://user-images.githubusercontent.com/61973070/160446207-57b7e7a0-b5b0-4c26-963e-7c6324f99e37.png">
-알림기능
-<img width="1438" alt="darkmode-noti" src="https://user-images.githubusercontent.com/61973070/160446024-dc803abc-215d-487a-b947-9c463e624e34.png">
-마이페이지
-<img width="1439" alt="darkmode-my" src="https://user-images.githubusercontent.com/61973070/160446119-e7848922-b894-4e65-8442-8b45ccf65adb.png">
+<img width="1437" alt="darkmode-main" src="https://user-images.githubusercontent.com/61973070/160445847-e01820a9-8034-46fc-a2d6-c61a0122cc62.png"><br />
 
-모바일 메인페이지
+라이트모드 메인화면
+<img width="1440" alt="lightmode-main" src="https://user-images.githubusercontent.com/61973070/160446207-57b7e7a0-b5b0-4c26-963e-7c6324f99e37.png"><br />
+
+알림기능
+<img width="1438" alt="darkmode-noti" src="https://user-images.githubusercontent.com/61973070/160446024-dc803abc-215d-487a-b947-9c463e624e34.png"><br />
+
+마이페이지
+<img width="1439" alt="darkmode-my" src="https://user-images.githubusercontent.com/61973070/160446119-e7848922-b894-4e65-8442-8b45ccf65adb.png"><br />
+
+모바일 메인페이지<br />
 ![lightmode-main-mobile](https://user-images.githubusercontent.com/61973070/160446695-3affb96e-cadd-4693-bb36-eecf470b05da.jpeg)
 
-모바일 마이페이지
+모바일 마이페이지<br />
 ![lightmode-my-mobile2](https://user-images.githubusercontent.com/61973070/160446759-dacb6b78-05b4-4465-9fa6-9a3f28fa60bb.jpeg)
+
+<br />
 
 ### 42BLIND?
 
 **42 서울 내 교육생들이 자유로운 의견을 주고받을 수 있는 익명 커뮤니티 게시판.**
 
-**사용기술** : `React` `TypeScript` `RTK-Query` `AWS S3` `AWS CloudFront`
+**사용기술** <br />
+`React`, `TypeScript` `RTK-Query` `AWS S3` `AWS CloudFront`
 
 폴더 구조
 
@@ -78,9 +84,11 @@
   - 최소단위로 나누어 재사용하여 사용.
   - 폴더 구조
     - components - Atomic Pattern
+    ```
       │   ├── atoms (제일 작은 최소단위)
       │   ├── molecules (atom + atom)
       │   ├── organisms (도메인 관련 정보가 포함됨.)
       │   ├── templates (뼈대)
+    ```
 - AWS S3, AWS CloudFront를 이용하여 서버구축, 배포
   - Github Actions 을이용한 자동 배포 CI/CD 적용.
