@@ -22,15 +22,12 @@
 
 ### 42BLIND?
 
-**42 서울 내 교육생들이 자유로운 의견을 주고받을 수 있는 익명 커뮤니티 게시판.**
+**42 서울 내 교육생들이 자유로운 의견을 주고받을 수 있는 익명 커뮤니티 게시판.** <br />
 
-**사용기술** <br />
-`React`, `TypeScript` `RTK-Query` `AWS S3` `AWS CloudFront`
+**사용기술** : `React` `TypeScript` `RTK-Query` `AWS S3` `AWS CloudFront` <br />
 
-폴더 구조
-
+**폴더 구조**
 ```bash
-
 ├── App.tsx
 ├── api
 ├── app - redux 사용을 위한 hooks, store.
@@ -50,7 +47,7 @@
 ├── types
 └── utils
 ```
-
+<br />
 **프로젝트 관련 개발 내용**
 
 - TypeScript 적용
