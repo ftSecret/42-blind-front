@@ -1,24 +1,40 @@
 # 42BLIND
 
-<center>다크모드 메인화면/ 라이트모드 메인화면</br>
+<center>
+
+**사용 기술**
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![RTK-Query](https://img.shields.io/badge/rtk_query-339933?style=for-the-badge&logo=redux&logoColor=white)
+![AWS-S3](https://img.shields.io/badge/AWS_S3-ff4444?style=for-the-badge&logo=Amazon&logoColor=white)
+![AWS-Cloudfront](https://img.shields.io/badge/AWS_Cloudfront-9999ff?style=for-the-badge&logo=Amazon&logoColor=white)
+</center>
+
+<center>
+
+**다크모드 메인화면/ 라이트모드 메인화면**
+</br>
 <img width="400" height="200" alt="darkmode-main" src="https://user-images.githubusercontent.com/61973070/160445847-e01820a9-8034-46fc-a2d6-c61a0122cc62.png"> <img width="400" height="200" alt="lightmode-main" src="https://user-images.githubusercontent.com/61973070/160446207-57b7e7a0-b5b0-4c26-963e-7c6324f99e37.png"><br />
 </center>
 <center>
-알림기능/ 마이페이지 <br />
+
+**알림기능/ 마이페이지**
+<br />
 <img width="400" height="200" alt="darkmode-noti" src="https://user-images.githubusercontent.com/61973070/160446024-dc803abc-215d-487a-b947-9c463e624e34.png"> <img width="400" height="200" alt="darkmode-my" src="https://user-images.githubusercontent.com/61973070/160446119-e7848922-b894-4e65-8442-8b45ccf65adb.png"><br />
 </center>
 <center>
-모바일 메인페이지 / 모바일 마이페이지 </br>
+
+**모바일 메인페이지 / 모바일 마이페이지**
+</br>
 <img width="150" height="250" alt="lightmode-main-mobile" src="https://user-images.githubusercontent.com/61973070/160446695-3affb96e-cadd-4693-bb36-eecf470b05da.jpeg">
 <img width="150" height="250" alt="lightmode-my-mobile2" src="https://user-images.githubusercontent.com/61973070/160446759-dacb6b78-05b4-4465-9fa6-9a3f28fa60bb.jpeg">
 </center>
 <br />
 
-### 42BLIND?
+## 42BLIND?
 
 **42 서울 내 교육생들이 자유로운 의견을 주고받을 수 있는 익명 커뮤니티 게시판.** <br />
-
-**사용기술** : `React` `TypeScript` `RTK-Query` `AWS S3` `AWS CloudFront` <br />
 
 **폴더 구조**
 ```bash
@@ -42,6 +58,7 @@
 └── utils
 ```
 <br />
+
 **프로젝트 관련 개발 내용**
 
 - TypeScript 적용
